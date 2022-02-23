@@ -1,0 +1,150 @@
+/* ===============
+   FONT
+   =============== */
+$mobile-size: 320px;
+$tablet-size: 768px;
+$desktop-size: 1024px;
+
+// Mixins
+@mixin mobile {
+  @media (min-width: #{$mobile-size}) and (max-width: #{$tablet-size - 1px}) {
+    @content;
+  }
+}
+
+@mixin fontsize($size) {
+  //font-size: $size * 1px !important;
+  font-size: $size * 0.1rem !important;
+
+  @include mobile {
+    font-size: $size * 0.07rem !important;
+  }
+}
+
+@mixin font-weight($weight) {
+  .font-weight-#{$weight} {
+    font-weight: $weight !Important;
+  }
+}
+
+//Classes
+html {
+  //font-size: 62.5%;
+}
+
+.font-xs {
+  @include fontsize(8.5);
+}
+
+.font-xs-2 {
+  @include fontsize(9.5);
+}
+
+.font-sm {
+  @include fontsize(10);
+}
+
+.font-sm-2 {
+  @include fontsize(11.5);
+
+}
+
+.font-sm-3 {
+  @include fontsize(12);
+}
+
+.font-sm-4 {
+  @include fontsize(13);
+}
+
+.font-sm-5 {
+  @include fontsize(14);
+}
+
+.font-lg {
+  @include fontsize(16);
+}
+
+.font-lg-2 {
+  @include fontsize(18);
+}
+
+.font-lg-3 {
+  @include fontsize(20);
+}
+
+.font-lg-4 {
+  @include fontsize(25);
+}
+
+.font-lg-5 {
+  @include fontsize(28);
+}
+
+.font-xl {
+  @include fontsize(30);
+}
+
+.font-xl-2 {
+  @include fontsize(40);
+}
+
+.font-xl-3 {
+  @include fontsize(50);
+}
+
+.font-xl-4 {
+  @include fontsize(60);
+}
+
+.font-xl-5 {
+  @include fontsize(70);
+}
+
+
+// font weight
+
+@include font-weight(100);
+@include font-weight(200);
+@include font-weight(300);
+@include font-weight(400);
+@include font-weight(500);
+@include font-weight(600);
+@include font-weight(700);
+@include font-weight(800);
+@include font-weight(900);
+
+
+// font color
+
+.font-black {
+  color: #000 !important
+}
+
+.font-white {
+  color: #fff !important
+}
+
+.font-gray {
+  color: gray !important
+}
+
+.font-gray-2 {
+  color: #333 !important
+}
+
+.font-orange {
+  color: #ffae19 !important
+}
+
+.font-red {
+  color: #cf3e21 !important
+}
+
+.font-yellow {
+  color: #f6b626 !important
+}
+
+.font-green {
+  color: #3fac5d !important
+}

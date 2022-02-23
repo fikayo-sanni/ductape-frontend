@@ -1,0 +1,222 @@
+:root {
+  --primary_color: #0746A6;
+  --primary_color_hover: #06275a;
+  --primary_color_transparent: #E4E6EA;
+  --primary_color_transparent_2: #F2F4F7;
+  --body-background-alt: #F9FAFC;
+  --skyblue: rgba(140, 194, 232, 0.24);
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.border-bottom, .border, .border-end, .border-start {
+  border-color: #E4E6EA !important;
+}
+
+.bg-primary_transparent_2 {
+  background: var(--primary_color_transparent_2) !important;
+}
+
+.bg-skyblue {
+  background: var(--skyblue) !important;
+}
+
+.bg-background-alternate {
+  background: var(--body-background-alt) !important;
+}
+
+.text-xxs {
+  font-size: 0.75rem !important;
+  line-height: 1rem !important;
+}
+
+.no_shadow, .no_shadow:focus, .no_shadow:active {
+  border: none !important;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+#main_nav .nav-link {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  background: none !important;
+  color: inherit !important;
+  border-radius: 0;
+}
+#main_nav .dropdown-menu {
+  margin-top: 10px !important;
+  transition: 0.3s;
+}
+#main_nav .dropdown-menu a {
+  color: inherit !important;
+}
+#main_nav .dropdown-menu .dropdown-item {
+  padding: 5px 20px;
+}
+#main_nav .dropdown-menu li {
+  border-bottom: 1px solid #dee2e6;
+}
+#main_nav .dropdown-menu li:last-of-type {
+  border-bottom: none !important;
+}
+
+#menu_1 li {
+  height: auto !important;
+  padding: 4px !important;
+  margin: 20px 15px;
+  border-radius: 50px;
+  background: #fff;
+}
+#menu_1 li.ant-menu-item-selected {
+  background: var(--secondary_color);
+  color: #fff;
+}
+#menu_1 li .ant-menu-item-icon {
+  width: 100%;
+}
+#menu_1 li .ant-menu-item-icon img, #menu_1 li .ant-menu-item-icon svg {
+  margin-top: -3px;
+  vertical-align: center !important;
+}
+
+.bg-gray-1 {
+  background: rgba(140, 143, 163, 0.12);
+}
+
+#inner_sidebar_menu .ant-menu-submenu-title, #inner_sidebar_menu .ant-menu-item {
+  border-radius: 10px !important;
+}
+#inner_sidebar_menu .ant-menu-submenu-open {
+  border-radius: 10px !important;
+}
+#inner_sidebar_menu .ant-menu-submenu-open .ant-menu-submenu-title {
+  background: var(--primary_color_transparent);
+}
+#inner_sidebar_menu .ant-menu-sub {
+  border-radius: 10px !important;
+  margin-top: 10px !important;
+}
+
+.side_menu .ant-menu-title-content {
+  margin-left: 15px !important;
+}
+.side_menu .ant-menu-item-selected {
+  border: none !important;
+  color: var(--primary_color) !important;
+}
+.side_menu .ant-menu-item, .side_menu .ant-menu-submenu .ant-menu-submenu-title {
+  width: 90%;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
+  padding-left: 20px !important;
+  color: #78797A;
+}
+.side_menu .ant-menu-item-selected {
+  background: #E9ECF1 !important;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+.side_menu .ant-menu-item-selected::after {
+  border-right: none !important;
+}
+
+.w-max-120 {
+  width: 140px !important;
+}
+
+.switch input {
+  position: absolute;
+  opacity: 0;
+}
+
+.ant-modal-mask {
+  z-index: 99999 !important;
+}
+
+.ant-modal-wrap {
+  z-index: 9999999 !important;
+}
+
+.ant-btn .anticon svg {
+  margin-top: -5px !important;
+}
+
+.anticon svg {
+  margin-top: -5px !important;
+}
+
+.ant-drawer {
+  z-index: 999999;
+}
+
+.border_primary {
+  border-color: var(--primary_color) !important;
+}
+
+.support_container {
+  bottom: 35px;
+  right: 40px;
+  left: auto;
+}
+
+#main_navigation li a.nav-link {
+  color: #333 !important;
+  font-size: 1.1rem;
+  margin-right: 20px;
+}
+#main_navigation li a.nav-link:hover {
+  color: var(--primary_color) !important;
+}
+
+.main_sidebar {
+  overflow-y: auto;
+  overflow-x: hidden !important;
+}
+
+.page_tabs .ant-tabs-tab {
+  padding: 20px 0;
+  border-bottom: 10px;
+}
+.page_tabs .ant-tabs-tab span {
+  padding: 0 !important;
+  color: #81868C;
+}
+.page_tabs .ant-tabs-tab span .ant-badge {
+  margin-left: 8px;
+  min-width: 30px !important;
+  padding: 4px;
+}
+.page_tabs .ant-tabs-tab span .ant-badge .ant-badge-count, .page_tabs .ant-tabs-tab span .ant-badge .ant-badge-count span {
+  font-size: 12px;
+  font-weight: 500;
+  color: #737A91 !important;
+}
+.page_tabs .ant-tabs-tab-active span {
+  color: var(--primary_color) !important;
+}
+
+.font_gray {
+  color: #81868C !important;
+}
+
+.btn-pill {
+  border-radius: 20px !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+  color: #81868C !important;
+  font-size: 10px;
+  border-color: #81868C !important;
+}
+.btn-pill:hover {
+  background: none !important;
+  color: var(--primary_color) !important;
+  border-color: var(--primary_color) !important;
+}
+
+.overflowYAuto {
+  overflow-y: auto !important;
+}
+
+/*# sourceMappingURL=style.css.map */

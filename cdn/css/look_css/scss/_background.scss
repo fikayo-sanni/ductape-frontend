@@ -1,0 +1,100 @@
+.no_background {
+  background: none !important;
+  background-color: transparent !important
+}
+
+.pic_background {
+  position: relative !Important;
+  background-size: 100% !Important;
+
+  @media(min-width: 767px) {
+    background-size: 300% !Important
+  }
+}
+
+.transparent_container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0
+}
+
+.bg-transparent {
+  opacity: .5 !important
+}
+
+.bg-transparent_black_8 {
+  background: rgba(0, 0, 0, .8) !important
+}
+
+.bg-transparent_black_7 {
+  background: rgba(0, 0, 0, .7) !important
+}
+
+.bg-transparent_black_6 {
+  background: rgba(0, 0, 0, .6) !important
+}
+
+.bg-transparent_black_5 {
+  background: rgba(0, 0, 0, .5) !important
+}
+
+.bg-transparent_black_4 {
+  background: rgba(0, 0, 0, .4) !important
+}
+
+.bg-transparent_black_3 {
+  background: rgba(0, 0, 0, .3) !important
+}
+
+.bg-transparent_black_2 {
+  background: rgba(0, 0, 0, .2) !important
+}
+
+.bg-transparent_black_1 {
+  background: rgba(0, 0, 0, .1) !important
+}
+
+.bg-gray {
+  background: #f6f6f6 !important
+}
+
+.bg-gray-2 {
+  background: gainsboro !important
+}
+
+.bg-gray-3 {
+  background: #1f1f1f !important
+}
+
+.bg-white {
+  background: white !important;
+  color: #333 !important
+}
+
+.bg-black {
+  background: #000 !important
+}
+
+.bg-blue {
+  background: #3396e1 !important
+}
+
+.bg-blue-2 {
+  background: #7476ac !important
+}
+
+.bg-red {
+  background: #de463e !important
+}
+
+.bg-yellow {
+  background: #f6b626 !important
+}
+
+.bg-green {
+  background: #3fac5d !important
+}
+
+

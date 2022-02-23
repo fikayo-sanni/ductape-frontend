@@ -1,0 +1,107 @@
+/* ===============
+   SPACING 
+   =============== */
+
+// Sizes
+$size-0: 0;
+$size-5: 5;
+$size-10: 10;
+$size-20: 20;
+$size-30: 30;
+$size-50: 50;
+$size-100: 100;
+
+
+//Mixins
+@mixin make-margins($class, $margin) {
+  @if $class == '0' {
+    .no_margin {
+      margin: 0 !Important;
+    }
+    .no_margin-left {
+      margin-left: 0 !Important;
+    }
+    .no_margin-right {
+      margin-right: 0 !Important;
+    }
+    .no_margin-bottom {
+      margin-bottom: 0 !Important;
+    }
+    .no_margin-top {
+      margin-top: 0 !Important;
+    }
+  } @else {
+    .margin_#{$class} {
+      margin: $margin * 0.1rem !important;
+    }
+    .margin_#{$class}-left {
+      margin-left: $margin * 0.1rem !important;
+    }
+    .margin_#{$class}-right {
+      margin-right: $margin * 0.1rem !important;
+    }
+    .margin_#{$class}-top {
+      margin-top: $margin * 0.1rem !important;
+    }
+    .margin_#{$class}-bottom {
+      margin-bottom: $margin * 0.1rem !important;
+    }
+  }
+
+}
+
+@mixin make-paddings($class, $padding) {
+  @if $class == '0' {
+    .no_padding {
+      padding: 0 !Important;
+    }
+    .no_padding-left {
+      padding-left: 0 !Important;
+    }
+    .no_padding-right {
+      padding-right: 0 !Important;
+    }
+    .no_padding-bottom {
+      padding-bottom: 0 !Important;
+    }
+    .no_padding-top {
+      padding-top: 0 !Important;
+    }
+  } @else {
+    .padding_#{$class} {
+      padding: $padding * 0.1rem !important;
+    }
+    .padding_#{$class}-left {
+      padding-left: $padding * 0.1rem !important;
+    }
+    .padding_#{$class}-right {
+      padding-right: $padding * 0.1rem !important;
+    }
+    .padding_#{$class}-top {
+      padding-top: $padding * 0.1rem !important;
+    }
+    .padding_#{$class}-bottom {
+      padding-bottom: $padding * 0.1rem !important;
+    }
+  }
+
+}
+
+
+@include make-margins("0", $size-0);
+@include make-margins("5", $size-5);
+@include make-margins("10", $size-10);
+@include make-margins("20", $size-20);
+@include make-margins("30", $size-30);
+@include make-margins("50", $size-50);
+@include make-margins("100", $size-100);
+
+@include make-paddings("0", $size-0);
+@include make-paddings("5", $size-5);
+@include make-paddings("10", $size-10);
+@include make-paddings("20", $size-20);
+@include make-paddings("30", $size-30);
+@include make-paddings("50", $size-50);
+@include make-paddings("100", $size-100);
+
+

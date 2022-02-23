@@ -1,0 +1,70 @@
+/*!
+ * Look Base v2.0.0 (http://nxtgendesign.com/look)
+ * Copyright 2017 Eddy Godwin Udom.
+ * Licensed under MIT 
+ */
+@import "spacing";
+@import "font";
+@import "background";
+@import "general";
+@import "border";
+
+
+@media all and (max-width: 767px) {
+  .pic_background {
+    position: relative;
+    background-attachment: scroll !Important;
+    background-size: 280% !Important;
+    background-position: 50% 10% !important
+  }
+
+  .equal {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex
+  }
+
+}
+
+@media all and (min-width: 768px) and (max-width: 992px) {
+
+  .pic_background {
+    position: relative;
+    background-size: 140% !Important;
+    background-position: 50% 0 !important;
+    background-attachment: scroll !Important
+  }
+}
+
+@media(min-width: 992px) and (max-width: 1200px) {
+  .pic_background {
+    position: relative;
+    background-size: 100% !Important;
+    background-position: 50% 0 !important;
+    background-attachment: scroll !Important
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact !Important;
+    font-size: 10px !Important;
+  }
+  a:link:after,
+  a:visited:after {
+    content: "  ";
+    font-size: 90%;
+  }
+  .no_print,
+  .dataTables_length,
+  .dataTables_filter,
+  .dataTables_info,
+  .dataTables_paginate {
+    display: none;
+  }
+  table tr td {
+    padding: 2px !Important;
+  }
+}
