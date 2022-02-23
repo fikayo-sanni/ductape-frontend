@@ -1,25 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="transactions">
-      <change afterPath="$PROJECT_DIR$/public/images/icons/arrow_right.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/billing.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/booking.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/dashboard.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/down.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/fixed_rates.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/network.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/notification.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/products.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/quotes.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/reports.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/settings.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/ship.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/shipment.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/support.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/icons/trade.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/logo.svg" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="initial commit 2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,21 +248,7 @@
       <workItem from="1642882958453" duration="12000" />
       <workItem from="1643063842974" duration="5764000" />
       <workItem from="1644659265597" duration="1870000" />
-      <workItem from="1645603336442" duration="11731000" />
-    </task>
-    <task id="LOCAL-00406" summary="Vendor">
-      <created>1635928144513</created>
-      <option name="number" value="00406" />
-      <option name="presentableId" value="LOCAL-00406" />
-      <option name="project" value="LOCAL" />
-      <updated>1635928144513</updated>
-    </task>
-    <task id="LOCAL-00407" summary="Vendor">
-      <created>1635930343933</created>
-      <option name="number" value="00407" />
-      <option name="presentableId" value="LOCAL-00407" />
-      <option name="project" value="LOCAL" />
-      <updated>1635930343934</updated>
+      <workItem from="1645603336442" duration="13051000" />
     </task>
     <task id="LOCAL-00408" summary="Vendor">
       <created>1635931056176</created>
@@ -609,7 +579,21 @@
       <option name="project" value="LOCAL" />
       <updated>1643069961104</updated>
     </task>
-    <option name="localTasksCounter" value="455" />
+    <task id="LOCAL-00455" summary="initial commit">
+      <created>1645635993177</created>
+      <option name="number" value="00455" />
+      <option name="presentableId" value="LOCAL-00455" />
+      <option name="project" value="LOCAL" />
+      <updated>1645635993177</updated>
+    </task>
+    <task id="LOCAL-00456" summary="initial commit 2">
+      <created>1645636103707</created>
+      <option name="number" value="00456" />
+      <option name="presentableId" value="LOCAL-00456" />
+      <option name="project" value="LOCAL" />
+      <updated>1645636103707</updated>
+    </task>
+    <option name="localTasksCounter" value="457" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -634,8 +618,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Logo" />
-    <MESSAGE value="Get started complete" />
     <MESSAGE value="Chart of account" />
     <MESSAGE value="Transactions" />
     <MESSAGE value="Invoice design 1" />
@@ -659,7 +641,9 @@
     <MESSAGE value="Okra" />
     <MESSAGE value="okra update" />
     <MESSAGE value="transactions" />
-    <option name="LAST_COMMIT_MESSAGE" value="transactions" />
+    <MESSAGE value="initial commit" />
+    <MESSAGE value="initial commit 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit 2" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

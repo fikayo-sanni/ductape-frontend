@@ -13,15 +13,16 @@ import {
     Badge,
     Table,
     Input,
-    Space
+    Space,
+    Result
 } from 'antd';
-import {InboxOutlined,ArrowRightOutlined, EditOutlined, UploadOutlined, SearchOutlined} from '@ant-design/icons';
+import {InboxOutlined,CloseCircleOutlined, EditOutlined, UploadOutlined, SearchOutlined} from '@ant-design/icons';
 import {thousandSeparator, Logo} from '../components/config/constant';
 import Skeleton from "react-loading-skeleton";
 import NProgress from "nprogress";
 import moment from "moment";
 
-const {Title} = Typography;
+const {Title, Paragraph, Text} = Typography;
 const {TabPane} = Tabs;
 
 export default function index() {
@@ -95,7 +96,8 @@ export default function index() {
     };
 
 
-    const data = [{
+    const data =
+        [{
         'id': 'SF-162F318',
         'contents' : 'Plain Shirts',
         'pickup' : {
@@ -299,8 +301,218 @@ export default function index() {
             },
             'status' : 'booked'
         },
-
     ];
+
+    const pending =
+        [{
+            'id': 'SF-162F318',
+            'contents' : 'Plain Shirts',
+            'pickup' : {
+                'location': 'Xiamen, China',
+                'readyDate': new Date('2021/02/24'),
+            },
+            'destination' : {
+                'location' : 'Lagos, Nigeria',
+                'expiryDate': new Date('2021/02/17'),
+            },
+            'cost' : {
+                'amount' : 14900000,
+                'symbol' : '₦'
+            },
+            'status' : 'pending'
+        },
+
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'pending'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'pending'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'pending'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'pending'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'pending'
+            },
+        ];
+
+    const ready =
+        [{
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'ready'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'ready'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'ready'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'ready'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'ready'
+            },
+            {
+                'id': 'SF-162F318',
+                'contents' : 'Plain Shirts',
+                'pickup' : {
+                    'location': 'Xiamen, China',
+                    'readyDate': new Date('2021/02/24'),
+                },
+                'destination' : {
+                    'location' : 'Lagos, Nigeria',
+                    'expiryDate': new Date('2021/02/17'),
+                },
+                'cost' : {
+                    'amount' : 14900000,
+                    'symbol' : '₦'
+                },
+                'status' : 'ready'
+            },
+        ];
 
     const columns2 = [
         {
@@ -413,35 +625,58 @@ export default function index() {
                   tabBarStyle={{paddingLeft: 44}}
                 //onChange={callback}
             >
-                <TabPane tab={<span className="align-items-center d-flex">All  <Badge count={42}
+                <TabPane tab={<span className="align-items-center d-flex">All  <Badge count={data.length}
                                                                                       style={{backgroundColor: '#E9ECF1'}}/></span>}
                          key="1">
 
-                    <section className="" style={{ height:'80vh', overflowY: 'auto' }}>
+                    <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
 
                         <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={data}
                                pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
                     </section>
 
                 </TabPane>
-                <TabPane tab={<span className="align-items-center d-flex">Pending  <Badge count={31}
+                <TabPane tab={<span className="align-items-center d-flex">Pending  <Badge count={pending.length}
                                                                                           style={{backgroundColor: '#E9ECF1'}}/></span>}
                          key="2">
 
-                    pending
+                    <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
+
+                        <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={pending}
+                               pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
+                    </section>
 
                 </TabPane>
-                <TabPane tab={<span className="align-items-center d-flex">Ready  <Badge count={42}
+                <TabPane tab={<span className="align-items-center d-flex">Ready  <Badge count={ready.length}
                                                                                         style={{backgroundColor: '#E9ECF1'}}/></span>}
                          key="3">
 
-                    ready
+                    <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
+
+                        <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={ready}
+                               pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
+                    </section>
                 </TabPane>
                 <TabPane tab={<span className="align-items-center d-flex">Booked  <Badge count={0} showZero={true}
                                                                                          style={{backgroundColor: '#E9ECF1'}}/></span>}
                          key="4">
 
-                    booked
+                    <section className="col-lg-8 py-5 mx-auto" >
+
+                        <Result
+                            status="error"
+                            icon={<i className="fa fa-folder-open fa-5x font_gray"></i>}
+                            title="No Result Found"
+                            subTitle="Kindly check back again later or reload the page to check for new information."
+                            extra={[
+                                <Button type="primary" key="console">
+                                    Reload page
+                                </Button>,
+                            ]}
+                        >
+                        </Result>
+
+                    </section>
                 </TabPane>
             </Tabs>
 
