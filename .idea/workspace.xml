@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="initial commit 2">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="initial commit 3">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
     </list>
@@ -248,21 +248,7 @@
       <workItem from="1642882958453" duration="12000" />
       <workItem from="1643063842974" duration="5764000" />
       <workItem from="1644659265597" duration="1870000" />
-      <workItem from="1645603336442" duration="13051000" />
-    </task>
-    <task id="LOCAL-00408" summary="Vendor">
-      <created>1635931056176</created>
-      <option name="number" value="00408" />
-      <option name="presentableId" value="LOCAL-00408" />
-      <option name="project" value="LOCAL" />
-      <updated>1635931056177</updated>
-    </task>
-    <task id="LOCAL-00409" summary="Vendor">
-      <created>1635934618278</created>
-      <option name="number" value="00409" />
-      <option name="presentableId" value="LOCAL-00409" />
-      <option name="project" value="LOCAL" />
-      <updated>1635934618278</updated>
+      <workItem from="1645603336442" duration="13853000" />
     </task>
     <task id="LOCAL-00410" summary="Vendor">
       <created>1635934925735</created>
@@ -593,7 +579,21 @@
       <option name="project" value="LOCAL" />
       <updated>1645636103707</updated>
     </task>
-    <option name="localTasksCounter" value="457" />
+    <task id="LOCAL-00457" summary="initial commit 3">
+      <created>1645637178095</created>
+      <option name="number" value="00457" />
+      <option name="presentableId" value="LOCAL-00457" />
+      <option name="project" value="LOCAL" />
+      <updated>1645637178095</updated>
+    </task>
+    <task id="LOCAL-00458" summary="initial commit 3">
+      <created>1645637376158</created>
+      <option name="number" value="00458" />
+      <option name="presentableId" value="LOCAL-00458" />
+      <option name="project" value="LOCAL" />
+      <updated>1645637376158</updated>
+    </task>
+    <option name="localTasksCounter" value="459" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,7 +618,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Chart of account" />
     <MESSAGE value="Transactions" />
     <MESSAGE value="Invoice design 1" />
     <MESSAGE value="Vendor" />
@@ -643,7 +642,8 @@
     <MESSAGE value="transactions" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="initial commit 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit 2" />
+    <MESSAGE value="initial commit 3" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial commit 3" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

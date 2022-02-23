@@ -26,7 +26,7 @@ const {Title, Paragraph, Text} = Typography;
 const {TabPane} = Tabs;
 
 export default function index() {
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [searchText, setSearchText] = useState('');
     const [searchedColumn, setSearchedColumn] = useState('');
 
@@ -614,71 +614,108 @@ export default function index() {
 
     useEffect(() => {
 
+        setTimeout(() => {
+            setLoading(false);
+        }, 5000)
+
     }, [])
 
     return (
         <Dashboard_Layout title="Quotes">
 
+            {
+                loading ? (
 
-            <Tabs defaultActiveKey="1"
-                  className="page_tabs"
-                  tabBarStyle={{paddingLeft: 44}}
-                //onChange={callback}
-            >
-                <TabPane tab={<span className="align-items-center d-flex">All  <Badge count={data.length}
-                                                                                      style={{backgroundColor: '#E9ECF1'}}/></span>}
-                         key="1">
+                    <div className="mx-5 py-4">
+                        <div className="row mb-2">
 
-                    <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
+                            <div className="col-lg-1">
+                        <Skeleton height="28px"/>
+                            </div>
+                            <div className="col-lg-1">
+                                <Skeleton height="28px"/>
+                            </div>
+                            <div className="col-lg-1">
+                                <Skeleton height="28px"/>
+                            </div>
+                            <div className="col-lg-1">
+                                <Skeleton height="28px"/>
+                            </div>
+                        </div>
 
-                        <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={data}
-                               pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
-                    </section>
+                        <Skeleton height="80px" className="mb-2"/>
+                        <Skeleton height="80px" className="mb-2"/>
+                        <Skeleton height="80px" className="mb-2"/>
+                        <Skeleton height="80px" className="mb-2"/>
+                        <Skeleton height="80px" className="mb-2"/>
+                        <Skeleton height="80px" className="mb-2"/>
+                        <Skeleton height="80px" className="mb-2"/>
+                    </div>
 
-                </TabPane>
-                <TabPane tab={<span className="align-items-center d-flex">Pending  <Badge count={pending.length}
-                                                                                          style={{backgroundColor: '#E9ECF1'}}/></span>}
-                         key="2">
+                ):(
+                    <Tabs defaultActiveKey="1"
+                          className="page_tabs"
+                          tabBarStyle={{paddingLeft: 44}}
+                        //onChange={callback}
+                    >
+                        <TabPane tab={<span className="align-items-center d-flex">All  <Badge count={data.length}
+                                                                                              style={{backgroundColor: '#E9ECF1'}}/></span>}
+                                 key="1">
 
-                    <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
+                            <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
 
-                        <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={pending}
-                               pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
-                    </section>
+                                <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={data}
+                                       pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
+                            </section>
 
-                </TabPane>
-                <TabPane tab={<span className="align-items-center d-flex">Ready  <Badge count={ready.length}
-                                                                                        style={{backgroundColor: '#E9ECF1'}}/></span>}
-                         key="3">
+                        </TabPane>
+                        <TabPane tab={<span className="align-items-center d-flex">Pending  <Badge count={pending.length}
+                                                                                                  style={{backgroundColor: '#E9ECF1'}}/></span>}
+                                 key="2">
 
-                    <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
+                            <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
 
-                        <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={ready}
-                               pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
-                    </section>
-                </TabPane>
-                <TabPane tab={<span className="align-items-center d-flex">Booked  <Badge count={0} showZero={true}
-                                                                                         style={{backgroundColor: '#E9ECF1'}}/></span>}
-                         key="4">
+                                <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={pending}
+                                       pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
+                            </section>
 
-                    <section className="col-lg-8 py-5 mx-auto" >
+                        </TabPane>
+                        <TabPane tab={<span className="align-items-center d-flex">Ready  <Badge count={ready.length}
+                                                                                                style={{backgroundColor: '#E9ECF1'}}/></span>}
+                                 key="3">
 
-                        <Result
-                            status="error"
-                            icon={<i className="fa fa-folder-open fa-5x font_gray"></i>}
-                            title="No Result Found"
-                            subTitle="Kindly check back again later or reload the page to check for new information."
-                            extra={[
-                                <Button type="primary" key="console">
-                                    Reload page
-                                </Button>,
-                            ]}
-                        >
-                        </Result>
+                            <section className="" style={{ height:'83vh', overflowY: 'auto' }}>
 
-                    </section>
-                </TabPane>
-            </Tabs>
+                                <Table rowClassName="px-5" showHeader={false} columns={columns2} dataSource={ready}
+                                       pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
+                            </section>
+                        </TabPane>
+                        <TabPane tab={<span className="align-items-center d-flex">Booked  <Badge count={0} showZero={true}
+                                                                                                 style={{backgroundColor: '#E9ECF1'}}/></span>}
+                                 key="4">
+
+                            <section className="col-lg-8 py-5 mx-auto" >
+
+                                <Result
+                                    status="error"
+                                    icon={<i className="fa fa-folder-open fa-5x font_gray"></i>}
+                                    title="No Result Found"
+                                    subTitle="Kindly check back again later or reload the page to check for new information."
+                                    extra={[
+                                        <Button type="primary" key="console">
+                                            Reload page
+                                        </Button>,
+                                    ]}
+                                >
+                                </Result>
+
+                            </section>
+                        </TabPane>
+                    </Tabs>
+
+                )
+            }
+
 
 
         </Dashboard_Layout>
