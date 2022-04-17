@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="auth">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="dashboard">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard.js" afterDir="false" />
     </list>
@@ -251,14 +251,7 @@
       <workItem from="1645603336442" duration="14271000" />
       <workItem from="1645684164034" duration="8000" />
       <workItem from="1650003013820" duration="11961000" />
-      <workItem from="1650184355822" duration="2221000" />
-    </task>
-    <task id="LOCAL-00412" summary="Invoice design 1">
-      <created>1635948624113</created>
-      <option name="number" value="00412" />
-      <option name="presentableId" value="LOCAL-00412" />
-      <option name="project" value="LOCAL" />
-      <updated>1635948624115</updated>
+      <workItem from="1650184355822" duration="2453000" />
     </task>
     <task id="LOCAL-00413" summary="Vendor">
       <created>1635978435267</created>
@@ -596,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650185929031</updated>
     </task>
-    <option name="localTasksCounter" value="461" />
+    <task id="LOCAL-00461" summary="dashboard">
+      <created>1650186593973</created>
+      <option name="number" value="00461" />
+      <option name="presentableId" value="LOCAL-00461" />
+      <option name="project" value="LOCAL" />
+      <updated>1650186593973</updated>
+    </task>
+    <option name="localTasksCounter" value="462" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -621,7 +621,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Vendor" />
     <MESSAGE value="Invoice" />
     <MESSAGE value="Receipt" />
     <MESSAGE value="Recurring payment" />
@@ -646,7 +645,8 @@
     <MESSAGE value="initial commit 3" />
     <MESSAGE value="skeleton" />
     <MESSAGE value="auth" />
-    <option name="LAST_COMMIT_MESSAGE" value="auth" />
+    <MESSAGE value="dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="dashboard" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
