@@ -54,8 +54,8 @@ export default function Dashboard_Layout({
                 <div className={'col-lg-10'}>
 
 
-                    <div className={"bg-white overflow-hidden position-relative border_radius  ms-0"}
-                         style={{height: '100vh'}}>
+                    <div className={"bg-white  position-relative border_radius  ms-0"}
+                         style={{height: '100vh', overflowY: 'auto'}}>
                         {header(title)}
                         <section className="d-flex flex-column" style={{height: '91%'}}>
 

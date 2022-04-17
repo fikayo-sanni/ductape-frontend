@@ -26,7 +26,7 @@ import moment from "moment";
 import {PdfData, VerbosityLevel} from 'pdfdataextract';
 import {readFileSync} from 'fs';
 
-
+const https = require('https');
 const {Title, Paragraph, Text} = Typography;
 const {TabPane} = Tabs;
 
@@ -71,17 +71,20 @@ export default function Index(props) {
 
                 const fdata = new FormData()
                 fdata.append('file', file.originFileObj)
-                fdata.append('upload_preset', 'kpfavf70')
-                fdata.append("cloud_name", "kpfavf70")
+                // fdata.append('upload_preset', 'kpfavf70')
+                // fdata.append("cloud_name", "kpfavf70")
 
-                await fetch("https://api.cloudinary.com/v1_1/avamot/upload", {
+                await fetch("https://sandbox-api.etranzactglobal.com/upload", {
                     method: "POST",
                     body: fdata
                 }).then(res => res.json()).then(data => {
-
+                  //  console.log(data)
                     toast.success('Successfully uploaded image ' + image)
 
-                    window.location = '/?file=' + data.secure_url;
+                    setTimeout(() => {
+                        window.location = '?file=' + data.data.url;
+                    }, 3000)
+
 
                 }).catch(err => {
                     alert("An error occured while uploading")
@@ -98,7 +101,7 @@ export default function Index(props) {
     }
 
     useEffect(() => {
-        console.log(props)
+        //console.log(props)
     }, [])
 
     return (
@@ -117,47 +120,47 @@ export default function Index(props) {
 
                 <button onClick={() => uploadFiles()} className="btn mt-4 btn-primary">Upload Files</button>
 
-                {/*{*/}
-                {/*    props.data.title && (*/}
+                {
+                    props.data.text && (
 
-                {/*        <div>*/}
+                        <div>
 
-                {/*            <div className="card mt-4 mb-4">*/}
-                {/*                <div className="card-header p-3">*/}
-                {/*                    <h5 className="m-0">Content</h5>*/}
-                {/*                </div>*/}
-                {/*                <div className="card-body lead">*/}
-                {/*                    {props.data.text}*/}
-                {/*                </div>*/}
-                {/*            </div>*/}
+                            <div className="card mt-4 mb-4">
+                                <div className="card-header p-3">
+                                    <h5 className="m-0">Content</h5>
+                                </div>
+                                <div className="card-body lead">
+                                    {props.data.text}
+                                </div>
+                            </div>
 
-                {/*            <div className="card col-lg-4">*/}
-                {/*                <div className="card-header p-3">*/}
-                {/*                    <h5 className="m-0">File info</h5>*/}
-                {/*                </div>*/}
-                {/*                <div className="card-body lead">*/}
-                {/*                    <table className="table m-0 table-striped">*/}
-                {/*                        <tbody>*/}
-                {/*                        <tr>*/}
-                {/*                            <td>File name</td>*/}
-                {/*                            <td>{props.data.info.Title}</td>*/}
-                {/*                        </tr>*/}
-                {/*                        <tr>*/}
-                {/*                            <td>No. of pages</td>*/}
-                {/*                            <td>{props.data.pages}</td>*/}
-                {/*                        </tr>*/}
-                {/*                        <tr>*/}
-                {/*                            <td>Date created</td>*/}
-                {/*                            <td>{props.data.info.CreationDate}</td>*/}
-                {/*                        </tr>*/}
-                {/*                        </tbody>*/}
-                {/*                    </table>*/}
-                {/*                </div>*/}
-                {/*            </div>*/}
+                            <div className="card col-lg-4">
+                                <div className="card-header p-3">
+                                    <h5 className="m-0">File info</h5>
+                                </div>
+                                <div className="card-body lead">
+                                    <table className="table m-0 table-striped">
+                                        <tbody>
+                                        <tr>
+                                            <td>File name</td>
+                                            <td>{props.data.info.Title}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>No. of pages</td>
+                                            <td>{props.data.pages}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Date created</td>
+                                            <td>{props.data.info.CreationDate}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
-                {/*        </div>*/}
-                {/*    )*/}
-                {/*}*/}
+                        </div>
+                    )
+                }
 
 
             </section>
@@ -168,17 +171,29 @@ export default function Index(props) {
 }
 
 export async function getServerSideProps({query}) {
+    const fs = require('fs');
     const {file} = query
-    const crawler = require('crawler-request');
 
     let pdfData = 'hello world';
 
+    if(file) {
+        const newLink = "data.txt";
 
-    if (file) {
-        pdfData = file;
+        const openFile = fs.createWriteStream("data.txt")
+
+        https.get(file, response => {
+            let stream = response.pipe(openFile);
+
+            stream.on("finish", function () {
+
+            })
+        })
+
+        if (newLink) {
+            pdfData = newLink;
 
 
-            const file_data = readFileSync(file);
+            const file_data = readFileSync(newLink);
 
             await PdfData.extract(file_data, {
                 // password: '123456', // password of the pdf file
@@ -209,6 +224,9 @@ export async function getServerSideProps({query}) {
                 // data.metadata; // metadata of the pdf document
                 // data.permissions; // permissions for the document
             });
+        }
+
+        fs.unlink("data.txt",() => console.log('idiot'))
     }
 
     // Pass data to the page via props
