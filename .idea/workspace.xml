@@ -1,22 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="skeleton">
-      <change afterPath="$PROJECT_DIR$/components/layout/home_layout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/dashboard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/register.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/reset.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/upload.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/invoice.pdf" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="auth">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,14 +251,7 @@
       <workItem from="1645603336442" duration="14271000" />
       <workItem from="1645684164034" duration="8000" />
       <workItem from="1650003013820" duration="11961000" />
-      <workItem from="1650184355822" duration="1562000" />
-    </task>
-    <task id="LOCAL-00411" summary="Invoice design 1">
-      <created>1635937932340</created>
-      <option name="number" value="00411" />
-      <option name="presentableId" value="LOCAL-00411" />
-      <option name="project" value="LOCAL" />
-      <updated>1635937932340</updated>
+      <workItem from="1650184355822" duration="2221000" />
     </task>
     <task id="LOCAL-00412" summary="Invoice design 1">
       <created>1635948624113</created>
@@ -609,7 +589,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645638058672</updated>
     </task>
-    <option name="localTasksCounter" value="460" />
+    <task id="LOCAL-00460" summary="auth">
+      <created>1650185929029</created>
+      <option name="number" value="00460" />
+      <option name="presentableId" value="LOCAL-00460" />
+      <option name="project" value="LOCAL" />
+      <updated>1650185929031</updated>
+    </task>
+    <option name="localTasksCounter" value="461" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -634,7 +621,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Invoice design 1" />
     <MESSAGE value="Vendor" />
     <MESSAGE value="Invoice" />
     <MESSAGE value="Receipt" />
@@ -659,7 +645,8 @@
     <MESSAGE value="initial commit 2" />
     <MESSAGE value="initial commit 3" />
     <MESSAGE value="skeleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="skeleton" />
+    <MESSAGE value="auth" />
+    <option name="LAST_COMMIT_MESSAGE" value="auth" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
