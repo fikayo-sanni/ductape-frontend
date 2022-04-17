@@ -1,8 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="initial commit 3">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="skeleton">
+      <change afterPath="$PROJECT_DIR$/components/layout/home_layout.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/dashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/register.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/reset.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/upload.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/images/invoice.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -47,7 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/images/icons" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
@@ -58,11 +71,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/public/images/icons" />
+      <recent name="$PROJECT_DIR$/pages" />
+      <recent name="$PROJECT_DIR$/components/layout" />
       <recent name="$PROJECT_DIR$/public/images" />
+      <recent name="$PROJECT_DIR$/public/images/icons" />
       <recent name="$PROJECT_DIR$/public/logos" />
-      <recent name="$PROJECT_DIR$/pages/dashboard" />
-      <recent name="$PROJECT_DIR$/pages/dashboard/invoice" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public/images/icons" />
@@ -248,14 +261,10 @@
       <workItem from="1642882958453" duration="12000" />
       <workItem from="1643063842974" duration="5764000" />
       <workItem from="1644659265597" duration="1870000" />
-      <workItem from="1645603336442" duration="13853000" />
-    </task>
-    <task id="LOCAL-00410" summary="Vendor">
-      <created>1635934925735</created>
-      <option name="number" value="00410" />
-      <option name="presentableId" value="LOCAL-00410" />
-      <option name="project" value="LOCAL" />
-      <updated>1635934925736</updated>
+      <workItem from="1645603336442" duration="14271000" />
+      <workItem from="1645684164034" duration="8000" />
+      <workItem from="1650003013820" duration="11961000" />
+      <workItem from="1650184355822" duration="1562000" />
     </task>
     <task id="LOCAL-00411" summary="Invoice design 1">
       <created>1635937932340</created>
@@ -593,7 +602,14 @@
       <option name="project" value="LOCAL" />
       <updated>1645637376158</updated>
     </task>
-    <option name="localTasksCounter" value="459" />
+    <task id="LOCAL-00459" summary="skeleton">
+      <created>1645638058672</created>
+      <option name="number" value="00459" />
+      <option name="presentableId" value="LOCAL-00459" />
+      <option name="project" value="LOCAL" />
+      <updated>1645638058672</updated>
+    </task>
+    <option name="localTasksCounter" value="460" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -618,7 +634,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Transactions" />
     <MESSAGE value="Invoice design 1" />
     <MESSAGE value="Vendor" />
     <MESSAGE value="Invoice" />
@@ -643,7 +658,8 @@
     <MESSAGE value="initial commit" />
     <MESSAGE value="initial commit 2" />
     <MESSAGE value="initial commit 3" />
-    <option name="LAST_COMMIT_MESSAGE" value="initial commit 3" />
+    <MESSAGE value="skeleton" />
+    <option name="LAST_COMMIT_MESSAGE" value="skeleton" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

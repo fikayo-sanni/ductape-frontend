@@ -355,3 +355,25 @@ body{
 {
   overflow-y: auto !Important;
 }
+
+.login_box {
+  padding: 3rem;
+  border-radius: 1rem;
+
+  @include mobile {
+    padding: 3rem;
+  }
+}
+
+.bg-skyblue {
+  background: var(--skyblue) !Important;
+}
+
+.bg-background-alternate {
+  background: var(--body-background-alt) !Important;
+}
+
+.text-xxs {
+  font-size: .75rem !Important;
+  line-height: 1rem !Important;
+}

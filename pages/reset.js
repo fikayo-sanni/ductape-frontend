@@ -62,9 +62,9 @@ export default function Index(props) {
                     <div className="col-xl-4 col-lg-6 col-md-8 mt-4 col-sm-10 mb-auto mx-auto">
 
                         <div className="bg-white login_box shadow">
-                            <h4 className="text-center mb-5 font-weight-700">Sign In</h4>
+                            <h4 className="text-center mb-5 font-weight-700">Forgot Password</h4>
 
-                            <form id="login_form" onSubmit={(e) => login(e, 'login_button')}>
+                            <form id="login_form">
                                 <div className="row">
 
                                     <div className="col-12 mb-4">
@@ -75,29 +75,19 @@ export default function Index(props) {
                                         </div>
                                     </div>
 
-                                    <div className="col-12 mb-4">
-                                        <div className="form-floating">
-                                            <input type="password" value={user.password} onChange={handleChange}
-                                                   className="form-control" placeholder="password" name="password"/>
-                                            <label>Password</label>
-                                        </div>
-                                    </div>
 
                                     <div className="col-lg-12 mx-auto">
 
                                         <button className="btn btn-lg p-3 mt-4 btn-primary w-100"
-                                                id="reg_button">Login
+                                                id="reg_button">Verify account
                                         </button>
-                                        <p className="mb-0 mt-4 text-center">Forgot your password? <Link href="reset">
-                                                <a className="">Reset password</a>
-                                            </Link>
-                                        </p>
+
                                         <p className="mb-0 mt-4 text-center">
                                             <Link href="register">
                                                 <a className="">Create an
-                                                    account</a>
+                                            account</a>
                                             </Link>
-                                        </p>
+                                            </p>
                                     </div>
                                 </div>
                             </form>
