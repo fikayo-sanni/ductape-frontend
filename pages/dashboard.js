@@ -659,7 +659,7 @@ export default function Index(props) {
                 <div className="col-lg-12 mt-4">
                     <Link href="upload">
                         <div className="border bg-primary-transparent cursor-pointer p-4 text-center border_radius">
-                            <p className="m-0 text-primary font-lg text-uppercase"><UploadOutlined/> Upload New File</p>
+                            <p className="m-0 text-primary font-lg text-uppercase"><UploadOutlined/> Upload File</p>
                         </div>
                     </Link>
 
@@ -703,27 +703,27 @@ export default function Index(props) {
                                    pagination={{showTotal: (total, range) => `Showing ${range[0]}-${range[1]} of ${total} results`, defaultPageSize: 7, showSizeChanger: true}}/>
                         </section>
                     </TabPane>
-                    <TabPane tab={<span className="align-items-center d-flex">Booked  <Badge count={0} showZero={true}
-                                                                                             style={{backgroundColor: '#E9ECF1'}}/></span>}
-                             key="4">
+                    {/*<TabPane tab={<span className="align-items-center d-flex">Booked  <Badge count={0} showZero={true}*/}
+                    {/*                                                                         style={{backgroundColor: '#E9ECF1'}}/></span>}*/}
+                    {/*         key="4">*/}
 
-                        <section className="col-lg-8 py-5 mx-auto" >
+                    {/*    <section className="col-lg-8 py-5 mx-auto" >*/}
 
-                            <Result
-                                status="error"
-                                icon={<i className="fa fa-folder-open fa-5x font_gray"></i>}
-                                title="No Result Found"
-                                subTitle="Kindly check back again later or reload the page to check for new information."
-                                extra={[
-                                    <Button type="primary" key="console">
-                                        Reload page
-                                    </Button>,
-                                ]}
-                            >
-                            </Result>
+                    {/*        <Result*/}
+                    {/*            status="error"*/}
+                    {/*            icon={<i className="fa fa-folder-open fa-5x font_gray"></i>}*/}
+                    {/*            title="No Result Found"*/}
+                    {/*            subTitle="Kindly check back again later or reload the page to check for new information."*/}
+                    {/*            extra={[*/}
+                    {/*                <Button type="primary" key="console">*/}
+                    {/*                    Reload page*/}
+                    {/*                </Button>,*/}
+                    {/*            ]}*/}
+                    {/*        >*/}
+                    {/*        </Result>*/}
 
-                        </section>
-                    </TabPane>
+                    {/*    </section>*/}
+                    {/*</TabPane>*/}
                 </Tabs>
 
             </section>

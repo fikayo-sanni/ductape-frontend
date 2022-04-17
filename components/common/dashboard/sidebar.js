@@ -51,43 +51,41 @@ export default function sidebar(title) {
                     className="w-100 no_background no_border side_menu"
                 >
 
-                    <Menu.Item key="home"
+                    <Menu.Item key="home" className='ant-menu-item-selected'
                                icon={<Avatar src="/images/icons/dashboard.svg" shape="square" size={15}/>}>
                         Dashboard
                     </Menu.Item>
 
-                    <Menu.Item key="quotes" className='ant-menu-item-selected' icon={<Avatar src="/images/icons/quotes.svg" shape="square" size={15}/>}>
-                        Quotes
+                    <Menu.Item key="quotes"  icon={<Avatar src="/images/icons/quotes.svg" shape="square" size={15}/>}>
+                        My Documents
                     </Menu.Item>
                     <Menu.Item key="bookings" icon={<Avatar src="/images/icons/booking.svg" shape="square" size={15}/>}>
-                        Bookings
+                        Subscriptions
                     </Menu.Item>
-                    <Menu.Item key="shipments" icon={<Avatar src="/images/icons/shipment.svg" shape="square" size={15}/>}>
-                        Shipments
-                    </Menu.Item>
-                    <Menu.Item key="trade_finance" icon={<Avatar src="/images/icons/trade.svg" shape="square" size={15}/>}>
-                        Trade Finance
+                    <Menu.Item key="bookings" icon={<Avatar src="/images/icons/booking.svg" shape="square" size={15}/>}>
+                        Fields
                     </Menu.Item>
 
-                    <div className="py-3 mb-4 border-bottom"></div>
+
+                    {/*<div className="py-3 mb-4 border-bottom"></div>*/}
 
 
-                    <Menu.Item  key="billing" icon={<Avatar src="/images/icons/billing.svg" shape="square" size={15}/>}>
-                        Billings
-                    </Menu.Item>
+                    {/*<Menu.Item  key="billing" icon={<Avatar src="/images/icons/billing.svg" shape="square" size={15}/>}>*/}
+                    {/*    Billings*/}
+                    {/*</Menu.Item>*/}
 
-                    <Menu.Item key="products" icon={<Avatar src="/images/icons/products.svg" shape="square" size={15}/>}>
-                        Products
-                    </Menu.Item>
-                    <Menu.Item key="rates" icon={<Avatar src="/images/icons/fixed_rates.svg" shape="square" size={15}/>}>
-                        Fixed Rates
-                    </Menu.Item>
-                    <Menu.Item key="network" icon={<Avatar src="/images/icons/network.svg" shape="square" size={15}/>}>
-                        Network
-                    </Menu.Item>
-                    <Menu.Item key="reports" icon={<Avatar src="/images/icons/reports.svg" shape="square" size={15}/>}>
-                        Reports
-                    </Menu.Item>
+                    {/*<Menu.Item key="products" icon={<Avatar src="/images/icons/products.svg" shape="square" size={15}/>}>*/}
+                    {/*    Products*/}
+                    {/*</Menu.Item>*/}
+                    {/*<Menu.Item key="rates" icon={<Avatar src="/images/icons/fixed_rates.svg" shape="square" size={15}/>}>*/}
+                    {/*    Fixed Rates*/}
+                    {/*</Menu.Item>*/}
+                    {/*<Menu.Item key="network" icon={<Avatar src="/images/icons/network.svg" shape="square" size={15}/>}>*/}
+                    {/*    Network*/}
+                    {/*</Menu.Item>*/}
+                    {/*<Menu.Item key="reports" icon={<Avatar src="/images/icons/reports.svg" shape="square" size={15}/>}>*/}
+                    {/*    Reports*/}
+                    {/*</Menu.Item>*/}
 
                 </Menu>
 
