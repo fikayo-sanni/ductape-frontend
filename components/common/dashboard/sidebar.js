@@ -81,7 +81,7 @@ export default function sidebar(title) {
                     <Link href="reports">
                         <a>
                             <Menu.Item key="reports"
-                                       icon={<Avatar src="/images/icons/quotes.svg" shape="square" size={15}/>}>
+                                       icon={<FileDoneOutlined />}>
                                 Reports
                             </Menu.Item>
                         </a>

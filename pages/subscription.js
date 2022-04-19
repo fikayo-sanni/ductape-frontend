@@ -20,8 +20,8 @@ export default function Subscription(props) {
             fee: 99,
             permissions: [
                 {item: '30 Documents per month', active: true},
-                {item:'No document storage', active:false},
-                {item:'No insight & reports', active: false}
+                {item:'Document storage', active:false},
+                {item:'Insight & reports', active: false}
             ]
         },
         {
