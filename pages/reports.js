@@ -4,6 +4,7 @@ import {
    DatePicker
 } from 'antd';
 import moment from "moment";
+import {DownloadOutlined} from "@ant-design/icons";
 
 const {RangePicker} = DatePicker;
 
@@ -77,7 +78,7 @@ export default function Reports(props) {
                 </tbody>
                 </table>
 
-                <button className="btn btn-outline-primary btn-pill mt-4 text-uppercase">Download</button>
+                <button className="btn btn-outline-primary btn-pill mt-4 text-uppercase"><DownloadOutlined /> Download full report </button>
 
             </section>
         </Dashboard_Layout>

@@ -80,15 +80,21 @@ export default function sidebar(title) {
 
                     <Link href="reports">
                         <a>
-                    <Menu.Item key="reports" icon={<Avatar src="/images/icons/quotes.svg" shape="square" size={15}/>}>
-                        Reports
-                    </Menu.Item>
+                            <Menu.Item key="reports"
+                                       icon={<Avatar src="/images/icons/quotes.svg" shape="square" size={15}/>}>
+                                Reports
+                            </Menu.Item>
                         </a>
                     </Link>
 
-                    <Menu.Item key="subscriptions" icon={<Avatar src="/images/icons/booking.svg" shape="square" size={15}/>}>
-                        Subscriptions
-                    </Menu.Item>
+                    <Link href="subscription">
+                        <a>
+                            <Menu.Item key="subscriptions"
+                                       icon={<Avatar src="/images/icons/booking.svg" shape="square" size={15}/>}>
+                                Subscriptions
+                            </Menu.Item>
+                        </a>
+                    </Link>
 
 
                     {/*<div className="py-3 mb-4 border-bottom"></div>*/}
