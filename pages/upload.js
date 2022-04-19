@@ -194,10 +194,11 @@ export async function getServerSideProps({query}) {
     const {file} = query
 
     let pdfData = 'hello world';
+    const newLink = "data.txt";
 
     if(file) {
 
-        const newLink = "data.txt";
+
         const openFile = fs.createWriteStream(newLink)
 
         await https.get(file, response => {
@@ -206,6 +207,8 @@ export async function getServerSideProps({query}) {
                 stream.close();
             })
         });
+
+    }
 
         if (fs.existsSync(newLink)) {
             pdfData = newLink;
@@ -244,7 +247,7 @@ export async function getServerSideProps({query}) {
         }
 
         //fs.unlinkSync("data.txt")
-    }
+
 
     // Pass data to the page via props
     return {props: {data: pdfData}}
