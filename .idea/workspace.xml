@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="general update">
-      <change afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="upload">
+      <change afterPath="$PROJECT_DIR$/1650210780193_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1650210793344_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1650210905515_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1650210935588_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1650210993780_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1650210994342_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1650211016985_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1650211138185_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/1650211138748_data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/documents.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/reports.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layout/dashboard_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layout/dashboard_layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/cdn/css/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/dashboard/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/common/dashboard/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/dashboard/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/common/dashboard/sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/config/constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/config/constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/dashboard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/upload.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -254,14 +271,8 @@
       <workItem from="1645684164034" duration="8000" />
       <workItem from="1650003013820" duration="11961000" />
       <workItem from="1650184355822" duration="2473000" />
-      <workItem from="1650207990429" duration="2183000" />
-    </task>
-    <task id="LOCAL-00415" summary="Receipt">
-      <created>1636017339928</created>
-      <option name="number" value="00415" />
-      <option name="presentableId" value="LOCAL-00415" />
-      <option name="project" value="LOCAL" />
-      <updated>1636017339929</updated>
+      <workItem from="1650207990429" duration="3764000" />
+      <workItem from="1650388368137" duration="4376000" />
     </task>
     <task id="LOCAL-00416" summary="Recurring payment">
       <created>1636194590068</created>
@@ -599,7 +610,14 @@
       <option name="project" value="LOCAL" />
       <updated>1650208160565</updated>
     </task>
-    <option name="localTasksCounter" value="464" />
+    <task id="LOCAL-00464" summary="upload">
+      <created>1650210254480</created>
+      <option name="number" value="00464" />
+      <option name="presentableId" value="LOCAL-00464" />
+      <option name="project" value="LOCAL" />
+      <updated>1650210254481</updated>
+    </task>
+    <option name="localTasksCounter" value="465" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -624,7 +642,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Recurring payment" />
     <MESSAGE value="Recepients" />
     <MESSAGE value="Support floater" />
     <MESSAGE value="API integration - register" />
@@ -649,7 +666,8 @@
     <MESSAGE value="dashboard" />
     <MESSAGE value="dashboard 2" />
     <MESSAGE value="general update" />
-    <option name="LAST_COMMIT_MESSAGE" value="general update" />
+    <MESSAGE value="upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="upload" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

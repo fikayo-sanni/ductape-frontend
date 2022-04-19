@@ -62,7 +62,8 @@ const Logo = (props) => {
 
 
         return (
-                <img src="/images/logo.svg" className={"w-max-200" + props.className}/>
+            <h2 className="text-primary text-center font-lg font-weight-900 text-uppercase">Docu<span className=" font-lg text-danger">Read</span></h2>
+            // <img src="/images/logo.svg" className={"w-max-200" + props.className}/>
                 )
 
 }
@@ -97,7 +98,6 @@ module.exports = {
     Logo,
     numFormatter,
     thousandSeparator,
-
 };
 
 

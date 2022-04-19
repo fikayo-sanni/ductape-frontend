@@ -1,7 +1,5 @@
 import Dashboard_Layout from "../components/layout/dashboard_layout";
 import React, {useContext, Component, useEffect, useState} from "react";
-import Icon, {UploadOutlined} from "@ant-design/icons";
-import Link from "next/link";
 import {
     Button,
     Upload,
@@ -18,15 +16,21 @@ import {
     Space,
     Result
 } from 'antd';
-import {InboxOutlined, CloseCircleOutlined, EditOutlined, SearchOutlined} from '@ant-design/icons';
+import {toast} from "react-hot-toast";
+import {InboxOutlined, CloseCircleOutlined, EditOutlined, UploadOutlined, SearchOutlined} from '@ant-design/icons';
 import {thousandSeparator, Logo} from '../components/config/constant';
 import Skeleton from "react-loading-skeleton";
 import NProgress from "nprogress";
+import * as ls from "local-storage";
 import moment from "moment";
+import {PdfData, VerbosityLevel} from 'pdfdataextract';
+import Link from "next/link";
+import Home_layout from "../components/layout/home_layout";
 
+const https = require('https');
 const {Title, Paragraph, Text} = Typography;
 const {TabPane} = Tabs;
-
+const { Dragger } = Upload;
 
 export default function Index(props) {
     const [loading, setLoading] = useState(false);
@@ -364,49 +368,15 @@ export default function Index(props) {
         setFileList(newFileList);
     };
 
-
     useEffect(() => {
-
+        //console.log(props)
     }, [])
 
     return (
-        <Dashboard_Layout title="Dashboard">
-
+        <Dashboard_Layout title="My Documents">
             <section className="padding_30">
 
 
-                <div className="row">
-                    <div className="col-lg-4">
-                        <div className="border animated slideInDown p-4 text-center border_radius">
-                            <p className="m-0 text-primary font-xs text-uppercase">Files Uploaded</p>
-                            <h1 className="m-0 font-weight-700">15</h1>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-4">
-                        <div className="border animated slideInDown  p-4 text-center border_radius">
-                            <p className="m-0 text-primary font-xs text-uppercase">Files Processed</p>
-                            <h1 className="m-0 font-weight-700">13</h1>
-                        </div>
-                    </div>
-
-                    <div className="col-lg-4">
-                        <div className="border animated slideInDown  p-4 text-center border_radius">
-                            <p className="m-0 text-primary font-xs text-uppercase">Correctness</p>
-                            <h1 className="m-0 font-weight-700">95%</h1>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div className="col-lg-12 mt-4">
-                    <Link href="upload">
-                        <div className="border bg-primary-transparent cursor-pointer p-4 text-center border_radius">
-                            <p className="m-0 text-primary font-lg text-uppercase"><UploadOutlined/> Upload Files</p>
-                        </div>
-                    </Link>
-
-                </div>
 
 
                 <Tabs defaultActiveKey="1"
@@ -485,8 +455,6 @@ export default function Index(props) {
                 </Tabs>
 
             </section>
-
-
         </Dashboard_Layout>
     )
 }

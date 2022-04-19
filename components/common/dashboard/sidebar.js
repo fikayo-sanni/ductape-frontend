@@ -13,7 +13,7 @@ import {
     CaretDownOutlined,
     CaretUpOutlined,
     ArrowRightOutlined,
-    TeamOutlined, GroupOutlined, ArrowDownOutlined, DownOutlined,
+    TeamOutlined, GroupOutlined, ArrowDownOutlined, DownOutlined, UploadOutlined,
 } from '@ant-design/icons';
 import Link from "next/link";
 import React, {useState, useContext} from "react";
@@ -51,19 +51,43 @@ export default function sidebar(title) {
                     className="w-100 no_background no_border side_menu"
                 >
 
-                    <Menu.Item key="home" className='ant-menu-item-selected'
-                               icon={<Avatar src="/images/icons/dashboard.svg" shape="square" size={15}/>}>
-                        Dashboard
-                    </Menu.Item>
+                    <Link href="/dashboard">
+                        <a>
+                            <Menu.Item key="home" className='ant-menu-item-selected'
+                                       icon={<Avatar src="/images/icons/dashboard.svg" shape="square" size={15}/>}>
+                                Dashboard
+                            </Menu.Item>
+                        </a>
+                    </Link>
 
-                    <Menu.Item key="quotes"  icon={<Avatar src="/images/icons/quotes.svg" shape="square" size={15}/>}>
-                        My Documents
+                    <Link href="/upload">
+                        <a>
+                            <Menu.Item key="upload" className='bg-primary rounded-3 font-white'
+                                       icon={<UploadOutlined/>}>
+                                Upload Documents
+                            </Menu.Item>
+                        </a>
+                    </Link>
+
+                    <Link href="documents">
+                        <a>
+                            <Menu.Item key="documents"
+                                       icon={<Avatar src="/images/icons/quotes.svg" shape="square" size={15}/>}>
+                                My Documents
+                            </Menu.Item>
+                        </a>
+                    </Link>
+
+                    <Link href="reports">
+                        <a>
+                    <Menu.Item key="reports" icon={<Avatar src="/images/icons/quotes.svg" shape="square" size={15}/>}>
+                        Reports
                     </Menu.Item>
-                    <Menu.Item key="bookings" icon={<Avatar src="/images/icons/booking.svg" shape="square" size={15}/>}>
+                        </a>
+                    </Link>
+
+                    <Menu.Item key="subscriptions" icon={<Avatar src="/images/icons/booking.svg" shape="square" size={15}/>}>
                         Subscriptions
-                    </Menu.Item>
-                    <Menu.Item key="bookings" icon={<Avatar src="/images/icons/booking.svg" shape="square" size={15}/>}>
-                        Fields
                     </Menu.Item>
 
 
@@ -99,11 +123,13 @@ export default function sidebar(title) {
                     className="w-100 no_background no_border side_menu"
                 >
 
-                    <Menu.Item key="notifications" icon={<Avatar src="/images/icons/notification.svg" shape="square" size={15}/>}>
+                    <Menu.Item key="notifications"
+                               icon={<Avatar src="/images/icons/notification.svg" shape="square" size={15}/>}>
                         Notifications
                     </Menu.Item>
 
-                    <Menu.Item key="settings" icon={<Avatar src="/images/icons/settings.svg" shape="square" size={15}/>}>
+                    <Menu.Item key="settings"
+                               icon={<Avatar src="/images/icons/settings.svg" shape="square" size={15}/>}>
                         Settings
                     </Menu.Item>
                     <Menu.Item key="support" icon={<Avatar src="/images/icons/support.svg" shape="square" size={15}/>}>
@@ -115,18 +141,18 @@ export default function sidebar(title) {
 
             </div>
 
-           <div className="bg-primary_transparent_2 align-items-center d-flex justify-content-between p-4 w-100">
-<div className="d-flex">
-               <Avatar className="bg-dark me-2 border_radius font-weight-700" shape="square">UK</Avatar>
-<div>
-    <h6 className="m-0">Mati Industries</h6>
-    <p className="m-0 font-gray font-xs">Lanremati@gmail.com</p>
-</div>
-</div>
+            <div className="bg-primary_transparent_2 align-items-center d-flex justify-content-between p-4 w-100">
+                <div className="d-flex">
+                    <Avatar className="bg-dark me-2 border_radius font-weight-700" shape="square">UK</Avatar>
+                    <div>
+                        <h6 className="m-0">Mati Industries</h6>
+                        <p className="m-0 font-gray font-xs">Lanremati@gmail.com</p>
+                    </div>
+                </div>
 
-               <img src="/images/icons/down.svg" />
+                <img src="/images/icons/down.svg"/>
 
-           </div>
+            </div>
 
         </div>
     );

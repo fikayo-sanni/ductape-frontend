@@ -29,6 +29,7 @@ import {readFileSync} from 'fs';
 const https = require('https');
 const {Title, Paragraph, Text} = Typography;
 const {TabPane} = Tabs;
+const { Dragger } = Upload;
 
 export default function Index(props) {
     const [loading, setLoading] = useState(false);
@@ -80,10 +81,11 @@ export default function Index(props) {
                 }).then(res => res.json()).then(data => {
                   //  console.log(data)
                     toast.success('Successfully uploaded image ' + image)
+                    toast.loading('Redirecting. Please wait');
 
                     setTimeout(() => {
                         window.location = '?file=' + data.data.url;
-                    }, 3000)
+                    }, 5000)
 
 
                 }).catch(err => {
@@ -94,6 +96,8 @@ export default function Index(props) {
                 //urls.push(url);
             }
 
+        }else{
+            toast.error('Select a file');
         }
 
         ls.set('files', urls);
@@ -105,18 +109,33 @@ export default function Index(props) {
     }, [])
 
     return (
-        <Dashboard_Layout title="Home">
+        <Dashboard_Layout title="Upload Document">
 
             <section className="padding_30">
 
-                <h6 className="font-sm ">Add new photos <span className="text-danger">*</span></h6>
-                <Upload
-                    className=""
-                    listType="picture"
-                    {...uploadProps}
+                {/*<h6 className="font-sm ">Add new photos <span className="text-danger">*</span></h6>*/}
 
-                > <Button className="w-100 form-control" icon={<UploadOutlined/>}> Select gallery photos</Button>
-                </Upload>
+                <div className="bg-primary-transparent mb-3 p-4">
+                    <Dragger {...uploadProps}>
+                        <p className="ant-upload-drag-icon">
+                            <InboxOutlined style={{fontSize: 54}} />
+                        </p>
+                        <p className="ant-upload-text">Click or drag file to this area to upload</p>
+                        <p className="ant-upload-hint">
+                            Support for a single or bulk upload. Strictly prohibit from uploading company data or other
+                            band files
+                        </p>
+                    </Dragger>
+                </div>
+
+                <label>Document Type</label>
+                <select className="form-control">
+                    <option disabled selected value="" >-- Select a file type --</option>
+                    <option>Invoice</option>
+                    <option>ID Card</option>
+                    <option>Receipt</option>
+                    <option>Driver's License</option>
+                </select>
 
                 <button onClick={() => uploadFiles()} className="btn mt-4 btn-primary">Upload Files</button>
 
@@ -177,21 +196,19 @@ export async function getServerSideProps({query}) {
     let pdfData = 'hello world';
 
     if(file) {
+
         const newLink = "data.txt";
+        const openFile = fs.createWriteStream(newLink)
 
-        const openFile = fs.createWriteStream("data.txt")
-
-        https.get(file, response => {
+        await https.get(file, response => {
             let stream = response.pipe(openFile);
-
             stream.on("finish", function () {
-
+                stream.close();
             })
-        })
+        });
 
-        if (newLink) {
+        if (fs.existsSync(newLink)) {
             pdfData = newLink;
-
 
             const file_data = readFileSync(newLink);
 
@@ -226,7 +243,7 @@ export async function getServerSideProps({query}) {
             });
         }
 
-        fs.unlink("data.txt",() => console.log('idiot'))
+        //fs.unlinkSync("data.txt")
     }
 
     // Pass data to the page via props
