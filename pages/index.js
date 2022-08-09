@@ -16,35 +16,61 @@ import {
     Space,
     Result
 } from 'antd';
+import NProgress from "nprogress";
 import {toast} from "react-hot-toast";
 import {thousandSeparator, Logo} from '../components/config/constant';
 import Router, {useRouter} from "next/router";
+import { loginUser } from "../components/services/users.service";
+import { fetchWorkspaces } from "../components/services/workspaces.service";
 import Link from "next/link";
+import { observer } from "mobx-react-lite";
+import { configStore } from '../data/configStore'
 
-export default function Index(props) {
-    const [loadingButton, setLoadingButton] = useState(-1);
-    const [user, setUser] = useState([]);
+const Index = observer((props) => {
+    const config = useContext(configStore)
+    const [loadingButton, setLoadingButton] = useState(false);
+    const [user, setUser] = useState({});
 
 
     const handleChange = e =>
         setUser({...user, [e.target.name]: e.target.value});
 
-    const login = (e, buttonId) => {
+    const login = async(e, buttonId) => {
         e.preventDefault();
         try {
+            setLoadingButton(true);
+            NProgress.start();
+            //toast.success('Registration successful')
+            const login = await loginUser(user);
+            console.log(login);
+            const userData = login.data.data;
+            config.changeUser(userData);
+            toast.success('Login successful')
+            const { workspaces } = login.data.data;
+            if(workspaces.length){
+                const {auth_token: token, public_key, _id: user_id} = userData;
+                const spaces = await fetchWorkspaces({token, public_key, user_id});
+                const {data} = spaces.data;
+                let defaultChanged = false;
+                data.map((d,i)=>{
+                    if(d.default){
+                        defaultChanged = true;
+                        config.changeDefaultWorkspaceId(d.workspace_id)
+                    }
+                })
+                if(!defaultChanged) config.changeDefaultWorkspaceId(data[0].workspace_id);
 
-            if (user.email === 'fikayo@gmail.com' && user.password === 'fikayo') {
-                toast.success('Login successful')
+                config.changeWorkspaces(data);
                 Router.push('/dashboard');
-            } else {
-                toast.error('Incorrect credentials')
+            }else{ 
+                Router.push('/workspaces');
             }
-
         } catch (e) {
-            console.log('An error occurred', e);
-
-            toast.error(e)
-
+            setLoadingButton(false)
+            NProgress.done()
+            console.log('An error occurred', e.response);
+            const error = e.response? e.response.data.errors: e.toString();
+            toast.error(error || e.toString())
         }
     }
 
@@ -69,7 +95,7 @@ export default function Index(props) {
 
                                     <div className="col-12 mb-4">
                                         <div className="form-floating">
-                                            <input type="email" value={user.email} onChange={handleChange}
+                                            <input type="email" value={user.email} onChange={handleChange} required
                                                    className="form-control" placeholder="email" name="email"/>
                                             <label>Email</label>
                                         </div>
@@ -77,7 +103,7 @@ export default function Index(props) {
 
                                     <div className="col-12 mb-4">
                                         <div className="form-floating">
-                                            <input type="password" value={user.password} onChange={handleChange}
+                                            <input type="password" value={user.password} onChange={handleChange} required
                                                    className="form-control" placeholder="password" name="password"/>
                                             <label>Password</label>
                                         </div>
@@ -85,7 +111,7 @@ export default function Index(props) {
 
                                     <div className="col-lg-12 mx-auto">
 
-                                        <button className="btn btn-lg p-3 mt-4 btn-primary w-100"
+                                        <button className="btn btn-lg p-3 mt-4 btn-primary w-100" disabled={loadingButton}
                                                 id="reg_button">Login
                                         </button>
                                         <p className="mb-0 mt-4 text-center">Forgot your password? <Link href="reset">
@@ -107,7 +133,7 @@ export default function Index(props) {
 
 
                     <div className="text-center">
-                        <span className="me-4">&copy; 2021</span>
+                        <span className="me-4">&copy; 2022</span>
                         <a href="" className="font-gray-3 me-4">Privacy policy</a>
                         <a href="" className="font-gray-3">Terms & conditions</a>
                     </div>
@@ -117,4 +143,6 @@ export default function Index(props) {
             </div>
         </Home_layout>
     )
-}
+})
+
+export default Index

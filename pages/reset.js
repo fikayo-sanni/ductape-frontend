@@ -16,34 +16,39 @@ import {
     Space,
     Result
 } from 'antd';
+import NProgress from "nprogress";
 import {toast} from "react-hot-toast";
 import {thousandSeparator, Logo} from '../components/config/constant';
 import Router, {useRouter} from "next/router";
 import Link from "next/link";
+import { forgotUser } from "../components/services/users.service";
 
 export default function Index(props) {
-    const [loadingButton, setLoadingButton] = useState(-1);
+    const [loadingButton, setLoadingButton] = useState(false);
     const [user, setUser] = useState([]);
 
 
     const handleChange = e =>
         setUser({...user, [e.target.name]: e.target.value});
 
-    const login = (e, buttonId) => {
+    const reset = async(e, buttonId) => {
         e.preventDefault();
         try {
-
-            if (user.email === 'fikayo@gmail.com' && user.password === 'fikayo') {
-                toast.success('Login successful')
-                Router.push('/dashboard');
-            } else {
-                toast.error('Incorrect credentials')
-            }
+            setLoadingButton(true);
+            NProgress.start();
+            //toast.success('Registration successful')
+            const login = await forgotUser(user);
+            console.log(login);
+            toast.success('Email Sent')
+            const { workspaces } = login.data.data;
+            Router.push('/');
 
         } catch (e) {
-            console.log('An error occurred', e);
-
-            toast.error(e)
+            setLoadingButton(false)
+            NProgress.done()
+            console.log('An error occurred', e.response);
+            const error = e.response? e.response.data.errors: e.toString();
+            toast.error(error)
 
         }
     }
@@ -64,7 +69,7 @@ export default function Index(props) {
                         <div className="bg-white login_box shadow">
                             <h4 className="text-center mb-5 font-weight-700">Forgot Password</h4>
 
-                            <form id="login_form">
+                            <form id="login_form" onSubmit={(e) => reset(e, 'reset_button')}>
                                 <div className="row">
 
                                     <div className="col-12 mb-4">
@@ -78,8 +83,8 @@ export default function Index(props) {
 
                                     <div className="col-lg-12 mx-auto">
 
-                                        <button className="btn btn-lg p-3 mt-4 btn-primary w-100"
-                                                id="reg_button">Verify account
+                                        <button className="btn btn-lg p-3 mt-4 btn-primary w-100" disabled={loadingButton}
+                                                id="reset_button">Send Email
                                         </button>
 
                                         <p className="mb-0 mt-4 text-center">
@@ -97,7 +102,7 @@ export default function Index(props) {
 
 
                     <div className="text-center">
-                        <span className="me-4">&copy; 2021</span>
+                        <span className="me-4">&copy; 2022</span>
                         <a href="" className="font-gray-3 me-4">Privacy policy</a>
                         <a href="" className="font-gray-3">Terms & conditions</a>
                     </div>

@@ -11,7 +11,7 @@ export default function Home_Layout ({
         <div className="">
 
             <Head>
-                <title>{title} | Startupia</title>
+                <title>{title} | DucTape</title>
                 <meta charSet="utf-8" />
                 <link rel="shortcut icon" type="image/png" href="/images/logo_2.png"/>
                 <link rel="icon" type="image/png" href="/images/logo_2.png" />

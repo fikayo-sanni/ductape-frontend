@@ -4,10 +4,13 @@ import {toast} from "react-hot-toast";
 import {Logo} from '../components/config/constant';
 import Router, {useRouter} from "next/router";
 import Link from "next/link";
+import { useNProgress } from '@tanem/react-nprogress'
+import { registerUser } from "../components/services/users.service";
+import NProgress from "nprogress";
 
 
 export default function Register(props) {
-    const [loadingButton, setLoadingButton] = useState(-1);
+    const [loadingButton, setLoadingButton] = useState(false);
     const [user, setUser] = useState([]);
 
 
@@ -15,6 +18,28 @@ export default function Register(props) {
         setUser({...user, [e.target.name]: e.target.value});
 
 
+
+    const register = async(e, buttonId) => {
+        e.preventDefault();
+        try {
+            if (user.password === user.repeat_password) {
+                setLoadingButton(true);
+                NProgress.start();
+                //toast.success('Registration successful')
+                await registerUser({...user, repeat_password: undefined});
+                toast.success('Registration successful')
+                //Router.push('/dashboard');
+            } else {
+                toast.error('passwords do not match')
+            }
+        } catch (e) {
+            setLoadingButton(false)
+            NProgress.done();
+            console.log('An error occurred', e);
+            const error = e.response? e.response.data.errors: e.toString();
+            toast.error(error)
+        }
+    }
     useEffect(() => {
 
     }, [])
@@ -31,21 +56,21 @@ export default function Register(props) {
                         <div className="bg-white login_box shadow">
                             <h4 className="text-center mb-5 font-weight-700">Create an account</h4>
 
-                            <form id="login_form">
+                            <form id="register_form" onSubmit={(e) => register(e, 'reg_button')}>
                                 <div className="row">
 
                                     <div className="col-6 mb-4">
                                         <div className="form-floating">
-                                            <input type="text" value={user.firstname} onChange={handleChange}
-                                                   className="form-control" placeholder="email" name="email"/>
+                                            <input type="text" value={user.firstname} onChange={handleChange} required
+                                                   className="form-control" placeholder="firstname" name="firstname"/>
                                             <label>First name</label>
                                         </div>
                                     </div>
 
                                     <div className="col-6 mb-4">
                                         <div className="form-floating">
-                                            <input type="text" value={user.lastname} onChange={handleChange}
-                                                   className="form-control" placeholder="email" name="email"/>
+                                            <input type="text" value={user.lastname} onChange={handleChange} required
+                                                   className="form-control" placeholder="lastname" name="lastname"/>
                                             <label>Last name</label>
                                         </div>
                                     </div>
@@ -53,7 +78,7 @@ export default function Register(props) {
 
                                     <div className="col-12 mb-4">
                                         <div className="form-floating">
-                                            <input type="email" value={user.email} onChange={handleChange}
+                                            <input type="email" value={user.email} onChange={handleChange} required
                                                    className="form-control" placeholder="email" name="email"/>
                                             <label>Email</label>
                                         </div>
@@ -61,7 +86,7 @@ export default function Register(props) {
 
                                     <div className="col-12 mb-4">
                                         <div className="form-floating">
-                                            <input type="password" value={user.password} onChange={handleChange}
+                                            <input type="password" value={user.password} onChange={handleChange} required
                                                    className="form-control" placeholder="password" name="password"/>
                                             <label>Password</label>
                                         </div>
@@ -69,15 +94,15 @@ export default function Register(props) {
 
                                     <div className="col-12 mb-4">
                                         <div className="form-floating">
-                                            <input type="password" value={user.password} onChange={handleChange}
-                                                   className="form-control" placeholder="password" name="password"/>
+                                            <input type="password" value={user.repeat_password} onChange={handleChange} required
+                                                   className="form-control" placeholder="repeat_password" name="repeat_password"/>
                                             <label>Confirm Password</label>
                                         </div>
                                     </div>
 
                                     <div className="col-lg-12 mx-auto">
 
-                                        <button className="btn btn-lg p-3 mt-4 btn-primary w-100" id="reg_button">Create
+                                        <button className="btn btn-lg p-3 mt-4 btn-primary w-100" id="reg_button" disabled={loadingButton}>Create
                                             account
                                         </button>
 
@@ -94,7 +119,7 @@ export default function Register(props) {
 
 
                     <div className="text-center">
-                        <span className="me-4">&copy; 2021</span>
+                        <span className="me-4">&copy; 2022</span>
                         <a href="" className="font-gray-3 me-4">Privacy policy</a>
                         <a href="" className="font-gray-3">Terms & conditions</a>
                     </div>

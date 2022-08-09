@@ -8,6 +8,7 @@ import React from "react";
 import Router, {useRouter} from "next/router";
 import NProgress from "nprogress";
 import {Toaster} from "react-hot-toast";
+import { observer } from 'mobx-react-lite';
 
 
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -15,7 +16,7 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 
-function App({Component, pageProps}) {
+const App = observer(({Component, pageProps}) => {
 
     return (
         <>
@@ -29,6 +30,6 @@ function App({Component, pageProps}) {
         </>
     )
 
-}
+});
 
 export default App

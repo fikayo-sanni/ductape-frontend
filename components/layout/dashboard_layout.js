@@ -12,24 +12,24 @@ import {
 } from '@ant-design/icons';
 import {Logo} from "../config/constant";
 import header from "../common/dashboard/header";
-import sidebar from "../common/dashboard/sidebar";
-
+import Sidebar from "../common/dashboard/sidebar";
+import { observer } from 'mobx-react-lite';
 
 const {SubMenu} = Menu;
 const {Header, Content, Sider} = Layout;
 
 
-export default function Dashboard_Layout({
+const  Dashboard_Layout = observer(({
                                              children,
                                              title = 'Dashboard'
-                                         }) {
+                                         }) => {
 
 
     return (
         <Layout className="">
 
             <Head>
-                <title>{title} | Send Freight</title>
+                <title>{title} | DucTape</title>
                 <meta charSet="utf-8"/>
                 <meta name="theme-color" content="#0746A6"/>
                 <link rel="shortcut icon" type="image/png" href="/images/logo_2.png"/>
@@ -47,7 +47,7 @@ export default function Dashboard_Layout({
 
 
                 <div className="col-lg-2">
-                    {sidebar(title)}
+                    <Sidebar/>
                 </div>
 
 
@@ -56,7 +56,6 @@ export default function Dashboard_Layout({
 
                     <div className={"bg-white  position-relative border_radius  ms-0"}
                          style={{height: '100vh', overflowY: 'auto'}}>
-                        {header(title)}
                         <section className="d-flex flex-column" style={{height: '91%'}}>
 
                             {children}
@@ -72,4 +71,6 @@ export default function Dashboard_Layout({
                     crossorigin="anonymous"></script>
         </Layout>
 )
-}
+});
+
+export default Dashboard_Layout
