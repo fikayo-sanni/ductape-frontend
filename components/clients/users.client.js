@@ -12,7 +12,7 @@ export const emailClient = (auth, contentType) => {
   if (instance) return instance;
   instance = axios.create({
     baseURL:"",
-    timeout: 5000,
+    timeout: 15000,
     headers: {
       'Content-Type': contentType,
       Authorization: auth

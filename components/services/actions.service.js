@@ -1,5 +1,5 @@
 import { actionsClient } from "../clients/actions.client";
-import { ACTIONS_CREATE_URL } from "../config/urls";
+import { ACTIONS_CREATE_URL, ACTION_FETCH_URL } from "../config/urls";
 import { Parameterize } from "../config/constant";
 
 export const createActions = async (payload) => {
@@ -32,3 +32,24 @@ export const createActions = async (payload) => {
     throw e;
   }
 };
+
+
+export const fetchAction = async (payload) => {
+  try {
+
+    const {
+      token,
+      action_id,
+      user_id,
+      public_key
+    } = payload;
+
+    const URL = Parameterize(ACTION_FETCH_URL, ":action_id", action_id);
+
+    return actionsClient(`Bearer ${token}`, "application/json").get(
+      `${URL}?user_id=${user_id}&public_key=${public_key}`
+    )
+  } catch (e) {
+    throw e;
+  }
+}

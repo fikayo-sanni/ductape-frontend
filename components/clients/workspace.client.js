@@ -10,7 +10,7 @@ export const workspaceClient = (auth, contentType) => {
     if (instance) return instance;
     instance = axios.create({
       baseURL: WORKSPACES_BASE_URL,
-      timeout: 5000,
+      timeout: 15000,
       headers: {
         'Content-Type': contentType,
         Authorization: auth
