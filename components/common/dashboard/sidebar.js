@@ -11,6 +11,7 @@ import {
   BarChartOutlined,
   TeamOutlined,
   CheckOutlined,
+  MessageOutlined
 } from "@ant-design/icons";
 import Link from "next/link";
 import { fetchInitials } from "../../config/constant";
@@ -152,7 +153,6 @@ const Sidebar = observer((props) => {
               </Menu.Item>
             </a>
           </Link>
-
           <Link href="/marketplace">
             <a>
               <Menu.Item
@@ -166,6 +166,21 @@ const Sidebar = observer((props) => {
               </Menu.Item>
             </a>
           </Link>
+
+          <Link href="/partners">
+            <a>
+              <Menu.Item
+                key="partners"
+                className={
+                  pathname.startsWith("/partners") ? "ant-menu-item-selected" : ""
+                }
+                icon={<MessageOutlined />}
+              >
+                Partners
+              </Menu.Item>
+            </a>
+          </Link>
+          
           <Link href="/teams">
             <a>
               <Menu.Item

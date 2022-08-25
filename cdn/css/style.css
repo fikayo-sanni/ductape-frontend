@@ -219,6 +219,14 @@ body {
   cursor: pointer;
   border-width: 2px !important; 
 }
+
+.hover-skyblue:hover {
+  background: var(--skyblue) !important;
+  color: var(--primary_color) !important;
+  border-right: 4px solid var(--primary_color) !important;
+  cursor: pointer;
+}
+
 .btn-pill:hover {
   background: none !important;
   color: var(--primary_color) !important;
