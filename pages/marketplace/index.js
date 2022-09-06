@@ -3,16 +3,6 @@ import React, { useContext, Component, useEffect, useState } from "react";
 import { Tabs, Typography, Breadcrumb, Input, Card, List, Menu, Avatar } from "antd";
 import Link from "next/link";
 
-import { configStore } from "../../data/configStore";
-import { observer } from "mobx-react-lite";
-import {
-  AppstoreOutlined,
-  CalendarOutlined,
-  LinkOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
-
 const { Title, Paragraph, Text } = Typography;
 const { Search } = Input;
 const { TabPane } = Tabs;
@@ -20,7 +10,7 @@ const { TabPane } = Tabs;
 const { TextArea } = Input;
 
 const Index = (props) => {
-  const config = useSelector((state) => state.app);
+  // const config = useSelector((state) => state.app);
 
   function getItem(label, key, icon, children) {
     return {
