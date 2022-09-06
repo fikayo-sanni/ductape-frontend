@@ -91,6 +91,8 @@ const Logo = (props) => {
 function fetchInitials(firstname, lastname) {
   if (firstname && lastname) {
     return `${firstname.charAt(0)} ${lastname.charAt(0)}`;
+  }else if(firstname) {
+    return `${firstname.charAt(0)}`
   }
 }
 

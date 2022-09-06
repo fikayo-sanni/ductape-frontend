@@ -12,19 +12,25 @@ import {
   Button,
   Breadcrumb,
   Checkbox,
+  Card,
   Slider,
   Switch,
   Empty,
-  Radio,
+  Menu,
+  List,
+  Avatar,
 } from "antd";
 import Icon, {
   InfoCircleOutlined,
+  LeftOutlined,
   OrderedListOutlined,
+  EditOutlined,
+  EllipsisOutlined,
   SettingOutlined,
+  PlusOutlined,
 } from "@ant-design/icons";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
-import { configStore } from "../../../data/configStore";
 import { observer } from "mobx-react-lite";
 import {
   fetchApp,
@@ -35,23 +41,36 @@ import {
   getTotalRow,
   Loading,
   capitalize,
+  fetchInitials,
   isValidHttpUrl,
   tagify,
   resourcify,
-  uniqueCheck
+  uniqueCheck,
 } from "../../../components/config/constant";
 import NProgress from "nprogress";
-
-const { Title, Paragraph, Text } = Typography;
-const { TabPane } = Tabs;
+import dynamic from "next/dynamic";
+import MarkdownIt from "markdown-it";
+import MdEditor from "react-markdown-editor-lite";
+// import style manually
+import "react-markdown-editor-lite/lib/index.css";
+import {useDispatch, useSelector} from "react-redux";
+import { changeDefaultWorkspaceId } from "../../../data/applicationSlice";
+import Actions from "../../../components/apps/actions";
+const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 const { TextArea } = Input;
+const { Meta } = Card;
+const { Title } = Typography;
+const { TabPane } = Tabs;
 
-const Index = observer((props) => {
-  const config = useContext(configStore);
+const Index = (props) => {
+  const config = useSelector((state) => state.app);
   const [app, setApp] = useState({});
   const [action, setAction] = useState({});
   const [createAction, setCreateAction] = useState(false);
+  const [appPage, setAppPage] = useState(1);
+  const [defaultActionType, setDefaultActionType] = useState("");
+  const [actionSelected, setActionSelected] = useState("");
 
   const [setupList, setSetupList] = useState([]);
   const [authList, setAuthList] = useState([]);
@@ -64,6 +83,7 @@ const Index = observer((props) => {
   const [envSelectedData, setEnvSelectedData] = useState({});
   const [envSelected, setEnvSelected] = useState();
   const [error, setError] = useState("");
+  const [selectedPage, setSelectedPage] = useState(-1);
   const [envSelectedPage, setEnvSelectedPage] = useState();
   const [user, setUser] = useState(config.user);
   const [loadingButton, setLoadingButton] = useState(false);
@@ -170,6 +190,11 @@ const Index = observer((props) => {
     setAction({ ...action, tag });
   };
 
+  const handleChangeName = (e) => {
+    const name = tagify(e.target.value);
+    setAction({ ...action, name });
+  };
+
   const handleChangeResource = (e) => {
     const resource = resourcify(e.target.value);
     setAction({ ...action, resource });
@@ -183,8 +208,9 @@ const Index = observer((props) => {
     setCreateAction(false);
   };
 
-  const showCreateActionDialog = () => {
+  const showCreateActionDialog = (defaultActionType = "") => {
     setCreateAction(true);
+    setDefaultActionType(defaultActionType);
   };
 
   const showEnvDialog = (index, e) => {
@@ -192,6 +218,10 @@ const Index = observer((props) => {
     setEnvSelectedData(app.envs[index]);
     setEnvSelectedPage(1);
     setEnvDialog(true);
+  };
+
+  const onChange = (key) => {
+    console.log(key);
   };
 
   const incEnvDialog = () => {
@@ -235,44 +265,47 @@ const Index = observer((props) => {
     actions.map((data) => {
       const { type } = data;
 
-        if (type === "SETUP") {
-          if(uniqueCheck(setupList, data))setupList.push(data);
-          setSetupList(setupList);
-        }
-        if (type === "AUTH") {
-          if(uniqueCheck(authList, data))authList.push(data);
-          setAuthList(authList);
-        }
-        if (type === "CREATE") {
-          if(uniqueCheck(createList, data))createList.push(data);
-          setCreateList(createList);
-        }
-        if (type === "READ") {
-          if(uniqueCheck(readList, data))readList.push(data);
-          setReadList(readList);
-        }
-        if (type === "UPDATE") {
-          if(uniqueCheck(updateList, data))updateList.push(data);
-          setUpdateList(updateList);
-        }
-        if (type === "DELETE") {
-          if(uniqueCheck(deleteList, data))deleteList.push(data);
-          setDeleteList(deleteList);
-        }
-        if (type === "HOOKS") {
-          if(uniqueCheck(hooksList, data))hooksList.push(data);
-          setHooksList(hooksList);
-        }
-        //alert(setupList.length)
-      
+      if (type === "SETUP") {
+        if (uniqueCheck(setupList, data)) setupList.push(data);
+        setSetupList(setupList);
+      }
+      if (type === "AUTH") {
+        if (uniqueCheck(authList, data)) authList.push(data);
+        setAuthList(authList);
+      }
+      if (type === "CREATE") {
+        if (uniqueCheck(createList, data)) createList.push(data);
+        setCreateList(createList);
+      }
+      if (type === "READ") {
+        if (uniqueCheck(readList, data)) readList.push(data);
+        setReadList(readList);
+      }
+      if (type === "UPDATE") {
+        if (uniqueCheck(updateList, data)) updateList.push(data);
+        setUpdateList(updateList);
+      }
+      if (type === "DELETE") {
+        if (uniqueCheck(deleteList, data)) deleteList.push(data);
+        setDeleteList(deleteList);
+      }
+      if (type === "HOOKS") {
+        if (uniqueCheck(hooksList, data)) hooksList.push(data);
+        setHooksList(hooksList);
+      }
+      //alert(setupList.length)
     });
+  };
+
+  const handleEditorChange = ({ html, text }) => {
+    console.log("handleEditorChange", html, text);
   };
 
   useEffect(async () => {
     try {
       const app = await fetchAppData();
       if (app.workspace_id === config.defaultWorkspaceId) {
-        categorizeActions(app.actions)
+        categorizeActions(app.actions);
         setApp(app);
       } else {
         const error = "Access Denied";
@@ -285,67 +318,9 @@ const Index = observer((props) => {
     }
   }, [app]);
 
-  let arrRowItems = [];
-
-  if (app.envs) arrRowItems = getTotalRow(app.envs, 3);
-
-  const columns = [
-    {
-      title: "Active",
-      key: "active",
-      render: (_, record) => (
-        <Space size="middle">
-          <Switch />
-        </Space>
-      ),
-    },
-    {
-      title: "Tag",
-      dataIndex: "tag",
-      key: "tag",
-      render: (text) => <label className="font-weight-500">{text}</label>,
-    },
-    {
-      title: "Description",
-      dataIndex: "description",
-      key: "description",
-      render: (text) => <label className="text-muted">{text}</label>,
-    },
-    {
-      title: "Category",
-      dataIndex: "type",
-      key: "type",
-      render: (text) => (
-        <badge className="border_radius border p-2">{text}</badge>
-      ),
-    },
-    {
-      title: "Method",
-      dataIndex: "httpVerb",
-      key: "httpVerb",
-      render: (text) => <Tag color="geekblue">{text}</Tag>,
-    },
-    {
-      title: "Resource",
-      dataIndex: "resource",
-      key: "resource",
-      render: (text) => <a>{text}</a>,
-    },
-    {
-      title: "Action",
-      key: "action",
-      render: (_, record) => (
-        <Space size="middle">
-          <Button href={`/apps/${app_id}/actions/${record._id}`}>
-            Configure <SettingOutlined />
-          </Button>
-        </Space>
-      ),
-    },
-  ];
-
   return (
-    <Dashboard_Layout title={app.app_name || "App"}>
+    <Dashboard_Layout title={capitalize(String(app.app_name)) || "App"}>
+      <div className="padding_10"></div>
       {app && app.envs ? (
         <Modal
           title={
@@ -627,6 +602,20 @@ const Index = observer((props) => {
             <div className="form-floating">
               <input
                 type="text"
+                value={action.name || ""}
+                onChange={handleChangeName}
+                required
+                className="form-control"
+                placeholder="Name"
+                name="name"
+              />
+              <label>Action Name</label>
+            </div>
+          </div>
+          <div className="col-12 mb-4">
+            <div className="form-floating">
+              <input
+                type="text"
                 value={action.tag || ""}
                 onChange={handleChangeTag}
                 required
@@ -684,7 +673,8 @@ const Index = observer((props) => {
               <select
                 className="form-control"
                 onChange={handleChangeAction}
-                value={action.type || ""}
+                value={action.type || defaultActionType || ""}
+                disabled={Boolean(defaultActionType)}
                 name="type"
               >
                 <option disabled selected value="">
@@ -717,280 +707,862 @@ const Index = observer((props) => {
         </div>
       </Modal>
       <section className="padding_10 row">
-        <div className="padding_20">
-          <Breadcrumb>
-            <Breadcrumb.Item>
-              <Link href="/apps">Apps</Link>
-            </Breadcrumb.Item>
-            <Breadcrumb.Item>{app.app_name || "App"}</Breadcrumb.Item>
-          </Breadcrumb>
-        </div>
-        {Object.keys(app).length && !error ? (
-          <div>
-            <div>
-              <h4 className="ms-3">Environments</h4>
-              {app.envs.length ? (
-                <div>
-                  {arrRowItems.map((rowItems, index) => {
-                    return (
-                      <div key={"key-" + index}>
-                        <div
-                          style={{
-                            display: "grid",
-                            gridTemplateColumns: "1fr 1fr 1fr",
-                          }}
-                        >
-                          {rowItems.map((item, index) => {
-                            return (
-                              <div>
-                                <div
-                                  className="border animated slideInDown p-4 border_radius m-3 mb-0 hover-blue"
-                                  onClick={(e) => {
+        <div className="row">
+          <div className="col-2 border-end h-100">
+            <div className="padding_10">
+              <Breadcrumb>
+                <Breadcrumb.Item>
+                  <Link href="/apps">Apps</Link>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>
+                  {app.app_name ? capitalize(String(app.app_name)) : "App"}
+                </Breadcrumb.Item>
+              </Breadcrumb>
+            </div>
+            <Menu
+              defaultSelectedKeys={["1"]}
+              mode="inline"
+              theme="light"
+              inlineCollapsed={false}
+              className="border-none"
+            >
+              <Menu.Item
+                key="1"
+                onClick={() => {
+                  setAppPage(1);
+                  setActionSelected("");
+                }}
+              >
+                <span>Overview</span>
+              </Menu.Item>
+              <Menu.Item
+                key="2"
+                onClick={() => {
+                  setAppPage(2);
+                  setActionSelected("");
+                }}
+              >
+                <span>Environments</span>
+              </Menu.Item>
+              <Menu.Item
+                key="3"
+                onClick={() => {
+                  setAppPage(3);
+                  setActionSelected("");
+                }}
+              >
+                <span>Onboarding</span>
+              </Menu.Item>
+              <Menu.Item
+                key="4"
+                onClick={() => {
+                  setAppPage(4);
+                  setActionSelected("");
+                }}
+              >
+                <span>Auth</span>
+              </Menu.Item>
+              <Menu.Item
+                key="5"
+                onClick={() => {
+                  setAppPage(5);
+                  setActionSelected("");
+                }}
+              >
+                <span>CRUD Actions</span>
+              </Menu.Item>
+              <Menu.Item
+                key="6"
+                onClick={() => {
+                  setAppPage(6);
+                  setActionSelected("");
+                }}
+              >
+                <span>Webhook Events</span>
+              </Menu.Item>
+              <Menu.Item
+                key="9"
+                onClick={() => {
+                  setAppPage(9);
+                  setActionSelected("");
+                }}
+              >
+                <span>Geo-Availability</span>
+              </Menu.Item>
+              <Menu.Item
+                key="7"
+                onClick={() => {
+                  setAppPage(7);
+                  setActionSelected("");
+                }}
+              >
+                <span>Pricing</span>
+              </Menu.Item>
+              <Menu.Item
+                key="8"
+                onClick={() => {
+                  setAppPage(8);
+                  setActionSelected("");
+                }}
+              >
+                <span>Publish</span>
+              </Menu.Item>
+            </Menu>
+          </div>
+          <div className="col-10 padding_10">
+            {Object.keys(app).length && !actionSelected && !error ? (
+              <div>
+                {appPage === 1 ? (
+                  <span>
+                    <div>
+                      <Breadcrumb>
+                        <Breadcrumb.Item>Overview</Breadcrumb.Item>
+                        <Breadcrumb.Item> </Breadcrumb.Item>
+                      </Breadcrumb>
+                    </div>
+
+                    <span>
+                      <br />
+                      <span className="h-100">
+                        <MdEditor
+                          style={{ height: "700px" }}
+                          renderHTML={(text) => mdParser.render(text)}
+                          onChange={handleEditorChange}
+                        />
+                      </span>
+                    </span>
+                  </span>
+                ) : null}
+
+                {appPage === 2 && selectedPage == -1 ? (
+                  <span>
+                    <div>
+                      <Breadcrumb>
+                        <Breadcrumb.Item>Environments</Breadcrumb.Item>
+                        <Breadcrumb.Item> </Breadcrumb.Item>
+                      </Breadcrumb>
+                    </div>
+                    <List
+                      grid={{
+                        gutter: 20,
+                        xs: 1,
+                        sm: 2,
+                        md: 4,
+                        lg: 4,
+                        xl: 6,
+                        xxl: 3,
+                      }}
+                      dataSource={app.envs}
+                      renderItem={(item, index) => (
+                        <List.Item className="p-2">
+                          <Card
+                            className="hover-blue"
+                            title={
+                              <span>
+                                <Avatar
+                                  className="bg-gray text-primary me-2 border_radius font-weight-500"
+                                  shape="square"
+                                >
+                                  {fetchInitials(capitalize(item.env_name))}
+                                </Avatar>{" "}
+                                {capitalize(item.env_name)}
+                              </span>
+                            }
+                          >
+                            <label>{item.description}</label>
+                            <br />
+                            <div className="row">
+                              <label className="mt-4 text-muted col-9">
+                                <Switch
+                                  checked={item.active}
+                                  onChange={(e) => {
                                     showEnvDialog(index, e);
                                   }}
+                                />
+                              </label>
+                              <div className="col-3 mt-4">
+                                <Button
+                                  className="btn-outline-primary"
+                                  onClick={() => {
+                                    setSelectedPage(index);
+                                  }}
                                 >
-                                  <h5 className="m-0">
-                                    {capitalize(item.env_name)}{" "}
-                                  </h5>
-
-                                  <label className="mt-4 text-muted">
-                                    <Switch checked={item.active} />
-                                  </label>
-                                </div>
-                                {index !== 2 ? (
-                                  <div style={{ width: "15 px" }}></div>
-                                ) : null}
+                                  View
+                                </Button>
                               </div>
-                            );
-                          })}
-                        </div>
-                        {index !== arrRowItems.length - 1 ? (
-                          <div style={{ marginTop: "30px" }}></div>
-                        ) : null}
-                      </div>
-                    );
-                  })}
-                </div>
-              ) : (
-                <Empty></Empty>
-              )}
-              <br />
-              <h4 className="ms-3 mt-3">Actions</h4>
+                            </div>
+                          </Card>
+                        </List.Item>
+                      )}
+                    />
+                  </span>
+                ) : null}
 
-              <Tabs
-                defaultActiveKey="1"
-                className="page_tabs animated slideInUp"
-                tabBarStyle={{ paddingLeft: 44 }}
-                tabBarExtraContent={
-                  <div>
-                    <button
-                      className="btn btn-primary btn-pill font-white text-uppercase"
-                      onClick={showCreateActionDialog}
+                {appPage === 3 ? (
+                  <span>
+                    <div>
+                      <div className="row">
+                        <div className="col-4">
+                          <Breadcrumb>
+                            <Breadcrumb.Item>Onboarding</Breadcrumb.Item>
+                            <Breadcrumb.Item> </Breadcrumb.Item>
+                          </Breadcrumb>
+                        </div>
+                        <span className="col-6"></span>
+                        <span className="col-2">
+                          <button
+                            className="btn btn-outline-primary w-100"
+                            onClick={() => {
+                              showCreateActionDialog("SETUP");
+                            }}
+                          >
+                            ADD STEP <PlusOutlined />
+                          </button>
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="row padding_20">
+                      <div className="col-1"></div>
+                      <div className="col-10">
+                        <List
+                          dataSource={setupList}
+                          renderItem={(item, index) => (
+                            <List.Item className="pb-4 pt-4">
+                              <Card
+                                className="hover-blue w-100"
+                                title={
+                                  <span className="row">
+                                    <span className="col-10">
+                                      <Avatar
+                                        className="bg-skyblue text-primary me-2 border_radius font-weight-500"
+                                        shape="square"
+                                      >
+                                        {fetchInitials(item.tag)}
+                                      </Avatar>{" "}
+                                      <label>{item.tag}</label>
+                                    </span>
+                                    <span className="col-2">
+                                      <Button
+                                        className="btn-outline-primary"
+                                        onClick={() => {
+                                          setActionSelected(item._id);
+                                        }}
+                                      >
+                                        Configure <SettingOutlined />
+                                      </Button>
+                                    </span>
+                                  </span>
+                                }
+                              >
+                                <div className="row">
+                                  <span className="col-11">
+                                    <label>{item.description}</label>
+                                  </span>
+                                  <span className="text-muted col-1">
+                                    <Switch checked={false} />
+                                  </span>
+                                </div>
+                              </Card>
+                            </List.Item>
+                          )}
+                        />
+                      </div>
+                      <div className="col-1"></div>
+                    </div>
+                  </span>
+                ) : null}
+
+                {appPage === 4 ? (
+                  <span>
+                    <div>
+                      <div className="row">
+                        <div className="col-4">
+                          <Breadcrumb>
+                            <Breadcrumb.Item>Auth</Breadcrumb.Item>
+                            <Breadcrumb.Item> </Breadcrumb.Item>
+                          </Breadcrumb>
+                        </div>
+                        <span className="col-6"></span>
+                        <span className="col-2">
+                          <button
+                            className="btn btn-outline-primary w-100"
+                            onClick={() => {
+                              showCreateActionDialog("AUTH");
+                            }}
+                          >
+                            ADD AUTH <PlusOutlined />
+                          </button>
+                        </span>
+                      </div>
+                      <div className="row padding_20">
+                        <div className="col-1"></div>
+                        <div className="col-10">
+                          <List
+                            dataSource={authList}
+                            renderItem={(item, index) => (
+                              <List.Item className="pb-4 pt-4">
+                                <Card
+                                  className="hover-blue w-100"
+                                  title={
+                                    <span className="row">
+                                      <span className="col-10">
+                                        <Avatar
+                                          className="bg-skyblue text-primary me-2 border_radius font-weight-500"
+                                          shape="square"
+                                        >
+                                          {fetchInitials(item.tag)}
+                                        </Avatar>{" "}
+                                        <label>{item.tag}</label>
+                                      </span>
+                                      <span className="col-2">
+                                        <Button
+                                          className="btn-outline-primary"
+                                          onClick={() => {
+                                            setSelectedPage(index);
+                                          }}
+                                        >
+                                          Configure <SettingOutlined />
+                                        </Button>
+                                      </span>
+                                    </span>
+                                  }
+                                >
+                                  <div className="row">
+                                    <span className="col-11">
+                                      <label>{item.description}</label>
+                                    </span>
+                                    <span className="text-muted col-1">
+                                      <Switch checked={false} />
+                                    </span>
+                                  </div>
+                                </Card>
+                              </List.Item>
+                            )}
+                          />
+                        </div>
+                        <div className="col-1"></div>
+                      </div>
+                    </div>
+                  </span>
+                ) : null}
+
+                {appPage === 5 ? (
+                  <span>
+                    <div className="row">
+                      <div className="col-4">
+                        <Breadcrumb>
+                          <Breadcrumb.Item>CRUD Actions</Breadcrumb.Item>
+                          <Breadcrumb.Item> </Breadcrumb.Item>
+                        </Breadcrumb>
+                      </div>
+                      <span className="col-6"></span>
+                      <span className="col-2">
+                        <button
+                          className="btn btn-outline-primary w-100"
+                          onClick={() => {
+                            showCreateActionDialog("");
+                          }}
+                        >
+                          ADD CRUD ACTION <PlusOutlined />
+                        </button>
+                      </span>
+                    </div>
+
+                    <div>
+                      <Tabs
+                        defaultActiveKey="1"
+                        className="page_tabs animated slideInUp"
+                        tabBarStyle={{ paddingLeft: 44 }}
+                        tabBarExtraContent={<div></div>}
+                        //onChange={callback}
+                      >
+                        <TabPane
+                          tab={
+                            <span className="align-items-center d-flex">
+                              Create Actions{" "}
+                              <Badge
+                                count={createList.length}
+                                style={{ backgroundColor: "#E9ECF1" }}
+                              />
+                            </span>
+                          }
+                          key="4"
+                        >
+                          <section
+                            className=""
+                            style={{ height: "83vh", overflowY: "auto" }}
+                          >
+                            <div>
+                              <div className="row padding_20">
+                                <div className="col-1"></div>
+                                <div className="col-10">
+                                  <List
+                                    dataSource={createList}
+                                    renderItem={(item, index) => (
+                                      <List.Item className="pb-4 pt-4">
+                                        <Card
+                                          className="hover-blue w-100"
+                                          title={
+                                            <span className="row">
+                                              <span className="col-10">
+                                                <Avatar
+                                                  className="bg-skyblue text-primary me-2 border_radius font-weight-500"
+                                                  shape="square"
+                                                >
+                                                  {fetchInitials(item.tag)}
+                                                </Avatar>{" "}
+                                                <label>{item.tag}</label>
+                                              </span>
+                                              <span className="col-2">
+                                                <Button
+                                                  className="btn-outline-primary"
+                                                  onClick={() => {
+                                                    setSelectedPage(index);
+                                                  }}
+                                                >
+                                                  Configure <SettingOutlined />
+                                                </Button>
+                                              </span>
+                                            </span>
+                                          }
+                                        >
+                                          <div className="row">
+                                            <span className="col-11">
+                                              <label>{item.description}</label>
+                                            </span>
+                                            <span className="text-muted col-1">
+                                              <Switch checked={false} />
+                                            </span>
+                                          </div>
+                                        </Card>
+                                      </List.Item>
+                                    )}
+                                  />
+                                </div>
+                                <div className="col-1"></div>
+                              </div>
+                            </div>
+                          </section>
+                        </TabPane>
+                        <TabPane
+                          tab={
+                            <span className="align-items-center d-flex">
+                              Read Actions{" "}
+                              <Badge
+                                count={readList.length}
+                                style={{ backgroundColor: "#E9ECF1" }}
+                              />
+                            </span>
+                          }
+                          key="5"
+                        >
+                          <section
+                            className=""
+                            style={{ height: "83vh", overflowY: "auto" }}
+                          >
+                            <div>
+                              <div className="row padding_20">
+                                <div className="col-1"></div>
+                                <div className="col-10">
+                                  <List
+                                    dataSource={readList}
+                                    renderItem={(item, index) => (
+                                      <List.Item className="pb-4 pt-4">
+                                        <Card
+                                          className="hover-blue w-100"
+                                          title={
+                                            <span className="row">
+                                              <span className="col-10">
+                                                <Avatar
+                                                  className="bg-skyblue text-primary me-2 border_radius font-weight-500"
+                                                  shape="square"
+                                                >
+                                                  {fetchInitials(item.tag)}
+                                                </Avatar>{" "}
+                                                <label>{item.tag}</label>
+                                              </span>
+                                              <span className="col-2">
+                                                <Button
+                                                  className="btn-outline-primary"
+                                                  onClick={() => {
+                                                    setSelectedPage(index);
+                                                  }}
+                                                >
+                                                  Configure <SettingOutlined />
+                                                </Button>
+                                              </span>
+                                            </span>
+                                          }
+                                        >
+                                          <div className="row">
+                                            <span className="col-11">
+                                              <label>{item.description}</label>
+                                            </span>
+                                            <span className="text-muted col-1">
+                                              <Switch checked={false} />
+                                            </span>
+                                          </div>
+                                        </Card>
+                                      </List.Item>
+                                    )}
+                                  />
+                                </div>
+                                <div className="col-1"></div>
+                              </div>
+                            </div>
+                          </section>
+                        </TabPane>
+                        <TabPane
+                          tab={
+                            <span className="align-items-center d-flex">
+                              Update Actions{" "}
+                              <Badge
+                                count={updateList.length}
+                                style={{ backgroundColor: "#E9ECF1" }}
+                              />
+                            </span>
+                          }
+                          key="6"
+                        >
+                          <section
+                            className=""
+                            style={{ height: "83vh", overflowY: "auto" }}
+                          >
+                            <div>
+                              <div className="row padding_20">
+                                <div className="col-1"></div>
+                                <div className="col-10">
+                                  <List
+                                    dataSource={updateList}
+                                    renderItem={(item, index) => (
+                                      <List.Item className="pb-4 pt-4">
+                                        <Card
+                                          className="hover-blue w-100"
+                                          title={
+                                            <span className="row">
+                                              <span className="col-10">
+                                                <Avatar
+                                                  className="bg-skyblue text-primary me-2 border_radius font-weight-500"
+                                                  shape="square"
+                                                >
+                                                  {fetchInitials(item.tag)}
+                                                </Avatar>{" "}
+                                                <label>{item.tag}</label>
+                                              </span>
+                                              <span className="col-2">
+                                                <Button
+                                                  className="btn-outline-primary"
+                                                  onClick={() => {
+                                                    setSelectedPage(index);
+                                                  }}
+                                                >
+                                                  Configure <SettingOutlined />
+                                                </Button>
+                                              </span>
+                                            </span>
+                                          }
+                                        >
+                                          <div className="row">
+                                            <span className="col-11">
+                                              <label>{item.description}</label>
+                                            </span>
+                                            <span className="text-muted col-1">
+                                              <Switch checked={false} />
+                                            </span>
+                                          </div>
+                                        </Card>
+                                      </List.Item>
+                                    )}
+                                  />
+                                </div>
+                                <div className="col-1"></div>
+                              </div>
+                            </div>
+                          </section>
+                        </TabPane>
+                        <TabPane
+                          tab={
+                            <span className="align-items-center d-flex">
+                              Delete Actions{" "}
+                              <Badge
+                                count={deleteList.length}
+                                style={{ backgroundColor: "#E9ECF1" }}
+                              />
+                            </span>
+                          }
+                          key="7"
+                        >
+                          <section
+                            className=""
+                            style={{ height: "83vh", overflowY: "auto" }}
+                          >
+                            <div>
+                              <div className="row padding_20">
+                                <div className="col-1"></div>
+                                <div className="col-10">
+                                  <List
+                                    dataSource={deleteList}
+                                    renderItem={(item, index) => (
+                                      <List.Item className="pb-4 pt-4">
+                                        <Card
+                                          className="hover-blue w-100"
+                                          title={
+                                            <span className="row">
+                                              <span className="col-10">
+                                                <Avatar
+                                                  className="bg-skyblue text-primary me-2 border_radius font-weight-500"
+                                                  shape="square"
+                                                >
+                                                  {fetchInitials(item.tag)}
+                                                </Avatar>{" "}
+                                                <label>{item.tag}</label>
+                                              </span>
+                                              <span className="col-2">
+                                                <Button
+                                                  className="btn-outline-primary"
+                                                  onClick={() => {
+                                                    setSelectedPage(index);
+                                                  }}
+                                                >
+                                                  Configure <SettingOutlined />
+                                                </Button>
+                                              </span>
+                                            </span>
+                                          }
+                                        >
+                                          <div className="row">
+                                            <span className="col-11">
+                                              <label>{item.description}</label>
+                                            </span>
+                                            <span className="text-muted col-1">
+                                              <Switch checked={false} />
+                                            </span>
+                                          </div>
+                                        </Card>
+                                      </List.Item>
+                                    )}
+                                  />
+                                </div>
+                                <div className="col-1"></div>
+                              </div>
+                            </div>
+                          </section>
+                        </TabPane>
+                      </Tabs>
+                    </div>
+                  </span>
+                ) : null}
+
+                {appPage === 6 ? (
+                  <span>
+                    <div>
+                      <Breadcrumb>
+                        <Breadcrumb.Item>Webhook Events</Breadcrumb.Item>
+                        <Breadcrumb.Item> </Breadcrumb.Item>
+                      </Breadcrumb>
+                    </div>
+                  </span>
+                ) : null}
+
+                {appPage === 7 ? (
+                  <span>
+                    <div>
+                      <Breadcrumb>
+                        <Breadcrumb.Item>Pricing</Breadcrumb.Item>
+                        <Breadcrumb.Item> </Breadcrumb.Item>
+                      </Breadcrumb>
+                    </div>
+                  </span>
+                ) : null}
+
+                {appPage === 8 ? (
+                  <span>
+                    <div>
+                      <Breadcrumb>
+                        <Breadcrumb.Item>Publish</Breadcrumb.Item>
+                        <Breadcrumb.Item> </Breadcrumb.Item>
+                      </Breadcrumb>
+                    </div>
+                  </span>
+                ) : null}
+
+                {appPage === 9 ? (
+                  <span>
+                    <div>
+                      <Breadcrumb>
+                        <Breadcrumb.Item>Geo-Availability</Breadcrumb.Item>
+                        <Breadcrumb.Item> </Breadcrumb.Item>
+                      </Breadcrumb>
+                    </div>
+                  </span>
+                ) : null}
+              </div>
+            ) : null}
+            {selectedPage > -1 && appPage === 2 ? (
+              <span className="padding_10">
+                <span
+                  className="padding_10 pointer top-margin"
+                  onClick={() => {
+                    setSelectedPage(-1);
+                  }}
+                >
+                  <LeftOutlined />
+                </span>
+                <br />
+                <div className="row">
+                  <div className="col-1"></div>
+                  <div className="col-10">
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "100%",
+                      }}
+                      actions={[
+                        <SettingOutlined key="setting" />,
+                        <EditOutlined key="edit" />,
+                        <EllipsisOutlined key="ellipsis" />,
+                      ]}
                     >
-                      Create Action
-                    </button>
+                      <Meta
+                        title={
+                          <span>
+                            <Avatar
+                              className="bg-gray text-primary me-2 border_radius font-weight-500"
+                              shape="square"
+                            >
+                              {fetchInitials(
+                                capitalize(app.envs[selectedPage].env_name)
+                              )}
+                            </Avatar>{" "}
+                            {capitalize(app.envs[selectedPage].env_name)}
+                          </span>
+                        }
+                        description={app.envs[selectedPage].description}
+                      />
+                      <br />
+
+                      <table className="table border">
+                        <tbody>
+                          <tr>
+                            <td>Base URL:</td>
+                            <td>
+                              <a
+                                href={app.envs[selectedPage].base_url}
+                                target="blank"
+                              >
+                                {app.envs[selectedPage].base_url || "undefined"}
+                              </a>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Default Content-Type:</td>
+                            <td>
+                              <label className="text-primary">
+                                {app.envs[selectedPage].request_type ||
+                                  "undefined"}
+                              </label>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Pricing Strategy:</td>
+                            <td>
+                              <Tag color="geekblue">
+                                {String(
+                                  app.envs[selectedPage].payment_type
+                                ).toUpperCase()}
+                              </Tag>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Base Price:</td>
+                            <td>
+                              ${app.envs[selectedPage].cost || "undefined"}
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Inbound Requests:</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Inbound Responses:</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Average Latency:</td>
+                            <td>
+                              <label className="text-muted">0ms</label>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Success Rate:</td>
+                            <td>0</td>
+                          </tr>
+                          <tr>
+                            <td>Status:</td>
+                            <td>
+                              <Switch
+                                checked={app.envs[selectedPage].active}
+                                onChange={(e) => {
+                                  showEnvDialog(selectedPage, e);
+                                }}
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Require Whitelist:</td>
+                            <td>
+                              <Switch
+                                checked={app.envs[selectedPage].active}
+                                onChange={(e) => {
+                                  showEnvDialog(selectedPage, e);
+                                }}
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Default Test Environment:</td>
+                            <td>
+                              <Switch
+                                checked={app.envs[selectedPage].default_sandbox}
+                                onChange={(e) => {
+                                  showEnvDialog(selectedPage, e);
+                                }}
+                              />
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>Default Live Environment:</td>
+                            <td>
+                              {" "}
+                              <Switch
+                                checked={app.envs[selectedPage].default_prod}
+                                onChange={(e) => {
+                                  showEnvDialog(selectedPage, e);
+                                }}
+                              />
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </Card>
                   </div>
-                }
-                //onChange={callback}
-              >
-                <TabPane
-                  tab={
-                    <span className="align-items-center d-flex">
-                      Setup{" "}
-                      <Badge
-                        count={setupList.length}
-                        style={{ backgroundColor: "#E9ECF1" }}
-                      />
-                    </span>
-                  }
-                  key="2"
-                >
-                  <section
-                    className=""
-                    style={{ height: "83vh", overflowY: "auto" }}
-                  >
-                    <div className="p-3">
-                      <Table
-                        showHeader={false}
-                        dataSource={setupList}
-                        columns={columns}
-                        pagination={{
-                          showTotal: (total, range) =>
-                            `Showing ${range[0]}-${range[1]} of ${total} results`,
-                          defaultPageSize: 5,
-                          showSizeChanger: true,
-                        }}
-                      />
-                    </div>
-                  </section>
-                </TabPane>
-                <TabPane
-                  tab={
-                    <span className="align-items-center d-flex">
-                      Auth{" "}
-                      <Badge
-                        count={authList.length || 0}
-                        style={{ backgroundColor: "#E9ECF1" }}
-                      />
-                    </span>
-                  }
-                  key="3"
-                >
-                  <section
-                    className=""
-                    style={{ height: "83vh", overflowY: "auto" }}
-                  >
-                    <div className="p-3">
-                      <Table
-                        showHeader={false}
-                        dataSource={authList}
-                        columns={columns}
-                      />
-                    </div>
-                  </section>
-                </TabPane>
-                <TabPane
-                  tab={
-                    <span className="align-items-center d-flex">
-                      Create{" "}
-                      <Badge
-                        count={createList.length}
-                        style={{ backgroundColor: "#E9ECF1" }}
-                      />
-                    </span>
-                  }
-                  key="4"
-                >
-                  <section
-                    className=""
-                    style={{ height: "83vh", overflowY: "auto" }}
-                  >
-                    <div className="p-3">
-                      <Table
-                        showHeader={false}
-                        dataSource={createList}
-                        columns={columns}
-                      />
-                    </div>
-                  </section>
-                </TabPane>
-                <TabPane
-                  tab={
-                    <span className="align-items-center d-flex">
-                      Read{" "}
-                      <Badge
-                        count={readList.length}
-                        style={{ backgroundColor: "#E9ECF1" }}
-                      />
-                    </span>
-                  }
-                  key="5"
-                >
-                  <section
-                    className=""
-                    style={{ height: "83vh", overflowY: "auto" }}
-                  >
-                    <div className="p-3">
-                      <Table
-                        showHeader={false}
-                        dataSource={readList}
-                        columns={columns}
-                      />
-                    </div>
-                  </section>
-                </TabPane>
-                <TabPane
-                  tab={
-                    <span className="align-items-center d-flex">
-                      Update{" "}
-                      <Badge
-                        count={updateList.length}
-                        style={{ backgroundColor: "#E9ECF1" }}
-                      />
-                    </span>
-                  }
-                  key="6"
-                >
-                  <section
-                    className=""
-                    style={{ height: "83vh", overflowY: "auto" }}
-                  >
-                    <div className="p-3">
-                      <Table
-                        showHeader={false}
-                        dataSource={updateList}
-                        columns={columns}
-                      />
-                    </div>
-                  </section>
-                </TabPane>
-                <TabPane
-                  tab={
-                    <span className="align-items-center d-flex">
-                      Delete{" "}
-                      <Badge
-                        count={deleteList.length}
-                        style={{ backgroundColor: "#E9ECF1" }}
-                      />
-                    </span>
-                  }
-                  key="7"
-                >
-                  <section
-                    className=""
-                    style={{ height: "83vh", overflowY: "auto" }}
-                  >
-                    <div className="p-3">
-                      <Table
-                        showHeader={false}
-                        dataSource={deleteList}
-                        columns={columns}
-                      />
-                    </div>
-                  </section>
-                </TabPane>
-                <TabPane
-                  tab={
-                    <span className="align-items-center d-flex">
-                      Hooks{" "}
-                      <Badge
-                        count={hooksList.length}
-                        style={{ backgroundColor: "#E9ECF1" }}
-                      />
-                    </span>
-                  }
-                  key="8"
-                >
-                  <section
-                    className=""
-                    style={{ height: "83vh", overflowY: "auto" }}
-                  >
-                    <div className="p-3">
-                      <Table
-                        showHeader={false}
-                        dataSource={hooksList}
-                        columns={columns}
-                      />
-                    </div>
-                  </section>
-                </TabPane>
-              </Tabs>
-            </div>
-            :
+                  <div className="col-1"></div>
+                </div>
+              </span>
+            ) : (
+              <></>
+            )}
+
+            {actionSelected?(<div>
+              <Actions action_id={actionSelected} app_id={app_id} user_data={config.user}/>
+            </div>):(<></>)}
           </div>
-        ) : !error ? (
-          <Loading />
-        ) : (
-          <Empty description={<span>{error}</span>}></Empty>
-        )}
+        </div>
       </section>
     </Dashboard_Layout>
   );
-});
-
-/**
- *
- */
+};
 
 export default Index;
 

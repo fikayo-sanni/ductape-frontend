@@ -8,8 +8,7 @@ import {
 } from "antd";
 import Link from "next/link";
 
-import { configStore } from "../../data/configStore";
-import { observer } from "mobx-react-lite";
+import { useSelector } from "react-redux";
 
 
 const { Title, Paragraph, Text } = Typography;
@@ -17,8 +16,8 @@ const { TabPane } = Tabs;
 
 const { TextArea } = Input;
 
-const Index = observer((props) => {
-  const config = useContext(configStore);
+const Index = (props) => {
+  const config = useSelector((state) => state.app);
 
   useEffect(async () => {
 
@@ -38,7 +37,7 @@ const Index = observer((props) => {
         </section>
     </Dashboard_Layout>
   );
-});
+}
 
 export default Index;
 /*

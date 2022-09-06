@@ -6,11 +6,11 @@ import NProgress from "nprogress";
 import toast, { Toaster } from 'react-hot-toast';
 import { LeftOutlined} from '@ant-design/icons';
 import Router, {useRouter} from "next/router";
-import { configStore } from '../data/configStore';
+import {useSelector} from "react-redux";
 import { createWorkspace } from "../components/services/workspaces.service";
 
-const Workspaces = observer(() => {
-    const config = useContext(configStore)
+const Workspaces = () => {
+    const config = useSelector((state) => state.app);
     const[workspace, setWorkspace] = useState([]);
     const [user, setUser] = useState(config.user);
 
@@ -94,6 +94,6 @@ const Workspaces = observer(() => {
       <Toaster position="top-center" reverseOrder={false} />
     </Home_layout>
   );
-});
+};
 
 export default Workspaces;

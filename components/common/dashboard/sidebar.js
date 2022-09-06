@@ -1,5 +1,5 @@
 import { Logo } from "../../config/constant";
-import { Menu, Button, Dropdown, Tooltip, Space, Avatar } from "antd";
+import { Menu, Button, Dropdown, Space, Avatar } from "antd";
 import {
   CreditCardOutlined,
   KeyOutlined,
@@ -14,29 +14,30 @@ import {
   MessageOutlined
 } from "@ant-design/icons";
 import Link from "next/link";
+import {useDispatch, useSelector} from "react-redux";
+import { changeDefaultWorkspaceId } from "../../../data/applicationSlice";
 import { fetchInitials } from "../../config/constant";
 import React, { useEffect, useState, useContext } from "react";
-import toast from "react-hot-toast";
-import { observer } from "mobx-react-lite";
-import { configStore } from "../../../data/configStore";
 import { updateDefaultAccess } from "../../services/workspaces.service";
 
-const { SubMenu } = Menu;
 
-const Sidebar = observer((props) => {
-  const config = useContext(configStore);
+const Sidebar = (props) => {
+  let config = useSelector((state) => state.app);
   const [user, setUser] = useState(config.user);
   const [workspaces, setWorkspaces] = useState(config.workspaces);
   const [defaultWorkspace, setDefaultWorkspace] = useState({});
   const [pathname, setPathname] = useState("");
   const [openKeys, setOpenKeys] = React.useState(["0"]);
   const rootSubmenuKeys = ["sub1", "sub2", "sub4"];
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // code to run on component mount
     if (typeof window !== "undefined") {
       setPathname(window.location.pathname);
     }
+
+    if(!config) config = useSelector((state) => state.app);
 
     workspaces.map((data)=>{
       if(data.workspace_id === config.defaultWorkspaceId){
@@ -58,8 +59,8 @@ const Sidebar = observer((props) => {
     console.log("click left button", e);
   };
 
-  const changeDefaultWorkspaceId = async (e, workspace_id, index) => {
-    config.changeDefaultWorkspaceId(workspace_id);
+  const changeDefaultWorkspace = async (e, workspace_id, index) => {
+    dispatch(changeDefaultWorkspaceId(workspace_id));
     // setDefaultWorkspace(workspaces[index]);
     const {auth_token: token, _id: user_id, public_key} = config.user;
     updateDefaultAccess({token, user_id, workspace_id, public_key});
@@ -67,7 +68,7 @@ const Sidebar = observer((props) => {
   }
 
   const workspaceItems = workspaces.map((data,index)=>{
-      return <Menu.Item onClick={(e)=>{changeDefaultWorkspaceId(e, data.workspace_id, index)}}>{data.name} {config.defaultWorkspaceId===data.workspace_id?<CheckOutlined />: ""}</Menu.Item>;
+      return <Menu.Item onClick={(e)=>{changeDefaultWorkspace(e, data.workspace_id, index)}}>{data.name} {config.defaultWorkspaceId===data.workspace_id?<CheckOutlined />: ""}</Menu.Item>;
   });
 
   const menu = (
@@ -322,6 +323,6 @@ const Sidebar = observer((props) => {
       </div>
     </div>
   );
-});
+};
 
 export default Sidebar;

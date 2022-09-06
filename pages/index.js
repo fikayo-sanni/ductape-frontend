@@ -1,33 +1,18 @@
 import Home_layout from "../components/layout/home_layout";
-import React, {useContext, Component, useEffect, useState} from "react";
-import {
-    Button,
-    Upload,
-    message,
-    Carousel,
-    Card,
-    Tabs,
-    Typography,
-    Spin,
-    Avatar,
-    Badge,
-    Table,
-    Input,
-    Space,
-    Result
-} from 'antd';
+import React, {useEffect, useState} from "react";
 import NProgress from "nprogress";
 import {toast} from "react-hot-toast";
-import {thousandSeparator, Logo} from '../components/config/constant';
-import Router, {useRouter} from "next/router";
+import {Logo} from '../components/config/constant';
+import Router from "next/router";
 import { loginUser } from "../components/services/users.service";
 import { fetchWorkspaces } from "../components/services/workspaces.service";
 import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { configStore } from '../data/configStore'
+import {useDispatch} from "react-redux";
+import {changeUser, changeWorkspaces, changeDefaultWorkspaceId} from "../data/applicationSlice";
 
-const Index = observer((props) => {
-    const config = useContext(configStore)
+const Index = (props) => {
+    const dispatch = useDispatch();
+
     const [loadingButton, setLoadingButton] = useState(false);
     const [user, setUser] = useState({});
 
@@ -44,7 +29,7 @@ const Index = observer((props) => {
             const login = await loginUser(user);
             console.log(login);
             const userData = login.data.data;
-            config.changeUser(userData);
+            dispatch(changeUser(userData));
             toast.success('Login successful')
             const { workspaces } = login.data.data;
             if(workspaces.length){
@@ -55,12 +40,12 @@ const Index = observer((props) => {
                 data.map((d,i)=>{
                     if(d.default){
                         defaultChanged = true;
-                        config.changeDefaultWorkspaceId(d.workspace_id)
+                        dispatch(changeDefaultWorkspaceId(d.workspace_id))
                     }
                 })
-                if(!defaultChanged) config.changeDefaultWorkspaceId(data[0].workspace_id);
+                if(!defaultChanged) dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
 
-                config.changeWorkspaces(data);
+                dispatch(changeWorkspaces(data));
                 Router.push('/dashboard');
             }else{ 
                 Router.push('/workspaces');
@@ -143,6 +128,6 @@ const Index = observer((props) => {
             </div>
         </Home_layout>
     )
-})
+}
 
 export default Index

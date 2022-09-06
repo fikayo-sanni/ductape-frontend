@@ -1,21 +1,20 @@
 import Dashboard_Layout from "../../components/layout/dashboard_layout";
 import React, { useContext, Component, useEffect, useState } from "react";
-import Icon, {
-  UploadOutlined,
+import {
   PlusOutlined,
   SettingOutlined,
-  AppstoreAddOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
 import {
   Tabs,
   Typography,
-  Badge,
-  Table,
+  List,
+  Card,
+  Avatar,
   Modal,
   Input,
   Button,
-  Empty,
+  Menu,
   Breadcrumb,
 } from "antd";
 import NProgress from "nprogress";
@@ -27,20 +26,23 @@ import {
   cleanFields,
   getTotalRow,
   Loading,
+  fetchInitials,
+  capitalize,
 } from "../../components/config/constant";
 import {
   createApp,
   fetchWorkspaceApps,
 } from "../../components/services/apps.service";
 import { updateDefaultEnvs } from "../../components/services/workspaces.service";
+import { useDispatch, useSelector } from "react-redux";
+import { changeWorkspaces, changeApps } from "../../data/applicationSlice";
 
-const { Title, Paragraph, Text } = Typography;
-const { TabPane } = Tabs;
 
 const { TextArea } = Input;
 
 const Index = observer((props) => {
-  const config = useContext(configStore);
+  const config = useSelector((state) => state.app);
+  const dispatch = useDispatch();
 
   const defaultValue = {
     env_name: "",
@@ -116,7 +118,7 @@ const Index = observer((props) => {
           workspace_id: config.defaultWorkspaceId,
           envs: cleanFields(inputFields),
         });
-        config.changeWorkspaces(create.data.data);
+        dispatch(changeWorkspaces(create.data.data));
         toast.success("Default Environments Updated");
         setDefaultLoading(false);
         setIsDefaultsModalVisible(false);
@@ -205,7 +207,7 @@ const Index = observer((props) => {
         public_key,
         workspace_id: config.defaultWorkspaceId,
       });
-      config.changeApps(apps.data.data);
+      dispatch(changeApps(apps.data.data));
       if (apps.data.data.length) {
         setApps(apps.data.data);
       } else {
@@ -219,43 +221,48 @@ const Index = observer((props) => {
     }
   }, []);
 
-  const arrRowItems = getTotalRow(apps, 3);
-
   const Apps = (
     <div>
-      {arrRowItems.map((rowItems, index) => {
-        return (
-          <div key={"key-" + index}>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 1fr 1fr",
-              }}
-            >
-              {rowItems.map((item, index) => {
-                return (
-                  <div>
-                    <Link href={`/apps/${item._id}`}>
-                      <div className="border animated slideInDown p-4 border_radius m-3 mb-0 hover-blue">
-                        <h5 className="m-0">{item.app_name}</h5>
-                        <label className="mt-4 btn btn-light text-muted">
-                          {item.envs.length} envs
-                        </label>
-                      </div>
-                    </Link>
-                    {index !== 2 ? (
-                      <div style={{ width: "15 px" }}></div>
-                    ) : null}
-                  </div>
-                );
-              })}
-            </div>
-            {index !== arrRowItems.length - 1 ? (
-              <div style={{ marginTop: "30px" }}></div>
-            ) : null}
-          </div>
-        );
-      })}
+      <List
+        grid={{
+          gutter: 20,
+          xs: 1,
+          sm: 2,
+          md: 4,
+          lg: 4,
+          xl: 6,
+          xxl: 3,
+        }}
+        dataSource={apps}
+        renderItem={(item, index) => (
+          <List.Item className="p-2">
+            <Link href={`/apps/${item._id}`}>
+              <Card
+                title={
+                  <span>
+                    <Avatar
+                      className="bg-gray text-primary me-2 border_radius font-weight-500"
+                      shape="square"
+                    >
+                      {fetchInitials(capitalize(item.app_name))}
+                    </Avatar>{" "}
+                    {capitalize(item.app_name)}
+                  </span>
+                }
+                className="hover-blue"
+              >
+                <div className="row">
+                  <label className="mt-2 text-muted col-9">
+                    <label className="btn btn-light text-muted">
+                      {item.envs.length} envs
+                    </label>
+                  </label>
+                </div>
+              </Card>
+            </Link>
+          </List.Item>
+        )}
+      />
     </div>
   );
   return (
@@ -410,28 +417,46 @@ const Index = observer((props) => {
             <Breadcrumb.Item className="text-white">""</Breadcrumb.Item>
           </Breadcrumb>
         </div>
-        <div>
-          <button
-            className="btn btn-light text-primary m-3 text-uppercase"
-            onClick={showModal}
-          >
-            Apps <PlusOutlined />
-          </button>
-
-          <button
-            className="btn btn-light text-danger m-3 ms-0 text-uppercase"
-            onClick={showDefaultsModal}
-          >
-            Envs <SettingOutlined />
-          </button>
+        <div className="row">
+          <div className="col-2">
+            <Menu
+              defaultSelectedKeys={["1"]}
+              mode="inline"
+              theme="light"
+              inlineCollapsed={false}
+              className="border-none"
+            >
+              <Menu.Item key="1">
+                <span>All</span>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <span>Draft</span>
+              </Menu.Item>
+              <Menu.Item key="3">
+                <span>Private</span>
+              </Menu.Item>
+              <Menu.Item key="4">
+                <span>Public</span>
+              </Menu.Item>
+            </Menu>
+            <button
+              className="btn btn-outline-primary w-100 mb-3 mt-3 text-uppercase"
+              onClick={showModal}
+            >
+              Apps <PlusOutlined />
+            </button>
+            <button
+              className="btn btn-outline-danger w-100 text-uppercase"
+              onClick={showDefaultsModal}
+            >
+              Envs <SettingOutlined />
+            </button>
+          </div>
+          <div className="col-10">
+            {!apps.length && !error ? <Loading /> : Apps}
+            {error && !apps.length ? <></> : ""}
+          </div>
         </div>
-
-        {!apps.length && !error ? <Loading /> : Apps}
-        {error && !apps.length ? (
-          <Empty description={<span>{error}</span>}></Empty>
-        ) : (
-          ""
-        )}
       </section>
     </Dashboard_Layout>
   );

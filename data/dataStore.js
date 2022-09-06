@@ -41,7 +41,8 @@ export class DataStore {
     const data = await retrieveData(this.storeName);
     console.log(data);
     console.log("Load Event");
-    Object.assign(this, JSON.parse(data));
+    if(data)
+      Object.assign(this, JSON.parse(data));
   };
 
   save = async () => {

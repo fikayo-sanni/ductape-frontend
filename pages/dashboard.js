@@ -510,7 +510,7 @@ export default function Index(props) {
           <TabPane
             tab={
               <span className="align-items-center d-flex">
-                Pending{" "}
+                Incoming{" "}
                 <Badge
                   count={pending.length}
                   style={{ backgroundColor: "#E9ECF1" }}
@@ -537,7 +537,34 @@ export default function Index(props) {
           <TabPane
             tab={
               <span className="align-items-center d-flex">
-                Ready{" "}
+                Outgoing{" "}
+                <Badge
+                  count={ready.length}
+                  style={{ backgroundColor: "#E9ECF1" }}
+                />
+              </span>
+            }
+            key="3"
+          >
+            <section className="" style={{ height: "83vh", overflowY: "auto" }}>
+              <Table
+                rowClassName="px-5"
+                showHeader={false}
+                columns={columns2}
+                dataSource={ready}
+                pagination={{
+                  showTotal: (total, range) =>
+                    `Showing ${range[0]}-${range[1]} of ${total} results`,
+                  defaultPageSize: 7,
+                  showSizeChanger: true,
+                }}
+              />
+            </section>
+          </TabPane>
+          <TabPane
+            tab={
+              <span className="align-items-center d-flex">
+                Errors{" "}
                 <Badge
                   count={ready.length}
                   style={{ backgroundColor: "#E9ECF1" }}

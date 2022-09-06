@@ -8,18 +8,20 @@ import React from "react";
 import Router, {useRouter} from "next/router";
 import NProgress from "nprogress";
 import {Toaster} from "react-hot-toast";
-import { observer } from 'mobx-react-lite';
-
+// import { observer } from 'mobx-react-lite';
+import {Provider} from 'react-redux'
+import {persistStore} from 'redux-persist'
+import store from "../data/store";
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 
-const App = observer(({Component, pageProps}) => {
-
+const App = ({Component, pageProps}) => {
+    persistStore(store);
     return (
-        <>
+        <Provider store={store}>
             <Component {...pageProps} />
             <Toaster
                 duration={5000}
@@ -27,9 +29,9 @@ const App = observer(({Component, pageProps}) => {
                 reverseOrder={false}
                 containerStyle={{zIndex: 99999999999}}
             />
-        </>
+        </Provider>
     )
 
-});
+};
 
 export default App
