@@ -37,7 +37,7 @@ const SubMenu = Menu.SubMenu;
 const TabPane = Tabs;
 
 const Index = (props) => {
-  const config = useSelector((state) => state.app);
+  // const config = useSelector((state) => state.app);
 
   useEffect(async () => {}, []);
 
