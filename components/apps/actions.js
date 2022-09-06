@@ -307,8 +307,7 @@ const Actions = (props) => {
           )}
           {typeof valueCheck !== "object" ? (
             <div className="col-4">
-              <div className="row">
-                <div className="form-floating col-11 ">
+                <div className="form-floating">
                   <input
                     type="text"
                     value={data.description}
@@ -322,10 +321,6 @@ const Actions = (props) => {
                   />
                   <label>Description</label>
                 </div>
-                <div className="col-1 mt-3">
-                  <Checkbox></Checkbox>
-                </div>
-              </div>
             </div>
           ) : null}
         </div>
@@ -444,7 +439,7 @@ const Actions = (props) => {
                   >
                     <div className="padding_10">
                       <div className="row">
-                        <div className="col-1">
+                        {CodeEditor?<div className="col-1">
                           <Button
                             onClick={() => {
                               setHideBodyCode(!hideBodyCode);
@@ -452,20 +447,8 @@ const Actions = (props) => {
                           >
                             {hideBodyCode ? <DownOutlined /> : <UpOutlined />}
                           </Button>
-                        </div>
-                        <div className="col-10"></div>
-                        <div className="col-1">
-                          <Button
-                            onClick={() => {
-                              setHideBodyCode(!hideBodyCode);
-                            }}
-                            className="btn btn-outline-primary"
-                          >
-                            Save <SaveOutlined />
-                          </Button>
-                        </div>
+                        </div>:null}
                       </div>
-                      <br />
                       {!hideBodyCode ? (
                         <CodeEditor
                           value={bodyCode}
