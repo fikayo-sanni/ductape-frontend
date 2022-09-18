@@ -12,13 +12,13 @@ const Index = (props) => {
   const config = useSelector((state) => state.app);
   const data = [
     {
-      title: "Title 1",
+      title: "XCelApp Backend",
     },
     {
-      title: "Title 2",
+      title: "Exqu Logistics Service",
     },
     {
-      title: "Title 3",
+      title: "Batman App",
     },
   ];
 

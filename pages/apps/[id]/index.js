@@ -38,7 +38,6 @@ import {
 } from "../../../components/services/apps.service";
 import { createActions } from "../../../components/services/actions.service";
 import {
-  getTotalRow,
   Loading,
   capitalize,
   fetchInitials,
