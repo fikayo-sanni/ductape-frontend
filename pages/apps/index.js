@@ -215,7 +215,7 @@ const Index = observer((props) => {
         toast.error("No Apps");
       }
     } catch (e) {
-      alert(config.defaultWorkspaceId);
+      // alert(config.defaultWorkspaceId);
       const error = e.response ? e.response.data.errors : e.toString();
       setError(error || e.toString());
       toast.error(error);
