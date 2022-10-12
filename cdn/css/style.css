@@ -44,6 +44,14 @@ body {
   line-height: 1rem !important;
 }
 
+.text-big {
+  margin-top: 10px;
+  font-size: 1.2rem !important;
+  line-height: 1.75rem !important;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+}
+
 .no_shadow, .no_shadow:focus, .no_shadow:active {
   border: none !important;
   transition: none !important;
@@ -224,13 +232,17 @@ body {
 .hover-blue:hover {
   border-color: var(--primary_color) !important;
   cursor: pointer;
-  border-width: 2px !important; 
+  border-width: 1px !important; 
 }
 .pointer {
   cursor: pointer;
 }
 .top-margin{
   margin-top: 50px;
+}
+
+.left-margin{
+  margin-left: 50px;
 }
 
 .hover-skyblue:hover {

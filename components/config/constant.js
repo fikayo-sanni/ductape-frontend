@@ -25,25 +25,7 @@ import {
   Spin,
 } from "antd";
 import Link from "next/link";
-import {
-  GlobalOutlined,
-  AppstoreOutlined,
-  ContainerOutlined,
-  SolutionOutlined,
-  DollarCircleOutlined,
-  UnlockOutlined,
-  TeamOutlined,
-  GroupOutlined,
-  LogoutOutlined,
-  CheckCircleOutlined,
-  FileWordOutlined,
-  SettingOutlined,
-  UserOutlined,
-  WalletOutlined,
-  FolderOpenOutlined,
-  FunctionOutlined,
-  HomeOutlined,
-} from "@ant-design/icons";
+import { LoadingOutlined } from "@ant-design/icons";
 const { Title } = Typography;
 const { SubMenu } = Menu;
 
@@ -58,26 +40,26 @@ const Loading = () => {
 };
 
 const getTotalRow = (data, itemsPerRow) => {
-  let allRow = []
-  let rowItems = []
-  let isNewRow = false
+  let allRow = [];
+  let rowItems = [];
+  let isNewRow = false;
   data.forEach((element, index) => {
-    isNewRow = index % itemsPerRow === 0 ? true : false
+    isNewRow = index % itemsPerRow === 0 ? true : false;
     if (isNewRow && rowItems.length > 0) {
       // Push
-      allRow.push([...rowItems])
+      allRow.push([...rowItems]);
       // Reset
-      rowItems = []
-      rowItems.push({ ...element })
+      rowItems = [];
+      rowItems.push({ ...element });
     } else {
-      rowItems.push({ ...element })
+      rowItems.push({ ...element });
     }
-  })
+  });
   if (rowItems.length > 0) {
-    allRow.push([...rowItems])
+    allRow.push([...rowItems]);
   }
-  return allRow
-}
+  return allRow;
+};
 
 const Logo = (props) => {
   return (
@@ -91,8 +73,8 @@ const Logo = (props) => {
 function fetchInitials(firstname, lastname) {
   if (firstname && lastname) {
     return `${firstname.charAt(0)} ${lastname.charAt(0)}`;
-  }else if(firstname) {
-    return `${firstname.charAt(0)}`
+  } else if (firstname) {
+    return `${firstname.charAt(0)}`;
   }
 }
 
@@ -123,21 +105,21 @@ function thousandSeparator(num) {
 }
 
 function capitalize(str) {
-  return str.charAt(0).toUpperCase() + (str.slice(1)).toLowerCase();
+  return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
 function tagify(str) {
-  return (str.replace(/[^A-Z0-9]/ig, "_")).toUpperCase();
+  return str.replace(/[^A-Z0-9]/gi, "_").toUpperCase();
 }
 
 function uniqueCheck(arr, data) {
-  const found = arr.some(el => el._id === data._id);
-  return !found
+  const found = arr.some((el) => el._id === data._id);
+  return !found;
 }
 
 function resourcify(str) {
-  if(!str.startsWith("/")) str = `/${str}`
-  return str.replace(/[^A-Z0-9:]/ig, "/")
+  if (!str.startsWith("/")) str = `/${str}`;
+  return str.replace(/[^A-Z0-9:]/gi, "/");
 }
 
 function Parameterize(URL, datapoint, replacement) {
@@ -147,11 +129,11 @@ function Parameterize(URL, datapoint, replacement) {
 function cleanFields(array) {
   const arr = [];
 
-  for(let i=0; i< array.length; i++){
+  for (let i = 0; i < array.length; i++) {
     const obj = array[i];
-    const isEmpty = Object.values(obj).every(x => x === null || x === '');
+    const isEmpty = Object.values(obj).every((x) => x === null || x === "");
 
-    if(!isEmpty) arr.push(obj);
+    if (!isEmpty) arr.push(obj);
   }
 
   return arr;
@@ -159,15 +141,58 @@ function cleanFields(array) {
 
 function isValidHttpUrl(string) {
   let url;
-  
+
   try {
     url = new URL(string);
   } catch (_) {
-    return false;  
+    return false;
   }
 
   return url.protocol === "http:" || url.protocol === "https:";
 }
+
+const jsonToFields = (d) => {
+  let data = d;
+  if (Array.isArray(d) && d.length > 0) data = d[0];
+
+  const fields = [];
+
+  if (typeof data === "object" && data !== null) {
+    let keys = Object.keys(data);
+    for (let i = 0; i < keys.length; i++) {
+      let type = typeof data[keys[i]];
+
+      if (type === "object" && Array.isArray(d[keys[i]])) type = "array";
+      fields.push({
+        env: "",
+        type,
+        key: keys[i],
+        value: "{{input}}",
+        sampleValue: data[keys[i]],
+        origin: "",
+        description: "",
+        required: false,
+      });
+    }
+  } else {
+    // alert(data);
+    const type = typeof data;
+    fields.push({
+      env: "",
+      type,
+      key: `${type}-value`,
+      value: "{{input}}",
+      sampleValue: data,
+      origin: "",
+      description: "",
+      required: false,
+    });
+  }
+
+  // if(d.length>0)alert(JSON.stringify(keys))
+
+  return fields;
+};
 
 module.exports = {
   Loading,
@@ -182,5 +207,6 @@ module.exports = {
   isValidHttpUrl,
   tagify,
   resourcify,
-  uniqueCheck
+  uniqueCheck,
+  jsonToFields
 };

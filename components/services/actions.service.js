@@ -14,6 +14,7 @@ export const createActions = async (payload) => {
       httpVerb,
       tag,
       type,
+      name
     } = payload;
     return actionsClient(`Bearer ${token}`, "application/json").post(
       ACTIONS_CREATE_URL,
@@ -26,6 +27,7 @@ export const createActions = async (payload) => {
         httpVerb,
         tag,
         type,
+        name
       }
     );
   } catch (e) {
@@ -50,6 +52,14 @@ export const fetchAction = async (payload) => {
       `${URL}?user_id=${user_id}&public_key=${public_key}`
     )
   } catch (e) {
+    throw e;
+  }
+}
+
+export const updateActionHeaders = async (payload) => {
+  try {
+
+  } catch(e) {
     throw e;
   }
 }

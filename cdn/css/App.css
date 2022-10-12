@@ -25124,6 +25124,10 @@ a.btn {
 .w-80 {
   width: 80%;
 }
+
+.w-90 {
+  width: 90%
+}
 @media (min-width: 320px) and (max-width: 768px) {
   .w-80 {
     width: 100%;
