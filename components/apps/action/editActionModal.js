@@ -8,8 +8,7 @@ const CodeEditor = dynamic(
 );
 
 const EditActionModal = (props) => {
-  const { showDialog, setInputFields } = props;
-  const [code, setCode] = useState("");
+  const { showDialog, setInputFields, code, setCode } = props;
 
   const closeEditDialog = () => {
     showDialog(false);

@@ -17,23 +17,34 @@ import dynamic from "next/dynamic";
 import "@uiw/react-textarea-code-editor/dist.css";
 import { EditOutlined } from "@ant-design/icons";
 import { fetchAction } from "../services/actions.service";
-import { Loading } from "../config/constant";
+import { Loading, extractParams } from "../config/constant";
 import EditActionModal from "./action/editActionModal";
 import EmptyList from "./emptyList";
 import Headers from "./action/editHeaders";
 import Params from "./action/editParams";
 import Body from "./action/editBody";
+import EditResponse from "./action/editResponse";
+import EditPricing from "./action/editPricing";
+import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
 const { TabPane } = Tabs;
 
-const CodeEditor = dynamic(
+/**const CodeEditor = dynamic(
   () => import("@uiw/react-textarea-code-editor").then((mod) => mod.default),
   { ssr: false }
 );
 
-const Actions = (props) => {
-  const { action_id, app_id, user_data, envs } = props;
+const extractText = (strToParse, strStart, strFinish) => {
+  return strToParse.match(strStart + "(.*?)" + strFinish)[1];
+};*/
 
-  const [user, setUser] = useState(user_data);
+const Actions = (props) => {
+  const { action_id, envs, setSelected } = props;
+
+  const config = useSelector((state) => state.app);
+
+  const [user, setUser] = useState(config.user);
+  const [params, setParams] = useState([]);
   const [action, setAction] = useState({});
   const [error, setError] = useState("");
   const [dialog, showDialog] = useState(false);
@@ -49,50 +60,52 @@ const Actions = (props) => {
     }
   };
 
+  const fetchParams = (str) => {
+    setParams(extractParams(str));
+  };
+
   useEffect(async () => {
-    const action = await fetchActionInfo();
-    if (action.data) {
-      setAction(action.data.data);
-      if (action.data.data.app_envs.length > 0) {
-        action.data.data.app_envs.map((data, index) => {
-          if (data.request_type) {
-            // headers.push()
-          }
-        });
+    try {
+      const action = await fetchActionInfo();
+      if (action && action.data) {
+        const { type } = action.data.data;
+        // alert(JSON.stringify(type))
+        let selected;
+        if (type === "SETUP") selected = "3";
+        else selected = "5";
+        setSelected(selected);
+        //alert("SELECTED: "+selected);
+        setAction(action.data.data);
+        if (action.data.data.app_envs.length > 0) {
+          action.data.data.app_envs.map((data, index) => {
+            if (data.request_type) {
+              // headers.push()
+            }
+          });
+        }
+
+        fetchParams(action.data.data.resource);
       }
-
-      const headers = [];
-      const params = [];
-      const body = [];
-      const query = [];
-      const response = [];
-
-      /* body.push(defaultFields);
-      query.push(defaultFields);
-      response.push(defaultFields);
-      headers.push(defaultFields);
-      params.push(defaultFields);*/
-
-      /*setParams(headers);
-      setBody(body);
-      setResponse(response);
-      setQuery(query);
-      setHeaders(headers);*/
+    } catch (e) {
+      const error = e.response ? e.response.data.errors : e.toString();
+      toast.error(error || e.toString());
     }
   }, []);
 
   const EnvRows = envs.map((data, index) => {
-    return (
-      <tr>
-        <td>{data.env_name}</td>
-        <td>
-          <a>{`${data.base_url}${action.resource}`}</a>
-        </td>
-        <td>
-          <Switch />
-        </td>
-      </tr>
-    );
+    if (data.active) {
+      return (
+        <tr>
+          <td>{data.env_name}</td>
+          <td>
+            <a>{`${data.base_url}${action.resource}`}</a>
+          </td>
+          <td>
+            <Switch />
+          </td>
+        </tr>
+      );
+    }
   });
 
   return (
@@ -100,11 +113,12 @@ const Actions = (props) => {
       {dialog ? <EditActionModal showDialog={showDialog} /> : <></>}
       <Breadcrumb>
         <Breadcrumb.Item> </Breadcrumb.Item>
-        <Breadcrumb.Item>
+        <Breadcrumb.Item className="text-muted">{"Action"}</Breadcrumb.Item>
+        <Breadcrumb.Item className="text-muted">
           {action.name ? action.name : "Action"}
         </Breadcrumb.Item>
       </Breadcrumb>
-      <section className="padding_10 row">
+      <section className="padding_10 row border-start">
         <div className="row">
           {Object.keys(action).length === 0 && !error ? <Loading /> : <></>}
           {Object.keys(action).length > 0 ? (
@@ -145,7 +159,11 @@ const Actions = (props) => {
                     style={{ height: "83vh", overflowY: "auto" }}
                   >
                     <div className="padding_10">
-                      <Headers envs={envs} type="header" />
+                      <Headers
+                        envs={envs}
+                        type="header"
+                        action_id={action_id}
+                      />
                     </div>
                   </section>
                 </TabPane>
@@ -159,14 +177,23 @@ const Actions = (props) => {
                     className=""
                     style={{ height: "83vh", overflowY: "auto" }}
                   >
-                    <div className="padding_10">
-                      <h5>Params</h5>
-                      <Headers envs={envs} type="Params" />
-                    </div>
+                    {params.length ? (
+                      <div className="padding_10">
+                        <h5>Params</h5>
+                        <Headers
+                          envs={envs}
+                          type="params"
+                          presets={params}
+                          action_id={action_id}
+                        />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
 
                     <div className="padding_10">
                       <h5>Query</h5>
-                      <Headers envs={envs} type="Query" />
+                      <Headers envs={envs} type="query" action_id={action_id} />
                     </div>
                   </section>
                 </TabPane>
@@ -179,7 +206,7 @@ const Actions = (props) => {
                     style={{ height: "83vh", overflowY: "auto" }}
                   >
                     <div className="padding_10">
-                      <Body />
+                      <Body envs={envs} action_id={action_id} type="body" />
                     </div>
                   </section>
                 </TabPane>
@@ -194,7 +221,11 @@ const Actions = (props) => {
                     style={{ height: "83vh", overflowY: "auto" }}
                   >
                     <div className="padding_10">
-                      <EmptyList />
+                      <EditResponse
+                        envs={envs}
+                        action_id={action_id}
+                        type="response"
+                      />
                     </div>
                   </section>
                 </TabPane>
@@ -205,7 +236,7 @@ const Actions = (props) => {
                   key="5"
                 >
                   <div className="padding_10">
-                    <EmptyList />
+                    <EditPricing />
                   </div>
                 </TabPane>
               </Tabs>

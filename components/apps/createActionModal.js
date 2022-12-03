@@ -2,25 +2,25 @@ import { Modal, Button, Input } from "antd";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { InfoCircleOutlined } from "@ant-design/icons";
-import { tagify, resourcify } from "../config/constant"
+import { tagify, resourcify } from "../config/constant";
 import NProgress from "nprogress";
 import { toast } from "react-hot-toast";
 import { createActions } from "../services/actions.service";
 
 const { TextArea } = Input;
 const CreateActionModal = (props) => {
-
   const config = useSelector((state) => state.app);
   const [user, setUser] = useState(config.user);
 
   const { setCreateActionDialog, defaultActionType, app_id } = props;
-  const [action, setAction] = useState ({});
+  const [action, setAction] = useState({});
+
   const [loadingActionButton, setLoadingActionButton] = useState(false);
 
-
-  const closeCreateActionDialog = () =>{
-    setCreateActionDialog(false)
-  }
+  const closeCreateActionDialog = () => {
+    //alert(defaultActionType);
+    setCreateActionDialog(false);
+  };
 
   const createActionData = async () => {
     try {
@@ -77,11 +77,11 @@ const CreateActionModal = (props) => {
     setAction({ ...action, [e.target.name]: e.target.value });
   };
 
-  useEffect(()=>{
+  useEffect(() => {
+    if (defaultActionType) setAction({ ...action, type: defaultActionType });
+  }, []);
 
-    if(defaultActionType) setAction({...action, type: defaultActionType})
-
-  },[]);
+  // {defaultActionType?<option value="AUTH">Authorization</option>: null}
   return (
     <Modal
       title="Create Action"
@@ -91,7 +91,6 @@ const CreateActionModal = (props) => {
         <Button key="submit" onClick={closeCreateActionDialog}>
           Cancel
         </Button>,
-
         <Button
           key="submit"
           type="primary"
@@ -194,8 +193,7 @@ const CreateActionModal = (props) => {
               <option disabled selected value="">
                 -- Select Action Type --
               </option>
-              {defaultActionType?<option value="SETUP">Set Up</option>: null}
-              {defaultActionType?<option value="AUTH">Authorization</option>: null}
+              {defaultActionType ? <option value="SETUP">Set Up</option> : null}
               <option value="CREATE">Create</option>
               <option value="READ">Read</option>
               <option value="UPDATE">Update</option>

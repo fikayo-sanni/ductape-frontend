@@ -1,35 +1,11 @@
 import {createSlice, PayloadAction} from '@reduxjs/toolkit'
 
-/** export interface AppState {
-    user?: CurrentUser,
-    preferences?: Preferences,
-    isAuthenticated: boolean,
-    stats? : any
-    lastUpdated: Date
-}
-
-export interface Preferences {
-    loanRate: number,
-    minimumLoanAmount: number,
-    maximumLoanAmount: number,
-    loanFee: number,
-    loanInterestRate: number,
-    bankAccounts: string[],
-}
-
-export interface CurrentUser {
-    fullName: string,
-    token: string,
-    id: string,
-    permission: string[],
-    // email: string,
-    // phoneNumber: string,
-}*/
-
 export const initialState = {
     isAuthenticated: false,
     user: {},
+    app: {},
     workspaces: [],
+    domains: [],
     defaultWorkspaceId: "",
 }
 
@@ -42,8 +18,25 @@ export const applicationSlice = createSlice({
         },
 
         changeApps: (state, {payload}) => {
-            state.apps = payload
+            state.apps = payload;
         },
+
+        changeIntegrations: (state, {payload}) => {
+            state.integrations = payload;
+        },
+
+        changeDomains: (state, {payload}) => {
+            state.domains = payload;
+        },
+
+        changeSelectedIntegration: (state, {payload}) => {
+            state.integration = payload;
+        },
+
+        changeSelectedApp: (state, {payload}) => {
+            state.app = payload;
+        },
+
         changeUser: (state, {payload}) => {
             state.user = payload;
         },
@@ -67,6 +60,10 @@ export const {
     changeUser,
     logoutUser,
     changeApps,
+    changeIntegrations,
+    changeSelectedApp,
+    changeDomains,
+    changeSelectedIntegration,
     changeWorkspaces,
     changeDefaultWorkspaceId,
     clearData,

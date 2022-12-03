@@ -1,9 +1,7 @@
 const subQuery = (data, index, type) => {
   // alert(JSON.stringify(data));
   return data.map((d, i) => {
-    //alert(JSON.stringify(d))
     return <FormsRender index={i} type={type} data={d} />;
-    // return FormsRender(i, type, d);
   });
 };
 
@@ -11,26 +9,6 @@ const FormsRender = (props) => {
   const { index, type, data } = props;
   const valueCheck = data.sampleValue;
 
-  /**const Headers = headers.map((data, index) => {
-    // alert(JSON.stringify(data))
-    return formsRender(index, "headers", data);
-  });
-
-  const Params = params.map((data, index) => {
-    return formsRender(index, "params", data);
-  });
-
-  const Query = query.map((data, index) => {
-    return formsRender(index, "query", data);
-  });
-
-  const Body = body.map((data, index) => {
-    return formsRender(index, "body", data);
-  });
-
-  const Response = response.map((data, index) => {
-    return formsRender(index, "response", data);
-  });*/
 
   const handleKeyPress = (index, e, type) => {
     //alert(type)

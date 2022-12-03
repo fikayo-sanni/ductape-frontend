@@ -3,7 +3,7 @@ import { useState } from "react";
 import { capitalize } from "../../config/constant";
 
 const SetValueProps = (props) => {
-  const { closeValueProps, handleChange, index, data, envs } = props;
+  const { closeValueProps, handleChange, index, data, envs, hideEnvs } = props;
   const [envsList, setEnvList] = useState([]);
   const [value, setValue] = useState({ ...data });
 
@@ -31,6 +31,8 @@ const SetValueProps = (props) => {
       </span>
     );
   });
+
+  //alert(JSON.stringify(dataArr))
 
   return (
     <Modal
@@ -98,10 +100,9 @@ const SetValueProps = (props) => {
             >
               <option disabled selected value=""></option>
               <option value="string">STRING</option>
-              <option value="integer">INTEGER</option>
-              <option value="float">FLOAT</option>
-              <option value="double">DOUBLE</option>
+              <option value="number">NUMBER</option>
               <option value="uuid">UUID</option>
+              <option value="boolean">BOOLEAN</option>
               <option value="array">ARRAY</option>
               <option value="object">OBJECT</option>
             </select>
@@ -114,7 +115,7 @@ const SetValueProps = (props) => {
           <div className="form-floating">
             <input
               type="text"
-              value={""}
+              value={value.decorator}
               onChange={handleChangeAction}
               required
               className="form-control"
@@ -170,7 +171,7 @@ const SetValueProps = (props) => {
           </div>
         </div>
       </div>
-      <div className="col-12">{Envs}</div>
+      {!hideEnvs?<div className="col-12">{Envs}</div>:<></>}
     </Modal>
   );
 };

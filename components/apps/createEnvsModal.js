@@ -61,7 +61,6 @@ const CreateEnvsModal = (props) => {
 
   const handleKeyPress = (index, e) => {
     if (index === inputFields.length - 1) {
-      // toast.error( index+" bossbaby "+(inputFields.length - 1));
       setInputFields([...inputFields, { ...defaultValue }]);
     }
   };
@@ -76,7 +75,7 @@ const CreateEnvsModal = (props) => {
         }
       }
     });
-  });
+  },[]);
 
   const allFieldsDefaultSet = () => {
     let valid = true;

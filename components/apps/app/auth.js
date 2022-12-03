@@ -4,31 +4,32 @@ import { SettingOutlined, PlusOutlined } from "@ant-design/icons";
 import Lists from "./crud/lists";
 
 const Auth = (props) => {
-    const {authList, showCreateActionDialog} = props;
-    return <span>
-    <div>
-      <div className="row">
-        <div className="col-4">
-          <Breadcrumb>
-            <Breadcrumb.Item>Auth</Breadcrumb.Item>
-            <Breadcrumb.Item> </Breadcrumb.Item>
-          </Breadcrumb>
+  const { authList, setCreateAction } = props;
+  return (
+    <span>
+      <div>
+        <div className="row">
+          <div className="col-4">
+            <Breadcrumb>
+              <Breadcrumb.Item>Auth</Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <Button
+                  type="primary"
+                  shape="circle"
+                  onClick={() => {
+                    setCreateAction(true);
+                  }}
+                >
+                  <PlusOutlined />
+                </Button>{" "}
+              </Breadcrumb.Item>
+            </Breadcrumb>
+          </div>
         </div>
-        <span className="col-6"></span>
-        <span className="col-2">
-          <button
-            className="btn btn-primary"
-            onClick={() => {
-              showCreateActionDialog("AUTH");
-            }}
-          >
-            ADD AUTH <PlusOutlined />
-          </button>
-        </span>
+        <Lists list={authList} />
       </div>
-      <Lists list={authList}/>
-    </div>
-  </span>
-}
+    </span>
+  );
+};
 
-export default Auth
+export default Auth;

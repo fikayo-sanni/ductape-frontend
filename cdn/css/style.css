@@ -31,12 +31,56 @@ body {
   background: var(--primary_color_transparent_2) !important;
 }
 
+/*.bg-dark {
+  background: #fff !important;
+}*/
+
 .bg-skyblue {
   background: var(--skyblue) !important;
 }
 
 .bg-background-alternate {
   background: var(--body-background-alt) !important;
+}
+
+.width5 {
+  width: 5%;
+}
+
+.width4 {
+  width: 4%;
+}
+
+.width6 {
+  width: 6%;
+}
+
+.width30 {
+  width: 30%;
+}
+
+.font14 {
+  font-size: 14px !important;
+}
+
+.font16 {
+  font-size: 16px !important;
+}
+
+.noBorderTop {
+  border-top: 0 !important;
+}
+
+.noBorderEnd {
+  border-right: 0 !important;
+}
+
+.noBorderStart{
+  border-left: 0 !important;
+}
+
+.bold {
+  font-weight: 700;
 }
 
 .text-xxs {
@@ -49,6 +93,14 @@ body {
   font-size: 1.2rem !important;
   line-height: 1.75rem !important;
   font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+.text-xl {
+  margin-top: 10px;
+  font-size: 1.5rem !important;
+  line-height: 2.0rem !important;
+  font-weight: 300;
   color: rgba(0, 0, 0, 0.85);
 }
 

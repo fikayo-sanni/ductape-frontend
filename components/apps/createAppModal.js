@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import {
-    createApp,
-} from "../services/apps.service";
+import { createApp } from "../services/apps.service";
 import NProgress from "nprogress";
 import { toast } from "react-hot-toast";
 import { Modal, Button, Input } from "antd";
+import FileUpload from "../fileUpload";
 
-const {TextArea} = Input;
+const { TextArea } = Input;
 const CreateAppModal = (props) => {
   const { showModal, refreshApps } = props;
   const config = useSelector((state) => state.app);
@@ -51,7 +50,7 @@ const CreateAppModal = (props) => {
   };
 
   const handleCancel = () => {
-    showModal(false)
+    showModal(false);
   };
 
   // return (<div>Better</div>)

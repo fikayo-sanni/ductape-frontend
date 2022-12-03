@@ -1,5 +1,5 @@
 import { Modal, Input, Checkbox, Button } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { capitalize, isValidHttpUrl } from "../config/constant";
 import { toast } from "react-hot-toast";

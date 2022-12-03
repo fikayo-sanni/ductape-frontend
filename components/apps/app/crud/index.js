@@ -1,11 +1,18 @@
-import { Breadcrumb, Tabs, Badge } from "antd";
+import { Breadcrumb, Tabs, Badge, Button } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import Lists from "./lists";
 
 const { TabPane } = Tabs;
 
 const CRUD = (props) => {
-  const { readList, createList, deleteList, updateList, showCreateActionDialog, setActionSelected } = props;
+  const {
+    readList,
+    createList,
+    deleteList,
+    updateList,
+    setCreateAction,
+    setActionSelected,
+  } = props;
 
   //alert(JSON.stringify(props));
   return (
@@ -20,17 +27,24 @@ const CRUD = (props) => {
       </div>
 
       <div className="padding_10">
+        <div>
+          <h2 className="pt-3">
+            CRUD Actions{" "}
+            <Button
+              type="primary"
+              shape="circle"
+              onClick={() => {
+                setCreateAction(true);
+              }}
+            >
+              <PlusOutlined />
+            </Button>
+          </h2>
+        </div>
         <Tabs
           defaultActiveKey="1"
           className="page_tabs"
           //onChange={callback}
-          tabBarExtraContent={
-            <div>
-              <button className="btn btn-primary text-uppercase" onClick={()=>showCreateActionDialog("")}>
-                ADD CRUD ACTION <PlusOutlined />
-              </button>
-            </div>
-          }
         >
           <TabPane
             tab={
@@ -58,7 +72,7 @@ const CRUD = (props) => {
             }
             key="5"
           >
-            <Lists list={readList} setActionSelected={setActionSelected}/>
+            <Lists list={readList} setActionSelected={setActionSelected} />
           </TabPane>
           <TabPane
             tab={
