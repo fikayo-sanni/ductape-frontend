@@ -1,9 +1,15 @@
-import { Breadcrumb, List, Card, Avatar, Switch, Button } from "antd";
+import { Breadcrumb, List, Card, Avatar, Switch, Button, Dropdown } from "antd";
 import { useState } from "react";
 import { capitalize, fetchInitials } from "../../config/constant";
 import EnvInfo from "./envInfo";
 import UpdateAppEnvModal from "../updateAppEnvModal";
-import { PlusOutlined } from "@ant-design/icons";
+import {
+  EyeOutlined,
+  FilterFilled,
+  PlusOutlined,
+  SettingFilled,
+  SettingOutlined,
+} from "@ant-design/icons";
 import CreateAppEnvModal from "../createAppEnvModal";
 
 const Environments = (props) => {
@@ -32,27 +38,23 @@ const Environments = (props) => {
     setCreateEnvDialog(false);
   };
 
+  /**
+
+                      <div className="col-3 mt-4">
+                        <Button
+                          className="btn-outline-primary"
+                          onClick={(e) => {
+                            showEnvDialog(index, e);
+                          }}
+                        >
+                          Setup <SettingOutlined />
+                        </Button>
+                      </div>
+   */
+
   return (
     <span>
-      <div className="row">
-        <div className="col-4">
-          <Breadcrumb>
-            <Breadcrumb.Item>Environments</Breadcrumb.Item>
-            <Breadcrumb.Item>
-              {" "}
-            </Breadcrumb.Item>
-          </Breadcrumb>
-        </div>
-      </div>
-
-      <div className="padding_10">
-        <h2 className="pt-3">
-          Environments{" "}
-          <Button type="primary" shape="circle" onClick={() => {setCreateEnvDialog(true);}}>
-            <PlusOutlined />
-          </Button>
-        </h2>
-
+      <div className="padding_20">
         {createEnvDialog ? (
           <CreateAppEnvModal
             closeCreateDialog={closeCreateDialog}
@@ -74,6 +76,28 @@ const Environments = (props) => {
         )}
         {selectedPage === -1 ? (
           <span>
+            <div className="row">
+              <h2 className="mb-0">App Environments</h2>
+              <span className="row">
+                <span className="col-10">
+                  <label className="text-muted mt-2">
+                    Manage your app environments
+                  </label>
+                </span>
+                <span className="col-2">
+                  <Button className="mt-0 me-2">
+                    Filter <FilterFilled style={{ color: "#00875A" }} />
+                  </Button>
+                  <Button
+                    onClick={() => {
+                      setCreateEnvDialog(true);
+                    }}
+                  >
+                    Envs <SettingFilled style={{ color: "#dc3545" }} />
+                  </Button>
+                </span>
+              </span>
+            </div>
             <br />
             <List
               grid={{
@@ -82,36 +106,29 @@ const Environments = (props) => {
                 sm: 2,
                 md: 4,
                 lg: 4,
-                xl: 6,
+                xl: 4,
                 xxl: 3,
               }}
               dataSource={envs}
               renderItem={(item, index) => (
                 <List.Item className="p-2">
-                  <Card
-                    className="hover-blue"
-                    title={
-                      <span>
-                        <Avatar
-                          className="bg-gray text-primary me-2 border_radius font-weight-500"
-                          shape="square"
-                        >
-                          {fetchInitials(capitalize(item.env_name))}
-                        </Avatar>{" "}
-                        {capitalize(item.env_name)}
-                      </span>
-                    }
-                  >
-                    <label>{item.description}</label>
+                  <Card className="hover-blue">
+                    <span>
+                      <Avatar
+                        className="bg-gray text-primary me-2 border_radius font-weight-500"
+                        shape="square"
+                      >
+                        {fetchInitials(capitalize(item.env_name))}
+                      </Avatar>{" "}
+                      {capitalize(item.env_name)}
+                    </span>
+                    <br />
+                    <br />
+                    <label className="text-muted">{item.description}</label>
                     <br />
                     <div className="row">
                       <label className="mt-4 text-muted col-9">
-                        <Switch
-                          checked={item.active}
-                          onChange={(e) => {
-                            showEnvDialog(index, e);
-                          }}
-                        />
+                        <Switch checked={item.active} onChange={(e) => {}} />
                       </label>
                       <div className="col-3 mt-4">
                         <Button
@@ -120,7 +137,7 @@ const Environments = (props) => {
                             setSelectedPage(index);
                           }}
                         >
-                          View
+                          View <EyeOutlined />
                         </Button>
                       </div>
                     </div>

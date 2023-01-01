@@ -79,6 +79,10 @@ body {
   border-left: 0 !important;
 }
 
+.smallHeight {
+  height: 5vh;  
+}
+
 .bold {
   font-weight: 700;
 }
@@ -284,7 +288,7 @@ body {
 .hover-blue:hover {
   border-color: var(--primary_color) !important;
   cursor: pointer;
-  border-width: 1px !important; 
+  border-width: 3px !important; 
 }
 .pointer {
   cursor: pointer;

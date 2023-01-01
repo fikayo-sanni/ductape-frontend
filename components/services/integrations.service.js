@@ -162,3 +162,12 @@ export const createIntegrationApp = async (payload) => {
     throw e;
   }
 };
+
+
+// map integration environments
+
+// create feature
+
+// create data input 
+
+// map data with transformations

@@ -10,18 +10,41 @@ import {
   AuditOutlined,
   BarChartOutlined,
   TeamOutlined,
-  CheckOutlined,
-  MessageOutlined
+  MessageOutlined,
+  LeftOutlined,
+  SaveOutlined,
+  SettingOutlined,
+  EyeInvisibleOutlined,
+  EyeOutlined,
+  EditOutlined,
+  UnorderedListOutlined,
+  AppstoreFilled,
+  BuildOutlined,
+  PartitionOutlined,
+  BookOutlined,
+  NotificationOutlined,
+  FileSyncOutlined,
+  DiffOutlined,
+  ToolOutlined,
+  SwapOutlined,
+  BankOutlined,
+  MoneyCollectOutlined,
+  AppstoreAddOutlined,
+  SyncOutlined,
 } from "@ant-design/icons";
 import Link from "next/link";
-import {useDispatch, useSelector} from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeDefaultWorkspaceId } from "../../../data/applicationSlice";
-import { fetchInitials } from "../../config/constant";
+
+import CreateAppModal from "../../../components/apps/createAppModal";
+import CreateEnvsModal from "../../../components/apps/createEnvsModal";
+
 import React, { useEffect, useState, useContext } from "react";
 import { updateDefaultAccess } from "../../services/workspaces.service";
-
+import { fetchInitials, capitalize } from "../../config/constant";
 
 const Sidebar = (props) => {
+  const { type, refreshApps, id, info } = props;
   let config = useSelector((state) => state.app);
   const [user, setUser] = useState(config.user);
   const [workspaces, setWorkspaces] = useState(config.workspaces);
@@ -37,13 +60,13 @@ const Sidebar = (props) => {
       setPathname(window.location.pathname);
     }
 
-    if(!config) config = useSelector((state) => state.app);
+    if (!config) config = useSelector((state) => state.app);
 
-    workspaces.map((data)=>{
-      if(data.workspace_id === config.defaultWorkspaceId){
-        setDefaultWorkspace(data)
+    workspaces.map((data) => {
+      if (data.workspace_id === config.defaultWorkspaceId) {
+        setDefaultWorkspace(data);
       }
-    })
+    });
   }, []);
 
   const onOpenChange = (keys) => {
@@ -55,272 +78,468 @@ const Sidebar = (props) => {
     }
   };
 
-  const handleMenuClick = (e) => {
-    console.log("click left button", e);
-  };
-
   const changeDefaultWorkspace = async (e, workspace_id, index) => {
     dispatch(changeDefaultWorkspaceId(workspace_id));
     // setDefaultWorkspace(workspaces[index]);
-    const {auth_token: token, _id: user_id, public_key} = config.user;
-    updateDefaultAccess({token, user_id, workspace_id, public_key});
+    const { auth_token: token, _id: user_id, public_key } = config.user;
+    updateDefaultAccess({ token, user_id, workspace_id, public_key });
     window.location.reload();
-  }
-
-  const workspaceItems = workspaces.map((data,index)=>{
-      return <Menu.Item onClick={(e)=>{changeDefaultWorkspace(e, data.workspace_id, index)}}>{data.name} {config.defaultWorkspaceId===data.workspace_id?<CheckOutlined />: ""}</Menu.Item>;
-  });
-
-  const menu = (
-    <Menu onClick={handleMenuClick}>
-      {workspaceItems}
-      <Link href="/workspaces">
-        <a>
-          <Menu.Item className="bg-muted">
-            <Space className="text-primary"><PlusOutlined /> Create Workspace</Space>
-          </Menu.Item>
-        </a>
-      </Link>
-    </Menu>
-  );
-
-  
+  };
 
   return (
-    <div className="position-relative main_sidebar border-0 d-flex flex-column align-items-baseline h-100">
+    <div className="position-relative main_sidebar bg-white border-end d-flex flex-column align-items-baseline h-100">
       <div className="p-4">
-        <Logo />
+        {!type || type === "dashboard" ? <Logo /> : <></>}
       </div>
 
-      <div className="ps-3 w-90">
-        <Dropdown overlay={menu} className="w-100">
-          <Button>
-            <Space>
-              {defaultWorkspace.name || "Workspace"}
-              <CaretDownOutlined />
-            </Space>
-          </Button>
-        </Dropdown>
-      </div>
       <div className="py-4 ps-0 w-100 mb-auto ">
-        <Menu
-          onOpenChange={onOpenChange}
-          //style={{ width: 256 }}
-          mode="inline"
-          className="w-100 no_background no_border side_menu"
-        >
-          <Link href="/dashboard">
-            <a>
-              <Menu.Item
-                key="home"
-                className={
-                  pathname.startsWith("/dashboard") ? "ant-menu-item-selected" : ""
-                }
-                icon={
-                  <Avatar
-                    src="/images/icons/dashboard.svg"
-                    shape="square"
-                    size={15}
-                  />
-                }
+        {type && type !== "dashboard" ? (
+          <span>
+            <div className="row">
+              <div className="col-1"></div>
+              <div className="col-2">
+                <Link href={`/${type}s`}>
+                  <LeftOutlined />
+                </Link>
+              </div>
+              <div className="col-9">
+                <h5>{`${capitalize(type)}s`}</h5>
+              </div>
+            </div>
+          </span>
+        ) : (
+          <></>
+        )}
+        {type === "integration" ? (
+          <div>
+            <span className="padding_10 row">
+              <Avatar
+                className="bg-gray col-3 text-primary me-2 border_radius font-weight-700"
+                shape="square"
               >
-                Dashboard
-              </Menu.Item>
-            </a>
-          </Link>
+                {info.name ? fetchInitials(info.name) : <></>}
+              </Avatar>{" "}
+              <h5 className="col-9 pt-2">{info.name}</h5>
+            </span>
 
-          <Link href="/apps">
-            <a>
+            <Menu
+              mode="inline"
+              theme="light"
+              inlineCollapsed={false}
+              className="w-100 no_background no_border side_menu"
+            >
               <Menu.Item
-                key="apps" // className='bg-primary rounded-3 font-white'
-                className={pathname.startsWith("/apps") ? "ant-menu-item-selected" : ""}
-                icon={<AuditOutlined />}
-              >
-                Apps
-              </Menu.Item>
-            </a>
-          </Link>
-
-          <Link href="/integrations">
-            <a>
-              <Menu.Item
-                key="integrations"
+                key="3"
                 className={
-                  pathname.startsWith("/integrations") ? "ant-menu-item-selected" : ""
+                  pathname.endsWith("/features") ? "ant-menu-item-selected" : ""
                 }
-                icon={<FolderOpenOutlined />}
+                icon={<PartitionOutlined />}
               >
-                Integrations
+                <Link href={`/integrations/${id}/features`}>
+                  <span>Features</span>
+                </Link>
               </Menu.Item>
-            </a>
-          </Link>
-          <Link href="/marketplace">
-            <a>
               <Menu.Item
-                key="marketplace"
+                key="1"
                 className={
-                  pathname.startsWith("/marketplace") ? "ant-menu-item-selected" : ""
+                  pathname.endsWith("/envs") ? "ant-menu-item-selected" : ""
+                }
+                icon={<BuildOutlined />}
+              >
+                <Link href={`/integrations/${id}/envs`}>
+                  <span>Envs</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item
+                key="2"
+                className={
+                  pathname.endsWith("/apps") ? "ant-menu-item-selected" : ""
                 }
                 icon={<AppstoreOutlined />}
               >
-                MarketPlace
+                <Link href={`/integrations/${id}/apps`}>
+                  <span>Apps</span>
+                </Link>
               </Menu.Item>
-            </a>
-          </Link>
-
-          <Link href="/partners">
-            <a>
               <Menu.Item
-                key="partners"
+                key="5"
                 className={
-                  pathname.startsWith("/partners") ? "ant-menu-item-selected" : ""
+                  pathname.endsWith("/caches") ? "ant-menu-item-selected" : ""
                 }
-                icon={<MessageOutlined />}
+                icon={<BankOutlined />}
               >
-                Partners
+                <Link href={`/integrations/${id}/caches`}>
+                  <span>Data Caches</span>
+                </Link>
               </Menu.Item>
-            </a>
-          </Link>
-          
-          <Link href="/teams">
-            <a>
               <Menu.Item
-                key="team"
-                className={pathname.startsWith("/team") ? "ant-menu-item-selected" : ""}
-                icon={<TeamOutlined />}
-              >
-                Team
-              </Menu.Item>
-            </a>
-          </Link>
-
-          <Link href="/activity">
-            <a>
-              <Menu.Item
-                key="activity"
+                key="6"
                 className={
-                  pathname.startsWith("/activity") ? "ant-menu-item-selected" : ""
+                  pathname.endsWith("/enums") ? "ant-menu-item-selected" : ""
                 }
-                icon={<BarChartOutlined />}
+                icon={<BookOutlined />}
               >
-                Activity
+                <Link href={`/integrations/${id}/enums`}>
+                  <span>Data Enums</span>
+                </Link>
               </Menu.Item>
-            </a>
-          </Link>
-
-          <Link href="/tokens">
-            <a>
               <Menu.Item
-                key="tokens"
+                key="7"
                 className={
-                  pathname.startsWith("/tokens") ? "ant-menu-item-selected" : ""
+                  pathname.endsWith("/notifications")
+                    ? "ant-menu-item-selected"
+                    : ""
+                }
+                icon={<NotificationOutlined />}
+              >
+                <Link href={`/integrations/${id}/notifications`}>
+                  <span>Notifications</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item
+                key="4"
+                className={
+                  pathname.endsWith("/keys") ? "ant-menu-item-selected" : ""
                 }
                 icon={<KeyOutlined />}
               >
-                Tokens
+                <Link href={`/integrations/${id}/keys`}>
+                  <span>Access Keys</span>
+                </Link>
               </Menu.Item>
-            </a>
-          </Link>
-          <Link href="/billing">
-            <a>
               <Menu.Item
-                key="billing"
+                key="6"
                 className={
-                  pathname.startsWith("/billing") ? "ant-menu-item-selected" : ""
+                  pathname.endsWith("/activity") ? "ant-menu-item-selected" : ""
                 }
-                icon={<CreditCardOutlined />}
+                icon={<BarChartOutlined />}
               >
-                Billing
+                <Link href={`/integrations/${id}/activity`}>
+                  <span>Activity</span>
+                </Link>
               </Menu.Item>
-            </a>
-          </Link>
-
-          {/*<div className="py-3 mb-4 border-bottom"></div>*/}
-
-          {/*<Menu.Item  key="billing" icon={<Avatar src="/images/icons/billing.svg" shape="square" size={15}/>}>*/}
-          {/*    Billings*/}
-          {/*</Menu.Item>*/}
-
-          {/*<Menu.Item key="products" icon={<Avatar src="/images/icons/products.svg" shape="square" size={15}/>}>*/}
-          {/*    Products*/}
-          {/*</Menu.Item>*/}
-          {/*<Menu.Item key="rates" icon={<Avatar src="/images/icons/fixed_rates.svg" shape="square" size={15}/>}>*/}
-          {/*    Fixed Rates*/}
-          {/*</Menu.Item>*/}
-          {/*<Menu.Item key="network" icon={<Avatar src="/images/icons/network.svg" shape="square" size={15}/>}>*/}
-          {/*    Network*/}
-          {/*</Menu.Item>*/}
-          {/*<Menu.Item key="reports" icon={<Avatar src="/images/icons/reports.svg" shape="square" size={15}/>}>*/}
-          {/*    Reports*/}
-          {/*</Menu.Item>*/}
-        </Menu>
-      </div>
-
-      <div className="p-4 ps-0 w-100 mb-auto">
-        <Menu
-          onOpenChange={onOpenChange}
-          //style={{ width: 256 }}
-          mode="inline"
-          className="w-100 no_background no_border side_menu"
-        >
-          <Menu.Item
-            key="notifications"
-            icon={
-              <Avatar
-                src="/images/icons/notification.svg"
-                shape="square"
-                size={15}
-              />
-            }
-          >
-            Notifications
-          </Menu.Item>
-
-          <Menu.Item
-            key="settings"
-            icon={
-              <Avatar
-                src="/images/icons/settings.svg"
-                shape="square"
-                size={15}
-              />
-            }
-          >
-            Settings
-          </Menu.Item>
-          <Menu.Item
-            key="support"
-            icon={
-              <Avatar
-                src="/images/icons/support.svg"
-                shape="square"
-                size={15}
-              />
-            }
-          >
-            Support
-          </Menu.Item>
-        </Menu>
-      </div>
-
-      <div className="bg-primary_transparent_2 align-items-center d-flex justify-content-between p-4 w-100">
-        <div className="d-flex">
-          <Avatar
-            className="bg-dark me-2 border_radius font-weight-700"
-            shape="square"
-          >
-            {fetchInitials(user.firstname, user.lastname)}
-          </Avatar>
-          <div>
-            <h6 className="m-0">
-              {user.firstname} {user.lastname}
-            </h6>
-            <p className="m-0 font-gray font-xs">{user.email}</p>
+            </Menu>
           </div>
-        </div>
+        ) : (
+          <></>
+        )}
 
-        <img src="/images/icons/down.svg" />
+        {type === "app" ? (
+          <div>
+            <span className="padding_10 row">
+              <Avatar
+                className="bg-gray col-3 text-primary me-2 border_radius font-weight-700"
+                shape="square"
+              >
+                {info.app_name ? fetchInitials(info.app_name) : <></>}
+              </Avatar>{" "}
+              <h5 className="col-9 pt-2">{info.app_name}</h5>
+            </span>
+            <Menu
+              mode="inline"
+              theme="light"
+              inlineCollapsed={false}
+              className="w-100 no_background no_border side_menu"
+            >
+              <Menu.Item
+                key="2"
+                className={
+                  pathname.endsWith("/environments")
+                    ? "ant-menu-item-selected"
+                    : ""
+                }
+                icon={<BuildOutlined />}
+              >
+                <Link href={`/apps/${id}/environments`}>
+                  <span>Environments</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item
+                key="3"
+                className={
+                  pathname.endsWith("/setup") ? "ant-menu-item-selected" : ""
+                }
+                icon={<ToolOutlined/>}
+              >
+                <Link href={`/apps/${id}/setup`}>
+                  <span>Setup</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item
+                key="5"
+                className={
+                  pathname.endsWith("/crud") ? "ant-menu-item-selected" : ""
+                }
+                icon={<SwapOutlined />}
+              >
+                <Link href={`/apps/${id}/crud`}>
+                  <span>CRUD Actions</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item
+                key="6"
+                className={
+                  pathname.endsWith("/webhooks") ? "ant-menu-item-selected" : ""
+                }
+                icon={<SyncOutlined />}
+              >
+                <Link href={`/apps/${id}/webhooks`}>
+                  <span>Webhook Events</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item
+                key="7"
+                className={
+                  pathname.endsWith("/pricing") ? "ant-menu-item-selected" : ""
+                }
+                icon={<MoneyCollectOutlined/>}
+              >
+                <Link href={`/apps/${id}/pricing`}>
+                  <span>Pricing</span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item
+                key="8"
+                className={
+                  pathname.endsWith("/publish") ? "ant-menu-item-selected" : ""
+                }
+                icon={<AppstoreAddOutlined/>}
+              >
+                <Link href={`/apps/${id}/publish`}>
+                  <span>Publish</span>
+                </Link>
+              </Menu.Item>
+            </Menu>
+          </div>
+        ) : (
+          <></>
+        )}
+
+        {!type || type === "dashboard" ? (
+          <Menu
+            onOpenChange={onOpenChange}
+            //style={{ width: 256 }}
+            mode="inline"
+            className="w-100 no_background no_border side_menu"
+          >
+            <Link href="/dashboard">
+              <a>
+                <Menu.Item
+                  key="home"
+                  className={
+                    pathname.startsWith("/dashboard")
+                      ? "ant-menu-item-selected"
+                      : ""
+                  }
+                  icon={
+                    <Avatar
+                      src="/images/icons/dashboard.svg"
+                      shape="square"
+                      size={15}
+                    />
+                  }
+                >
+                  Dashboard
+                </Menu.Item>
+              </a>
+            </Link>
+
+            <Link href="/apps">
+              <a>
+                <Menu.Item
+                  key="apps" // className='bg-primary rounded-3 font-white'
+                  className={
+                    pathname.startsWith("/apps") ? "ant-menu-item-selected" : ""
+                  }
+                  icon={<AuditOutlined />}
+                >
+                  Apps
+                </Menu.Item>
+              </a>
+            </Link>
+
+            <Link href="/integrations">
+              <a>
+                <Menu.Item
+                  key="integrations"
+                  className={
+                    pathname.startsWith("/integrations")
+                      ? "ant-menu-item-selected"
+                      : ""
+                  }
+                  icon={<FolderOpenOutlined />}
+                >
+                  Integrations
+                </Menu.Item>
+              </a>
+            </Link>
+            <Link href="/marketplace">
+              <a>
+                <Menu.Item
+                  key="marketplace"
+                  className={
+                    pathname.startsWith("/marketplace")
+                      ? "ant-menu-item-selected"
+                      : ""
+                  }
+                  icon={<AppstoreOutlined />}
+                >
+                  MarketPlace
+                </Menu.Item>
+              </a>
+            </Link>
+
+            <Link href="/partners">
+              <a>
+                <Menu.Item
+                  key="partners"
+                  className={
+                    pathname.startsWith("/partners")
+                      ? "ant-menu-item-selected"
+                      : ""
+                  }
+                  icon={<MessageOutlined />}
+                >
+                  Partners
+                </Menu.Item>
+              </a>
+            </Link>
+
+            <Link href="/teams">
+              <a>
+                <Menu.Item
+                  key="team"
+                  className={
+                    pathname.startsWith("/team") ? "ant-menu-item-selected" : ""
+                  }
+                  icon={<TeamOutlined />}
+                >
+                  Team
+                </Menu.Item>
+              </a>
+            </Link>
+
+            <Link href="/activity">
+              <a>
+                <Menu.Item
+                  key="activity"
+                  className={
+                    pathname.startsWith("/activity")
+                      ? "ant-menu-item-selected"
+                      : ""
+                  }
+                  icon={<BarChartOutlined />}
+                >
+                  Activity
+                </Menu.Item>
+              </a>
+            </Link>
+
+            <Link href="/tokens">
+              <a>
+                <Menu.Item
+                  key="tokens"
+                  className={
+                    pathname.startsWith("/tokens")
+                      ? "ant-menu-item-selected"
+                      : ""
+                  }
+                  icon={<KeyOutlined />}
+                >
+                  Tokens
+                </Menu.Item>
+              </a>
+            </Link>
+            <Link href="/billing">
+              <a>
+                <Menu.Item
+                  key="billing"
+                  className={
+                    pathname.startsWith("/billing")
+                      ? "ant-menu-item-selected"
+                      : ""
+                  }
+                  icon={<CreditCardOutlined />}
+                >
+                  Billing
+                </Menu.Item>
+              </a>
+            </Link>
+
+            {/*<div className="py-3 mb-4 border-bottom"></div>*/}
+
+            {/*<Menu.Item  key="billing" icon={<Avatar src="/images/icons/billing.svg" shape="square" size={15}/>}>*/}
+            {/*    Billings*/}
+            {/*</Menu.Item>*/}
+
+            {/*<Menu.Item key="products" icon={<Avatar src="/images/icons/products.svg" shape="square" size={15}/>}>*/}
+            {/*    Products*/}
+            {/*</Menu.Item>*/}
+            {/*<Menu.Item key="rates" icon={<Avatar src="/images/icons/fixed_rates.svg" shape="square" size={15}/>}>*/}
+            {/*    Fixed Rates*/}
+            {/*</Menu.Item>*/}
+            {/*<Menu.Item key="network" icon={<Avatar src="/images/icons/network.svg" shape="square" size={15}/>}>*/}
+            {/*    Network*/}
+            {/*</Menu.Item>*/}
+            {/*<Menu.Item key="reports" icon={<Avatar src="/images/icons/reports.svg" shape="square" size={15}/>}>*/}
+            {/*    Reports*/}
+            {/*</Menu.Item>*/}
+          </Menu>
+        ) : (
+          <></>
+        )}
       </div>
+
+      {!type || type === "dashboard" ? (
+        <div className="p-4 ps-0 w-100 mb-auto">
+          <Menu
+            onOpenChange={onOpenChange}
+            //style={{ width: 256 }}
+            mode="inline"
+            className="w-100 no_background no_border side_menu"
+          >
+            <Menu.Item
+              key="notifications"
+              icon={
+                <Avatar
+                  src="/images/icons/notification.svg"
+                  shape="square"
+                  size={15}
+                />
+              }
+            >
+              Notifications
+            </Menu.Item>
+
+            <Menu.Item
+              key="settings"
+              icon={
+                <Avatar
+                  src="/images/icons/settings.svg"
+                  shape="square"
+                  size={15}
+                />
+              }
+            >
+              Settings
+            </Menu.Item>
+            <Menu.Item
+              key="support"
+              icon={
+                <Avatar
+                  src="/images/icons/support.svg"
+                  shape="square"
+                  size={15}
+                />
+              }
+            >
+              Support
+            </Menu.Item>
+          </Menu>
+        </div>
+      ) : (
+        <></>
+      )}
     </div>
   );
 };

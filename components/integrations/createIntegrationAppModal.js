@@ -1,4 +1,4 @@
-import { CaretDownOutlined, ExclamationCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { CaretDownOutlined, ExclamationCircleOutlined, PlusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Dropdown, Menu, Modal, Space } from "antd";
 import Link from "next/link";
 import toast from "react-hot-toast";
@@ -128,8 +128,9 @@ const CreateIntegrationAppModal = (props) => {
 
   return (
     <Dropdown overlay={menu}>
-      <Button type="primary" shape="circle">
-        <PlusOutlined />
+      <Button>
+        App
+        <PlusCircleOutlined style={{ color: "#0746A6" }} />
       </Button>
     </Dropdown>
   );

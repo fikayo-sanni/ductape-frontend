@@ -13,19 +13,23 @@ const Apps = (props) => {
     setCreateAppsDialog(false);
   };
 
+  // <CreateIntegrationAppModal closeCreateDialog={closeCreateDialog} integration_id={integration_id} refreshApps={refreshApps}/>
+
   return (
     <span>
       <div className="row">
-        <div className="col-4">
-          <Breadcrumb>
-            <Breadcrumb.Item>Apps</Breadcrumb.Item>
-            <Breadcrumb.Item><CreateIntegrationAppModal closeCreateDialog={closeCreateDialog} integration_id={integration_id} refreshApps={refreshApps}/>
-              {" "}
-            </Breadcrumb.Item>
-          </Breadcrumb>
-        </div>
+        <h2 className="mb-0">Integration Apps</h2>
+        <span className="row">
+          <span className="col-11">
+            <label className="text-muted mt-2">
+              Manage apps on which your features are built
+            </label>
+          </span>
+          <span className="col-1">
+          <CreateIntegrationAppModal closeCreateDialog={closeCreateDialog} integration_id={integration_id} refreshApps={refreshApps}/>
+          </span>
+        </span>
       </div>
-
       <span>
         <br />
         <List
@@ -35,7 +39,7 @@ const Apps = (props) => {
             sm: 2,
             md: 4,
             lg: 4,
-            xl: 6,
+            xl: 4,
             xxl: 3,
           }}
           dataSource={apps}
@@ -43,18 +47,16 @@ const Apps = (props) => {
             <List.Item className="p-2">
               <Card
                 className="hover-blue"
-                title={
-                  <span>
+              >
+                <span>
                     <Avatar
                       className="bg-gray text-primary me-2 border_radius font-weight-500"
                       shape="square"
                     >
-                      {fetchInitials (capitalize(item.app_data[0].app_name))}
+                      {fetchInitials(capitalize(item.app_data[0].app_name))}
                     </Avatar>{" "}
                     {capitalize(item.app_data[0].app_name)}
                   </span>
-                }
-              >
                 <label>{item.description}</label>
                 <br />
                 <div className="row">
@@ -62,7 +64,9 @@ const Apps = (props) => {
                     <Switch checked={item.status} />
                   </label>
                   <div className="col-5 mt-4">
-                    <Button className="btn-outline-primary" href="">Setup Envs</Button>
+                    <Button className="btn-outline-primary" href="">
+                      Setup
+                    </Button>
                   </div>
                 </div>
               </Card>

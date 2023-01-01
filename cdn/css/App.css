@@ -21,6 +21,9 @@ input::-ms-reveal {
 *::after {
   box-sizing: border-box;
 }
+.bg-white {
+  background-color: #FFF;
+}
 html {
   font-family: sans-serif;
   line-height: 1.15;

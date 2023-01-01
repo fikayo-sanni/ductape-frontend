@@ -54,59 +54,10 @@ const Integration_Layout = (props) => {
   }, [integration]);
 
   return (
-    <Dashboard_Layout title={integration.name || "Integrations"}>
-      <div className="padding_10"></div>
-      <section className="padding_10 row">
+    <Dashboard_Layout title={integration.name || "Integrations"}  type="integration" id={integration_id} info={integration}>
+      <section className="padding_20 row">
         <div className="row">
-          <div className="col-2 h-100">
-            <div className="padding_10">
-              <Breadcrumb>
-                <Breadcrumb.Item className="text-muted">
-                  <Link href={"/integrations"}>Integrations</Link>
-                </Breadcrumb.Item>
-                <Breadcrumb.Item className="text-muted">{integration.name} </Breadcrumb.Item>
-              </Breadcrumb>
-            </div>
-            <Menu
-              defaultSelectedKeys={selected}
-              mode="inline"
-              theme="light"
-              inlineCollapsed={false}
-              className="border-none"
-            >
-              <Menu.Item key="1">
-                <Link href={`/integrations/${integration_id}/envs`}>
-                  <span>Envs</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="2">
-                <Link href={`/integrations/${integration_id}/apps`}>
-                  <span>Apps</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="3">
-                <Link href={`/integrations/${integration_id}/features`}>
-                  <span>Features</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="4">
-                <Link href={`/integrations/${integration_id}/keys`}>
-                  <span>Access Keys</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="5">
-                <Link href={`/integrations/${integration_id}/caches`}>
-                  <span>Data Caches</span>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="6">
-                <Link href={`/integrations/${integration_id}/activity`}>
-                  <span>Activity</span>
-                </Link>
-              </Menu.Item>
-            </Menu>
-          </div>
-          <div className="col-10 padding_10">{children}</div>
+          <div className="padding_10">{children}</div>
         </div>
       </section>
     </Dashboard_Layout>

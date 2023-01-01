@@ -5,6 +5,7 @@ import Lists from "./crud/lists";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import NProgress from "nprogress";
+import Upload from "../../../pages/upload";
 import { useSelector, useDispatch } from "react-redux";
 import { updateApp } from "../../services/apps.service";
 import { changeSelectedApp } from "../../../data/applicationSlice";
@@ -95,6 +96,7 @@ const Publish = (props) => {
                 Publish App to marketplace, are you good to go?
               </label>
               <br />
+              <Upload/>
               <br />
 
               <label className="text-muted">Select related domains</label>

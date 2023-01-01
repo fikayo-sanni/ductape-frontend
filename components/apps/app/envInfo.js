@@ -1,6 +1,13 @@
 import { Avatar, Card, Switch, Tag, Button } from "antd";
-import { LeftOutlined, SettingOutlined, EditOutlined, EllipsisOutlined } from "@ant-design/icons";
-import { fetchInitials, capitalize } from "../../config/constant"
+import {
+  LeftOutlined,
+  SettingOutlined,
+  EditOutlined,
+  EllipsisOutlined,
+  FilterFilled,
+  SettingFilled,
+} from "@ant-design/icons";
+import { fetchInitials, capitalize } from "../../config/constant";
 
 const { Meta } = Card;
 const EnvInfo = (props) => {
@@ -8,7 +15,29 @@ const EnvInfo = (props) => {
 
   // alert(JSON.stringify(env))
   return (
-    <span className="padding_10">
+    <span>
+      <div className="row">
+        <h2 className="mb-0 mt-2">
+          <span onClick={toggleSelectedPage}>
+            <LeftOutlined />
+          </span>{" "}
+          {` ${capitalize(env.env_name)}`}
+        </h2>
+        <span className="row">
+          <span className="col-11">
+            <label className="text-muted mt-2 ms-4">{env.description}</label>
+          </span>
+          <span className="col-1">
+            <Button
+              onClick={() => {
+                setCreateEnvDialog(true);
+              }}
+            >
+              Edit <EditOutlined style={{ color: "#0746A6" }} />
+            </Button>
+          </span>
+        </span>
+      </div>
       <br />
       <div className="row">
         <div className="col-1"></div>
@@ -18,124 +47,159 @@ const EnvInfo = (props) => {
             style={{
               width: "100%",
             }}
-            actions={[
-              <SettingOutlined key="setting" />,
-              <EditOutlined key="edit" />,
-              <EllipsisOutlined key="ellipsis" />,
-            ]}
+            className="padding_10"
           >
-            <Meta
-              title={
-                <span>
-                  <span className="me-2"><Button shape="circle" icon={<LeftOutlined/>} size="large" onClick={toggleSelectedPage}/></span>
-                  <Avatar
-                    className="bg-gray text-primary me-2 border_radius font-weight-500"
-                    shape="square"
-                  >
-                    {fetchInitials(capitalize(env.env_name))}
-                  </Avatar>{" "}
-                  {capitalize(env.env_name)}
-                </span>
-              }
-              description={env.description}
-            />
-            <br />
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Base URL</h6>
+                  <label className="text-muted">
+                    Base URL for all endpoints in this environment
+                  </label>
+                </div>
+                <div className="col-3 text-primary">
+                  <span className="float-end">
+                    {env.base_url || "undefined"}{" "}
+                  </span>
+                </div>
+              </span>
+            </div>
 
-            <table className="table border">
-              <tbody>
-                <tr>
-                  <td>Base URL:</td>
-                  <td>
-                    <a href={env.base_url} target="blank">
-                      {env.base_url || "undefined"}
-                    </a>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Default Content-Type:</td>
-                  <td>
-                    <label className="text-primary">
-                      {env.request_type || "undefined"}
-                    </label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Pricing Strategy:</td>
-                  <td>
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Content Type</h6>
+                  <label className="text-muted">Default Content Type</label>
+                </div>
+                <div className="col-3">
+                  <span className="float-end">
+                    {env.request_type || "undefined"}{" "}
+                  </span>
+                </div>
+              </span>
+            </div>
+
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Pricing Bundle</h6>
+                  <label className="text-muted">
+                    Strategy for pricing this environment
+                  </label>
+                </div>
+                <div className="col-3 text-primary">
+                  <span className="float-end">
                     <Tag color="geekblue">
                       {String(env.payment_type).toUpperCase()}
                     </Tag>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Base Price:</td>
-                  <td>${env.cost || "undefined"}</td>
-                </tr>
-                <tr>
-                  <td>Inbound Requests:</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>Inbound Responses:</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>Average Latency:</td>
-                  <td>
-                    <label className="text-muted">0ms</label>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Success Rate:</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>Status:</td>
-                  <td>
-                    <Switch
-                      checked={env.active}
-                      onChange={(e) => {
-                        showEnvDialog(selectedPage, e);
-                      }}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Require Whitelist:</td>
-                  <td>
-                    <Switch
-                      checked={env.active}
-                      onChange={(e) => {
-                        showEnvDialog(selectedPage, e);
-                      }}
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Default Test Environment:</td>
-                  <td>
+                  </span>
+                </div>
+              </span>
+            </div>
+
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Base Price</h6>
+                  <label className="text-muted">Default cost per unit</label>
+                </div>
+                <div className="col-3 text-primary">
+                  <span className="float-end">
+                    $0.01
+                  </span>
+                </div>
+              </span>
+            </div>
+
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Default Live Environment</h6>
+                  <label className="text-muted">
+                    Is this your production environment?
+                  </label>
+                </div>
+                <div className="col-3 text-muted">
+                  <span className="float-end">
+                    <Switch checked={env.default_prod} onChange={(e) => {}} />
+                  </span>
+                </div>
+              </span>
+            </div>
+
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Default Sandbox Environment</h6>
+                  <label className="text-muted">
+                    Is this your primary sandbox environment?
+                  </label>
+                </div>
+                <div className="col-3 text-muted">
+                  <span className="float-end">
                     <Switch
                       checked={env.default_sandbox}
-                      onChange={(e) => {
-                        showEnvDialog(selectedPage, e);
-                      }}
+                      onChange={(e) => {}}
                     />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Default Live Environment:</td>
-                  <td>
-                    {" "}
-                    <Switch
-                      checked={env.default_prod}
-                      onChange={(e) => {
-                        showEnvDialog(selectedPage, e);
-                      }}
-                    />
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+                  </span>
+                </div>
+              </span>
+            </div>
+
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Active</h6>
+                  <label className="text-muted">
+                    Activate to receive requests
+                  </label>
+                </div>
+                <div className="col-3 text-muted">
+                  <span className="float-end">
+                    <Switch checked={env.active} onChange={(e) => {}} />
+                  </span>
+                </div>
+              </span>
+            </div>
+
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Inbound Requests</h6>
+                  <label className="text-muted">Requests Received</label>
+                </div>
+                <div className="col-3">
+                  <span className="float-end">0</span>
+                </div>
+              </span>
+            </div>
+
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Outbound Requests</h6>
+                  <label className="text-muted">Requests Sent</label>
+                </div>
+                <div className="col-3">
+                  <span className="float-end">0</span>
+                </div>
+              </span>
+            </div>
+
+            <div className="padding_5 mb-2 border-bottom pb-2">
+              <span className="row">
+                <div className="col-9">
+                  <h6>Average Latency</h6>
+                  <label className="text-muted">
+                    Average Time Per Requests
+                  </label>
+                </div>
+                <div className="col-3 text-muted">
+                  <span className="float-end">0 ms</span>
+                </div>
+              </span>
+            </div>
+
           </Card>
         </div>
         <div className="col-1"></div>

@@ -8,6 +8,7 @@ import { fetchWorkspaceApps } from "../../components/services/apps.service";
 import { useDispatch, useSelector } from "react-redux";
 import { changeApps } from "../../data/applicationSlice";
 import Apps_Layout from "../../components/layout/apps_layout";
+import Dashboard_Layout from "../../components/layout/dashboard_layout";
 
 const { TextArea } = Input;
 
@@ -33,9 +34,9 @@ const Index = observer((props) => {
     if (selected === "4") show = "public";
 
     //alert(show)
-    if (show === "all"){
+    if (show === "all") {
       //alert("APPS "+JSON.stringify(apps))
-       setDisplayed(apps);
+      setDisplayed(apps);
     } else {
       const data = apps.filter((data) => {
         //alert("data "+data.status+" "+show)

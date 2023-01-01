@@ -5,6 +5,7 @@ import { fetchWorkspaceIntegrations } from "../../components/services/integratio
 import toast from "react-hot-toast";
 import { changeIntegrations } from "../../data/applicationSlice";
 import IntegrationList from "../../components/integrations/integrationList";
+import Dashboard_Layout from "../../components/layout/dashboard_layout";
 
 const Index = (props) => {
   const { selected } = props;

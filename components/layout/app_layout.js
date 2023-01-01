@@ -154,6 +154,19 @@ const App_Layout = (props) => {
   //alert(selected)
 
   return (
+    <Dashboard_Layout title="App" type="app" id={app_id} info={app}>
+
+      <section className="padding_10">
+        <div className="row">
+          <div className="col-12">
+            {children}
+          </div>
+        </div>
+      </section>
+    </Dashboard_Layout>
+  );
+
+  /**return (
     <Dashboard_Layout title={capitalize(String(app.app_name)) || "App"}>
       <div className="padding_10"></div>
 
@@ -253,7 +266,7 @@ const App_Layout = (props) => {
         </div>
       </section>
     </Dashboard_Layout>
-  );
+  );*/
 };
 
 export default App_Layout;
