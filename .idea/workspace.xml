@@ -2,8 +2,176 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="general update">
+      <change afterPath="$PROJECT_DIR$/.prettierrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/next-env.d.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/apps/app/crud/update.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/layout/home_layout.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/apps/[id]/overview.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/apps/[id]/webhook/[webhook_id].js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/partners/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/applicationSlice.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/store.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/App.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/App.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/App.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/App.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/animate.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/animate.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/css/look_base_v2.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/css/look_base_v2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/css/look_base_v2.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/css/look_base_v2.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/css/look_base_v2.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/css/look_base_v2.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_background.scssc" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_background.scssc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_border.scssc" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_border.scssc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_font.scssc" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_font.scssc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_general.scssc" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_general.scssc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_spacing.scssc" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/_spacing.scssc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/look_base_v2.scssc" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/.sass-cache/cb6d634aa65787c576c087e19bed7fec2aa98100/look_base_v2.scssc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/_background.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/_background.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/_border.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/_border.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/_font.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/_font.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/_general.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/_general.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/_spacing.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/_spacing.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/look_base_v2.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/look_base_v2.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/look_base_v2.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/look_base_v2.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/look_css/scss/look_base_v2.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/look_css/scss/look_base_v2.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/createResponseModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/createResponseModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/editActionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editActionModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/editBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editBody.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/editHeaders.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editHeaders.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/editParams.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editParams.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/editPricing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editPricing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/editResponse.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editResponse.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/formsRender.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/formsRender.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/pricing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/pricing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/action/setValuePropsModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/setValuePropsModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/actions.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/actions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/actionItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.env.d.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/crud/create.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/crud/create.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/crud/delete.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/actionItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/crud/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/crud/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/crud/lists.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/crud/lists.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/crud/update.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/crud/delete.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/envInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/envInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/environments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/environments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/onboarding.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/onboarding.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/overview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/pricing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/pricing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/publish.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/publish.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/setupLists.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/setupLists.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/webhooks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/webhooks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/app/webhooksList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/webhooksList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/appList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/appList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/createActionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/createActionModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/createAppEnvModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/createAppEnvModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/createAppModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/createAppModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/createEnvsModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/createEnvsModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/createPricesModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/createPricesModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/createSetupModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/createSetupModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/createWebhookModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/createWebhookModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/emptyList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/emptyList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/setups.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/setups.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/apps/updateAppEnvModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/updateAppEnvModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/clients/actions.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/actions.client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/clients/apps.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/apps.client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/clients/email.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/email.client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/clients/integrations.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/integrations.client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/clients/users.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/users.client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/clients/workspace.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/workspace.client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/dashboard/full_header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/full_header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/dashboard/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/dashboard/inner_sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/inner_sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/dashboard/menus.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/menus.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/dashboard/sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/landing_header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/landing_header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/common/landing_sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/landing_sidebar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/config/constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/constant.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/fileUpload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/fileUpload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/integrations/createIntegrationAppModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integrations/createIntegrationAppModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/integrations/createIntegrationEnvModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integrations/createIntegrationEnvModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/integrations/createProjectModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integrations/createProjectModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/integrations/integration/apps.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integrations/integration/apps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/integrations/integration/environments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integrations/integration/environments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/integrations/integration/features.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integrations/integration/features.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/integrations/integrationList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integrations/integrationList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/integrations/updateIntegrationEnv.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/integrations/updateIntegrationEnv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/app_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/app_layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/apps_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/apps_layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/dashboard_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/home_layout.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/integration_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/integration_layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/integrations_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/integrations_layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/partners_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/partners_layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layout/partnerslist_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/partnerslist_layout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/progressbar/bar.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/progressbar/bar.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/progressbar/container.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/progressbar/container.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/progressbar/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/progressbar/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/progressbar/progress.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/progressbar/progress.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/progressbar/spinner.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/progressbar/spinner.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/services/actions.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/actions.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/services/integrations.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/integrations.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/services/users.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/users.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/services/workspaces.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/workspaces.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/applicationSlice.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/applicationSlice.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/configStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/configStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/dataStore.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/dataStore.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/localStorage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/localStorage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/store.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/store.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/activity/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/activity/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/actions/[action_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/actions/[action_id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/crud.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/crud.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/environments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/environments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/overview.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/pricing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/pricing.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/publish.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/publish.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/setup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/setup/[setup_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/setup/[setup_id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/webhook/[webhook_id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/[id]/webhooks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/webhooks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/draft.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/draft.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/private.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/private.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/apps/public.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/public.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/billing/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/billing/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/documents.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/documents.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/[id]/activity.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/[id]/activity.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/[id]/apps.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/[id]/apps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/[id]/caches.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/[id]/caches.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/[id]/envs.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/[id]/envs.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/[id]/features.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/[id]/features.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/[id]/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/[id]/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/[id]/keys.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/[id]/keys.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/active.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/active.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/draft.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/draft.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/integrations/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/marketplace/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/marketplace/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/partners/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/reports.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reports.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/reset.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/reset.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/subscription.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/subscription.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/teams/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/teams/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tokens/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/tokens/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/upload.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/upload.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/workspaces.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/workspaces.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/b5/js/bootstrap.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/b5/js/bootstrap.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/b5/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/b5/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +193,8 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/components/config/constant.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/pages/_app.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/pages/_app.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/config/constant.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="1" />
@@ -47,9 +215,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/redux" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="settings.editor.selected.configurable" value="watcher.settings" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -58,18 +226,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/redux" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/pages" />
       <recent name="$PROJECT_DIR$/components/layout" />
       <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/public/images/icons" />
-      <recent name="$PROJECT_DIR$/public/logos" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/dashboard" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/images/icons" />
       <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/pages/security/verify_email" />
-      <recent name="$PROJECT_DIR$/pages/dashboard/profile" />
-      <recent name="$PROJECT_DIR$/public" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -254,6 +422,8 @@
       <workItem from="1650184355822" duration="2473000" />
       <workItem from="1650207990429" duration="3764000" />
       <workItem from="1650388368137" duration="7643000" />
+      <workItem from="1672947344060" duration="2693000" />
+      <workItem from="1672950075529" duration="7920000" />
     </task>
     <task id="LOCAL-00421" summary="Support floater">
       <created>1636222157974</created>
