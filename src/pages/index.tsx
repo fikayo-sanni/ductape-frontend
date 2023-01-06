@@ -58,9 +58,13 @@ const Index = () => {
                     if(d.default){
                         defaultChanged = true;
                         dispatch(changeDefaultWorkspaceId(d.workspace_id))
+                        dispatch(setCurrentWorkspace(d))
                     }
                 })
-                if(!defaultChanged) dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
+                if(!defaultChanged){
+                    dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
+                    dispatch(setCurrentWorkspace(data[0]))
+                }
 
                 // save all workspaces
                 dispatch(setWorkspaces(data));

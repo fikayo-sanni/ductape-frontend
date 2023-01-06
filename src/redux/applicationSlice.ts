@@ -19,6 +19,14 @@ export interface AppState {
     currentTheme: any;
 }
 
+export interface Workspace {
+    user_id: string;
+    workspace_id: string;
+    name: string;
+    _id: string;
+    default: boolean
+}
+
 export interface CurrentUser {
     firstname: string;
     lastname: string;
@@ -95,11 +103,13 @@ export const applicationSlice = createSlice({
         },
 
         //workspaces
-        setWorkspaces: (state: AppState, { payload }: PayloadAction<string[]>) => {
+        setWorkspaces: (state: AppState, { payload }: PayloadAction<Workspace[]>) => {
             state.workspaces = payload;
         },
-        setCurrentWorkspace: (state: AppState, { payload }: PayloadAction<any>) => {
+        setCurrentWorkspace: (state: AppState, { payload }: PayloadAction<Workspace>) => {
             state.workspace = payload;
+            state.defaultWorkspaceId = payload.workspace_id;
+            window.top.location.reload()
         },
         changeDefaultWorkspaceId: (state: AppState, { payload }: PayloadAction<string>) => {
             state.defaultWorkspaceId = payload;

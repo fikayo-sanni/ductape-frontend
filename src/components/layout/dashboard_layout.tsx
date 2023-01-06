@@ -1,30 +1,43 @@
 import Head from 'next/head';
 import React, { useContext, Component, useEffect, useState } from 'react';
-import { Affix, ConfigProvider, FloatButton, Layout, Menu, Popover, theme } from 'antd';
+import {
+    Affix, Avatar, Button,
+    Card,
+    ConfigProvider,
+    Dropdown,
+    FloatButton,
+    Layout,
+    Menu, MenuProps,
+    Space,
+    theme,
+    Typography,
+} from 'antd';
 import Sidebar from '../common/dashboard/sidebar';
 import FullHeader from '../common/dashboard/full_header';
 import { observer } from 'mobx-react-lite';
 import { RootState } from '../../redux/store';
+import { Logo } from '../config/constant';
 import { useDispatch, useSelector } from 'react-redux';
+import dynamic from 'next/dynamic';
 import {
     setTheme,
-    logoutUser,
-    setCurrentWorkspace,
-    setWorkspaces,
-    changeDefaultWorkspaceId,
 } from '../../redux/applicationSlice';
-import { BulbFilled, BulbOutlined } from '@ant-design/icons';
+import { BulbFilled, BulbOutlined, DownOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+const { Title, Paragraph, Text } = Typography;
 const { darkAlgorithm } = theme;
+
+const TopNav = dynamic(() => import('../../components/common/dashboard/topNav'));
+const LowerNav = dynamic(() => import('../../components/common/dashboard/lowerNav'));
 
 const Dashboard_Layout = observer(({ children, title = 'Dashboard', type, refreshApps, id, info }) => {
     const { user, currentApp, currentTheme, darkMode, isAuthenticated } = useSelector(
         (state: RootState) => state.app,
     );
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         if (isAuthenticated === false) {
@@ -36,6 +49,9 @@ const Dashboard_Layout = observer(({ children, title = 'Dashboard', type, refres
         <ConfigProvider
             theme={{
                 algorithm: darkMode && [darkAlgorithm],
+                token: {
+                    colorPrimary: '#0746A6',
+                },
             }}
         >
             <Layout className=''>
@@ -62,20 +78,27 @@ const Dashboard_Layout = observer(({ children, title = 'Dashboard', type, refres
                 />
 
                 <body className=''>
+
                 <Layout
-                    className='site-layout bg-red position-relative'
-                    style={{ height: '5vh', background: currentTheme.colorBgBase }}
+                    className='site-layout position-relative'
+                    style={{ minHeight: '6vh' }}
                 >
-                    this is the header
+                    <TopNav />
                 </Layout>
                 <Affix offsetTop={0}>
                     <Layout
-                        className='sticky-top site-layout bg-blue'
-                        style={{ height: '4vh', background: currentTheme.colorBgBase }}
+                        className='sticky-top site-layout'
+                        style={{ height: '5vh', overflow: 'hidden' }}
                     >
-                        sub header
+                        <LowerNav />
                     </Layout>
                 </Affix>
+
+                <Layout
+                    className="site-layout position-relative"
+                    style={{ marginLeft: 400, minHeight: '100vh', background: currentTheme.colorBgBase }}
+                >
+                </Layout>
                 </body>
 
 
@@ -86,7 +109,7 @@ const Dashboard_Layout = observer(({ children, title = 'Dashboard', type, refres
 
                     <div className={'col-lg-10'}>
 
-                        {/*<FullHeader/>*/}
+                        <FullHeader />
                         <div
                             className={'no_background  position-relative border_radius  ms-0'}
                             style={{ height: '100vh', overflowY: 'auto' }}
