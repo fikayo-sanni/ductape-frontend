@@ -33,8 +33,14 @@ const { darkAlgorithm } = theme;
 const TopNav = dynamic(() => import('../../components/common/dashboard/topNav'));
 const LowerNav = dynamic(() => import('../../components/common/dashboard/lowerNav'));
 
-const Dashboard_Layout = observer(({ children, title = 'Dashboard', type, refreshApps, id, info }) => {
-    const { user, currentApp, currentTheme, darkMode, isAuthenticated } = useSelector(
+interface Props {
+    children: any;
+    showSidebar?: boolean;
+    title: string;
+}
+
+const Dashboard_Layout : React.FC<Props> = ({ children, title = 'Dashboard', showSidebar = false, type, refreshApps, id, info }) => {
+    const { user, currentTheme, darkMode, isAuthenticated } = useSelector(
         (state: RootState) => state.app,
     );
     const dispatch = useDispatch();
@@ -87,39 +93,65 @@ const Dashboard_Layout = observer(({ children, title = 'Dashboard', type, refres
                 </Layout>
                 <Affix offsetTop={0}>
                     <Layout
-                        className='sticky-top site-layout'
-                        style={{ height: '5vh', overflow: 'hidden' }}
+                        className='sticky-top site-layout '
+                        style={{ minHeight: '5vh', overflow: 'hidden' }}
                     >
-                        <LowerNav />
+
+                        <LowerNav pageTitle={title} />
                     </Layout>
                 </Affix>
 
-                <Layout
-                    className="site-layout position-relative"
-                    style={{ marginLeft: 400, minHeight: '100vh', background: currentTheme.colorBgBase }}
-                >
-                </Layout>
+                <div className='d-flex flex-row'>
+                    {
+                        showSidebar && (
+                            <Affix offsetTop={45}>
+                                <Layout.Sider
+                                    className='dashboard_sidebar'
+                                    trigger={null}
+                                    breakpoint={'md'}
+                                    width={300}
+                                    style={{
+                                        paddingTop: -0,
+                                        overflowY: 'auto',
+                                        overflowX: 'hidden',
+                                        height: '95vh',
+                                        left: 0,
+                                    }}
+                                >
+                                    hello
+                                </Layout.Sider>
+                            </Affix>
+                        )
+                    }
+
+                    <Layout.Content
+                        className='site-layout position-relative'
+                        style={{  minHeight: '90vh', background: currentTheme.colorBgBase }}
+                    >
+                        {children}
+                    </Layout.Content>
+                </div>
                 </body>
 
 
-                <div className='h-100 bg-primary-transparent row g-0'>
-                    <div className='col-lg-2'>
-                        <Sidebar type={type} refreshApps={refreshApps} id={id} info={info} />
-                    </div>
+                {/*<div className='h-100 bg-primary-transparent row g-0'>*/}
+                {/*    <div className='col-lg-2'>*/}
+                {/*        <Sidebar type={type} refreshApps={refreshApps} id={id} info={info} />*/}
+                {/*    </div>*/}
 
-                    <div className={'col-lg-10'}>
+                {/*    <div className={'col-lg-10'}>*/}
 
-                        <FullHeader />
-                        <div
-                            className={'no_background  position-relative border_radius  ms-0'}
-                            style={{ height: '100vh', overflowY: 'auto' }}
-                        >
-                            <section className='d-flex flex-column' style={{ height: '91%' }}>
-                                {children}
-                            </section>
-                        </div>
-                    </div>
-                </div>
+                {/*        <FullHeader />*/}
+                {/*        <div*/}
+                {/*            className={'no_background  position-relative border_radius  ms-0'}*/}
+                {/*            style={{ height: '100vh', overflowY: 'auto' }}*/}
+                {/*        >*/}
+                {/*            <section className='d-flex flex-column' style={{ height: '91%' }}>*/}
+                {/*                {children}*/}
+                {/*            </section>*/}
+                {/*        </div>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
 
                 <script
                     src='/b5/js/bootstrap.bun.js'
@@ -129,6 +161,6 @@ const Dashboard_Layout = observer(({ children, title = 'Dashboard', type, refres
             </Layout>
         </ConfigProvider>
     );
-});
+}
 
 export default Dashboard_Layout;

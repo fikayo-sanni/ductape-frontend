@@ -33,9 +33,9 @@ const getTotalRow = (data, itemsPerRow) => {
   return allRow;
 };
 
-const Logo = (props) => {
+export const Logo = (props) => {
   return (
-    <h2 className="text-primary text-center font-lg font-weight-900 text-uppercase">
+    <h2 className="text-primary mb-0 text-center font-lg font-weight-900 text-uppercase">
       Duc<span className=" font-lg text-danger">Tape</span>
     </h2>
     // <img src="/images/logo.svg" className={"w-max-200" + props.className}/>

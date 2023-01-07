@@ -232,6 +232,18 @@ a{
 
 }
 
+#nprogress {
+  position: fixed !important;
+  z-index: 99999999 !important;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  .bar {
+    height: 5px !important;
+    background: var(--primary_colour) !important;
+  }
+}
 
 
 .w-max-120
@@ -472,3 +484,11 @@ a{
       min-width: 0 !important;
     }
   }
+
+.lowerAffix
+{
+  .ant-affix
+  {
+
+  }
+}

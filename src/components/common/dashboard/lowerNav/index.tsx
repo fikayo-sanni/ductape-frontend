@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Avatar, Button, Card, Dropdown, Layout, Menu, MenuProps, Space } from 'antd';
-import { Logo } from '../../../config/constant';
-import { DownOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu, MenuProps } from 'antd';
+
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
+import Router from "next/router";
+import { Logo } from '../../../config/constant';
 
 interface Props {
     pageTitle: string;
@@ -13,51 +14,51 @@ interface Props {
 }
 
 export const LowerNav: React.FC<Props> = ({ pageTitle, className }) => {
-    const { user, currentApp, workspace, workspaces, currentTheme, darkMode, isAuthenticated } = useSelector(
+    const { user, app, workspace, workspaces, currentTheme, darkMode, isAuthenticated } = useSelector(
         (state: RootState) => state.app,
     );
-    const [currentMenu, setCurrentMenu] = useState<string>('dashboard')
+
+    const [currentMenu, setCurrentMenu] = useState<string>(pageTitle ?? 'dashboard')
 
     const items: MenuProps['items'] = [
         {
             label: 'Dashboard',
-            key: 'dashboard',
+            key: 'Dashboard',
+            onClick: () => Router.push('/dashboard')
         },
         {
             label: 'Apps',
-            key: 'apps',
+            key: 'Apps',
+            onClick: () => Router.push('/apps')
         },
-        {
-            label: 'Domains',
-            key: 'domains',
-        },
+
         {
             label: 'Integrations',
-            key: 'integrations',
+            key: 'Integrations',
         },
         {
             label: 'Market Place',
-            key: 'marketPlace',
+            key: 'MarketPlace',
         },
         {
             label: 'Partners',
-            key: 'partners',
+            key: 'Partners',
         },
         {
             label: 'Teams',
-            key: 'teams',
+            key: 'Teams',
         },
         {
             label: 'Tokens',
-            key: 'tokens',
+            key: 'Tokens',
         },
         {
             label: 'Activity',
-            key: 'activity',
+            key: 'Activity',
         },
         {
             label: 'Billing',
-            key: 'billing',
+            key: 'Billing',
         },
 
 
@@ -65,11 +66,13 @@ export const LowerNav: React.FC<Props> = ({ pageTitle, className }) => {
 
 
     return (
-        <div type='inner' className='rounded-0 p-0' size='small'>
+        <div className='rounded-0 p-0 '>
+
             <Menu
                 onClick={(e) => setCurrentMenu(e.key)}
                 selectedKeys={[currentMenu]}
                 mode="horizontal" items={items} />
+
         </div>
     )
 }

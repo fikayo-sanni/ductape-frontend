@@ -1,6 +1,5 @@
 import Home_Layout from '../components/layout/home_layout.tsx';
 import React, {useEffect, useState} from "react";
-import NProgress from "nprogress";
 import {toast} from "react-hot-toast";
 import {Logo} from '../components/config/constant';
 import Router from "next/router";
@@ -18,7 +17,7 @@ const { Title, Text, Paragraph } = Typography;
 const Index = () => {
     const dispatch = useDispatch();
 
-    const { user, isAuthenticated, darkMode } = useSelector((state: RootState) => state.app);
+    const { user, isAuthenticated } = useSelector((state: RootState) => state.app);
     const [submitting, setSubmitting] = useState(false);
     const [authenticated, setAuthenticated] = useState(isAuthenticated);
     const [loginUser, setLoginUser] = useState({
