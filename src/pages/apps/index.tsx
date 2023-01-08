@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import AppList from '../../components/apps/appList';
-import { Avatar, Card, Input, Tag, Typography, Select, Space } from 'antd';
+import { Avatar, Card, Input, Tag, Typography, Select, Radio } from 'antd';
 import { toast } from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 import { fetchWorkspaceApps } from '../../components/services/apps.service';
@@ -13,12 +13,14 @@ const { Title, Text, Paragraph } = Typography;
 
 const PageHeader = dynamic(() => import('../../components/common/pageHeader'));
 const Loading = dynamic(() => import('../../components/common/loading'));
+const AppDisplay = dynamic(() => import('../../components/common/appDisplay'));
 
 export default function Apps(props) {
     const { user, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
     const [apps, setApps] = useState([]);
     const [filterApps, setFilterApps] = useState([]);
-    const [orientation, setOrientation] = useState('');
+    const [search, setSearch] = useState('');
+    const [orientation, setOrientation] = useState('grid');
     const [filter, setFilter] = useState<string[]>(['draft', 'public', 'private']);
     const [loading, setLoading] = useState(true);
 
@@ -46,6 +48,8 @@ export default function Apps(props) {
             return item.app_name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
         });
 
+        setFilter(['draft', 'public', 'private']);
+        setSearch(e.target.value);
         setFilterApps(appList);
     };
 
@@ -66,15 +70,24 @@ export default function Apps(props) {
                             <Input
                                 onChange={onSearch}
                                 allowClear
+                                value={search}
                                 size="large"
                                 placeholder="Search"
                                 prefix={<SearchOutlined />}
                             />
+                            <Radio.Group value={orientation}>
+                                <Radio.Button value="grid">Grid</Radio.Button>
+                                <Radio.Button value="list">List</Radio.Button>
+                            </Radio.Group>
                             <Select
                                 defaultValue="All"
                                 size="large"
                                 style={{ width: 120 }}
-                                onChange={(value) => setFilter(value.split(','))}
+                                onChange={(value) => {
+                                    setFilter(value.split(','));
+                                    setFilterApps([]);
+                                    setSearch('');
+                                }}
                                 options={[
                                     {
                                         value: 'draft,public,private',
@@ -98,74 +111,11 @@ export default function Apps(props) {
 
                         <div className="row mt-4">
                             {filterApps.length
-                                ? filterApps.map((app) => (
-                                      <div className="col-xl-4">
-                                          <Card
-                                              className=" mb-4"
-                                              actions={[
-                                                  <Text>{app.domains ? app.domains.length : 0} domains</Text>,
-                                                  <Text>{app.envs.length} environments</Text>,
-                                              ]}
-                                          >
-                                              <div className="d-flex justify-content-between align-items-start">
-                                                  <div className="d-flex flex-row gap-2">
-                                                      <Avatar className="font-sm-2" shape="square" size="large">
-                                                          {app.app_name.charAt(0)}
-                                                      </Avatar>
-                                                      <div>
-                                                          <Title className="mb-0" level={5}>
-                                                              {app.app_name}
-                                                          </Title>
-                                                          <Text type="secondary" className="text-capitalize mb-0">
-                                                              {app.status}
-                                                          </Text>
-                                                      </div>
-                                                  </div>
-                                                  {app.active ? (
-                                                      <Tag color="green">Active</Tag>
-                                                  ) : (
-                                                      <Tag color="red">Inactive</Tag>
-                                                  )}
-                                              </div>
-                                          </Card>
-                                      </div>
-                                  ))
+                                ? filterApps.map((app) => <AppDisplay orientation={orientation} app={app} />)
                                 : apps.map(
                                       (app) =>
                                           filter.includes(app.status) && (
-                                              <div className="col-xl-4">
-                                                  <Card
-                                                      className=" mb-4"
-                                                      actions={[
-                                                          <Text>{app.domains ? app.domains.length : 0} domains</Text>,
-                                                          <Text>{app.envs.length} environments</Text>,
-                                                      ]}
-                                                  >
-                                                      <div className="d-flex justify-content-between align-items-start">
-                                                          <div className="d-flex flex-row gap-2">
-                                                              <Avatar className="font-sm-2" shape="square" size="large">
-                                                                  {app.app_name.charAt(0)}
-                                                              </Avatar>
-                                                              <div>
-                                                                  <Title className="mb-0" level={5}>
-                                                                      {app.app_name}
-                                                                  </Title>
-                                                                  <Text
-                                                                      type="secondary"
-                                                                      className="text-capitalize mb-0"
-                                                                  >
-                                                                      {app.status}
-                                                                  </Text>
-                                                              </div>
-                                                          </div>
-                                                          {app.active ? (
-                                                              <Tag color="green">Active</Tag>
-                                                          ) : (
-                                                              <Tag color="red">Inactive</Tag>
-                                                          )}
-                                                      </div>
-                                                  </Card>
-                                              </div>
+                                              <AppDisplay orientation={orientation} app={app} />
                                           ),
                                   )}
                         </div>

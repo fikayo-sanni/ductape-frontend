@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="code cleanup">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="app filter">
+      <change afterPath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/draft.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/apps/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/private.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/public.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -269,14 +267,7 @@
       <workItem from="1672947344060" duration="2693000" />
       <workItem from="1672950075529" duration="19619000" />
       <workItem from="1673080481915" duration="8274000" />
-      <workItem from="1673107789823" duration="8436000" />
-    </task>
-    <task id="LOCAL-00425" summary="UI change">
-      <created>1636392315258</created>
-      <option name="number" value="00425" />
-      <option name="presentableId" value="LOCAL-00425" />
-      <option name="project" value="LOCAL" />
-      <updated>1636392315260</updated>
+      <workItem from="1673107789823" duration="9233000" />
     </task>
     <task id="LOCAL-00426" summary="Finalize signup">
       <created>1636393494973</created>
@@ -614,7 +605,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673168726951</updated>
     </task>
-    <option name="localTasksCounter" value="474" />
+    <task id="LOCAL-00474" summary="app filter">
+      <created>1673170408671</created>
+      <option name="number" value="00474" />
+      <option name="presentableId" value="LOCAL-00474" />
+      <option name="project" value="LOCAL" />
+      <updated>1673170408671</updated>
+    </task>
+    <option name="localTasksCounter" value="475" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -639,7 +637,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Finalize signup" />
     <MESSAGE value="Get started - create organization" />
     <MESSAGE value="Landing page" />
     <MESSAGE value="Create organization" />
@@ -664,7 +661,8 @@
     <MESSAGE value="update dashboard layout" />
     <MESSAGE value="apps page" />
     <MESSAGE value="code cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="code cleanup" />
+    <MESSAGE value="app filter" />
+    <option name="LAST_COMMIT_MESSAGE" value="app filter" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
