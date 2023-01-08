@@ -1,18 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="orientation">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update login">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/lowerNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/lowerNav/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/config/constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/constant.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/home_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/home_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/activity/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/activity/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/teams/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/teams/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/applicationSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/applicationSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -275,14 +266,7 @@
       <workItem from="1672947344060" duration="2693000" />
       <workItem from="1672950075529" duration="19619000" />
       <workItem from="1673080481915" duration="8274000" />
-      <workItem from="1673107789823" duration="15754000" />
-    </task>
-    <task id="LOCAL-00428" summary="Finalize signup">
-      <created>1636405987171</created>
-      <option name="number" value="00428" />
-      <option name="presentableId" value="LOCAL-00428" />
-      <option name="project" value="LOCAL" />
-      <updated>1636405987172</updated>
+      <workItem from="1673107789823" duration="17888000" />
     </task>
     <task id="LOCAL-00429" summary="Get started - create organization">
       <created>1636416864854</created>
@@ -620,7 +604,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673173179438</updated>
     </task>
-    <option name="localTasksCounter" value="477" />
+    <task id="LOCAL-00477" summary="update login">
+      <created>1673178163791</created>
+      <option name="number" value="00477" />
+      <option name="presentableId" value="LOCAL-00477" />
+      <option name="project" value="LOCAL" />
+      <updated>1673178163791</updated>
+    </task>
+    <option name="localTasksCounter" value="478" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +636,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Create organization" />
     <MESSAGE value="Create organization and login" />
     <MESSAGE value="Sync bank" />
     <MESSAGE value="Vendors" />
@@ -670,7 +660,8 @@
     <MESSAGE value="app filter" />
     <MESSAGE value="filter &amp; search update" />
     <MESSAGE value="orientation" />
-    <option name="LAST_COMMIT_MESSAGE" value="orientation" />
+    <MESSAGE value="update login" />
+    <option name="LAST_COMMIT_MESSAGE" value="update login" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
