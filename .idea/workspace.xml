@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="apps page">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="code cleanup">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/apps/action/createResponseModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/createResponseModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/apps/action/editActionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editActionModal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/webhook/[webhook_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/webhook/[webhook_id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/draft.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/apps/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/redux/applicationSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/applicationSlice.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/private.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/public.js" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -276,14 +269,7 @@
       <workItem from="1672947344060" duration="2693000" />
       <workItem from="1672950075529" duration="19619000" />
       <workItem from="1673080481915" duration="8274000" />
-      <workItem from="1673107789823" duration="6720000" />
-    </task>
-    <task id="LOCAL-00424" summary="registration">
-      <created>1636389507227</created>
-      <option name="number" value="00424" />
-      <option name="presentableId" value="LOCAL-00424" />
-      <option name="project" value="LOCAL" />
-      <updated>1636389507234</updated>
+      <workItem from="1673107789823" duration="8436000" />
     </task>
     <task id="LOCAL-00425" summary="UI change">
       <created>1636392315258</created>
@@ -621,7 +607,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673110534155</updated>
     </task>
-    <option name="localTasksCounter" value="473" />
+    <task id="LOCAL-00473" summary="code cleanup">
+      <created>1673168726951</created>
+      <option name="number" value="00473" />
+      <option name="presentableId" value="LOCAL-00473" />
+      <option name="project" value="LOCAL" />
+      <updated>1673168726951</updated>
+    </task>
+    <option name="localTasksCounter" value="474" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -646,7 +639,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="UI change" />
     <MESSAGE value="Finalize signup" />
     <MESSAGE value="Get started - create organization" />
     <MESSAGE value="Landing page" />
@@ -671,7 +663,8 @@
     <MESSAGE value="change login layout" />
     <MESSAGE value="update dashboard layout" />
     <MESSAGE value="apps page" />
-    <option name="LAST_COMMIT_MESSAGE" value="apps page" />
+    <MESSAGE value="code cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="code cleanup" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

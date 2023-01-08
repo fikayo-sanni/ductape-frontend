@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import AppList from '../../components/apps/appList';
-import { Avatar, Card, Input, Tag, Typography, Select } from 'antd';
+import { Avatar, Card, Input, Tag, Typography, Select, Space } from 'antd';
 import { toast } from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 import { fetchWorkspaceApps } from '../../components/services/apps.service';
 import { useDispatch, useSelector } from 'react-redux';
 import Dashboard_Layout from '../../components/layout/dashboard_layout';
 import { RootState } from '../../redux/store';
+import { SearchOutlined } from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -14,9 +15,11 @@ const PageHeader = dynamic(() => import('../../components/common/pageHeader'));
 const Loading = dynamic(() => import('../../components/common/loading'));
 
 export default function Apps(props) {
-    const { user, workspace, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
+    const { user, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
     const [apps, setApps] = useState([]);
-    const [filter, setFilter] = useState('all');
+    const [filterApps, setFilterApps] = useState([]);
+    const [orientation, setOrientation] = useState('');
+    const [filter, setFilter] = useState<string[]>(['draft', 'public', 'private']);
     const [loading, setLoading] = useState(true);
 
     const fetchApps = async () => {
@@ -34,6 +37,18 @@ export default function Apps(props) {
         }
     };
 
+    const onSearch = async (e) => {
+        const keyword = e.target.value;
+
+        let appList = [...apps];
+
+        appList = appList.filter((item) => {
+            return item.app_name.toLowerCase().indexOf(keyword.toLowerCase()) !== -1;
+        });
+
+        setFilterApps(appList);
+    };
+
     useEffect(() => {
         fetchApps();
     }, []);
@@ -47,62 +62,112 @@ export default function Apps(props) {
                     <Loading />
                 ) : (
                     <div>
-                        <Select
-                            defaultValue="all"
-                            style={{ width: 120 }}
-                            onChange={null}
-                            options={[
-                                {
-                                    value: 'all',
-                                    label: 'All',
-                                },
-                                {
-                                    value: 'public',
-                                    label: 'Public',
-                                },
-                                {
-                                    value: 'private',
-                                    label: 'Private',
-                                },
-                                {
-                                    value: 'draft',
-                                    label: 'Draft',
-                                },
-                            ]}
-                        />
+                        <div className="d-flex justify-content-between align-items-center gap-4">
+                            <Input
+                                onChange={onSearch}
+                                allowClear
+                                size="large"
+                                placeholder="Search"
+                                prefix={<SearchOutlined />}
+                            />
+                            <Select
+                                defaultValue="All"
+                                size="large"
+                                style={{ width: 120 }}
+                                onChange={(value) => setFilter(value.split(','))}
+                                options={[
+                                    {
+                                        value: 'draft,public,private',
+                                        label: 'All',
+                                    },
+                                    {
+                                        value: 'public',
+                                        label: 'Public',
+                                    },
+                                    {
+                                        value: 'private',
+                                        label: 'Private',
+                                    },
+                                    {
+                                        value: 'draft',
+                                        label: 'Draft',
+                                    },
+                                ]}
+                            />
+                        </div>
+
                         <div className="row mt-4">
-                            {apps.map((app) => (
-                                <div className="col-xl-4">
-                                    <Card
-                                        className=" mb-4"
-                                        actions={[
-                                            <Text>{app.domains ? app.domains.length : 0} domains</Text>,
-                                            <Text>{app.envs.length} environments</Text>,
-                                        ]}
-                                    >
-                                        <div className="d-flex justify-content-between align-items-start">
-                                            <div className="d-flex flex-row gap-2">
-                                                <Avatar className="font-sm-2" shape="square" size="large">
-                                                    {app.app_name.charAt(0)}
-                                                </Avatar>
-                                                <div>
-                                                    <Title className="mb-0" level={5}>
-                                                        {app.app_name}
-                                                    </Title>
-                                                    <Text type="secondary" className="text-capitalize mb-0">
-                                                        {app.status}
-                                                    </Text>
-                                                </div>
-                                            </div>
-                                            {app.active ? (
-                                                <Tag color="green">Active</Tag>
-                                            ) : (
-                                                <Tag color="red">Inactive</Tag>
-                                            )}
-                                        </div>
-                                    </Card>
-                                </div>
-                            ))}
+                            {filterApps.length
+                                ? filterApps.map((app) => (
+                                      <div className="col-xl-4">
+                                          <Card
+                                              className=" mb-4"
+                                              actions={[
+                                                  <Text>{app.domains ? app.domains.length : 0} domains</Text>,
+                                                  <Text>{app.envs.length} environments</Text>,
+                                              ]}
+                                          >
+                                              <div className="d-flex justify-content-between align-items-start">
+                                                  <div className="d-flex flex-row gap-2">
+                                                      <Avatar className="font-sm-2" shape="square" size="large">
+                                                          {app.app_name.charAt(0)}
+                                                      </Avatar>
+                                                      <div>
+                                                          <Title className="mb-0" level={5}>
+                                                              {app.app_name}
+                                                          </Title>
+                                                          <Text type="secondary" className="text-capitalize mb-0">
+                                                              {app.status}
+                                                          </Text>
+                                                      </div>
+                                                  </div>
+                                                  {app.active ? (
+                                                      <Tag color="green">Active</Tag>
+                                                  ) : (
+                                                      <Tag color="red">Inactive</Tag>
+                                                  )}
+                                              </div>
+                                          </Card>
+                                      </div>
+                                  ))
+                                : apps.map(
+                                      (app) =>
+                                          filter.includes(app.status) && (
+                                              <div className="col-xl-4">
+                                                  <Card
+                                                      className=" mb-4"
+                                                      actions={[
+                                                          <Text>{app.domains ? app.domains.length : 0} domains</Text>,
+                                                          <Text>{app.envs.length} environments</Text>,
+                                                      ]}
+                                                  >
+                                                      <div className="d-flex justify-content-between align-items-start">
+                                                          <div className="d-flex flex-row gap-2">
+                                                              <Avatar className="font-sm-2" shape="square" size="large">
+                                                                  {app.app_name.charAt(0)}
+                                                              </Avatar>
+                                                              <div>
+                                                                  <Title className="mb-0" level={5}>
+                                                                      {app.app_name}
+                                                                  </Title>
+                                                                  <Text
+                                                                      type="secondary"
+                                                                      className="text-capitalize mb-0"
+                                                                  >
+                                                                      {app.status}
+                                                                  </Text>
+                                                              </div>
+                                                          </div>
+                                                          {app.active ? (
+                                                              <Tag color="green">Active</Tag>
+                                                          ) : (
+                                                              <Tag color="red">Inactive</Tag>
+                                                          )}
+                                                      </div>
+                                                  </Card>
+                                              </div>
+                                          ),
+                                  )}
                         </div>
                     </div>
                 )}
