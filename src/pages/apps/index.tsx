@@ -125,7 +125,7 @@ export default function Apps(props) {
                         </div>
 
                         <div className="row mt-4">
-                            {filterApps.length
+                            {search.length
                                 ? filterApps.map((app) => <AppDisplay orientation={orientation} app={app} />)
                                 : apps.map(
                                       (app) =>

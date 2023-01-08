@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface AppState {
-    user?: CurrentUser;
+    user?: CurrentUser | null;
     isAuthenticated: boolean;
     lastUpdated: Date;
 
@@ -79,7 +79,9 @@ export const applicationSlice = createSlice({
             state.lastUpdated = new Date();
         },
         logoutUser: (state: AppState) => {
-            return initialState;
+            window.top.location.href = '/';
+            state.user = null;
+            state.isAuthenticated = false;
         },
         // apps
         setCurrentApp: (state: AppState, { payload }: PayloadAction<any>) => {

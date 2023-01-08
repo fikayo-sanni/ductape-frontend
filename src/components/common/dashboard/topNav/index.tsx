@@ -4,7 +4,7 @@ import { Avatar, Button, Card, Dropdown, Layout, MenuProps, Space } from 'antd';
 import { BellOutlined, DownOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import { setCurrentWorkspace } from '../../../../redux/applicationSlice';
+import { setCurrentWorkspace, logoutUser } from '../../../../redux/applicationSlice';
 import dynamic from 'next/dynamic';
 
 const Logo = dynamic(() => import('../../../config/constant').then((component) => component.Logo));
@@ -43,9 +43,30 @@ export const TopNav: React.FC = () => {
         items,
     };
 
-    useEffect(() => {
-        console.log(workspaceItems);
-    }, []);
+    const userItems: MenuProps['items'] = [
+        {
+            key: '2',
+            label: 'Preferences',
+        },
+        {
+            key: 'divider',
+            type: 'divider',
+        },
+        {
+            key: '3',
+            label: 'Logout',
+            danger: true,
+            onClick: async () => {
+                await dispatch(logoutUser());
+            },
+        },
+    ];
+
+    const userProps = {
+        items: userItems,
+    };
+
+    useEffect(() => {}, []);
 
     return (
         <Card className="rounded-0 border-start-0 border-end-0" size="small">
@@ -70,9 +91,11 @@ export const TopNav: React.FC = () => {
                     <Link href="/">Support</Link>
                     <Button shape="circle" icon={<BellOutlined />} />
 
-                    <Button type="primary" icon={<UserOutlined />}>
-                        {user.firstname} {user.lastname.charAt(0).toUpperCase()}.
-                    </Button>
+                    <Dropdown menu={userProps} trigger={['click']}>
+                        <Button type="primary" icon={<UserOutlined />}>
+                            {user.firstname} {user.lastname.charAt(0).toUpperCase()}.
+                        </Button>
+                    </Dropdown>
                 </div>
             </Space>
         </Card>

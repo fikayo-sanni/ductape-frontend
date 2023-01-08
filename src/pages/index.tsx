@@ -16,7 +16,7 @@ import {
     setWorkspaces,
     changeDefaultWorkspaceId,
 } from '../redux/applicationSlice';
-import { LoadingOutlined } from '@ant-design/icons';
+import { LoadingOutlined, StarFilled } from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -84,56 +84,17 @@ const Index = () => {
         }
     };
 
-    // const login = async(e, buttonId) => {
-    //     e.preventDefault();
-    //     try {
-    //         setLoadingButton(true);
-    //         NProgress.start();
-    //         //toast.success('Registration successful')
-    //         const login = await loginUser(user);
-    //         console.log(login);
-    //         const userData = login.data.data;
-    //         dispatch(changeUser(userData));
-    //         toast.success('Login successful')
-    //         const { workspaces } = login.data.data;
-    //         if(workspaces.length){
-    //             const {auth_token: token, public_key, _id: user_id} = userData;
-    //             const spaces = await fetchWorkspaces({token, public_key, user_id});
-    //             const {data} = spaces.data;
-    //             let defaultChanged = false;
-    //             data.map((d,i)=>{
-    //                 if(d.default){
-    //                     defaultChanged = true;
-    //                     dispatch(changeDefaultWorkspaceId(d.workspace_id))
-    //                 }
-    //             })
-    //             if(!defaultChanged) dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
-    //
-    //             dispatch(changeWorkspaces(data));
-    //             Router.push('/dashboard');
-    //         }else{
-    //             Router.push('/workspaces');
-    //         }
-    //     } catch (e) {
-    //         setLoadingButton(false)
-    //         NProgress.done()
-    //         console.log('An error occurred', e.response);
-    //         const error = e.response? e.response.data.errors: e.toString();
-    //         toast.error(error || e.toString())
-    //     }
-    // }
-
     useEffect(() => {}, []);
 
     return (
         <Home_Layout title="Home">
             <div className="h-full row overflow-hidden g-0">
-                <div className="col-xl-3 mx-auto col-lg-5 pb-5 d-flex flex-column">
-                    <div className="col-lg-12 mt-auto padding_10-xs ">
+                <div className="col-xl-4 col-lg-5 p-5 d-flex flex-column">
+                    <div className="col-lg-12  padding_10-xs ">
                         <section>
                             {isAuthenticated ? (
                                 <div>
-                                    <div className="text-center mb-5">
+                                    <div className="d-flex mb-5">
                                         <Logo />
                                     </div>
 
@@ -159,15 +120,15 @@ const Index = () => {
                                 </div>
                             ) : (
                                 <div>
-                                    <div className="text-center">
-                                        <div className="text-center margin_50-bottom">
+                                    <div className="">
+                                        <div className=" margin_30-bottom">
                                             <Logo />
                                         </div>
-                                        <Title level={2} className="mb-0 font-weight-500">
-                                            Sign In
+                                        <Title level={3} className="mb-0 font-weight-500">
+                                            Automate your Integrations
                                         </Title>
-                                        <Paragraph type="secondary" className="mb-5 lead font-sm-2">
-                                            Continue to your admin profile
+                                        <Paragraph type="secondary" className="mb-5 lead">
+                                            Continue to your profile
                                         </Paragraph>
                                     </div>
 
@@ -232,6 +193,31 @@ const Index = () => {
                         <p>Copyright. &copy; 2023</p>
                         <p>Ductape</p>
                     </div>
+                </div>
+                <div className="col-xl-8 position-relative col-lg-7 p-3 d-flex flex-column">
+                    <Card className="h-100 p-5">
+                        <Title level={2}>
+                            "Few things make me feel more powerful than setting up automations in Ductape to make my
+                            life easier and more efficient."
+                        </Title>
+
+                        <div className="d-flex mt-5 flex-row justify-content-between align-items-start">
+                            <div>
+                                <Title className="mb-0" level={4}>
+                                    {' '}
+                                    - Fikayo Sanni
+                                </Title>
+                                <Text type="secondary">Co-Founder startupia LLC</Text>
+                            </div>
+                            <div>
+                                <StarFilled />
+                                <StarFilled />
+                                <StarFilled />
+                                <StarFilled />
+                                <StarFilled />
+                            </div>
+                        </div>
+                    </Card>
                 </div>
             </div>
         </Home_Layout>

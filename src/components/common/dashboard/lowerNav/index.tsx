@@ -4,7 +4,7 @@ import { Menu, MenuProps } from 'antd';
 
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
-import Router from "next/router";
+import Router from 'next/router';
 import { Logo } from '../../../config/constant';
 
 interface Props {
@@ -18,23 +18,24 @@ export const LowerNav: React.FC<Props> = ({ pageTitle, className }) => {
         (state: RootState) => state.app,
     );
 
-    const [currentMenu, setCurrentMenu] = useState<string>(pageTitle ?? 'dashboard')
+    const [currentMenu, setCurrentMenu] = useState<string>(pageTitle ?? 'dashboard');
 
     const items: MenuProps['items'] = [
         {
             label: 'Dashboard',
             key: 'Dashboard',
-            onClick: () => Router.push('/dashboard')
+            onClick: () => Router.push('/dashboard'),
         },
         {
             label: 'Apps',
             key: 'Apps',
-            onClick: () => Router.push('/apps')
+            onClick: () => Router.push('/apps'),
         },
 
         {
             label: 'Integrations',
             key: 'Integrations',
+            onClick: () => Router.push('/integrations'),
         },
         {
             label: 'Market Place',
@@ -47,6 +48,7 @@ export const LowerNav: React.FC<Props> = ({ pageTitle, className }) => {
         {
             label: 'Teams',
             key: 'Teams',
+            onClick: () => Router.push('/teams'),
         },
         {
             label: 'Tokens',
@@ -55,26 +57,19 @@ export const LowerNav: React.FC<Props> = ({ pageTitle, className }) => {
         {
             label: 'Activity',
             key: 'Activity',
+            onClick: () => Router.push('/activity'),
         },
         {
             label: 'Billing',
             key: 'Billing',
         },
-
-
     ];
 
-
     return (
-        <div className='rounded-0 p-0 '>
-
-            <Menu
-                onClick={(e) => setCurrentMenu(e.key)}
-                selectedKeys={[currentMenu]}
-                mode="horizontal" items={items} />
-
+        <div className="rounded-0 p-0 ">
+            <Menu onClick={(e) => setCurrentMenu(e.key)} selectedKeys={[currentMenu]} mode="horizontal" items={items} />
         </div>
-    )
-}
+    );
+};
 
 export default LowerNav;
