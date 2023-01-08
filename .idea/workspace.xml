@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="general update">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="apps page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/apps/action/createResponseModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/createResponseModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/apps/action/editActionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editActionModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/overview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/webhook/[webhook_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/webhook/[webhook_id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/applicationSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/applicationSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +24,11 @@
     <execution />
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -25,8 +40,8 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/components/config/constant.js" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/pages/_app.js" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/pages/_app.tsx" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/components/config/constant.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedIndex" value="1" />
@@ -47,9 +62,11 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/common" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
+    <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="/usr/local/bin/node" />
+    <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
     <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -58,18 +75,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/pages" />
-      <recent name="$PROJECT_DIR$/components/layout" />
-      <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/public/images/icons" />
-      <recent name="$PROJECT_DIR$/public/logos" />
+      <recent name="$PROJECT_DIR$/src/components/common" />
+      <recent name="$PROJECT_DIR$/src/components/common/pageHeader" />
+      <recent name="$PROJECT_DIR$/src/components/common/dashboard" />
+      <recent name="$PROJECT_DIR$/src/redux" />
+      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/dashboard" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/images/icons" />
       <recent name="$PROJECT_DIR$/public/images" />
-      <recent name="$PROJECT_DIR$/pages/security/verify_email" />
-      <recent name="$PROJECT_DIR$/pages/dashboard/profile" />
-      <recent name="$PROJECT_DIR$/public" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -95,6 +112,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
@@ -254,27 +273,10 @@
       <workItem from="1650184355822" duration="2473000" />
       <workItem from="1650207990429" duration="3764000" />
       <workItem from="1650388368137" duration="7643000" />
-    </task>
-    <task id="LOCAL-00421" summary="Support floater">
-      <created>1636222157974</created>
-      <option name="number" value="00421" />
-      <option name="presentableId" value="LOCAL-00421" />
-      <option name="project" value="LOCAL" />
-      <updated>1636222157976</updated>
-    </task>
-    <task id="LOCAL-00422" summary="API integration - register">
-      <created>1636374092696</created>
-      <option name="number" value="00422" />
-      <option name="presentableId" value="LOCAL-00422" />
-      <option name="project" value="LOCAL" />
-      <updated>1636374092696</updated>
-    </task>
-    <task id="LOCAL-00423" summary="registration">
-      <created>1636382735112</created>
-      <option name="number" value="00423" />
-      <option name="presentableId" value="LOCAL-00423" />
-      <option name="project" value="LOCAL" />
-      <updated>1636382735113</updated>
+      <workItem from="1672947344060" duration="2693000" />
+      <workItem from="1672950075529" duration="19619000" />
+      <workItem from="1673080481915" duration="8274000" />
+      <workItem from="1673107789823" duration="6720000" />
     </task>
     <task id="LOCAL-00424" summary="registration">
       <created>1636389507227</created>
@@ -598,7 +600,28 @@
       <option name="project" value="LOCAL" />
       <updated>1650395933990</updated>
     </task>
-    <option name="localTasksCounter" value="470" />
+    <task id="LOCAL-00470" summary="change login layout">
+      <created>1672958029075</created>
+      <option name="number" value="00470" />
+      <option name="presentableId" value="LOCAL-00470" />
+      <option name="project" value="LOCAL" />
+      <updated>1672958029075</updated>
+    </task>
+    <task id="LOCAL-00471" summary="update dashboard layout">
+      <created>1672983277523</created>
+      <option name="number" value="00471" />
+      <option name="presentableId" value="LOCAL-00471" />
+      <option name="project" value="LOCAL" />
+      <updated>1672983277523</updated>
+    </task>
+    <task id="LOCAL-00472" summary="apps page">
+      <created>1673110534155</created>
+      <option name="number" value="00472" />
+      <option name="presentableId" value="LOCAL-00472" />
+      <option name="project" value="LOCAL" />
+      <updated>1673110534155</updated>
+    </task>
+    <option name="localTasksCounter" value="473" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -623,9 +646,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Support floater" />
-    <MESSAGE value="API integration - register" />
-    <MESSAGE value="registration" />
     <MESSAGE value="UI change" />
     <MESSAGE value="Finalize signup" />
     <MESSAGE value="Get started - create organization" />
@@ -648,7 +668,10 @@
     <MESSAGE value="upload" />
     <MESSAGE value="reports" />
     <MESSAGE value="general update" />
-    <option name="LAST_COMMIT_MESSAGE" value="general update" />
+    <MESSAGE value="change login layout" />
+    <MESSAGE value="update dashboard layout" />
+    <MESSAGE value="apps page" />
+    <option name="LAST_COMMIT_MESSAGE" value="apps page" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
