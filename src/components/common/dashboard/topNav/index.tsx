@@ -7,15 +7,9 @@ import { RootState } from '../../../../redux/store';
 import { setCurrentWorkspace } from '../../../../redux/applicationSlice';
 import dynamic from 'next/dynamic';
 
-interface Props {
-    pageTitle: string;
-    className?: string;
-    mainNav?: string;
-}
-
 const Logo = dynamic(() => import('../../../config/constant').then((component) => component.Logo));
 
-export const TopNav: React.FC<Props> = ({ pageTitle, className }) => {
+export const TopNav: React.FC = () => {
     const { user, app, workspace, workspaces, currentTheme, darkMode, isAuthenticated } = useSelector(
         (state: RootState) => state.app,
     );
@@ -35,6 +29,7 @@ export const TopNav: React.FC<Props> = ({ pageTitle, className }) => {
     let items = [
         ...workspaceItems,
         {
+            key: 'divider',
             type: 'divider',
         },
         {
@@ -60,7 +55,7 @@ export const TopNav: React.FC<Props> = ({ pageTitle, className }) => {
                         <Logo />
                     </div>
 
-                    <Dropdown menu={menuProps} trigger="click">
+                    <Dropdown menu={menuProps} trigger={['click']}>
                         <Button>
                             <Space>
                                 {workspace.name}

@@ -1,15 +1,21 @@
-import Home_Layout from '../components/layout/home_layout.tsx';
-import React, {useEffect, useState} from "react";
-import {toast} from "react-hot-toast";
-import {Logo} from '../components/config/constant';
-import Router from "next/router";
-import { loginUser as userAuth } from "../components/services/users.service";
+import Home_Layout from '../components/layout/home_layout';
+import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Logo } from '../components/config/constant';
+import Router from 'next/router';
+import { loginUser as userAuth } from '../components/services/users.service';
 import { Avatar, Button, Card, Input, Typography } from 'antd';
-import { fetchWorkspaces } from "../components/services/workspaces.service";
-import Link from "next/link";
+import { fetchWorkspaces } from '../components/services/workspaces.service';
+import Link from 'next/link';
 import { RootState } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import {setAppUser, logoutUser, setCurrentWorkspace, setWorkspaces, changeDefaultWorkspaceId} from "../redux/applicationSlice";
+import {
+    setAppUser,
+    logoutUser,
+    setCurrentWorkspace,
+    setWorkspaces,
+    changeDefaultWorkspaceId,
+} from '../redux/applicationSlice';
 import { LoadingOutlined } from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
@@ -25,9 +31,9 @@ const Index = () => {
         password: '',
     });
 
-    const handleChange = e => setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
+    const handleChange = (e) => setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
 
-    const validateEmail = email => {
+    const validateEmail = (email) => {
         return email.match(
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
         );
@@ -37,50 +43,46 @@ const Index = () => {
         toast('Authenticating details. Please wait');
         setSubmitting(true);
         try {
-
             // login user
             const login = await userAuth(loginUser);
             const userData = login.data.data;
             dispatch(await setAppUser(userData));
 
-
             // set workspaces
             const { workspaces } = login.data.data;
-            if(workspaces.length){
-                const {auth_token: token, public_key, _id: user_id} = userData;
-                const spaces = await fetchWorkspaces({token, public_key, user_id});
-                const {data} = spaces.data;
+            if (workspaces.length) {
+                const { auth_token: token, public_key, _id: user_id } = userData;
+                const spaces = await fetchWorkspaces({ token, public_key, user_id });
+                const { data } = spaces.data;
                 let defaultChanged = false;
 
                 // save default workspace
-                data.map((d,i)=>{
-                    if(d.default){
+                data.map((d, i) => {
+                    if (d.default) {
                         defaultChanged = true;
-                        dispatch(changeDefaultWorkspaceId(d.workspace_id))
-                        dispatch(setCurrentWorkspace(d))
+                        dispatch(changeDefaultWorkspaceId(d.workspace_id));
+                        dispatch(setCurrentWorkspace(d));
                     }
-                })
-                if(!defaultChanged){
+                });
+                if (!defaultChanged) {
                     dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
-                    dispatch(setCurrentWorkspace(data[0]))
+                    dispatch(setCurrentWorkspace(data[0]));
                 }
 
                 // save all workspaces
                 dispatch(setWorkspaces(data));
 
                 Router.push('/dashboard');
-            }else{
+            } else {
                 Router.push('/workspaces');
             }
-
         } catch (e) {
             console.log('An error occurred', e);
-            const error = e.response? e.response.data.errors: e.toString();
-            toast.error(error || e.toString())
-            setSubmitting(false)
+            const error = e.response ? e.response.data.errors : e.toString();
+            toast.error(error || e.toString());
+            setSubmitting(false);
         }
     };
-
 
     // const login = async(e, buttonId) => {
     //     e.preventDefault();
@@ -121,9 +123,7 @@ const Index = () => {
     //     }
     // }
 
-    useEffect(() => {
-
-    }, [])
+    useEffect(() => {}, []);
 
     return (
         <Home_Layout title="Home">
@@ -131,10 +131,10 @@ const Index = () => {
                 <div className="col-xl-3 mx-auto col-lg-5 pb-5 d-flex flex-column">
                     <div className="col-lg-12 mt-auto padding_10-xs ">
                         <section>
-                            {  isAuthenticated ? (
+                            {isAuthenticated ? (
                                 <div>
                                     <div className="text-center mb-5">
-                                       <Logo />
+                                        <Logo />
                                     </div>
 
                                     <Card title="Already logged in as" size="default">
@@ -181,7 +181,7 @@ const Index = () => {
                                                     value={loginUser.email}
                                                     placeholder="Email address"
                                                     name="email"
-                                                    onKeyPress={event => {
+                                                    onKeyPress={(event) => {
                                                         if (event.key === 'Enter') {
                                                             Login();
                                                         }
@@ -197,7 +197,7 @@ const Index = () => {
                                                     value={loginUser.password}
                                                     placeholder="Password"
                                                     name="password"
-                                                    onKeyPress={event => {
+                                                    onKeyPress={(event) => {
                                                         if (event.key === 'Enter') {
                                                             Login();
                                                         }
@@ -226,7 +226,6 @@ const Index = () => {
                                 </div>
                             )}
                         </section>
-
                     </div>
 
                     <div className="mt-auto d-flex font-gray justify-content-between gap-2">
@@ -236,7 +235,7 @@ const Index = () => {
                 </div>
             </div>
         </Home_Layout>
-    )
-}
+    );
+};
 
-export default Index
+export default Index;

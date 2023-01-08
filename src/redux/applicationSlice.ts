@@ -24,16 +24,18 @@ export interface Workspace {
     workspace_id: string;
     name: string;
     _id: string;
-    default: boolean
+    default: boolean;
 }
 
 export interface CurrentUser {
     firstname: string;
     lastname: string;
     token: string;
-    id: string;
+    _id: string;
     email: string;
-    permissions: string[]
+    auth_token: string;
+    public_key: string;
+    permissions: string[];
 }
 
 const lightTheme = {
@@ -84,32 +86,28 @@ export const applicationSlice = createSlice({
             state.app = payload;
         },
 
-        changeApps: (state: AppState, { payload }: PayloadAction<string[]>) => {
-            state.apps = payload;
-        },
-
         // integrations
-        changeIntegrations: (state: AppState, { payload }: PayloadAction<string[]>) => {
+        changeIntegrations: (state: AppState, { payload }: PayloadAction<[]>) => {
             state.integrations = payload;
         },
+
         changeSelectedIntegration: (state: AppState, { payload }: PayloadAction<any>) => {
             state.integration = payload;
         },
 
-
         // domains
-        changeDomains: (state: AppState, { payload }: PayloadAction<string[]>) => {
+        changeDomains: (state: AppState, { payload }: PayloadAction<[]>) => {
             state.domains = payload;
         },
 
         //workspaces
-        setWorkspaces: (state: AppState, { payload }: PayloadAction<Workspace[]>) => {
+        setWorkspaces: (state: AppState, { payload }: PayloadAction<[]>) => {
             state.workspaces = payload;
         },
         setCurrentWorkspace: (state: AppState, { payload }: PayloadAction<Workspace>) => {
             state.workspace = payload;
             state.defaultWorkspaceId = payload.workspace_id;
-            window.top.location.reload()
+            window.top.location.reload();
         },
         changeDefaultWorkspaceId: (state: AppState, { payload }: PayloadAction<string>) => {
             state.defaultWorkspaceId = payload;
@@ -126,7 +124,7 @@ export const applicationSlice = createSlice({
             }
         },
 
-        clearData: state => {
+        clearData: (state) => {
             return initialState;
         },
     },

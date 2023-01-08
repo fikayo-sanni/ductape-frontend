@@ -49,28 +49,28 @@ export default function Apps(props) {
                     <div>
                         <Select
                             defaultValue="all"
+                            style={{ width: 120 }}
                             onChange={null}
                             options={[
                                 {
-                                    value: 'All',
-                                    label: 'Jack',
+                                    value: 'all',
+                                    label: 'All',
                                 },
                                 {
-                                    value: 'Public',
-                                    label: 'Lucy',
+                                    value: 'public',
+                                    label: 'Public',
                                 },
                                 {
-                                    value: 'Private',
-                                    disabled: true,
-                                    label: 'Disabled',
+                                    value: 'private',
+                                    label: 'Private',
                                 },
                                 {
-                                    value: 'Draft',
-                                    label: 'yiminghe',
+                                    value: 'draft',
+                                    label: 'Draft',
                                 },
                             ]}
                         />
-                        <div className="row">
+                        <div className="row mt-4">
                             {apps.map((app) => (
                                 <div className="col-xl-4">
                                     <Card

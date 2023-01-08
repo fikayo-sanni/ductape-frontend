@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update dashboard layout">
-      <change afterPath="$PROJECT_DIR$/src/components/common/loading/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="apps page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/lowerNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/lowerNav/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/apps/action/createResponseModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/createResponseModal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/apps/action/editActionModal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/action/editActionModal.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/config/constant.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/constant.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/overview.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/webhook/[webhook_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/webhook/[webhook_id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/redux/applicationSlice.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/redux/applicationSlice.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -279,14 +276,7 @@
       <workItem from="1672947344060" duration="2693000" />
       <workItem from="1672950075529" duration="19619000" />
       <workItem from="1673080481915" duration="8274000" />
-      <workItem from="1673107789823" duration="2731000" />
-    </task>
-    <task id="LOCAL-00423" summary="registration">
-      <created>1636382735112</created>
-      <option name="number" value="00423" />
-      <option name="presentableId" value="LOCAL-00423" />
-      <option name="project" value="LOCAL" />
-      <updated>1636382735113</updated>
+      <workItem from="1673107789823" duration="6720000" />
     </task>
     <task id="LOCAL-00424" summary="registration">
       <created>1636389507227</created>
@@ -624,7 +614,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672983277523</updated>
     </task>
-    <option name="localTasksCounter" value="472" />
+    <task id="LOCAL-00472" summary="apps page">
+      <created>1673110534155</created>
+      <option name="number" value="00472" />
+      <option name="presentableId" value="LOCAL-00472" />
+      <option name="project" value="LOCAL" />
+      <updated>1673110534155</updated>
+    </task>
+    <option name="localTasksCounter" value="473" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -649,7 +646,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="registration" />
     <MESSAGE value="UI change" />
     <MESSAGE value="Finalize signup" />
     <MESSAGE value="Get started - create organization" />
@@ -674,7 +670,8 @@
     <MESSAGE value="general update" />
     <MESSAGE value="change login layout" />
     <MESSAGE value="update dashboard layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="update dashboard layout" />
+    <MESSAGE value="apps page" />
+    <option name="LAST_COMMIT_MESSAGE" value="apps page" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
