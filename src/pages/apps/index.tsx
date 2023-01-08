@@ -7,7 +7,7 @@ import { fetchWorkspaceApps } from '../../components/services/apps.service';
 import { useDispatch, useSelector } from 'react-redux';
 import Dashboard_Layout from '../../components/layout/dashboard_layout';
 import { RootState } from '../../redux/store';
-import { SearchOutlined } from '@ant-design/icons';
+import { AppstoreOutlined, BarsOutlined, SearchOutlined } from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -67,46 +67,61 @@ export default function Apps(props) {
                 ) : (
                     <div>
                         <div className="d-flex justify-content-between align-items-center gap-4">
-                            <Input
-                                onChange={onSearch}
-                                allowClear
-                                value={search}
-                                size="large"
-                                placeholder="Search"
-                                prefix={<SearchOutlined />}
-                            />
-                            <Radio.Group value={orientation}>
-                                <Radio.Button value="grid">Grid</Radio.Button>
-                                <Radio.Button value="list">List</Radio.Button>
-                            </Radio.Group>
-                            <Select
-                                defaultValue="All"
-                                size="large"
-                                style={{ width: 120 }}
-                                onChange={(value) => {
-                                    setFilter(value.split(','));
-                                    setFilterApps([]);
-                                    setSearch('');
-                                }}
-                                options={[
-                                    {
-                                        value: 'draft,public,private',
-                                        label: 'All',
-                                    },
-                                    {
-                                        value: 'public',
-                                        label: 'Public',
-                                    },
-                                    {
-                                        value: 'private',
-                                        label: 'Private',
-                                    },
-                                    {
-                                        value: 'draft',
-                                        label: 'Draft',
-                                    },
-                                ]}
-                            />
+                            <div className="col">
+                                <Input
+                                    onChange={onSearch}
+                                    allowClear
+                                    value={search}
+                                    size="large"
+                                    placeholder="Search"
+                                    prefix={<SearchOutlined />}
+                                />
+                            </div>
+                            <div className="col-auto">
+                                <Radio.Group
+                                    size="large"
+                                    onChange={(e) => setOrientation(e.target.value)}
+                                    value={orientation}
+                                    className="ms-auto"
+                                >
+                                    <Radio.Button value="grid">
+                                        <AppstoreOutlined />
+                                    </Radio.Button>
+                                    <Radio.Button value="list">
+                                        <BarsOutlined />
+                                    </Radio.Button>
+                                </Radio.Group>
+                            </div>
+                            <div className="col-auto">
+                                <Select
+                                    defaultValue="All"
+                                    size="large"
+                                    style={{ width: 120 }}
+                                    onChange={(value) => {
+                                        setFilter(value.split(','));
+                                        setFilterApps([]);
+                                        setSearch('');
+                                    }}
+                                    options={[
+                                        {
+                                            value: 'draft,public,private',
+                                            label: 'All',
+                                        },
+                                        {
+                                            value: 'public',
+                                            label: 'Public',
+                                        },
+                                        {
+                                            value: 'private',
+                                            label: 'Private',
+                                        },
+                                        {
+                                            value: 'draft',
+                                            label: 'Draft',
+                                        },
+                                    ]}
+                                />
+                            </div>
                         </div>
 
                         <div className="row mt-4">
