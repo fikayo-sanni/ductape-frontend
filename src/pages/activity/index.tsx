@@ -17,7 +17,6 @@ const Loading = dynamic(() => import('../../components/common/loading'));
 
 export default function Activity() {
     const [loading, setLoading] = useState(false);
-    const config = useSelector((state) => state.app);
 
     useEffect(() => {}, []);
 

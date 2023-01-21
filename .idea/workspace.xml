@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update apps">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="open app">
+      <change afterPath="$PROJECT_DIR$/src/cdn/css/markdown.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/apps/[id]/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/activity/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/activity/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/about.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +63,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/common" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/apps/[id]" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="/usr/local/bin/node" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
@@ -67,11 +76,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/apps/[id]" />
+      <recent name="$PROJECT_DIR$/src/components/common/dashboard" />
       <recent name="$PROJECT_DIR$/src/components/common" />
       <recent name="$PROJECT_DIR$/src/components/common/pageHeader" />
-      <recent name="$PROJECT_DIR$/src/components/common/dashboard" />
       <recent name="$PROJECT_DIR$/src/redux" />
-      <recent name="$PROJECT_DIR$" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/pages/dashboard" />
@@ -268,14 +277,10 @@
       <workItem from="1672947344060" duration="2693000" />
       <workItem from="1672950075529" duration="19619000" />
       <workItem from="1673080481915" duration="8274000" />
-      <workItem from="1673107789823" duration="18515000" />
-    </task>
-    <task id="LOCAL-00430" summary="Landing page">
-      <created>1636449383832</created>
-      <option name="number" value="00430" />
-      <option name="presentableId" value="LOCAL-00430" />
-      <option name="project" value="LOCAL" />
-      <updated>1636449383838</updated>
+      <workItem from="1673107789823" duration="19135000" />
+      <workItem from="1673339913092" duration="2604000" />
+      <workItem from="1674235878794" duration="603000" />
+      <workItem from="1674297068053" duration="7887000" />
     </task>
     <task id="LOCAL-00431" summary="Landing page">
       <created>1636457921354</created>
@@ -613,7 +618,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673181825294</updated>
     </task>
-    <option name="localTasksCounter" value="479" />
+    <task id="LOCAL-00479" summary="open app">
+      <created>1673182454910</created>
+      <option name="number" value="00479" />
+      <option name="presentableId" value="LOCAL-00479" />
+      <option name="project" value="LOCAL" />
+      <updated>1673182454910</updated>
+    </task>
+    <option name="localTasksCounter" value="480" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -638,7 +650,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Sync bank" />
     <MESSAGE value="Vendors" />
     <MESSAGE value="Add bank loading notification" />
     <MESSAGE value="Okra" />
@@ -663,7 +674,8 @@
     <MESSAGE value="orientation" />
     <MESSAGE value="update login" />
     <MESSAGE value="update apps" />
-    <option name="LAST_COMMIT_MESSAGE" value="update apps" />
+    <MESSAGE value="open app" />
+    <option name="LAST_COMMIT_MESSAGE" value="open app" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

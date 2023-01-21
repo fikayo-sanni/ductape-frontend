@@ -33,14 +33,16 @@ const { darkAlgorithm } = theme;
 
 const TopNav = dynamic(() => import('../../components/common/dashboard/topNav'));
 const LowerNav = dynamic(() => import('../../components/common/dashboard/lowerNav'));
+const AppNav = dynamic(() => import('../../components/common/dashboard/appNav'));
 
 interface Props {
     children: any;
     showSidebar?: boolean;
     title: string;
+    appPage?: string;
 }
 
-const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', showSidebar = false }) => {
+const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', showSidebar = false, appPage }) => {
     const { user, currentTheme, darkMode, isAuthenticated } = useSelector((state: RootState) => state.app);
     const dispatch = useDispatch();
 
@@ -96,11 +98,16 @@ const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', show
                         {showSidebar && (
                             <Affix offsetTop={45}>
                                 <Layout.Sider
-                                    className="dashboard_sidebar"
+                                    className=""
                                     trigger={null}
                                     breakpoint={'md'}
                                     width={300}
                                     style={{
+                                        background: currentTheme.colorBgBase,
+                                        borderColor: !darkMode ? 'rgba(5, 5, 5, 0.06)' : currentTheme.colorBorder,
+                                        borderRight: !darkMode
+                                            ? '1px solid rgba(5, 5, 5, 0.06)'
+                                            : `1px solid ${currentTheme.colorBorder}`,
                                         paddingTop: -0,
                                         overflowY: 'auto',
                                         overflowX: 'hidden',
@@ -108,7 +115,7 @@ const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', show
                                         left: 0,
                                     }}
                                 >
-                                    hello
+                                    <AppNav appPage={appPage} />
                                 </Layout.Sider>
                             </Affix>
                         )}

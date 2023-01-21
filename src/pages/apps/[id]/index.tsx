@@ -12,7 +12,7 @@ const Index = (props) => {
     const [html, setHTML] = useState('');
 
     return (
-        <Dashboard_Layout showSidebar={true} title="Apps">
+        <Dashboard_Layout showSidebar={true} title="Apps" appPage="My App">
             <Overview app_id={app_id} defaultText={text} defaultHTML={html} />
         </Dashboard_Layout>
     );

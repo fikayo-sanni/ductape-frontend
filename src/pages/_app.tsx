@@ -4,6 +4,8 @@ import '../../public/fontawesome-free-5.15.3-web/css/all.css';
 import '../cdn/css/animate.min.css';
 import 'antd/dist/reset.css';
 import '../cdn/css/style.css';
+import '@uiw/react-md-editor/markdown-editor.css';
+import '../cdn/css/markdown.css';
 import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import NProgress from 'nprogress';

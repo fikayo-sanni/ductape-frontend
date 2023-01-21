@@ -10,7 +10,7 @@ interface Props {
 
 export const PageHeader: React.FC<Props> = ({ title, extra }) => {
     return (
-        <Card className="rounded-0 py-2">
+        <Card className="rounded-0 border-top-0 border-start-0 border-end-0 py-2">
             <div className="container d-flex flex-row justify-content-between align-items-center">
                 <Title className="mb-0" level={2}>
                     {title}
