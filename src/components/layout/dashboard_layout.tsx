@@ -15,9 +15,6 @@ import {
     theme,
     Typography,
 } from 'antd';
-import Sidebar from '../common/dashboard/sidebar';
-import FullHeader from '../common/dashboard/full_header';
-import { observer } from 'mobx-react-lite';
 import { RootState } from '../../redux/store';
 import { Logo } from '../config/constant';
 import { useDispatch, useSelector } from 'react-redux';

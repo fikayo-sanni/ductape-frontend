@@ -40,8 +40,10 @@ const App = ({ Component, pageProps }) => {
                 <Component {...pageProps} />
             )}
             <Toaster
-                // duration={5000}
-                position="top-center"
+                toastOptions={{
+                    duration: 5000,
+                }}
+                position="bottom-left"
                 reverseOrder={false}
                 containerStyle={{ zIndex: 99999999999 }}
             />

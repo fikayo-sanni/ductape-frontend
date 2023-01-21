@@ -3,8 +3,11 @@ import Overview from '../../../components/apps/app/overview';
 import { setCurrentApp } from '../../../redux/applicationSlice';
 import React, { useState } from 'react';
 import PageHeader from '../../../components/common/pageHeader';
+import dynamic from 'next/dynamic';
 
-const Index = (props) => {
+const AppInfo = dynamic(() => import('../../../components/app/appInfo'));
+
+const About = (props) => {
     const { app_id } = props;
 
     //alert(JSON.stringify(props));
@@ -16,9 +19,9 @@ const Index = (props) => {
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="About">
             <PageHeader title="App Info." />
 
-            <Overview app_id={app_id} defaultText={text} defaultHTML={html} />
+            <AppInfo />
         </Dashboard_Layout>
     );
 };
 
-export default Index;
+export default About;
