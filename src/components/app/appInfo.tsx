@@ -1,19 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import {
-    Avatar,
-    Typography,
-    Card,
-    Divider,
-    Dropdown,
-    Layout,
-    Menu,
-    MenuProps,
-    Space,
-    Breadcrumb,
-    Button,
-    Result,
-} from 'antd';
+import { Avatar, Typography, Button, Result } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';

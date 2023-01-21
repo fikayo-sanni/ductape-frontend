@@ -1,21 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="app design">
-      <change afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="app info page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/apps/app/overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/full_header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/header.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/inner_sidebar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/menus.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/sidebar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/about.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/about.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,14 +271,7 @@
       <workItem from="1673107789823" duration="19135000" />
       <workItem from="1673339913092" duration="2604000" />
       <workItem from="1674235878794" duration="603000" />
-      <workItem from="1674297068053" duration="16208000" />
-    </task>
-    <task id="LOCAL-00432" summary="Landing page">
-      <created>1636460727842</created>
-      <option name="number" value="00432" />
-      <option name="presentableId" value="LOCAL-00432" />
-      <option name="project" value="LOCAL" />
-      <updated>1636460727843</updated>
+      <workItem from="1674297068053" duration="19732000" />
     </task>
     <task id="LOCAL-00433" summary="Create organization">
       <created>1636467998005</created>
@@ -626,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674306308317</updated>
     </task>
-    <option name="localTasksCounter" value="481" />
+    <task id="LOCAL-00481" summary="app info page">
+      <created>1674319337021</created>
+      <option name="number" value="00481" />
+      <option name="presentableId" value="LOCAL-00481" />
+      <option name="project" value="LOCAL" />
+      <updated>1674319337021</updated>
+    </task>
+    <option name="localTasksCounter" value="482" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,7 +641,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Add bank loading notification" />
     <MESSAGE value="Okra" />
     <MESSAGE value="okra update" />
     <MESSAGE value="transactions" />
@@ -676,7 +665,8 @@
     <MESSAGE value="update apps" />
     <MESSAGE value="open app" />
     <MESSAGE value="app design" />
-    <option name="LAST_COMMIT_MESSAGE" value="app design" />
+    <MESSAGE value="app info page" />
+    <option name="LAST_COMMIT_MESSAGE" value="app info page" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
