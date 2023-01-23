@@ -47,7 +47,7 @@ const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', show
         if (isAuthenticated === false) {
             Router.replace('/');
         }
-    }, [isAuthenticated]);
+    }, []);
 
     return (
         <ConfigProvider
@@ -101,10 +101,9 @@ const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', show
                                     width={300}
                                     style={{
                                         background: currentTheme.colorBgBase,
-                                        borderColor: !darkMode ? 'rgba(5, 5, 5, 0.06)' : currentTheme.colorBorder,
                                         borderRight: !darkMode
                                             ? '1px solid rgba(5, 5, 5, 0.06)'
-                                            : `1px solid ${currentTheme.colorBorder}`,
+                                            : `1px solid rgba(48, 48, 48)`,
                                         paddingTop: -0,
                                         overflowY: 'auto',
                                         overflowX: 'hidden',

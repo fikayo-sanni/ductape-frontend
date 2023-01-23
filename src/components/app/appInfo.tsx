@@ -59,10 +59,10 @@ export const AppInfo: React.FC<Props> = ({}) => {
         <div className="padding_20">
             <div className="d-flex mb-3 justify-content-between">
                 <div>
-                    <Title level={3} className="mb-0">
+                    <Title level={4} className="mb-0">
                         Readme
                     </Title>
-                    <Text>Tell us about your app, what it does, and how to use it</Text>
+                    <Text type="secondary">Tell us about your app, what it does, and how to use it</Text>
                 </div>
                 <div>
                     <Button onClick={() => toggleEdit()}>
@@ -85,7 +85,6 @@ export const AppInfo: React.FC<Props> = ({}) => {
                     value={dApp.aboutHTML}
                     onChange={(value) => {
                         setDApp({ ...dApp, aboutHTML: value });
-                        console.log(value);
                     }}
                 />
             ) : (
@@ -94,10 +93,10 @@ export const AppInfo: React.FC<Props> = ({}) => {
 
             <div className="d-flex mb-3 mt-5 justify-content-between">
                 <div>
-                    <Title level={3} className="mb-0">
+                    <Title level={4} className="mb-0">
                         FAQ
                     </Title>
-                    <Text>Frequently asked questions about your app</Text>
+                    <Text type="secondary">Frequently asked questions about your app</Text>
                 </div>
             </div>
             <Result

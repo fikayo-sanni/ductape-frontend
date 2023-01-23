@@ -48,7 +48,7 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
                         <a href="">Apps</a>
                     </Breadcrumb.Item>
                 </Breadcrumb>
-                <Title className="mb-1 p-0" level={3}>
+                <Title className="mb-1 p-0 mt-2" level={4}>
                     {app.app_name}
                 </Title>
                 <Link href="/apps">
@@ -86,8 +86,8 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
             </Divider>
 
             <Menu.ItemGroup key="management_area">
-                <Menu.Item key="Beneficiaries" icon={<AppstoreAddOutlined style={{ width: 20 }} />}>
-                    <Link href="/swiftmoney/user/beneficiaries">
+                <Menu.Item key="Environments" icon={<AppstoreAddOutlined style={{ width: 20 }} />}>
+                    <Link href={`/apps/${app._id}/environments`}>
                         <a>Environments</a>
                     </Link>
                 </Menu.Item>

@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="app info page">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="dashboard design">
+      <change afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashboard/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/environments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +59,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/apps/[id]" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/app" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="/usr/local/bin/node" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
@@ -67,11 +72,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/app" />
       <recent name="$PROJECT_DIR$/src/pages/apps/[id]" />
       <recent name="$PROJECT_DIR$/src/components/common/dashboard" />
       <recent name="$PROJECT_DIR$/src/components/common" />
       <recent name="$PROJECT_DIR$/src/components/common/pageHeader" />
-      <recent name="$PROJECT_DIR$/src/redux" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/pages/dashboard" />
@@ -271,14 +276,8 @@
       <workItem from="1673107789823" duration="19135000" />
       <workItem from="1673339913092" duration="2604000" />
       <workItem from="1674235878794" duration="603000" />
-      <workItem from="1674297068053" duration="19732000" />
-    </task>
-    <task id="LOCAL-00433" summary="Create organization">
-      <created>1636467998005</created>
-      <option name="number" value="00433" />
-      <option name="presentableId" value="LOCAL-00433" />
-      <option name="project" value="LOCAL" />
-      <updated>1636467998006</updated>
+      <workItem from="1674297068053" duration="26223000" />
+      <workItem from="1674400168021" duration="6391000" />
     </task>
     <task id="LOCAL-00434" summary="Create organization and login">
       <created>1636496567347</created>
@@ -616,7 +615,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674319337021</updated>
     </task>
-    <option name="localTasksCounter" value="482" />
+    <task id="LOCAL-00482" summary="dashboard design">
+      <created>1674334808030</created>
+      <option name="number" value="00482" />
+      <option name="presentableId" value="LOCAL-00482" />
+      <option name="project" value="LOCAL" />
+      <updated>1674334808030</updated>
+    </task>
+    <option name="localTasksCounter" value="483" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -641,7 +647,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Okra" />
     <MESSAGE value="okra update" />
     <MESSAGE value="transactions" />
     <MESSAGE value="initial commit" />
@@ -666,7 +671,8 @@
     <MESSAGE value="open app" />
     <MESSAGE value="app design" />
     <MESSAGE value="app info page" />
-    <option name="LAST_COMMIT_MESSAGE" value="app info page" />
+    <MESSAGE value="dashboard design" />
+    <option name="LAST_COMMIT_MESSAGE" value="dashboard design" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
