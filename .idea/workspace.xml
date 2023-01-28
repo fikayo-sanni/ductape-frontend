@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -271,14 +270,7 @@
       <workItem from="1674235878794" duration="603000" />
       <workItem from="1674297068053" duration="26223000" />
       <workItem from="1674400168021" duration="6406000" />
-      <workItem from="1674893420643" duration="3785000" />
-    </task>
-    <task id="LOCAL-00438" summary="Create organization and login">
-      <created>1636544958830</created>
-      <option name="number" value="00438" />
-      <option name="presentableId" value="LOCAL-00438" />
-      <option name="project" value="LOCAL" />
-      <updated>1636544958831</updated>
+      <workItem from="1674893420643" duration="3853000" />
     </task>
     <task id="LOCAL-00439" summary="Create organization and login">
       <created>1636630541554</created>
@@ -616,7 +608,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674897169119</updated>
     </task>
-    <option name="localTasksCounter" value="487" />
+    <task id="LOCAL-00487" summary="update">
+      <created>1674897218237</created>
+      <option name="number" value="00487" />
+      <option name="presentableId" value="LOCAL-00487" />
+      <option name="project" value="LOCAL" />
+      <updated>1674897218237</updated>
+    </task>
+    <option name="localTasksCounter" value="488" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
