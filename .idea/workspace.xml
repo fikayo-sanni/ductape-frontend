@@ -3,13 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/lowerNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/lowerNav/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -278,14 +272,7 @@
       <workItem from="1674235878794" duration="603000" />
       <workItem from="1674297068053" duration="26223000" />
       <workItem from="1674400168021" duration="6406000" />
-      <workItem from="1674893420643" duration="1283000" />
-    </task>
-    <task id="LOCAL-00435" summary="Create organization and login">
-      <created>1636501514594</created>
-      <option name="number" value="00435" />
-      <option name="presentableId" value="LOCAL-00435" />
-      <option name="project" value="LOCAL" />
-      <updated>1636501514597</updated>
+      <workItem from="1674893420643" duration="2700000" />
     </task>
     <task id="LOCAL-00436" summary="Create organization and login">
       <created>1636532787341</created>
@@ -623,7 +610,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674459404024</updated>
     </task>
-    <option name="localTasksCounter" value="484" />
+    <task id="LOCAL-00484" summary="update">
+      <created>1674894798079</created>
+      <option name="number" value="00484" />
+      <option name="presentableId" value="LOCAL-00484" />
+      <option name="project" value="LOCAL" />
+      <updated>1674894798079</updated>
+    </task>
+    <option name="localTasksCounter" value="485" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
