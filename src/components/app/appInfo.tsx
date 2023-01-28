@@ -79,17 +79,17 @@ export const AppInfo: React.FC<Props> = ({}) => {
                 </div>
             </div>
 
-            {/*{edit ? (*/}
-            {/*    <MDEditor*/}
-            {/*        className="p-3"*/}
-            {/*        value={dApp.aboutHTML}*/}
-            {/*        onChange={(value) => {*/}
-            {/*            setDApp({ ...dApp, aboutHTML: value });*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*) : (*/}
-            {/*    <MDEditor.Markdown className="p-3" source={dApp.aboutHTML} style={{ whiteSpace: 'pre-wrap' }} />*/}
-            {/*)}*/}
+            {edit ? (
+                <MDEditor
+                    className="p-3"
+                    value={dApp.aboutHTML}
+                    onChange={(value) => {
+                        setDApp({ ...dApp, aboutHTML: value });
+                    }}
+                />
+            ) : (
+                <MDEditor.Markdown className="p-3" source={dApp.aboutHTML} style={{ whiteSpace: 'pre-wrap' }} />
+            )}
 
             <div className="d-flex mb-3 mt-5 justify-content-between">
                 <div>

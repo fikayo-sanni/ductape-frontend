@@ -100,7 +100,7 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
                 onCancel={() => setIsVisible(false)}
             >
                 <div className="row mb-4">
-                    <div className="col-sm-6">
+                    <div className="col-sm-4">
                         <Card>
                             <Statistic
                                 title={<Text className="font-weight-500 text-uppercase">Requests Received</Text>}
@@ -110,7 +110,17 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
                         </Card>
                     </div>
 
-                    <div className="col-sm-6">
+                    <div className="col-sm-4">
+                        <Card>
+                            <Statistic
+                                title={<Text className="font-weight-500 text-uppercase">Latency</Text>}
+                                value={'0ms'}
+                                //formatter={formatter}
+                            />
+                        </Card>
+                    </div>
+
+                    <div className="col-sm-4">
                         <Card>
                             <Statistic
                                 title={<Text className="font-weight-500 text-uppercase">Requests Sent</Text>}
@@ -146,11 +156,6 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
                             ),
                             description: 'Activate to receive requests',
                             value: <Switch checked={currentEnv.active} />,
-                        },
-                        {
-                            title: 'Latency',
-                            description: 'Average Time Per Request',
-                            value: '0ms',
                         },
                     ]}
                     renderItem={(item) => (
