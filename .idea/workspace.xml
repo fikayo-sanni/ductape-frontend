@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -274,14 +271,7 @@
       <workItem from="1674235878794" duration="603000" />
       <workItem from="1674297068053" duration="26223000" />
       <workItem from="1674400168021" duration="6406000" />
-      <workItem from="1674893420643" duration="3736000" />
-    </task>
-    <task id="LOCAL-00437" summary="Create organization and login">
-      <created>1636537501264</created>
-      <option name="number" value="00437" />
-      <option name="presentableId" value="LOCAL-00437" />
-      <option name="project" value="LOCAL" />
-      <updated>1636537501264</updated>
+      <workItem from="1674893420643" duration="3785000" />
     </task>
     <task id="LOCAL-00438" summary="Create organization and login">
       <created>1636544958830</created>
@@ -619,7 +609,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674896130046</updated>
     </task>
-    <option name="localTasksCounter" value="486" />
+    <task id="LOCAL-00486" summary="update">
+      <created>1674897169119</created>
+      <option name="number" value="00486" />
+      <option name="presentableId" value="LOCAL-00486" />
+      <option name="project" value="LOCAL" />
+      <updated>1674897169119</updated>
+    </task>
+    <option name="localTasksCounter" value="487" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

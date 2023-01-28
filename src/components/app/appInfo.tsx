@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import { setCurrentWorkspace, logoutUser } from '../../redux/applicationSlice';
 import dynamic from 'next/dynamic';
-// import MDEditor from '@uiw/react-md-editor';
+import MDEditor from '@uiw/react-md-editor';
 import { EditOutlined, SaveOutlined } from '@ant-design/icons';
 import NProgress from 'nprogress';
 import { updateApp } from '../services/apps.service';
