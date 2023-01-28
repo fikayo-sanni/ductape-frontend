@@ -69,7 +69,7 @@ export const TopNav: React.FC = () => {
     useEffect(() => {}, []);
 
     return (
-        <Card className="rounded-0 border-start-0 border-end-0" size="small">
+        <Card className="rounded-0 border-start-0 border-end-0 m-0" size="small">
             <Space size={20} className="d-flex align-items-center justify-content-between w-100 flex-row">
                 <div className="d-flex flex-row gap-4">
                     <div style={{ height: 30, overflow: 'hidden' }}>

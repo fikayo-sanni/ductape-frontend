@@ -54,7 +54,7 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
     return loading ? (
         <Loading />
     ) : (
-        <div className="padding_20">
+        <div className="container py-5">
             <Text>Showing {app.envs.length.toLocaleString()} environment(s)</Text>
             <Table
                 onRow={(record, rowIndex) => {

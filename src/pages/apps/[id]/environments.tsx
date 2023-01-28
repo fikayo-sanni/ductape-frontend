@@ -2,29 +2,31 @@ import React, { useState } from 'react';
 import Dashboard_Layout from '../../../components/layout/dashboard_layout';
 import PageHeader from '../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
-import { Button, Modal, Typography } from 'antd';
+import { Button, Card, Modal, Typography } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 
 const AppEnvironments = dynamic(() => import('../../../components/app/environments'));
 
 const Environments = () => {
-    const [visible, setVisible] = useState(false);
-
-    const handleClick = () => {
-        setVisible(!visible);
-    };
+    const [visible, setVisible] = useState(true);
 
     return (
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="Environments">
-            <PageHeader
-                title="Environments"
-                handleClick={handleClick}
-                extra={
-                    <>
-                        <PlusCircleOutlined /> Create Environment
-                    </>
-                }
-            />
+            <Card className="rounded-0 border-top-0 border-start-0 border-end-0 py-2">
+                <div className="container d-flex flex-row justify-content-between align-items-center">
+                    <Typography.Title className="mb-0" level={2}>
+                        Environments
+                    </Typography.Title>
+
+                    <div className="title_extra">
+                        dd
+                        <Button onClick={() => setVisible(true)}>
+                            <PlusCircleOutlined /> Create Environment
+                        </Button>
+                    </div>
+                </div>
+            </Card>
+
             <AppEnvironments />
 
             <Modal

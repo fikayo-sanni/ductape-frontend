@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="dashboard design">
-      <change afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/lowerNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/lowerNav/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/topNav/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/environments.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -277,14 +277,8 @@
       <workItem from="1673339913092" duration="2604000" />
       <workItem from="1674235878794" duration="603000" />
       <workItem from="1674297068053" duration="26223000" />
-      <workItem from="1674400168021" duration="6391000" />
-    </task>
-    <task id="LOCAL-00434" summary="Create organization and login">
-      <created>1636496567347</created>
-      <option name="number" value="00434" />
-      <option name="presentableId" value="LOCAL-00434" />
-      <option name="project" value="LOCAL" />
-      <updated>1636496567350</updated>
+      <workItem from="1674400168021" duration="6406000" />
+      <workItem from="1674893420643" duration="1283000" />
     </task>
     <task id="LOCAL-00435" summary="Create organization and login">
       <created>1636501514594</created>
@@ -622,7 +616,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674334808030</updated>
     </task>
-    <option name="localTasksCounter" value="483" />
+    <task id="LOCAL-00483" summary="update">
+      <created>1674459404023</created>
+      <option name="number" value="00483" />
+      <option name="presentableId" value="LOCAL-00483" />
+      <option name="project" value="LOCAL" />
+      <updated>1674459404024</updated>
+    </task>
+    <option name="localTasksCounter" value="484" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -647,7 +648,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="okra update" />
     <MESSAGE value="transactions" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="initial commit 2" />
@@ -672,7 +672,8 @@
     <MESSAGE value="app design" />
     <MESSAGE value="app info page" />
     <MESSAGE value="dashboard design" />
-    <option name="LAST_COMMIT_MESSAGE" value="dashboard design" />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

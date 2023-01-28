@@ -82,11 +82,11 @@ const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', show
                 />
 
                 <body className="">
-                    <Layout className="site-layout position-relative" style={{ minHeight: '6vh' }}>
+                    <Layout className="site-layout position-relative">
                         <TopNav />
                     </Layout>
                     <Affix offsetTop={0}>
-                        <Layout className="sticky-top site-layout " style={{ minHeight: '5vh', overflow: 'hidden' }}>
+                        <Layout className="sticky-top site-layout " style={{ overflow: 'hidden' }}>
                             <LowerNav pageTitle={title} />
                         </Layout>
                     </Affix>

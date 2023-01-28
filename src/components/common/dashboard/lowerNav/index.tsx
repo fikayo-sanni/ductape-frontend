@@ -66,7 +66,7 @@ export const LowerNav: React.FC<Props> = ({ pageTitle, className }) => {
     ];
 
     return (
-        <div className="rounded-0 p-0 ">
+        <div className="rounded-0 p-0 m-0">
             <Menu onClick={(e) => setCurrentMenu(e.key)} selectedKeys={[currentMenu]} mode="horizontal" items={items} />
         </div>
     );
