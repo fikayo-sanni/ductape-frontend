@@ -7,7 +7,7 @@ import dynamic from 'next/dynamic';
 import CountUp from 'react-countup';
 import { EditOutlined } from '@ant-design/icons';
 
-const { Text, Title } = Typography;
+const { Text, Title, Paragraph } = Typography;
 
 interface Props {}
 
@@ -131,31 +131,30 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
                     </div>
                 </div>
 
+                <Paragraph className="my-4">{currentEnv.description}</Paragraph>
+
                 <List
                     size="small"
                     header={
                         <div className="font-weight-700 d-flex justify-content-between">
                             Activation
-                            <Button type="primary" size="small">
-                                <EditOutlined /> Edit
-                            </Button>
+                            <Link href={`/apps/current/env/${currentEnv._id}`}>
+                                <Button type="primary" size="small">
+                                    <EditOutlined /> Edit
+                                </Button>
+                            </Link>
                         </div>
                     }
                     bordered
                     dataSource={[
                         {
-                            title: (
-                                <div>
-                                    Status{' '}
-                                    {currentEnv.active ? (
-                                        <Tag color="green">Active</Tag>
-                                    ) : (
-                                        <Tag color="red">Inactive</Tag>
-                                    )}
-                                </div>
-                            ),
+                            title: <div>Status</div>,
                             description: 'Activate to receive requests',
-                            value: <Switch checked={currentEnv.active} />,
+                            value: currentEnv.active ? (
+                                <Tag color="green">Active</Tag>
+                            ) : (
+                                <Tag color="red">Inactive</Tag>
+                            ),
                         },
                     ]}
                     renderItem={(item) => (
@@ -172,9 +171,11 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
                     header={
                         <div className="font-weight-700 d-flex justify-content-between">
                             General
-                            <Button type="primary" size="small">
-                                <EditOutlined /> Edit
-                            </Button>
+                            <Link href={`/apps/current/env/${currentEnv._id}`}>
+                                <Button type="primary" size="small">
+                                    <EditOutlined /> Edit
+                                </Button>
+                            </Link>
                         </div>
                     }
                     bordered
@@ -182,22 +183,17 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
                         {
                             title: 'Base URL',
                             description: 'Base URL for all endpoints in this environment',
-                            value: currentEnv.base_url,
+                            value: currentEnv.base_url ?? 'N/A',
                         },
                         {
                             title: 'Content Type',
                             description: 'Default content type',
-                            value: currentEnv.request_type,
+                            value: currentEnv.request_type ?? 'N/A',
                         },
                         {
-                            title: 'Default Live Environment',
-                            description: 'Is this your production environment?',
-                            value: <Switch checked={currentEnv.default_prod} />,
-                        },
-                        {
-                            title: 'Default Sandbox Environment',
-                            description: 'Is this your sandbox environment?',
-                            value: <Switch checked={currentEnv.default_sandbox} />,
+                            title: 'Whitelist',
+                            description: null,
+                            value: currentEnv.whitelist ? <Tag color="green">Yes</Tag> : <Tag color="red">No</Tag>,
                         },
                     ]}
                     renderItem={(item) => (
@@ -214,9 +210,11 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
                     header={
                         <div className="font-weight-700 d-flex justify-content-between">
                             Pricing
-                            <Button type="primary" size="small">
-                                <EditOutlined /> Edit
-                            </Button>
+                            <Link href={`/apps/current/env/${currentEnv._id}`}>
+                                <Button type="primary" size="small">
+                                    <EditOutlined /> Edit
+                                </Button>
+                            </Link>
                         </div>
                     }
                     bordered

@@ -20,7 +20,7 @@ const AppDisplay: React.FC<Props> = ({ app, orientation = 'grid' }) => {
 
     const openApp = async (app) => {
         await dispatch(setCurrentApp(app));
-        Router.push(`/apps/${app._id}`);
+        Router.push(`/apps/current`);
     };
 
     return orientation === 'grid' ? (

@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
-import Dashboard_Layout from '../../../components/layout/dashboard_layout';
-import PageHeader from '../../../components/common/pageHeader';
+import Dashboard_Layout from '../../../../components/layout/dashboard_layout';
+import PageHeader from '../../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
 import { Button, Input, Modal, Typography } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import NProgress from 'nprogress';
-import { createAppEnv } from '../../../components/services/apps.service';
+import { createAppEnv, fetchApp } from '../../../../components/services/apps.service';
 import toast from 'react-hot-toast';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../../redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../../redux/store';
+import { slug } from 'github-slugger';
+import { setCurrentApp } from '../../../../redux/applicationSlice';
 
 const { Title, Text } = Typography;
-const AppEnvironments = dynamic(() => import('../../../components/app/environments'));
+const AppEnvironments = dynamic(() => import('../../../../components/app/environments'));
 
 const Environments = () => {
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
+    const dispatch = useDispatch();
     const [visible, setVisible] = useState(false);
     const [newEnv, setNewEnv] = useState({
-        name: '',
+        env_name: '',
+        slug: '',
         description: '',
     });
 
@@ -25,16 +29,26 @@ const Environments = () => {
         setVisible(!visible);
     };
 
-    const handleChange = (e) => {
-        setNewEnv({ ...newEnv, [e.target.name]: e.target.value });
+    const handleChange = async (e) => {
+        let value = e.target.value;
+
+        if (e.target.name === 'slug') {
+            value = slug(e.target.value);
+        }
+
+        await setNewEnv({ ...newEnv, [e.target.name]: value });
     };
 
-    const createApp = async () => {
-        toast.loading('Creating environment');
+    const createEnv = async () => {
         try {
-            const { auth_token: token, _id: user_id, public_key } = user;
-            const create = await createAppEnv({
-                ...env,
+            if (!newEnv.env_name.trim() || !newEnv.slug.trim() || !newEnv.description.trim()) {
+                toast.error('Fill in all details');
+                return true;
+            }
+            toast.loading('Creating environment');
+
+            await createAppEnv({
+                ...newEnv,
                 token: user.auth_token,
                 user_id: user._id,
                 public_key: user.public_key,
@@ -42,18 +56,24 @@ const Environments = () => {
                 workspace_id: defaultWorkspaceId,
             });
 
-            toast.success('Env Created');
-            setLoading(false);
-            refreshEnvs(create.data.data);
-            closeCreateDialog();
-            NProgress.done();
+            const appDetails = await fetchApp({
+                token: user.auth_token,
+                user_id: user._id,
+                public_key: user.public_key,
+                app_id: app._id,
+                workspace_id: defaultWorkspaceId,
+            });
+
+            dispatch(setCurrentApp(appDetails.data.data));
+
+            toast.success('Environment Created');
+
+            setNewEnv({ env_name: '', slug: '', description: '' });
+            setVisible(false);
         } catch (e) {
-            NProgress.done();
-            setLoading(false);
             const error = e.response ? e.response.data.errors : e.toString();
             toast.error(error || e.toString());
         }
-        // closeCreateDialog();
     };
 
     return (
@@ -84,12 +104,12 @@ const Environments = () => {
             >
                 <div className="mb-3">
                     <label>Name</label>
-                    <Input value={newEnv.name} name="name" onChange={handleChange} />
+                    <Input value={newEnv.env_name} name="env_name" onChange={handleChange} />
                 </div>
 
                 <div className="mb-3">
                     <label>Slug</label>
-                    <Input value={newEnv.name} />
+                    <Input value={newEnv.slug} maxLength={3} name="slug" onChange={handleChange} />
                 </div>
 
                 <div className="mb-3">
@@ -97,7 +117,9 @@ const Environments = () => {
                     <Input.TextArea value={newEnv.description} name="description" onChange={handleChange} rows={3} />
                 </div>
 
-                <Button type="primary">Create</Button>
+                <Button onClick={() => createEnv()} type="primary">
+                    Create
+                </Button>
             </Modal>
         </Dashboard_Layout>
     );

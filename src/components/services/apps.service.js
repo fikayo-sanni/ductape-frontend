@@ -72,6 +72,19 @@ export const fetchApp = async (payload) => {
     }
 };
 
+export const fetchAppEnv = async (payload) => {
+    try {
+        const { token, user_id, public_key, env_id } = payload;
+
+        const URL = Parameterize(ENV_UPDATE_URL, ':env_id', env_id);
+        return appsClient(`Bearer ${token}`, 'application/json').get(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+        );
+    } catch (e) {
+        throw e;
+    }
+};
+
 export const updateAppEnv = async (payload) => {
     try {
         const { token, env_id } = payload;

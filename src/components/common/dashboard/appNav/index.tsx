@@ -66,16 +66,16 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
 
             <Menu.ItemGroup key="preference_area">
                 <Menu.Item key="My App" icon={<DashboardOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/${app._id}/`}>My App</Link>
+                    <Link href={`/apps/current/`}>My App</Link>
                 </Menu.Item>
                 <Menu.Item key="Dashboard" icon={<CheckOutlined style={{ width: 20 }} />}>
-                    <Link href="/swiftmoney/user/">Get Started</Link>
+                    <Link href="/apps/current/get-started">Get Started</Link>
                 </Menu.Item>
                 <Menu.Item key="About" icon={<InfoCircleOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/${app._id}/about`}>App Information</Link>
+                    <Link href={`/apps/current/about`}>App Information</Link>
                 </Menu.Item>
                 <Menu.Item key="Publish" icon={<InfoCircleOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/${app._id}/about`}>Publish</Link>
+                    <Link href={`/apps/current/about`}>Publish</Link>
                 </Menu.Item>
             </Menu.ItemGroup>
 
@@ -87,7 +87,7 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
 
             <Menu.ItemGroup key="management_area">
                 <Menu.Item key="Environments" icon={<AppstoreAddOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/${app._id}/environments`}>
+                    <Link href={`/apps/current/env`}>
                         <a>Environments</a>
                     </Link>
                 </Menu.Item>
