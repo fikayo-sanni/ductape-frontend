@@ -1,6 +1,5 @@
 import App_Layout from '../../../../components/layout/app_layout';
-import Overview from '../../../../components/apps/app/overview';
-import toast from 'react-hot-toast';
+
 import { useState } from 'react';
 
 const Index = () => {

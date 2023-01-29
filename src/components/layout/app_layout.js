@@ -1,172 +1,165 @@
-import Dashboard_Layout from "./dashboard_layout";
-import React, { useEffect, useState } from "react";
-import { Input, Breadcrumb, Menu } from "antd";
-import { toast } from "react-hot-toast";
-import Link from "next/link";
-import { observer } from "mobx-react-lite";
-import { fetchApp, updateAppEnv } from "../services/apps.service"; // "../../services/apps.service";
-import { capitalize, uniqueCheck, Loading } from "../config/constant";
+import Dashboard_Layout from './dashboard_layout';
+import React, { useEffect, useState } from 'react';
+import { Input, Breadcrumb, Menu } from 'antd';
+import { toast } from 'react-hot-toast';
+import Link from 'next/link';
+import { fetchApp, updateAppEnv } from '../services/apps.service'; // "../../services/apps.service";
+import { capitalize, uniqueCheck, Loading } from '../config/constant';
 
 // import style manually
-import "react-markdown-editor-lite/lib/index.css";
-import { useDispatch, useSelector } from "react-redux";
-import CreateActionModal from "../apps/createActionModal";
-import { changeSelectedApp } from "../../data/applicationSlice";
-import CreateSetupModal from "../apps/createSetupModal";
-import CreateWebhookModal from "../apps/createWebhookModal";
+import { useDispatch, useSelector } from 'react-redux';
+import CreateActionModal from '../apps/createActionModal';
+import { changeSelectedApp } from '../../data/applicationSlice';
+import CreateSetupModal from '../apps/createSetupModal';
+import CreateWebhookModal from '../apps/createWebhookModal';
 
 const { TextArea } = Input;
 
 const App_Layout = (props) => {
-  const dispatch = useDispatch();
-  const {
-    children,
-    selected,
-    setHTML,
-    setText,
-    setEnvs,
-    setSetupEnvsList,
-    setWebhooksList,
-    setWebhookEnvsList,
-    setSetupList,
-    setAppDomains,
-    setAuthList,
-    setCreateList,
-    createAction,
-    setCreateAction,
-    createSetup,
-    setCreateSetup,
-    createWebhooks,
-    setCreateWebhooks,
-    defaultActionType,
-    setUpdateList,
-    setDeleteList,
-  } = props;
-  const config = useSelector((state) => state.app);
-  const [app, setApp] = useState({});
-  const [error, setError] = useState();
-  const [selectedPage, setSelectedPage] = useState(selected);
-  //if(selected)alert(selected);
-  const { app_id } = props;
+    const dispatch = useDispatch();
+    const {
+        children,
+        selected,
+        setHTML,
+        setText,
+        setEnvs,
+        setSetupEnvsList,
+        setWebhooksList,
+        setWebhookEnvsList,
+        setSetupList,
+        setAppDomains,
+        setAuthList,
+        setCreateList,
+        createAction,
+        setCreateAction,
+        createSetup,
+        setCreateSetup,
+        createWebhooks,
+        setCreateWebhooks,
+        defaultActionType,
+        setUpdateList,
+        setDeleteList,
+    } = props;
+    const config = useSelector((state) => state.app);
+    const [app, setApp] = useState({});
+    const [error, setError] = useState();
+    const [selectedPage, setSelectedPage] = useState(selected);
+    //if(selected)alert(selected);
+    const { app_id } = props;
 
-  const fetchAppData = async () => {
-    const { auth_token: token, _id: user_id, public_key } = config.user;
-    const data = await fetchApp({
-      token,
-      user_id,
-      public_key,
-      app_id,
-    });
-    const app = data.data.data;
-    return app;
-  };
+    const fetchAppData = async () => {
+        const { auth_token: token, _id: user_id, public_key } = config.user;
+        const data = await fetchApp({
+            token,
+            user_id,
+            public_key,
+            app_id,
+        });
+        const app = data.data.data;
+        return app;
+    };
 
-  const categorizeActions = (actions) => {
-    const setupList = [],
-      authList = [],
-      createList = [],
-      readList = [],
-      updateList = [],
-      deleteList = [],
-      hooksList = [];
+    const categorizeActions = (actions) => {
+        const setupList = [],
+            authList = [],
+            createList = [],
+            readList = [],
+            updateList = [],
+            deleteList = [],
+            hooksList = [];
 
-    actions.map((data) => {
-      const { type } = data;
+        actions.map((data) => {
+            const { type } = data;
 
-      if (type === "AUTH") {
-        if (uniqueCheck(authList, data)) authList.push(data);
-        if (setAuthList) setAuthList(authList);
-      }
-      if (type === "CREATE") {
-        if (uniqueCheck(createList, data)) createList.push(data);
-        if (setCreateList) setCreateList(createList);
-      }
-      if (type === "READ") {
-        if (uniqueCheck(readList, data)) readList.push(data);
-        setReadList(readList);
-      }
-      if (type === "UPDATE") {
-        if (uniqueCheck(updateList, data)) updateList.push(data);
-        if (setReadList) setUpdateList(updateList);
-      }
-      if (type === "DELETE") {
-        if (uniqueCheck(deleteList, data)) deleteList.push(data);
-        if (setDeleteList) setDeleteList(deleteList);
-      }
-      if (type === "HOOKS") {
-        if (uniqueCheck(hooksList, data)) hooksList.push(data);
-        if (setDeleteList) setHooksList(hooksList);
-      }
-      //alert(setupList.length)
-    });
-  };
+            if (type === 'AUTH') {
+                if (uniqueCheck(authList, data)) authList.push(data);
+                if (setAuthList) setAuthList(authList);
+            }
+            if (type === 'CREATE') {
+                if (uniqueCheck(createList, data)) createList.push(data);
+                if (setCreateList) setCreateList(createList);
+            }
+            if (type === 'READ') {
+                if (uniqueCheck(readList, data)) readList.push(data);
+                setReadList(readList);
+            }
+            if (type === 'UPDATE') {
+                if (uniqueCheck(updateList, data)) updateList.push(data);
+                if (setReadList) setUpdateList(updateList);
+            }
+            if (type === 'DELETE') {
+                if (uniqueCheck(deleteList, data)) deleteList.push(data);
+                if (setDeleteList) setDeleteList(deleteList);
+            }
+            if (type === 'HOOKS') {
+                if (uniqueCheck(hooksList, data)) hooksList.push(data);
+                if (setDeleteList) setHooksList(hooksList);
+            }
+            //alert(setupList.length)
+        });
+    };
 
-  const setCreateActionDialog = (bool) => {
-    setCreateAction(bool);
-  };
+    const setCreateActionDialog = (bool) => {
+        setCreateAction(bool);
+    };
 
-  const setCreateSetupDialog = (bool) => {
-    setCreateSetup(bool);
-  };
+    const setCreateSetupDialog = (bool) => {
+        setCreateSetup(bool);
+    };
 
-  useEffect(async () => {
-    if (config.app && config.app._id === app_id) {
-      setApp(config.app);
-      categorizeActions(config.app.actions);
-      if (setSetupList) setSetupList(config.app.setups);
-      if (setSetupEnvsList) setSetupEnvsList(config.app.setups_envs);
-      if (setWebhooksList) setWebhooksList(config.app.webhooks);
-      if (setWebhookEnvsList) setWebhookEnvsList(config.app.webhooks_envs);
-      if (setEnvs) setEnvs(config.app.envs);
-      if (setHTML) setHTML(config.app.aboutHTML);
-      if (setText) setText(config.app.aboutText);
-      if (setAppDomains && config.app.domains && config.app.domains.length)
-        setAppDomains(config.app.domains);
-    } else {
-      try {
-        const app = await fetchAppData();
-        if (app.workspace_id === config.defaultWorkspaceId) {
-          setApp(app);
-          dispatch(changeSelectedApp(app));
-          categorizeActions(app.actions);
-          if (setEnvs) setEnvs(app.envs);
-          if (setSetupList) setSetupList(app.setups);
-          if (setSetupEnvsList) setSetupEnvsList(app.setups_envs);
-          if (setWebhookEnvsList) setWebhookEnvsList(app.webhooks_envs);
-          if (setWebhooksList) setWebhooksList(app.webhooks);
-          if (setHTML) setHTML(app.aboutHTML);
-          if (setText) setText(app.aboutText);
-          if (setAppDomains && app.domains && app.domains.length)
-            setAppDomains(app.domains);
+    useEffect(async () => {
+        if (config.app && config.app._id === app_id) {
+            setApp(config.app);
+            categorizeActions(config.app.actions);
+            if (setSetupList) setSetupList(config.app.setups);
+            if (setSetupEnvsList) setSetupEnvsList(config.app.setups_envs);
+            if (setWebhooksList) setWebhooksList(config.app.webhooks);
+            if (setWebhookEnvsList) setWebhookEnvsList(config.app.webhooks_envs);
+            if (setEnvs) setEnvs(config.app.envs);
+            if (setHTML) setHTML(config.app.aboutHTML);
+            if (setText) setText(config.app.aboutText);
+            if (setAppDomains && config.app.domains && config.app.domains.length) setAppDomains(config.app.domains);
         } else {
-          const error = "Access Denied";
-          setError(error);
+            try {
+                const app = await fetchAppData();
+                if (app.workspace_id === config.defaultWorkspaceId) {
+                    setApp(app);
+                    dispatch(changeSelectedApp(app));
+                    categorizeActions(app.actions);
+                    if (setEnvs) setEnvs(app.envs);
+                    if (setSetupList) setSetupList(app.setups);
+                    if (setSetupEnvsList) setSetupEnvsList(app.setups_envs);
+                    if (setWebhookEnvsList) setWebhookEnvsList(app.webhooks_envs);
+                    if (setWebhooksList) setWebhooksList(app.webhooks);
+                    if (setHTML) setHTML(app.aboutHTML);
+                    if (setText) setText(app.aboutText);
+                    if (setAppDomains && app.domains && app.domains.length) setAppDomains(app.domains);
+                } else {
+                    const error = 'Access Denied';
+                    setError(error);
+                }
+            } catch (e) {
+                //alert(JSON.stringify(e));
+                const error = e.response ? e.response.data.errors : e.toString();
+                toast.error(error || e.toString());
+                setError(error);
+            }
         }
-      } catch (e) {
-        //alert(JSON.stringify(e));
-        const error = e.response ? e.response.data.errors : e.toString();
-        toast.error(error || e.toString());
-        setError(error);
-      }
-    }
-  }, [app]);
+    }, [app]);
 
-  //alert(selected)
+    //alert(selected)
 
-  return (
-    <Dashboard_Layout title="App" type="app" id={app_id} info={app}>
+    return (
+        <Dashboard_Layout title="App" type="app" id={app_id} info={app}>
+            <section className="padding_10">
+                <div className="row">
+                    <div className="col-12">{children}</div>
+                </div>
+            </section>
+        </Dashboard_Layout>
+    );
 
-      <section className="padding_10">
-        <div className="row">
-          <div className="col-12">
-            {children}
-          </div>
-        </div>
-      </section>
-    </Dashboard_Layout>
-  );
-
-  /**return (
+    /**return (
     <Dashboard_layout title={capitalize(String(app.app_name)) || "App"}>
       <div className="padding_10"></div>
 

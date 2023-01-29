@@ -1,7 +1,5 @@
 import { Breadcrumb, Button, Card } from 'antd';
-import MdEditor from 'react-markdown-editor-lite';
 import dynamic from 'next/dynamic';
-import MarkdownIt from 'markdown-it';
 import {
     EditOutlined,
     FilterFilled,
@@ -13,13 +11,12 @@ import {
 import { changeSelectedApp } from '../../../data/applicationSlice';
 import { useEffect, useState } from 'react';
 import { Loading } from '../../config/constant';
-const mdParser = new MarkdownIt(/* Markdown-it options */);
+
 import ReactHtmlParser, { processNodes, convertNodeToElement, htmlparser2 } from 'react-html-parser';
 import { updateApp } from '../../services/apps.service';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import NProgress from 'nprogress';
-import MDEditor from '@uiw/react-md-editor';
 
 const Overview = (props) => {
     const { app_id, defaultHTML, defaultText } = props;
