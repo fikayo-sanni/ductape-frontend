@@ -18,10 +18,22 @@ import Loading from '../../../../../components/common/loading';
 const { Title, Text, Paragraph } = Typography;
 const AppEnvironments = dynamic(() => import('../../../../../components/app/environments'));
 
+interface Environment {
+    _id: string;
+    env_name: string;
+    slug: string;
+    base_url: string;
+    request_type: string;
+    payment_type: any;
+    description: string;
+    active: boolean;
+    whitelist: boolean;
+}
+
 const EditEnvironments = () => {
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
     const dispatch = useDispatch();
-    const [env, setEnv] = useState();
+    const [env, setEnv] = useState<Environment>();
     const [loading, setLoading] = useState(true);
     const envId = Router.query.id;
 

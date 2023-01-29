@@ -95,7 +95,9 @@ const Environments = () => {
                         <Typography.Title level={2} className="m-0 text-capitalize">
                             Create New Environment
                         </Typography.Title>
-                        <Text type="secondary text-uppercase">Environment</Text>
+                        <Text type="secondary" className="text-uppercase">
+                            Environment
+                        </Text>
                     </div>
                 }
                 open={visible}

@@ -4,7 +4,11 @@ import { setCurrentApp } from '../../../redux/applicationSlice';
 import { useState } from 'react';
 
 const Index = (props) => {
-    return <Dashboard_Layout showSidebar={true} title="Apps" appPage="My App"></Dashboard_Layout>;
+    return (
+        <Dashboard_Layout showSidebar={true} title="Apps" appPage="My App">
+            WELCOME
+        </Dashboard_Layout>
+    );
 };
 
 export default Index;

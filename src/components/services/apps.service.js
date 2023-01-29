@@ -10,6 +10,8 @@ import {
     SETUP_FETCH_URL,
     APP_SETUP_ENV_FETCH,
     DOMAINS_FETCH_URL,
+    APP_FAQ_CREATE,
+    APP_FAQ_UPDATE,
 } from '../config/urls';
 import { Parameterize } from '../config/constant';
 
@@ -110,6 +112,53 @@ export const createAppEnv = async (payload) => {
             slug,
             user_id,
         });
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const createAppFaq = async (payload) => {
+    try {
+        const { token, app_id, public_key, question, answer, user_id } = payload;
+
+        const URL = Parameterize(APP_FAQ_CREATE, ':app_id', app_id);
+        return appsClient(`Bearer ${token}`, 'application/json').post(URL, {
+            public_key,
+            question,
+            answer,
+            user_id,
+        });
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const updateAppFaq = async (payload) => {
+    try {
+        const { token, app_id, faq_id, public_key, question, answer, user_id } = payload;
+
+        let URL = Parameterize(APP_FAQ_UPDATE, ':app_id', app_id);
+        URL = Parameterize(URL, ':faq_id', faq_id);
+        return appsClient(`Bearer ${token}`, 'application/json').put(URL, {
+            public_key,
+            question,
+            answer,
+            user_id,
+        });
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const deleteAppFaq = async (payload) => {
+    try {
+        const { token, app_id, public_key, user_id, faq_id } = payload;
+
+        let URL = Parameterize(APP_FAQ_UPDATE, ':app_id', app_id);
+        URL = Parameterize(URL, ':faq_id', faq_id);
+        return appsClient(`Bearer ${token}`, 'application/json').delete(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+        );
     } catch (e) {
         throw e;
     }

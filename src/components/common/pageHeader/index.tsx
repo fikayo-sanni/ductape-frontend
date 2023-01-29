@@ -6,7 +6,7 @@ const { Title, Text, Paragraph } = Typography;
 interface Props {
     title: string;
     extra?: any;
-    handleClick: () => void;
+    handleClick?: () => void;
 }
 
 export const PageHeader: React.FC<Props> = ({ title, handleClick, extra }) => {
@@ -17,9 +17,7 @@ export const PageHeader: React.FC<Props> = ({ title, handleClick, extra }) => {
                     {title}
                 </Title>
 
-                <div className="title_extra">
-                    <Button onClick={handleClick}>{extra}</Button>
-                </div>
+                <div className="title_extra">{extra && <Button onClick={handleClick}>{extra}</Button>}</div>
             </div>
         </Card>
     );

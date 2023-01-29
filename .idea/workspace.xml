@@ -1,26 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update">
-      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/env/[id]/index.tsx" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update environments">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/pageHeader/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/about.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/about.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/actions/[action_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/actions/[action_id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/crud.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/crud.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/env/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/pricing.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/publish.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/publish.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/setup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/setup/[setup_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/setup/[setup_id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/webhook/[webhook_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/webhook/[webhook_id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/[id]/webhooks.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/webhooks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/env/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/env/[id]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/env/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/env/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -289,14 +279,7 @@
       <workItem from="1674297068053" duration="26223000" />
       <workItem from="1674400168021" duration="6406000" />
       <workItem from="1674893420643" duration="8131000" />
-      <workItem from="1674942225245" duration="9178000" />
-    </task>
-    <task id="LOCAL-00440" summary="Create organization and login">
-      <created>1636847572529</created>
-      <option name="number" value="00440" />
-      <option name="presentableId" value="LOCAL-00440" />
-      <option name="project" value="LOCAL" />
-      <updated>1636847572529</updated>
+      <workItem from="1674942225245" duration="13521000" />
     </task>
     <task id="LOCAL-00441" summary="Sync bank">
       <created>1637277457509</created>
@@ -634,7 +617,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674897285839</updated>
     </task>
-    <option name="localTasksCounter" value="489" />
+    <task id="LOCAL-00489" summary="update environments">
+      <created>1674977895256</created>
+      <option name="number" value="00489" />
+      <option name="presentableId" value="LOCAL-00489" />
+      <option name="project" value="LOCAL" />
+      <updated>1674977895256</updated>
+    </task>
+    <option name="localTasksCounter" value="490" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -659,7 +649,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="transactions" />
     <MESSAGE value="initial commit" />
     <MESSAGE value="initial commit 2" />
     <MESSAGE value="initial commit 3" />
@@ -684,7 +673,8 @@
     <MESSAGE value="app info page" />
     <MESSAGE value="dashboard design" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="update environments" />
+    <option name="LAST_COMMIT_MESSAGE" value="update environments" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
