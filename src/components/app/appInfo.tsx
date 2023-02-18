@@ -141,7 +141,7 @@ export const AppInfo: React.FC<Props> = ({}) => {
     return loading ? (
         <Loading />
     ) : (
-        <div className="padding_20">
+        <div className="container py-5">
             <div className="d-flex mb-3 justify-content-between">
                 <div>
                     <Title level={4} className="mb-0">

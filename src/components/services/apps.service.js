@@ -1,4 +1,4 @@
-import { appsClient } from '../clients/apps.client';
+import { appsClient, pricingClient } from '../clients/apps.client';
 import {
     APPS_CREATE_URL,
     APPS_FETCH_URL,
@@ -12,6 +12,7 @@ import {
     DOMAINS_FETCH_URL,
     APP_FAQ_CREATE,
     APP_FAQ_UPDATE,
+    PRICING_FETCH_URL,
 } from '../config/urls';
 import { Parameterize } from '../config/constant';
 
@@ -67,6 +68,19 @@ export const fetchApp = async (payload) => {
 
         const URL = Parameterize(APP_FETCH_URL, ':app_id', app_id);
         return appsClient(`Bearer ${token}`, 'application/json').get(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+        );
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const fetchPricing = async (payload) => {
+    try {
+        const { token, user_id, public_key, app_id } = payload;
+
+        const URL = Parameterize(PRICING_FETCH_URL, ':app_id', app_id);
+        return pricingClient(`Bearer ${token}`, 'application/json').get(
             `${URL}?user_id=${user_id}&public_key=${public_key}`,
         );
     } catch (e) {

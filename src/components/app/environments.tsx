@@ -87,12 +87,11 @@ export const AppEnvironments: React.FC<Props> = ({}) => {
                         : null
                 }
                 loading={loading}
-                size="small"
                 bordered
                 columns={columns}
                 dataSource={app.envs}
                 pagination={{
-                    position: ['bottomCenter'],
+                    position: ['bottomRight'],
                     pageSize: 50,
                     pageSizeOptions: ['50', '100', '250', '500', '800'],
                 }}

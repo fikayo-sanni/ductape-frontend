@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="add faq">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="package cleanup">
+      <change afterPath="$PROJECT_DIR$/src/components/app/pricing.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/apps/app/overview.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/apps/app/overview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/app_layout.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/app_layout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/webhook/[webhook_id].js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/webhook/[webhook_id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clients/apps.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/apps.client.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/apps/[id]/env/[id]" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/app" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="/usr/local/bin/node" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
@@ -68,11 +73,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/app" />
+      <recent name="$PROJECT_DIR$/src/pages/apps/current" />
       <recent name="$PROJECT_DIR$/src/pages/apps/[id]/env/[id]" />
       <recent name="$PROJECT_DIR$/src/pages/apps/[id]/env" />
       <recent name="$PROJECT_DIR$/src/pages/apps/[id]" />
-      <recent name="$PROJECT_DIR$/src/components/app" />
-      <recent name="$PROJECT_DIR$/src/components/common/dashboard" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/pages/dashboard" />
@@ -275,14 +280,13 @@
       <workItem from="1674297068053" duration="26223000" />
       <workItem from="1674400168021" duration="6406000" />
       <workItem from="1674893420643" duration="8131000" />
-      <workItem from="1674942225245" duration="13843000" />
-    </task>
-    <task id="LOCAL-00442" summary="Vendors">
-      <created>1637880117073</created>
-      <option name="number" value="00442" />
-      <option name="presentableId" value="LOCAL-00442" />
-      <option name="project" value="LOCAL" />
-      <updated>1637880117073</updated>
+      <workItem from="1674942225245" duration="14119000" />
+      <workItem from="1675334901172" duration="663000" />
+      <workItem from="1675335633905" duration="1899000" />
+      <workItem from="1675438980132" duration="10000" />
+      <workItem from="1675510021670" duration="1165000" />
+      <workItem from="1675604041618" duration="1436000" />
+      <workItem from="1676703246552" duration="7176000" />
     </task>
     <task id="LOCAL-00443" summary="transactions">
       <created>1639330303183</created>
@@ -620,7 +624,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674982455852</updated>
     </task>
-    <option name="localTasksCounter" value="491" />
+    <task id="LOCAL-00491" summary="package cleanup">
+      <created>1674982807403</created>
+      <option name="number" value="00491" />
+      <option name="presentableId" value="LOCAL-00491" />
+      <option name="project" value="LOCAL" />
+      <updated>1674982807403</updated>
+    </task>
+    <option name="localTasksCounter" value="492" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -645,7 +656,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="initial commit 2" />
     <MESSAGE value="initial commit 3" />
     <MESSAGE value="skeleton" />
     <MESSAGE value="auth" />
@@ -670,7 +680,8 @@
     <MESSAGE value="update" />
     <MESSAGE value="update environments" />
     <MESSAGE value="add faq" />
-    <option name="LAST_COMMIT_MESSAGE" value="add faq" />
+    <MESSAGE value="package cleanup" />
+    <option name="LAST_COMMIT_MESSAGE" value="package cleanup" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
