@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="package cleanup">
-      <change afterPath="$PROJECT_DIR$/src/components/app/pricing.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/index.tsx" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="pricing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clients/apps.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/apps.client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,14 +280,7 @@
       <workItem from="1675438980132" duration="10000" />
       <workItem from="1675510021670" duration="1165000" />
       <workItem from="1675604041618" duration="1436000" />
-      <workItem from="1676703246552" duration="7176000" />
-    </task>
-    <task id="LOCAL-00443" summary="transactions">
-      <created>1639330303183</created>
-      <option name="number" value="00443" />
-      <option name="presentableId" value="LOCAL-00443" />
-      <option name="project" value="LOCAL" />
-      <updated>1639330303184</updated>
+      <workItem from="1676703246552" duration="11600000" />
     </task>
     <task id="LOCAL-00444" summary="transactions">
       <created>1639332394589</created>
@@ -631,7 +618,14 @@
       <option name="project" value="LOCAL" />
       <updated>1674982807403</updated>
     </task>
-    <option name="localTasksCounter" value="492" />
+    <task id="LOCAL-00492" summary="pricing">
+      <created>1676731993608</created>
+      <option name="number" value="00492" />
+      <option name="presentableId" value="LOCAL-00492" />
+      <option name="project" value="LOCAL" />
+      <updated>1676731993608</updated>
+    </task>
+    <option name="localTasksCounter" value="493" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -656,7 +650,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="initial commit 3" />
     <MESSAGE value="skeleton" />
     <MESSAGE value="auth" />
     <MESSAGE value="dashboard" />
@@ -681,7 +674,8 @@
     <MESSAGE value="update environments" />
     <MESSAGE value="add faq" />
     <MESSAGE value="package cleanup" />
-    <option name="LAST_COMMIT_MESSAGE" value="package cleanup" />
+    <MESSAGE value="pricing" />
+    <option name="LAST_COMMIT_MESSAGE" value="pricing" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -13,6 +13,8 @@ import {
     APP_FAQ_CREATE,
     APP_FAQ_UPDATE,
     PRICING_FETCH_URL,
+    PRICING_FETCH_SINGLE,
+    PRICING_UPDATE_URL,
 } from '../config/urls';
 import { Parameterize } from '../config/constant';
 
@@ -83,6 +85,31 @@ export const fetchPricing = async (payload) => {
         return pricingClient(`Bearer ${token}`, 'application/json').get(
             `${URL}?user_id=${user_id}&public_key=${public_key}`,
         );
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const fetchSinglePricing = async (payload) => {
+    try {
+        const { token, user_id, public_key, pricing_id } = payload;
+
+        const URL = Parameterize(PRICING_FETCH_SINGLE, ':pricing_id', pricing_id);
+        return pricingClient(`Bearer ${token}`, 'application/json').get(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+        );
+    } catch (e) {
+        throw e;
+    }
+};
+
+export const updatePricing = async (payload) => {
+    try {
+        const { token, pricing_id } = payload;
+
+        const URL = Parameterize(PRICING_UPDATE_URL, ':pricing_id', pricing_id);
+
+        return pricingClient(`Bearer ${token}`, 'application/json').put(URL, payload);
     } catch (e) {
         throw e;
     }

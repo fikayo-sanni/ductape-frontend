@@ -2,10 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Dashboard_Layout from '../../../../../components/layout/dashboard_layout';
 import PageHeader from '../../../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
-import { Button, Input, List, Modal, Switch, Tag, Typography } from 'antd';
+import { Button, Input, List, Modal, Select, Switch, Tag, Typography } from 'antd';
 import { EditOutlined, PlusCircleOutlined, SwapLeftOutlined } from '@ant-design/icons';
 import NProgress from 'nprogress';
-import { createAppEnv, fetchApp, fetchAppEnv, updateAppEnv } from '../../../../../components/services/apps.service';
+import {
+    createAppEnv,
+    fetchApp,
+    fetchAppEnv,
+    fetchSinglePricing,
+    updateAppEnv,
+    updatePricing,
+} from '../../../../../components/services/apps.service';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../../redux/store';
@@ -24,6 +31,7 @@ interface Pricing {
     name: string;
     envs: string[];
     interval: string;
+    unit_price: string | number;
     limits: any;
     pricing_mode: string;
 }
@@ -31,39 +39,40 @@ interface Pricing {
 const EditPricing = () => {
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
     const dispatch = useDispatch();
-    const [env, setEnv] = useState<Pricing>();
+    const [pricing, setPricing] = useState<Pricing>();
     const [loading, setLoading] = useState(true);
-    const envId = Router.query.id;
+    const pricingId = Router.query.id;
 
     const handleClick = () => {
         Router.push(`/apps/current/pricing`);
     };
 
     const fetchPricing = async () => {
-        const dEnv = await fetchAppEnv({
+        const pricingData = await fetchSinglePricing({
             token: user.auth_token,
             user_id: user._id,
             public_key: user.public_key,
-            env_id: envId,
+            pricing_id: pricingId,
         });
 
-        setEnv(dEnv.data.data[0]);
+        console.log(pricingData.data.data);
+        setPricing(pricingData.data.data);
         setLoading(false);
     };
 
-    const updateEnvironment = async () => {
-        toast.loading('Updating Environment');
-        const response = await updateAppEnv({
-            ...env,
+    const updatePricingPlan = async () => {
+        toast.loading('Updating Pricing Plan');
+        const response = await updatePricing({
+            ...pricing,
             token: user.auth_token,
             user_id: user._id,
             public_key: user.public_key,
-            env_id: envId,
+            pricing_id: pricingId,
         });
 
-        toast.success('Environment Updated');
+        toast.success('Pricing Plan Updated');
         console.log(response.data.data);
-        dispatch(setCurrentApp(response.data.data));
+        // dispatch(setCurrentApp(response.data.data));
     };
 
     useEffect(() => {
@@ -85,7 +94,181 @@ const EditPricing = () => {
                 <Loading />
             ) : (
                 <div className="container py-5">
-                    <Button type="primary" onClick={() => updateEnvironment()} className="mt-3">
+                    <List
+                        size="small"
+                        header={<div className="font-weight-700 d-flex justify-content-between">General</div>}
+                        bordered
+                        dataSource={[
+                            {
+                                title: <div>Name</div>,
+                                description: '',
+                                value: (
+                                    <Input
+                                        value={pricing.name}
+                                        onChange={(e) => setPricing({ ...pricing, ['name']: e.target.value })}
+                                        size="large"
+                                    />
+                                ),
+                            },
+                            {
+                                title: <div>Unit Price</div>,
+                                description: 'Cost',
+                                value: (
+                                    <Input
+                                        value={pricing.unit_price}
+                                        onChange={(e) =>
+                                            !isNaN(Number(e.target.value)) &&
+                                            setPricing({ ...pricing, ['unit_price']: e.target.value })
+                                        }
+                                        size="large"
+                                    />
+                                ),
+                            },
+                            {
+                                title: <div>Mode</div>,
+                                description: 'Type of charge',
+                                value: (
+                                    <Select
+                                        defaultValue={pricing.pricing_mode}
+                                        style={{ width: 150 }}
+                                        onChange={(value) => setPricing({ ...pricing, ['pricing_mode']: value })}
+                                        options={[
+                                            { value: 'per_request', label: 'Per Request' },
+                                            { value: 'upfront', label: 'Upfront' },
+                                            { value: 'intervals', label: 'Intervals' },
+                                        ]}
+                                    />
+                                ),
+                            },
+
+                            {
+                                title: <div>Interval</div>,
+                                description: 'When the customer will be charged',
+                                value: (
+                                    <Select
+                                        defaultValue={pricing.interval}
+                                        style={{ width: 150 }}
+                                        onChange={(value) => setPricing({ ...pricing, ['interval']: value })}
+                                        options={[
+                                            { value: 'daily', label: 'Daily' },
+                                            { value: 'weekly', label: 'Weekly' },
+                                            { value: 'bi-weekly', label: 'Bi-weekly' },
+                                            { value: 'monthly', label: 'Monthly' },
+                                            { value: 'quaterly', label: 'Quaterly' },
+                                            { value: 'yearly', label: 'Yearly' },
+                                        ]}
+                                    />
+                                ),
+                            },
+                        ]}
+                        renderItem={(item) => (
+                            <List.Item>
+                                <List.Item.Meta title={item.title} description={item.description} />
+                                <div>{item.value}</div>
+                            </List.Item>
+                        )}
+                    />
+
+                    <List
+                        size="small"
+                        header="Limits"
+                        className="mt-4"
+                        bordered
+                        dataSource={[
+                            {
+                                title: <div>Per Minute</div>,
+                                description: 'Set as 0 for unlimited',
+                                value: (
+                                    <Input
+                                        value={pricing.limits.per_minute}
+                                        onChange={(e) =>
+                                            !isNaN(Number(e.target.value)) &&
+                                            setPricing({
+                                                ...pricing,
+                                                limits: { ...pricing.limits, per_minute: e.target.value },
+                                            })
+                                        }
+                                        size="large"
+                                    />
+                                ),
+                            },
+                            {
+                                title: <div>Per Day</div>,
+                                description: 'Set as 0 for unlimited',
+                                value: (
+                                    <Input
+                                        value={pricing.limits.per_day}
+                                        onChange={(e) =>
+                                            !isNaN(Number(e.target.value)) &&
+                                            setPricing({
+                                                ...pricing,
+                                                limits: { ...pricing.limits, per_day: e.target.value },
+                                            })
+                                        }
+                                        size="large"
+                                    />
+                                ),
+                            },
+                            {
+                                title: <div>Per Hour</div>,
+                                value: (
+                                    <Input
+                                        value={pricing.limits.per_hour}
+                                        onChange={(e) =>
+                                            !isNaN(Number(e.target.value)) &&
+                                            setPricing({
+                                                ...pricing,
+                                                limits: { ...pricing.limits, per_hour: e.target.value },
+                                            })
+                                        }
+                                        size="large"
+                                    />
+                                ),
+                            },
+                            {
+                                title: <div>Per Week</div>,
+                                description: 'Set as 0 for unlimited',
+                                value: (
+                                    <Input
+                                        value={pricing.limits.per_week}
+                                        onChange={(e) =>
+                                            !isNaN(Number(e.target.value)) &&
+                                            setPricing({
+                                                ...pricing,
+                                                limits: { ...pricing.limits, per_week: e.target.value },
+                                            })
+                                        }
+                                        size="large"
+                                    />
+                                ),
+                            },
+                            {
+                                title: <div>Per Month</div>,
+                                description: 'Set as 0 for unlimited',
+                                value: (
+                                    <Input
+                                        value={pricing.limits.per_month}
+                                        onChange={(e) =>
+                                            !isNaN(Number(e.target.value)) &&
+                                            setPricing({
+                                                ...pricing,
+                                                limits: { ...pricing.limits, per_month: e.target.value },
+                                            })
+                                        }
+                                        size="large"
+                                    />
+                                ),
+                            },
+                        ]}
+                        renderItem={(item) => (
+                            <List.Item>
+                                <List.Item.Meta title={item.title} description={item.description} />
+                                <div>{item.value}</div>
+                            </List.Item>
+                        )}
+                    />
+
+                    <Button type="primary" onClick={() => updatePricingPlan()} className="mt-3">
                         Update
                     </Button>
                 </div>
