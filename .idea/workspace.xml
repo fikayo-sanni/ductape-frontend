@@ -1,22 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="pricing">
-      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/new.tsx" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="create new pricing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/pricing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/pricing.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/about.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/about.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/env/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/env/[id]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/env/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/env/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/new.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/new.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,14 +281,7 @@
       <workItem from="1675510021670" duration="1165000" />
       <workItem from="1675604041618" duration="1436000" />
       <workItem from="1676703246552" duration="12218000" />
-      <workItem from="1677301633634" duration="2558000" />
-    </task>
-    <task id="LOCAL-00445" summary="transactions">
-      <created>1639354530328</created>
-      <option name="number" value="00445" />
-      <option name="presentableId" value="LOCAL-00445" />
-      <option name="project" value="LOCAL" />
-      <updated>1639354530330</updated>
+      <workItem from="1677301633634" duration="4420000" />
     </task>
     <task id="LOCAL-00446" summary="Add bank loading notification">
       <created>1639354836974</created>
@@ -637,7 +619,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676739633835</updated>
     </task>
-    <option name="localTasksCounter" value="494" />
+    <task id="LOCAL-00494" summary="create new pricing">
+      <created>1677304209640</created>
+      <option name="number" value="00494" />
+      <option name="presentableId" value="LOCAL-00494" />
+      <option name="project" value="LOCAL" />
+      <updated>1677304209641</updated>
+    </task>
+    <option name="localTasksCounter" value="495" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -662,7 +651,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="skeleton" />
     <MESSAGE value="auth" />
     <MESSAGE value="dashboard" />
     <MESSAGE value="dashboard 2" />
@@ -687,7 +675,8 @@
     <MESSAGE value="add faq" />
     <MESSAGE value="package cleanup" />
     <MESSAGE value="pricing" />
-    <option name="LAST_COMMIT_MESSAGE" value="pricing" />
+    <MESSAGE value="create new pricing" />
+    <option name="LAST_COMMIT_MESSAGE" value="create new pricing" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

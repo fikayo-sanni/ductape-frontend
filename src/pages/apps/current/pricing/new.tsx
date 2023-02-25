@@ -56,6 +56,7 @@ const NewPricing = () => {
         toast.loading('Updating Pricing Plan');
         const response = await createPricing({
             ...pricing,
+            ...(pricing.pricing_mode === 'upfront' && { one_time: 'one-time' }),
             //token: user.auth_token,
             user_id: user._id,
             public_key: user.public_key,
@@ -140,21 +141,24 @@ const NewPricing = () => {
                                 {
                                     title: <div>Interval</div>,
                                     description: 'When the customer will be charged',
-                                    value: (
-                                        <Select
-                                            defaultValue={pricing.interval}
-                                            style={{ width: 150 }}
-                                            onChange={(value) => setPricing({ ...pricing, ['interval']: value })}
-                                            options={[
-                                                { value: 'daily', label: 'Daily' },
-                                                { value: 'weekly', label: 'Weekly' },
-                                                { value: 'bi-weekly', label: 'Bi-weekly' },
-                                                { value: 'monthly', label: 'Monthly' },
-                                                { value: 'quaterly', label: 'Quaterly' },
-                                                { value: 'yearly', label: 'Yearly' },
-                                            ]}
-                                        />
-                                    ),
+                                    value:
+                                        pricing.pricing_mode === 'upfront' ? (
+                                            'One-Time'
+                                        ) : (
+                                            <Select
+                                                defaultValue={pricing.interval}
+                                                style={{ width: 150 }}
+                                                onChange={(value) => setPricing({ ...pricing, ['interval']: value })}
+                                                options={[
+                                                    { value: 'daily', label: 'Daily' },
+                                                    { value: 'weekly', label: 'Weekly' },
+                                                    { value: 'bi-weekly', label: 'Bi-weekly' },
+                                                    { value: 'monthly', label: 'Monthly' },
+                                                    { value: 'quaterly', label: 'Quaterly' },
+                                                    { value: 'yearly', label: 'Yearly' },
+                                                ]}
+                                            />
+                                        ),
                                 },
 
                                 {
@@ -166,10 +170,10 @@ const NewPricing = () => {
                                             style={{ width: 150 }}
                                             onChange={(value) => setPricing({ ...pricing, ['currency']: value })}
                                             options={[
-                                                { value: '$', label: 'Dollar' },
-                                                { value: '£', label: 'Pounds' },
-                                                { value: '€', label: 'Euro' },
-                                                { value: '₦', label: 'Naira' },
+                                                { value: 'USD', label: 'Dollar' },
+                                                { value: 'GBP', label: 'Pounds' },
+                                                { value: 'EUR', label: 'Euro' },
+                                                { value: 'NGN', label: 'Naira' },
                                             ]}
                                         />
                                     ),

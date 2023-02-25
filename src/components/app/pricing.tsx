@@ -144,7 +144,7 @@ export const PricingView: React.FC<Props> = ({}) => {
                             {
                                 title: 'Interval',
                                 description: 'When the customer will be charged',
-                                value: currentPricing.interval,
+                                value: currentPricing.pricing_mode === 'upfront' ? 'One-Time' : currentPricing.interval,
                             },
                             {
                                 title: 'Currency',
