@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Dashboard_Layout from '../../../../components/layout/dashboard_layout';
 import PageHeader from '../../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
-import { Button, Input, Modal, Typography } from 'antd';
+import { Button, Card, Input, Modal, Typography } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import NProgress from 'nprogress';
 import { createAppEnv, fetchApp } from '../../../../components/services/apps.service';
@@ -87,7 +87,9 @@ const Environments = () => {
                     </>
                 }
             />
-            <AppEnvironments />
+            <Card className="no_background no_border  ">
+                <AppEnvironments />
+            </Card>
 
             <Modal
                 title={

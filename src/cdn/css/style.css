@@ -352,4 +352,8 @@ a {
   font-size: 0.7rem;
 }
 
+.body_card .ant-card-body {
+  padding: 0;
+}
+
 /*# sourceMappingURL=style.css.map */

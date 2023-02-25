@@ -1,32 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import Dashboard_Layout from '../../../../../components/layout/dashboard_layout';
-import PageHeader from '../../../../../components/common/pageHeader';
+import Dashboard_Layout from '../../../../components/layout/dashboard_layout';
+import PageHeader from '../../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
 import { Button, Card, Input, List, Modal, Select, Switch, Tag, Typography } from 'antd';
 import { EditOutlined, PlusCircleOutlined, SwapLeftOutlined } from '@ant-design/icons';
 import NProgress from 'nprogress';
 import {
     createAppEnv,
+    createPricing,
     fetchApp,
     fetchAppEnv,
     fetchSinglePricing,
     updateAppEnv,
     updatePricing,
-} from '../../../../../components/services/apps.service';
+} from '../../../../components/services/apps.service';
 import toast from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../../../redux/store';
-import { slug } from 'github-slugger';
-import { setCurrentApp } from '../../../../../redux/applicationSlice';
-import Link from 'next/link';
+import { RootState } from '../../../../redux/store';
 import Router from 'next/router';
-import Loading from '../../../../../components/common/loading';
+import Loading from '../../../../components/common/loading';
 
 const { Title, Text, Paragraph } = Typography;
-const AppEnvironments = dynamic(() => import('../../../../../components/app/environments'));
 
 interface Pricing {
-    _id: string;
     app_id: string;
     name: string;
     envs: string[];
@@ -37,52 +33,50 @@ interface Pricing {
     pricing_mode: string;
 }
 
-const EditPricing = () => {
+const NewPricing = () => {
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
     const dispatch = useDispatch();
-    const [pricing, setPricing] = useState<Pricing>();
-    const [loading, setLoading] = useState(true);
-    const pricingId = Router.query.id;
+    const [pricing, setPricing] = useState<Pricing>({
+        name: '',
+        envs: [],
+        interval: '',
+        currency: '',
+        unit_price: 0,
+        limits: {},
+        pricing_mode: '',
+        app_id: app._id,
+    });
+    const [loading, setLoading] = useState(false);
 
     const handleClick = () => {
         Router.push(`/apps/current/pricing`);
     };
 
-    const fetchPricing = async () => {
-        const pricingData = await fetchSinglePricing({
-            token: user.auth_token,
-            user_id: user._id,
-            public_key: user.public_key,
-            pricing_id: pricingId,
-        });
-
-        console.log(pricingData.data.data);
-        setPricing(pricingData.data.data);
-        setLoading(false);
-    };
-
-    const updatePricingPlan = async () => {
+    const createPricingPlan = async () => {
         toast.loading('Updating Pricing Plan');
-        const response = await updatePricing({
+        const response = await createPricing({
             ...pricing,
-            token: user.auth_token,
+            //token: user.auth_token,
             user_id: user._id,
             public_key: user.public_key,
-            pricing_id: pricingId,
+        }).catch((error) => {
+            toast.error(error.response.data.error);
+            return false;
         });
 
-        toast.success('Pricing Plan Updated');
-        console.log(response.data.data);
+        if (response !== false) {
+            toast.success('Pricing Plan Created');
+            Router.push(`/apps/current/pricing`);
+        }
+
         // dispatch(setCurrentApp(response.data.data));
     };
 
-    useEffect(() => {
-        fetchPricing();
-    }, [Router.query.id]);
+    useEffect(() => {}, [Router.query.id]);
     return (
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="Pricing">
             <PageHeader
-                title="Edit Pricing"
+                title="Create Pricing Plan"
                 handleClick={handleClick}
                 extra={
                     <>
@@ -165,7 +159,7 @@ const EditPricing = () => {
 
                                 {
                                     title: <div>Currency</div>,
-                                    description: 'When the customer will be charged',
+                                    description: 'Default currency',
                                     value: (
                                         <Select
                                             defaultValue={pricing.currency}
@@ -288,7 +282,7 @@ const EditPricing = () => {
                             )}
                         />
 
-                        <Button type="primary" onClick={() => updatePricingPlan()} className="mt-3">
+                        <Button type="primary" onClick={() => createPricingPlan()} className="mt-3">
                             Update
                         </Button>
                     </div>
@@ -298,4 +292,4 @@ const EditPricing = () => {
     );
 };
 
-export default EditPricing;
+export default NewPricing;

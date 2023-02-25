@@ -4,6 +4,7 @@ import { setCurrentApp } from '../../../redux/applicationSlice';
 import React, { useState } from 'react';
 import PageHeader from '../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
+import { Card } from 'antd';
 
 const AppInfo = dynamic(() => import('../../../components/app/appInfo'));
 
@@ -19,7 +20,9 @@ const About = (props) => {
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="About">
             <PageHeader title="App Info." />
 
-            <AppInfo />
+            <Card className="no_background no_border  body_card">
+                <AppInfo />
+            </Card>
         </Dashboard_Layout>
     );
 };

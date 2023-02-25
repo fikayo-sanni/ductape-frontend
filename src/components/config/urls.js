@@ -22,6 +22,7 @@ export const PRICING_BASE_URL = 'https://ductape-pricing-3bubdh4twq-uc.a.run.app
 export const PRICING_FETCH_URL = '/pricing/v1/getAppPrices/:app_id';
 export const PRICING_FETCH_SINGLE = '/pricing/v1/fetch/:pricing_id';
 export const PRICING_UPDATE_URL = '/pricing/v1/update/:pricing_id';
+export const PRICING_CREATE_URL = '/pricing/v1/create';
 
 export const ENV_UPDATE_URL = '/apps/v1/env/:env_id';
 export const APP_ENV_CREATE = '/apps/v1/app/:app_id/env';

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Dashboard_Layout from '../../../../components/layout/dashboard_layout';
 import PageHeader from '../../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
-import { Button, Input, Modal, Typography } from 'antd';
+import { Button, Card, Input, Modal, Typography } from 'antd';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import NProgress from 'nprogress';
 import { createAppEnv, fetchApp } from '../../../../components/services/apps.service';
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { slug } from 'github-slugger';
 import { setCurrentApp } from '../../../../redux/applicationSlice';
+import Router from 'next/router';
 
 const { Title, Text } = Typography;
 const PricingView = dynamic(() => import('../../../../components/app/pricing'));
@@ -26,7 +27,7 @@ const Pricing = () => {
     });
 
     const handleClick = () => {
-        setVisible(!visible);
+        Router.push(`/apps/current/pricing/new`);
     };
 
     const handleChange = async (e) => {
@@ -89,42 +90,9 @@ const Pricing = () => {
                     </>
                 }
             />
-            <PricingView />
-
-            <Modal
-                title={
-                    <div className="mb-3">
-                        <Typography.Title level={2} className="m-0 text-capitalize">
-                            Create New Environment
-                        </Typography.Title>
-                        <Text type="secondary" className="text-uppercase">
-                            Environment
-                        </Text>
-                    </div>
-                }
-                open={visible}
-                footer={null}
-                onCancel={() => setVisible(false)}
-            >
-                <div className="mb-3">
-                    <label>Name</label>
-                    <Input value={newEnv.env_name} name="env_name" onChange={handleChange} />
-                </div>
-
-                <div className="mb-3">
-                    <label>Slug</label>
-                    <Input value={newEnv.slug} maxLength={3} name="slug" onChange={handleChange} />
-                </div>
-
-                <div className="mb-3">
-                    <label>Description</label>
-                    <Input.TextArea value={newEnv.description} name="description" onChange={handleChange} rows={3} />
-                </div>
-
-                <Button onClick={() => createEnv()} type="primary">
-                    Create
-                </Button>
-            </Modal>
+            <Card className="no_background no_border">
+                <PricingView />
+            </Card>
         </Dashboard_Layout>
     );
 };

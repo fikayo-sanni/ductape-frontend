@@ -19,6 +19,7 @@ interface Pricing {
     name: string;
     envs: string[];
     interval: string;
+    currency: string;
     unit_price: string | number;
     limits: any;
     pricing_mode: string;
@@ -81,7 +82,7 @@ export const PricingView: React.FC<Props> = ({}) => {
     return loading ? (
         <Loading />
     ) : (
-        <div className="container py-5">
+        <div className="container ">
             <Text>Showing {app.envs.length.toLocaleString()} environment(s)</Text>
             <Table
                 onRow={(record, rowIndex) => {
@@ -144,6 +145,11 @@ export const PricingView: React.FC<Props> = ({}) => {
                                 title: 'Interval',
                                 description: 'When the customer will be charged',
                                 value: currentPricing.interval,
+                            },
+                            {
+                                title: 'Currency',
+                                description: 'Default currency',
+                                value: currentPricing.currency,
                             },
                         ]}
                         renderItem={(item) => (

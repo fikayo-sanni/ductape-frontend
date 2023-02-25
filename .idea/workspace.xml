@@ -2,10 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="pricing">
+      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/new.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/environments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/environments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/pricing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/pricing.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/about.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/about.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/env/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/env/[id]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/env/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/env/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +65,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/pages/apps/current/pricing" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="/usr/local/bin/node" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
@@ -67,11 +78,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/pages/apps/current/pricing" />
       <recent name="$PROJECT_DIR$/src/components/app" />
       <recent name="$PROJECT_DIR$/src/pages/apps/current" />
       <recent name="$PROJECT_DIR$/src/pages/apps/[id]/env/[id]" />
       <recent name="$PROJECT_DIR$/src/pages/apps/[id]/env" />
-      <recent name="$PROJECT_DIR$/src/pages/apps/[id]" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/pages/dashboard" />
@@ -280,14 +291,8 @@
       <workItem from="1675438980132" duration="10000" />
       <workItem from="1675510021670" duration="1165000" />
       <workItem from="1675604041618" duration="1436000" />
-      <workItem from="1676703246552" duration="11600000" />
-    </task>
-    <task id="LOCAL-00444" summary="transactions">
-      <created>1639332394589</created>
-      <option name="number" value="00444" />
-      <option name="presentableId" value="LOCAL-00444" />
-      <option name="project" value="LOCAL" />
-      <updated>1639332394589</updated>
+      <workItem from="1676703246552" duration="12218000" />
+      <workItem from="1677301633634" duration="2558000" />
     </task>
     <task id="LOCAL-00445" summary="transactions">
       <created>1639354530328</created>
@@ -625,7 +630,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676731993608</updated>
     </task>
-    <option name="localTasksCounter" value="493" />
+    <task id="LOCAL-00493" summary="pricing">
+      <created>1676739633835</created>
+      <option name="number" value="00493" />
+      <option name="presentableId" value="LOCAL-00493" />
+      <option name="project" value="LOCAL" />
+      <updated>1676739633835</updated>
+    </task>
+    <option name="localTasksCounter" value="494" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

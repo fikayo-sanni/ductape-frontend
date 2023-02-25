@@ -15,8 +15,10 @@ import {
     PRICING_FETCH_URL,
     PRICING_FETCH_SINGLE,
     PRICING_UPDATE_URL,
+    PRICING_CREATE_URL,
 } from '../config/urls';
 import { Parameterize } from '../config/constant';
+import toast from 'react-hot-toast';
 
 export const createApp = async (payload) => {
     try {
@@ -103,6 +105,17 @@ export const fetchSinglePricing = async (payload) => {
     }
 };
 
+export const createPricing = async (payload) => {
+    try {
+        const { token } = payload;
+
+        return pricingClient(`Bearer ${token}`, 'application/json').post(PRICING_CREATE_URL, payload);
+    } catch (e) {
+        throw e;
+        return true;
+    }
+};
+
 export const updatePricing = async (payload) => {
     try {
         const { token, pricing_id } = payload;
@@ -112,6 +125,7 @@ export const updatePricing = async (payload) => {
         return pricingClient(`Bearer ${token}`, 'application/json').put(URL, payload);
     } catch (e) {
         throw e;
+        return true;
     }
 };
 
