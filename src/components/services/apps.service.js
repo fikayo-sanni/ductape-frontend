@@ -1,4 +1,4 @@
-import { appsClient, pricingClient } from '../clients/apps.client';
+import { actionsClient, appsClient, pricingClient } from '../clients/apps.client';
 import {
     APPS_CREATE_URL,
     APPS_FETCH_URL,
@@ -16,6 +16,7 @@ import {
     PRICING_FETCH_SINGLE,
     PRICING_UPDATE_URL,
     PRICING_CREATE_URL,
+    ACTIONS_FETCH_FOLDERS,
 } from '../config/urls';
 import { Parameterize } from '../config/constant';
 import toast from 'react-hot-toast';
@@ -290,5 +291,20 @@ export const fetchDomains = async (payload) => {
         );
     } catch (e) {
         throw e;
+    }
+};
+
+export const fetchActionFolders = async (payload) => {
+    try {
+        const { app_id, token, user_id, public_key } = payload;
+
+        let URL = Parameterize(ACTIONS_FETCH_FOLDERS, ':app_id', app_id);
+
+        return actionsClient(`Bearer ${token}`, 'application/json').get(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+        );
+    } catch (e) {
+        throw e;
+        return true;
     }
 };

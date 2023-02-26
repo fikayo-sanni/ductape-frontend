@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { setCurrentApp } from '../../../redux/applicationSlice';
 import Router from 'next/router';
+import { fetchApp, fetchWorkspaceApps } from '../../services/apps.service';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -19,7 +20,14 @@ const AppDisplay: React.FC<Props> = ({ app, orientation = 'grid' }) => {
     const { user, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
 
     const openApp = async (app) => {
-        await dispatch(setCurrentApp(app));
+        const response = await fetchApp({
+            token: user.auth_token,
+            user_id: user._id,
+            public_key: user.public_key,
+            app_id: app._id,
+        });
+
+        await dispatch(setCurrentApp(response.data.data));
         Router.push(`/apps/current`);
     };
 

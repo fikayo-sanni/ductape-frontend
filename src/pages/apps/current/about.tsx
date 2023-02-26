@@ -20,7 +20,7 @@ const About = (props) => {
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="About">
             <PageHeader title="App Info." />
 
-            <Card className="no_background no_border  body_card">
+            <Card className="no_background no_border">
                 <AppInfo />
             </Card>
         </Dashboard_Layout>

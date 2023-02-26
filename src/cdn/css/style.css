@@ -356,4 +356,9 @@ a {
   padding: 0;
 }
 
+.ant-tree-icon__customize {
+  width: 55px !important;
+  margin-left: -10px !important;
+}
+
 /*# sourceMappingURL=style.css.map */
