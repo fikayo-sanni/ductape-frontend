@@ -1,20 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="create new pricing">
-      <change afterPath="$PROJECT_DIR$/src/components/app/actions.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/actions/index.tsx" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="actions">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/clients/apps.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/apps.client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/actions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/actions.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/about.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/about.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -290,14 +282,7 @@
       <workItem from="1675510021670" duration="1165000" />
       <workItem from="1675604041618" duration="1436000" />
       <workItem from="1676703246552" duration="12218000" />
-      <workItem from="1677301633634" duration="13712000" />
-    </task>
-    <task id="LOCAL-00447" summary="Add bank loading notification">
-      <created>1641229216320</created>
-      <option name="number" value="00447" />
-      <option name="presentableId" value="LOCAL-00447" />
-      <option name="project" value="LOCAL" />
-      <updated>1641229216321</updated>
+      <workItem from="1677301633634" duration="22991000" />
     </task>
     <task id="LOCAL-00448" summary="Okra">
       <created>1641229675681</created>
@@ -635,7 +620,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677306071221</updated>
     </task>
-    <option name="localTasksCounter" value="496" />
+    <task id="LOCAL-00496" summary="actions">
+      <created>1677404559734</created>
+      <option name="number" value="00496" />
+      <option name="presentableId" value="LOCAL-00496" />
+      <option name="project" value="LOCAL" />
+      <updated>1677404559734</updated>
+    </task>
+    <option name="localTasksCounter" value="497" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -660,7 +652,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="auth" />
     <MESSAGE value="dashboard" />
     <MESSAGE value="dashboard 2" />
     <MESSAGE value="upload" />
@@ -685,7 +676,8 @@
     <MESSAGE value="package cleanup" />
     <MESSAGE value="pricing" />
     <MESSAGE value="create new pricing" />
-    <option name="LAST_COMMIT_MESSAGE" value="create new pricing" />
+    <MESSAGE value="actions" />
+    <option name="LAST_COMMIT_MESSAGE" value="actions" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

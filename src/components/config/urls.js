@@ -38,7 +38,9 @@ export const ACTION_FETCH_URL = '/actions/v1/:action_id';
 export const ACTION_UPDATE_DATA = '/actions/v1/action/:action_id/data/:category';
 export const ACTIONS_CREATE_RESPONSES = '/actions/v1/response';
 export const ACTIONS_FETCH_RESPONSES = '/actions/v1/response/:action_id';
+export const ACTIONS_FETCH_ACTION = '/actions/v1/:action_id';
 export const ACTIONS_FETCH_FOLDERS = '/actions/v1/folders/:app_id';
+export const ACTIONS_UPDATE_FOLDER = '/actions/v1/folder/:folder_id';
 
 export const INTEGRATIONS_BASE_URL = 'https://ductape-integrations-3bubdh4twq-uc.a.run.app';
 export const INTEGRATIONS_CREATE_URL = '/integrations/v1/create';

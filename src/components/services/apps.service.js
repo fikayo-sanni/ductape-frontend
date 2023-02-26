@@ -17,6 +17,8 @@ import {
     PRICING_UPDATE_URL,
     PRICING_CREATE_URL,
     ACTIONS_FETCH_FOLDERS,
+    ACTIONS_UPDATE_FOLDER,
+    ACTIONS_FETCH_ACTION,
 } from '../config/urls';
 import { Parameterize } from '../config/constant';
 import toast from 'react-hot-toast';
@@ -294,6 +296,37 @@ export const fetchDomains = async (payload) => {
     }
 };
 
+export const fetchAction = async (payload) => {
+    try {
+        const { action_id, token, user_id, public_key } = payload;
+
+        let URL = Parameterize(ACTIONS_FETCH_ACTION, ':action_id', action_id);
+
+        return actionsClient(`Bearer ${token}`, 'application/json').get(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+        );
+    } catch (e) {
+        throw e;
+        return true;
+    }
+};
+
+export const updateAction = async (payload) => {
+    try {
+        const { action_id, token, user_id, public_key } = payload;
+
+        let URL = Parameterize(ACTIONS_FETCH_ACTION, ':action_id', action_id);
+
+        return actionsClient(`Bearer ${token}`, 'application/json').put(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+            payload,
+        );
+    } catch (e) {
+        throw e;
+        return true;
+    }
+};
+
 export const fetchActionFolders = async (payload) => {
     try {
         const { app_id, token, user_id, public_key } = payload;
@@ -302,6 +335,22 @@ export const fetchActionFolders = async (payload) => {
 
         return actionsClient(`Bearer ${token}`, 'application/json').get(
             `${URL}?user_id=${user_id}&public_key=${public_key}`,
+        );
+    } catch (e) {
+        throw e;
+        return true;
+    }
+};
+
+export const updateFolder = async (payload) => {
+    try {
+        const { folder_id, token, user_id, public_key } = payload;
+
+        let URL = Parameterize(ACTIONS_UPDATE_FOLDER, ':folder_id', folder_id);
+
+        return actionsClient(`Bearer ${token}`, 'application/json').put(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+            payload,
         );
     } catch (e) {
         throw e;

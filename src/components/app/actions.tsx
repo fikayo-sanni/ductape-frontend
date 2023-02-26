@@ -20,7 +20,18 @@ import { RootState } from '../../redux/store';
 import dynamic from 'next/dynamic';
 import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
 
-import { fetchActionFolders, fetchApp, fetchPricing } from '../services/apps.service';
+import {
+    createPricing,
+    fetchAction,
+    fetchActionFolders,
+    fetchApp,
+    fetchAppEnv,
+    fetchPricing,
+    updateAction,
+    updateFolder,
+} from '../services/apps.service';
+import toast from 'react-hot-toast';
+import Router from 'next/router';
 
 const { Text, Title, Paragraph } = Typography;
 const { Option } = Select;
@@ -44,9 +55,7 @@ const Loading = dynamic(() => import('../../components/common/loading'));
 
 export const ActionsView: React.FC<Props> = ({}) => {
     const { user, app } = useSelector((state: RootState) => state.app);
-
-    const [loading, setLoading] = useState(false);
-
+    const [loading, setLoading] = useState(true);
     const [treeData, setTreeData] = useState<DataNode[]>();
     const [currentData, setCurrentData] = useState<any>();
 
@@ -68,8 +77,6 @@ export const ActionsView: React.FC<Props> = ({}) => {
 
     const generateStructure = async (data) => {
         let tree = [];
-
-        console.log(data);
 
         for (const [index, info] of data.entries()) {
             tree.push({
@@ -108,13 +115,13 @@ export const ActionsView: React.FC<Props> = ({}) => {
                 icon: (
                     <Text
                         className={
-                            info.type === 'POST'
+                            info.httpVerb === 'POST'
                                 ? 'text-warning text-start font-xxs'
-                                : info.type === 'GET'
+                                : info.httpVerb === 'GET'
                                 ? 'text-success text-start font-xxs'
-                                : info.type === 'PUT' || info.type === 'UPDATE'
+                                : info.httpVerb === 'PUT' || info.httpVerb === 'UPDATE'
                                 ? 'text-primary text-start font-xxs'
-                                : info.type === 'DELETE'
+                                : info.httpVerb === 'DELETE'
                                 ? 'text-danger text-start font-xxs'
                                 : 'font-xxs text-start'
                         }
@@ -133,26 +140,32 @@ export const ActionsView: React.FC<Props> = ({}) => {
         fetchFolders();
     }, []);
 
-    return loading ? (
-        <Loading />
-    ) : (
+    return (
         <div className="container ">
             <div className="row">
                 <div className="col-lg-3">
                     <Card title="Navigation" size="small">
-                        <DirectoryTree
-                            multiple
-                            showLine
-                            onSelect={onSelect}
-                            // onExpand={onExpand}
-                            treeData={treeData}
-                        />
+                        {loading ? (
+                            <Loading />
+                        ) : (
+                            <DirectoryTree
+                                multiple
+                                showLine
+                                onSelect={onSelect}
+                                // onExpand={onExpand}
+                                treeData={treeData}
+                            />
+                        )}
                     </Card>
                 </div>
 
                 {currentData && (
                     <div className="col-lg-9">
-                        {currentData.isFolder ? <FolderView data={currentData} /> : <FileView data={currentData} />}
+                        {currentData.isFolder ? (
+                            <FolderView data={currentData} refresh={fetchFolders} />
+                        ) : (
+                            <ActionView data={currentData} refresh={fetchFolders} />
+                        )}
                     </div>
                 )}
             </div>
@@ -160,10 +173,42 @@ export const ActionsView: React.FC<Props> = ({}) => {
     );
 };
 
-const FolderView = ({ data }) => {
+interface FolderProps {
+    data: any;
+    refresh?: () => void;
+}
+
+const FolderView: React.FC<FolderProps> = ({ data, refresh }) => {
+    const { user, app } = useSelector((state: RootState) => state.app);
     const [folder, setfolder] = useState(data);
 
+    const updateFolderDetails = async () => {
+        if (!folder.name || !folder.description) {
+            toast.error('You must provide a folder name and description');
+        }
+
+        toast.loading('Updating folder');
+
+        const response = await updateFolder({
+            name: folder.name,
+            description: folder.description,
+            folder_id: folder._id,
+            token: user.auth_token,
+            user_id: user._id,
+            public_key: user.public_key,
+        }).catch((error) => {
+            toast.error(error.response.data.error);
+            return true;
+        });
+
+        if (response.data.status === true) {
+            toast.success('Folder Details Updated');
+            await refresh();
+        }
+    };
+
     useEffect(() => {}, [data.name]);
+
     return (
         <Card title="Folder">
             <Text>Name:</Text>
@@ -183,33 +228,109 @@ const FolderView = ({ data }) => {
                 onChange={(e) => setfolder({ ...folder, ['description']: e.target.value })}
             />
 
-            <Button type="primary">Save</Button>
+            <Button type="primary" onClick={() => updateFolderDetails()}>
+                Save
+            </Button>
         </Card>
     );
 };
 
-const FileView = ({ data }) => {
-    const [file, setFile] = useState(data);
+const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
+    const { user, app } = useSelector((state: RootState) => state.app);
+    const [loading, setLoading] = useState(true);
+    const [envs, setEnvs] = useState([]);
+    const [action, setAction] = useState(data);
+    const [actionEnvs, setActionEnvs] = useState([]);
+
+    const fetchActionDetails = async () => {
+        setLoading(true);
+        const response = await fetchAction({
+            token: user.auth_token,
+            user_id: user._id,
+            public_key: user.public_key,
+            action_id: data._id,
+        });
+
+        console.log('action', response.data.data);
+        setAction(response.data.data);
+        let v = [];
+
+        for (const ev of response.data.data.app_envs) {
+            v.push(ev._id);
+        }
+        setActionEnvs(v);
+        setLoading(false);
+    };
+
+    const updateActionDetails = async () => {
+        toast.loading('Updating action');
+
+        let newAction = { ...action, app_envs: actionEnvs };
+
+        const response = await updateAction({
+            ...newAction,
+            action_id: action._id,
+            token: user.auth_token,
+            user_id: user._id,
+            public_key: user.public_key,
+        }).catch((error) => {
+            toast.error(error.response.data.error);
+            return true;
+        });
+
+        if (response.data.status === true) {
+            toast.success('Action Details Updated');
+            await refresh();
+        }
+    };
 
     useEffect(() => {
-        setFile(data);
+        let environments = [];
+
+        app.envs.map((env) => {
+            environments.push({ label: env.env_name, value: env._id });
+        });
+
+        setEnvs(environments);
+
+        fetchActionDetails();
     }, [data.name]);
 
-    return (
+    return loading ? (
+        <Loading />
+    ) : (
         <Card title="Action">
-            <Text>Name</Text>
-            <Input
-                size="large"
-                className="mb-3"
-                value={file.name}
-                onChange={(e) => setFile({ ...file, ['name']: e.target.value })}
-            />
+            <div className="row">
+                <div className="col-6">
+                    <Text>Name</Text>
+                    <Input
+                        size="large"
+                        className="mb-3"
+                        value={action.name}
+                        onChange={(e) => setAction({ ...action, ['name']: e.target.value })}
+                    />
+                </div>
+                <div className="col-6">
+                    <Text>Available For</Text>
+                    <Select
+                        mode="multiple"
+                        allowClear
+                        className="mb-3"
+                        size="large"
+                        style={{ width: '100%' }}
+                        placeholder="Please select"
+                        value={actionEnvs}
+                        onChange={(value: string[]) => setActionEnvs(value)}
+                        options={envs}
+                    />
+                </div>
+            </div>
 
             <Text>Endpoint</Text>
             <Input.Group compact size="large">
                 <Select
-                    value={file.type}
-                    onChange={(value) => setFile({ ...file, ['type']: value })}
+                    value={action.type}
+                    onChange={(value) => setAction({ ...action, ['type']: value })}
                     size="large"
                     style={{ width: '20%' }}
                 >
@@ -231,12 +352,12 @@ const FileView = ({ data }) => {
                 </Select>
                 <Input
                     style={{ width: '80%' }}
-                    value={file.resource}
-                    onChange={(e) => setFile({ ...file, ['resource']: e.target.value })}
+                    value={action.resource}
+                    onChange={(e) => setAction({ ...action, ['resource']: e.target.value })}
                 />
             </Input.Group>
 
-            <Button type="primary" className="mt-3">
+            <Button type="primary" onClick={() => updateActionDetails()} className="mt-3">
                 Save
             </Button>
         </Card>

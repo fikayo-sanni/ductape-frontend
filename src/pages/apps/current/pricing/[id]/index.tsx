@@ -56,7 +56,7 @@ const EditPricing = () => {
             pricing_id: pricingId,
         });
 
-        console.log(pricingData.data.data);
+        //console.log(pricingData.data.data);
         setPricing(pricingData.data.data);
         setLoading(false);
     };
@@ -73,7 +73,7 @@ const EditPricing = () => {
         });
 
         toast.success('Pricing Plan Updated');
-        console.log(response.data.data);
+        // console.log(response.data.data);
         // dispatch(setCurrentApp(response.data.data));
     };
 
