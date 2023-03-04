@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update directories">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update acton display">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/app/actions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/actions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -286,14 +283,7 @@
       <workItem from="1675604041618" duration="1436000" />
       <workItem from="1676703246552" duration="12218000" />
       <workItem from="1677301633634" duration="23103000" />
-      <workItem from="1677920565597" duration="14550000" />
-    </task>
-    <task id="LOCAL-00450" summary="okra update">
-      <created>1642505803524</created>
-      <option name="number" value="00450" />
-      <option name="presentableId" value="LOCAL-00450" />
-      <option name="project" value="LOCAL" />
-      <updated>1642505803524</updated>
+      <workItem from="1677920565597" duration="18415000" />
     </task>
     <task id="LOCAL-00451" summary="okra update">
       <created>1643065523823</created>
@@ -631,7 +621,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677922848599</updated>
     </task>
-    <option name="localTasksCounter" value="499" />
+    <task id="LOCAL-00499" summary="update acton display">
+      <created>1677952274343</created>
+      <option name="number" value="00499" />
+      <option name="presentableId" value="LOCAL-00499" />
+      <option name="project" value="LOCAL" />
+      <updated>1677952274343</updated>
+    </task>
+    <option name="localTasksCounter" value="500" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -656,7 +653,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="upload" />
     <MESSAGE value="reports" />
     <MESSAGE value="general update" />
     <MESSAGE value="change login layout" />
@@ -681,7 +677,8 @@
     <MESSAGE value="actions" />
     <MESSAGE value="update action and folder" />
     <MESSAGE value="update directories" />
-    <option name="LAST_COMMIT_MESSAGE" value="update directories" />
+    <MESSAGE value="update acton display" />
+    <option name="LAST_COMMIT_MESSAGE" value="update acton display" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

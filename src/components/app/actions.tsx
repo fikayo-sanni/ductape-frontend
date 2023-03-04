@@ -17,6 +17,8 @@ import {
     Result,
     Tabs,
     Badge,
+    Space,
+    Collapse,
 } from 'antd';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -42,6 +44,7 @@ const { Text, Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
 const { Option } = Select;
 const { DirectoryTree } = Tree;
+const { Panel } = Collapse;
 
 interface Props {}
 
@@ -261,6 +264,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
     const [loading, setLoading] = useState(true);
     const [envs, setEnvs] = useState([]);
     const [bodydata, setBodyData] = useState<string[]>([]);
+    const [bodySample, setBodySample] = useState<object | null>(null);
     const [paramsdata, setParamsData] = useState<string[]>([]);
     const [action, setAction] = useState(data);
     const [actionEnvs, setActionEnvs] = useState([]);
@@ -294,6 +298,9 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
         });
 
         setBodyData(response2.data.data.data);
+        if (response2.data.data.data.length) {
+            setBodySample(response2.data.data.sample);
+        }
 
         // fetch params data
         const response3 = await fetchActionEntity({
@@ -313,145 +320,96 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
         data.map(
             (info, index) =>
                 info.level === 0 && (
-                    <>
-                        <tr>
-                            <td>
-                                <Input value={info.key} />
-                            </td>
-                            <td>
-                                <Select
-                                    value={info.type}
-                                    options={[
-                                        { label: 'String', value: 'string' },
-                                        { label: 'Array', value: 'array' },
-                                    ]}
-                                />
-                            </td>
-                            {/*<td>*/}
-                            {/*    {info.type === 'string' ? (*/}
-                            {/*        <Input value={info.sampleValue} defaultValue={info.defaultValue} />*/}
-                            {/*    ) : null}*/}
-                            {/*</td>*/}
+                    <Card size="small" className="mb-3">
+                        <div className="d-flex align-items-center justify-content-between">
+                            <Space size={50}>
+                                <div>
+                                    <Title className="mb-0" level={5}>
+                                        {info.key}
+                                    </Title>
+                                    <Text type="" className="mb-0 font-xxs">
+                                        Min. Length: {info.minLength} | Max. Length: {info.maxLength}
+                                    </Text>
+                                </div>
 
-                            {/*<td>*/}
-                            {/*    {info.type === 'string' ? (*/}
-                            {/*        <Input style={{ width: '50px' }} value={info.minLength} defaultValue={0} />*/}
-                            {/*    ) : null}*/}
-                            {/*</td>*/}
+                                <div>
+                                    <Title className="mb-0" level={5}>
+                                        {info.type}
+                                    </Title>
+                                    <Text className={info.required ? 'text-danger font-xxs' : 'font-xxs'}>
+                                        {info.required ? 'Required' : 'Optional'}
+                                    </Text>
+                                </div>
+                            </Space>
 
-                            {/*<td>*/}
-                            {/*    {info.type === 'string' ? (*/}
-                            {/*        <Input style={{ width: '50px' }} value={info.maxLength} defaultValue={0} />*/}
-                            {/*    ) : null}*/}
-                            {/*</td>*/}
-                            {/*<td>*/}
-                            {/*    <Input value={info.description} />*/}
-                            {/*</td>*/}
-                            <td>
-                                <Select
-                                    value={info.required}
-                                    options={[
-                                        { label: 'Yes', value: true },
-                                        { label: 'No', value: false },
-                                    ]}
-                                />
-                            </td>
-                        </tr>
-                        <tr>
-                            {['object', 'array'].includes(info.type) && (
-                                <td colSpan="100">
+                            <Space>
+                                <Button>Edit</Button>
+                                <Button danger>Delete</Button>
+                            </Space>
+                        </div>
+
+                        {['object', 'array'].includes(info.type) && (
+                            <Collapse size="small" ghost className="p-0 m-0 mt-3">
+                                <Panel header="Entries" className="m-0 p-0 border-top body_panel" key="1">
                                     <GenerateSubEntities parent={info} data={bodydata} />
-                                </td>
-                            )}
-                        </tr>
-                    </>
+                                </Panel>
+                            </Collapse>
+                            // <td colSpan="100">
+                            //     <GenerateSubEntities parent={info} data={bodydata} />
+                            // </td>
+                        )}
+                    </Card>
                 ),
         );
 
     const GenerateSubEntities = ({ parent, data }) => {
         return (
             <div>
-                <table className=" table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Key</th>
-                            <th>Type</th>
-                            {/*<th>Value</th>*/}
-                            {/*<th>Min. Length</th>*/}
-                            {/*<th>Max. Length</th>*/}
-                            {/*<th>Description</th>*/}
-                            <th>Required</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map(
-                            (info, index) =>
-                                info.parent_key === parent.key &&
-                                info.level === parent.level + 1 && (
-                                    <>
-                                        <tr>
-                                            <td>
-                                                <Input value={info.key} />
-                                            </td>
-                                            <td>
-                                                <Select
-                                                    value={info.type}
-                                                    options={[
-                                                        { label: 'String', value: 'string' },
-                                                        { label: 'Array', value: 'array' },
-                                                    ]}
-                                                />
-                                            </td>
-                                            {/*<td>*/}
-                                            {/*    {info.type === 'string' ? (*/}
-                                            {/*        <Input value={info.sampleValue} defaultValue={info.defaultValue} />*/}
-                                            {/*    ) : null}*/}
-                                            {/*</td>*/}
+                {data.map(
+                    (info, index) =>
+                        info.parent_key === parent.key &&
+                        info.level === parent.level + 1 && (
+                            <Card size="small" className="mb-3">
+                                <div className="d-flex align-items-center justify-content-between">
+                                    <Space size={50}>
+                                        <div>
+                                            <Title className="mb-0" level={5}>
+                                                {info.key}
+                                            </Title>
+                                            <Text type="" className="mb-0 font-xxs">
+                                                Min. Length: {info.minLength} | Max. Length: {info.maxLength}
+                                            </Text>
+                                        </div>
 
-                                            {/*<td>*/}
-                                            {/*    {info.type === 'string' ? (*/}
-                                            {/*        <Input*/}
-                                            {/*            style={{ width: '50px' }}*/}
-                                            {/*            value={info.minLength}*/}
-                                            {/*            defaultValue={0}*/}
-                                            {/*        />*/}
-                                            {/*    ) : null}*/}
-                                            {/*</td>*/}
+                                        <div>
+                                            <Title className="mb-0" level={5}>
+                                                {info.type}
+                                            </Title>
+                                            <Text className={info.required ? 'text-danger font-xxs' : 'font-xxs'}>
+                                                {info.required ? 'Required' : 'Optional'}
+                                            </Text>
+                                        </div>
+                                    </Space>
 
-                                            {/*<td>*/}
-                                            {/*    {info.type === 'string' ? (*/}
-                                            {/*        <Input*/}
-                                            {/*            style={{ width: '50px' }}*/}
-                                            {/*            value={info.maxLength}*/}
-                                            {/*            defaultValue={0}*/}
-                                            {/*        />*/}
-                                            {/*    ) : null}*/}
-                                            {/*</td>*/}
-                                            {/*<td>*/}
-                                            {/*    <Input value={info.description} />*/}
-                                            {/*</td>*/}
-                                            <td>
-                                                <Select
-                                                    value={info.required}
-                                                    options={[
-                                                        { label: 'Yes', value: true },
-                                                        { label: 'No', value: false },
-                                                    ]}
-                                                />
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            {['object', 'array'].includes(info.type) && (
-                                                <td colSpan="100">
-                                                    <GenerateSubEntities parent={info} data={bodydata} />
-                                                </td>
-                                            )}
-                                        </tr>
-                                    </>
-                                ),
-                        )}
-                    </tbody>
-                </table>
+                                    <Space>
+                                        <Button>Edit</Button>
+                                        <Button danger>Delete</Button>
+                                    </Space>
+                                </div>
+
+                                {['object', 'array'].includes(info.type) && (
+                                    <Collapse size="small" ghost className="p-0 m-0 mt-3">
+                                        <Panel header="Entries" className="m-0 p-0 border-top body_panel" key="1">
+                                            <GenerateSubEntities parent={info} data={bodydata} />
+                                        </Panel>
+                                    </Collapse>
+                                    // <td colSpan="100">
+                                    //     <GenerateSubEntities parent={info} data={bodydata} />
+                                    // </td>
+                                )}
+                            </Card>
+                        ),
+                )}
             </div>
         );
     };
@@ -556,25 +514,35 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
             <div>
                 <Tabs defaultActiveKey={action.httpVerb === 'POST' ? '0' : '1'} className="page_tabs ">
                     <TabPane tab="Body" key="0">
-                        <table className="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Key</th>
-                                    <th>Type</th>
-                                    {/*<th>Value</th>*/}
-                                    {/*<th>Min. Length</th>*/}
-                                    {/*<th>Max. Length</th>*/}
-                                    {/*<th>Description</th>*/}
-                                    <th>Required</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <GenerateEntityStructure data={bodydata} />
-                            </tbody>
-                        </table>
+                        {bodySample && (
+                            <Collapse className="mb-3">
+                                <Panel header="Sample Request">
+                                    <pre className="mb-0">{JSON.stringify(JSON.parse(bodySample.sample), null, 4)}</pre>
+                                </Panel>
+                            </Collapse>
+                        )}
+
+                        <GenerateEntityStructure data={bodydata} />
+
+                        {/*<table className="table">*/}
+                        {/*    <thead>*/}
+                        {/*        <tr>*/}
+                        {/*            <th>Key</th>*/}
+                        {/*            <th>Type</th>*/}
+                        {/*            /!*<th>Value</th>*!/*/}
+                        {/*            /!*<th>Min. Length</th>*!/*/}
+                        {/*            /!*<th>Max. Length</th>*!/*/}
+                        {/*            /!*<th>Description</th>*!/*/}
+                        {/*            <th>Required</th>*/}
+                        {/*        </tr>*/}
+                        {/*    </thead>*/}
+                        {/*    <tbody>*/}
+                        {/*        <GenerateEntityStructure data={bodydata} />*/}
+                        {/*    </tbody>*/}
+                        {/*</table>*/}
                     </TabPane>
                     <TabPane tab="Params" key="1">
-                        <table className="table table-bordered table-striped">
+                        <table className="table ">
                             <thead>
                                 <tr>
                                     <th>Key</th>

@@ -1,5 +1,5 @@
 :root {
-  --primary_color: #0746A6;
+  --primary_color: #0746a6;
   --primary_color_hover: #06275a;
   --primary_color_transparent: #E4E6EA;
   --primary_color_transparent_2: #F2F4F7;
@@ -367,6 +367,21 @@ a {
 
 .icon_extra_large svg {
   font-size: 10rem !important;
+}
+
+.body_panel .ant-collapse-header, .body_panel .ant-collapse-content-box {
+  transition: 0.5s !important;
+  border-radius: 0 !important;
+  padding-bottom: 10px !important;
+  background: rgba(7, 70, 116, 0.05);
+}
+.body_panel .ant-collapse-content-box {
+  background: none !important;
+}
+.body_panel .ant-collapse-header:hover {
+  background: rgba(7, 70, 116, 0.15);
+  padding-bottom: 10px !important;
+  padding-left: 10px !important;
 }
 
 /*# sourceMappingURL=style.css.map */

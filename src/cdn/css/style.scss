@@ -35,7 +35,7 @@ $tv-size: 1281px;
 }
 
 :root {
-  --primary_color: #0746A6;
+  --primary_color: #0746a6;
   --primary_color_hover: #06275a;
   --primary_color_transparent: #E4E6EA;
   --primary_color_transparent_2: #F2F4F7;
@@ -525,5 +525,28 @@ a{
 .icon_extra_large {
   svg {
     font-size: 10rem !important;
+  }
+}
+.body_panel
+{
+  .ant-collapse-header, .ant-collapse-content-box
+  {
+    transition: .5s !Important;
+    border-radius: 0 !Important;
+    padding-bottom: 10px !important;
+    background: rgb(7, 70, 116,.05);
+  }
+
+  .ant-collapse-content-box
+  {
+    background: none !Important;
+  }
+
+  .ant-collapse-header:hover
+  {
+    background: rgb(7, 70, 116,.15);
+    padding-bottom: 10px !important;
+    padding-left: 10px !important;
+
   }
 }
