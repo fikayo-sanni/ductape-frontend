@@ -4,9 +4,6 @@ import { Avatar, Typography, Button, Result, Tag, Table, Modal, List, Switch, Ca
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import dynamic from 'next/dynamic';
-import CountUp from 'react-countup';
-import { EditOutlined } from '@ant-design/icons';
-import { Env } from '@next/env';
 import { fetchApp, fetchPricing } from '../services/apps.service';
 
 const { Text, Title, Paragraph } = Typography;
@@ -83,7 +80,7 @@ export const PricingView: React.FC<Props> = ({}) => {
         <Loading />
     ) : (
         <div className="container ">
-            <Text>Showing {app.envs.length.toLocaleString()} environment(s)</Text>
+            <Text>Showing {app.pricing.length.toLocaleString()} environment(s)</Text>
             <Table
                 onRow={(record, rowIndex) => {
                     return {

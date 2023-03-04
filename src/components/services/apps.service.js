@@ -1,4 +1,4 @@
-import { actionsClient, appsClient, pricingClient } from '../clients/apps.client';
+import { appsClient } from '../clients/apps.client';
 import {
     APPS_CREATE_URL,
     APPS_FETCH_URL,
@@ -22,6 +22,8 @@ import {
 } from '../config/urls';
 import { Parameterize } from '../config/constant';
 import toast from 'react-hot-toast';
+import { actionsClient } from '../clients/actions.client';
+import { pricingClient } from '../clients/pricing.client';
 
 export const createApp = async (payload) => {
     try {

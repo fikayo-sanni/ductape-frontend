@@ -36,7 +36,7 @@ const AppDisplay: React.FC<Props> = ({ app, orientation = 'grid' }) => {
             <Card
                 className=" mb-4"
                 actions={[
-                    <Text>{app.domains ? app.domains.length : 0} domains</Text>,
+                    <Text>{app.actions ? app.actions.length : 0} actions</Text>,
                     <Text>{app.envs.length} environments</Text>,
                 ]}
             >

@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="actions">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update action and folder">
+      <change afterPath="$PROJECT_DIR$/src/components/clients/actions.client.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/clients/pricing.client.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/actions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/actions.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/config/urls.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/config/urls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/pricing.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/pricing.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clients/actions.client.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/clients/apps.client.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/clients/apps.client.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/appDisplay/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/services/apps.service.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/services/apps.service.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/actions/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/actions/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/[id]/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/pricing/new.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/pricing/new.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +62,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/app" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/clients" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="/usr/local/bin/node" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
@@ -68,11 +75,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/clients" />
       <recent name="$PROJECT_DIR$/src/components/app" />
       <recent name="$PROJECT_DIR$/src/pages/apps/current/actions" />
       <recent name="$PROJECT_DIR$/src/pages/apps/current/pricing" />
       <recent name="$PROJECT_DIR$/src/pages/apps/current" />
-      <recent name="$PROJECT_DIR$/src/pages/apps/[id]/env/[id]" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/pages/dashboard" />
@@ -282,14 +289,8 @@
       <workItem from="1675510021670" duration="1165000" />
       <workItem from="1675604041618" duration="1436000" />
       <workItem from="1676703246552" duration="12218000" />
-      <workItem from="1677301633634" duration="22991000" />
-    </task>
-    <task id="LOCAL-00448" summary="Okra">
-      <created>1641229675681</created>
-      <option name="number" value="00448" />
-      <option name="presentableId" value="LOCAL-00448" />
-      <option name="project" value="LOCAL" />
-      <updated>1641229675681</updated>
+      <workItem from="1677301633634" duration="23103000" />
+      <workItem from="1677920565597" duration="2270000" />
     </task>
     <task id="LOCAL-00449" summary="okra update">
       <created>1641395149690</created>
@@ -627,7 +628,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677404559734</updated>
     </task>
-    <option name="localTasksCounter" value="497" />
+    <task id="LOCAL-00497" summary="update action and folder">
+      <created>1677439961516</created>
+      <option name="number" value="00497" />
+      <option name="presentableId" value="LOCAL-00497" />
+      <option name="project" value="LOCAL" />
+      <updated>1677439961516</updated>
+    </task>
+    <option name="localTasksCounter" value="498" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -652,7 +660,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="dashboard" />
     <MESSAGE value="dashboard 2" />
     <MESSAGE value="upload" />
     <MESSAGE value="reports" />
@@ -677,7 +684,8 @@
     <MESSAGE value="pricing" />
     <MESSAGE value="create new pricing" />
     <MESSAGE value="actions" />
-    <option name="LAST_COMMIT_MESSAGE" value="actions" />
+    <MESSAGE value="update action and folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="update action and folder" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -154,7 +154,7 @@ const NewPricing = () => {
                                                     { value: 'weekly', label: 'Weekly' },
                                                     { value: 'bi-weekly', label: 'Bi-weekly' },
                                                     { value: 'monthly', label: 'Monthly' },
-                                                    { value: 'quaterly', label: 'Quaterly' },
+                                                    { value: 'quarterly', label: 'Quarterly' },
                                                     { value: 'yearly', label: 'Yearly' },
                                                 ]}
                                             />
