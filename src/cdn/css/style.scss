@@ -515,3 +515,15 @@ a{
   width: 55px !Important;
   margin-left: -10px !important;
 }
+
+.icon_large {
+  svg {
+    font-size: 50px !important;
+  }
+}
+
+.icon_extra_large {
+  svg {
+    font-size: 10rem !important;
+  }
+}

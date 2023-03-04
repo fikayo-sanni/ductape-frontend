@@ -19,6 +19,7 @@ import {
     ACTIONS_FETCH_FOLDERS,
     ACTIONS_UPDATE_FOLDER,
     ACTIONS_FETCH_ACTION,
+    ACTIONS_FETCH_ACTION_ENTITY,
 } from '../config/urls';
 import { Parameterize } from '../config/constant';
 import toast from 'react-hot-toast';
@@ -303,6 +304,22 @@ export const fetchAction = async (payload) => {
         const { action_id, token, user_id, public_key } = payload;
 
         let URL = Parameterize(ACTIONS_FETCH_ACTION, ':action_id', action_id);
+
+        return actionsClient(`Bearer ${token}`, 'application/json').get(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+        );
+    } catch (e) {
+        throw e;
+        return true;
+    }
+};
+
+export const fetchActionEntity = async (payload) => {
+    try {
+        const { action_id, category, token, user_id, public_key } = payload;
+
+        let URL = Parameterize(ACTIONS_FETCH_ACTION_ENTITY, ':action_id', action_id);
+        URL = Parameterize(URL, ':category', category);
 
         return actionsClient(`Bearer ${token}`, 'application/json').get(
             `${URL}?user_id=${user_id}&public_key=${public_key}`,

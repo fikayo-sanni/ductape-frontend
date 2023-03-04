@@ -39,6 +39,7 @@ export const ACTION_UPDATE_DATA = '/actions/v1/action/:action_id/data/:category'
 export const ACTIONS_CREATE_RESPONSES = '/actions/v1/response';
 export const ACTIONS_FETCH_RESPONSES = '/actions/v1/response/:action_id';
 export const ACTIONS_FETCH_ACTION = '/actions/v1/:action_id';
+export const ACTIONS_FETCH_ACTION_ENTITY = '/actions/v1/entity/:action_id/data/:category';
 export const ACTIONS_FETCH_FOLDERS = '/actions/v1/folders/:app_id';
 export const ACTIONS_UPDATE_FOLDER = '/actions/v1/folder/:folder_id';
 

@@ -14,6 +14,9 @@ import {
     Statistic,
     Input,
     Select,
+    Result,
+    Tabs,
+    Badge,
 } from 'antd';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -23,6 +26,7 @@ import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
 import {
     createPricing,
     fetchAction,
+    fetchActionEntity,
     fetchActionFolders,
     fetchApp,
     fetchAppEnv,
@@ -32,8 +36,10 @@ import {
 } from '../services/apps.service';
 import toast from 'react-hot-toast';
 import Router from 'next/router';
+import { FolderOpenOutlined } from '@ant-design/icons';
 
 const { Text, Title, Paragraph } = Typography;
+const { TabPane } = Tabs;
 const { Option } = Select;
 const { DirectoryTree } = Tree;
 
@@ -159,13 +165,28 @@ export const ActionsView: React.FC<Props> = ({}) => {
                     </Card>
                 </div>
 
-                {currentData && (
+                {currentData ? (
                     <div className="col-lg-9">
                         {currentData.isFolder ? (
                             <FolderView data={currentData} refresh={fetchFolders} />
                         ) : (
                             <ActionView data={currentData} refresh={fetchFolders} />
                         )}
+                    </div>
+                ) : (
+                    <div className="col-lg-9">
+                        <Result
+                            status="info"
+                            icon={<FolderOpenOutlined />}
+                            title={`${app.app_name} Actions Directory`}
+                            subTitle="Click to open a folder or action from the navigation pane"
+                            extra={[
+                                <Button type="primary" key="console">
+                                    Create Folder
+                                </Button>,
+                                <Button key="buy">Create Action</Button>,
+                            ]}
+                        />
                     </div>
                 )}
             </div>
@@ -239,11 +260,15 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
     const { user, app } = useSelector((state: RootState) => state.app);
     const [loading, setLoading] = useState(true);
     const [envs, setEnvs] = useState([]);
+    const [bodydata, setBodyData] = useState<string[]>([]);
+    const [paramsdata, setParamsData] = useState<string[]>([]);
     const [action, setAction] = useState(data);
     const [actionEnvs, setActionEnvs] = useState([]);
 
     const fetchActionDetails = async () => {
         setLoading(true);
+
+        // Fetch action data
         const response = await fetchAction({
             token: user.auth_token,
             user_id: user._id,
@@ -251,7 +276,6 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
             action_id: data._id,
         });
 
-        console.log('action', response.data.data);
         setAction(response.data.data);
         let v = [];
 
@@ -259,13 +283,185 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
             v.push(ev._id);
         }
         setActionEnvs(v);
+
+        // fetch body data
+        const response2 = await fetchActionEntity({
+            token: user.auth_token,
+            user_id: user._id,
+            public_key: user.public_key,
+            action_id: data._id,
+            category: 'body',
+        });
+
+        setBodyData(response2.data.data.data);
+
+        // fetch params data
+        const response3 = await fetchActionEntity({
+            token: user.auth_token,
+            user_id: user._id,
+            public_key: user.public_key,
+            action_id: data._id,
+            category: 'params',
+        });
+
+        setParamsData(response3.data.data.data);
+
         setLoading(false);
+    };
+
+    const GenerateEntityStructure = ({ data }) =>
+        data.map(
+            (info, index) =>
+                info.level === 0 && (
+                    <>
+                        <tr>
+                            <td>
+                                <Input value={info.key} />
+                            </td>
+                            <td>
+                                <Select
+                                    value={info.type}
+                                    options={[
+                                        { label: 'String', value: 'string' },
+                                        { label: 'Array', value: 'array' },
+                                    ]}
+                                />
+                            </td>
+                            {/*<td>*/}
+                            {/*    {info.type === 'string' ? (*/}
+                            {/*        <Input value={info.sampleValue} defaultValue={info.defaultValue} />*/}
+                            {/*    ) : null}*/}
+                            {/*</td>*/}
+
+                            {/*<td>*/}
+                            {/*    {info.type === 'string' ? (*/}
+                            {/*        <Input style={{ width: '50px' }} value={info.minLength} defaultValue={0} />*/}
+                            {/*    ) : null}*/}
+                            {/*</td>*/}
+
+                            {/*<td>*/}
+                            {/*    {info.type === 'string' ? (*/}
+                            {/*        <Input style={{ width: '50px' }} value={info.maxLength} defaultValue={0} />*/}
+                            {/*    ) : null}*/}
+                            {/*</td>*/}
+                            {/*<td>*/}
+                            {/*    <Input value={info.description} />*/}
+                            {/*</td>*/}
+                            <td>
+                                <Select
+                                    value={info.required}
+                                    options={[
+                                        { label: 'Yes', value: true },
+                                        { label: 'No', value: false },
+                                    ]}
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            {['object', 'array'].includes(info.type) && (
+                                <td colSpan="100">
+                                    <GenerateSubEntities parent={info} data={bodydata} />
+                                </td>
+                            )}
+                        </tr>
+                    </>
+                ),
+        );
+
+    const GenerateSubEntities = ({ parent, data }) => {
+        return (
+            <div>
+                <table className=" table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Key</th>
+                            <th>Type</th>
+                            {/*<th>Value</th>*/}
+                            {/*<th>Min. Length</th>*/}
+                            {/*<th>Max. Length</th>*/}
+                            {/*<th>Description</th>*/}
+                            <th>Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map(
+                            (info, index) =>
+                                info.parent_key === parent.key &&
+                                info.level === parent.level + 1 && (
+                                    <>
+                                        <tr>
+                                            <td>
+                                                <Input value={info.key} />
+                                            </td>
+                                            <td>
+                                                <Select
+                                                    value={info.type}
+                                                    options={[
+                                                        { label: 'String', value: 'string' },
+                                                        { label: 'Array', value: 'array' },
+                                                    ]}
+                                                />
+                                            </td>
+                                            {/*<td>*/}
+                                            {/*    {info.type === 'string' ? (*/}
+                                            {/*        <Input value={info.sampleValue} defaultValue={info.defaultValue} />*/}
+                                            {/*    ) : null}*/}
+                                            {/*</td>*/}
+
+                                            {/*<td>*/}
+                                            {/*    {info.type === 'string' ? (*/}
+                                            {/*        <Input*/}
+                                            {/*            style={{ width: '50px' }}*/}
+                                            {/*            value={info.minLength}*/}
+                                            {/*            defaultValue={0}*/}
+                                            {/*        />*/}
+                                            {/*    ) : null}*/}
+                                            {/*</td>*/}
+
+                                            {/*<td>*/}
+                                            {/*    {info.type === 'string' ? (*/}
+                                            {/*        <Input*/}
+                                            {/*            style={{ width: '50px' }}*/}
+                                            {/*            value={info.maxLength}*/}
+                                            {/*            defaultValue={0}*/}
+                                            {/*        />*/}
+                                            {/*    ) : null}*/}
+                                            {/*</td>*/}
+                                            {/*<td>*/}
+                                            {/*    <Input value={info.description} />*/}
+                                            {/*</td>*/}
+                                            <td>
+                                                <Select
+                                                    value={info.required}
+                                                    options={[
+                                                        { label: 'Yes', value: true },
+                                                        { label: 'No', value: false },
+                                                    ]}
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            {['object', 'array'].includes(info.type) && (
+                                                <td colSpan="100">
+                                                    <GenerateSubEntities parent={info} data={bodydata} />
+                                                </td>
+                                            )}
+                                        </tr>
+                                    </>
+                                ),
+                        )}
+                    </tbody>
+                </table>
+            </div>
+        );
     };
 
     const updateActionDetails = async () => {
         toast.loading('Updating action');
 
         let newAction = { ...action, app_envs: actionEnvs };
+
+        console.log(newAction);
 
         const response = await updateAction({
             ...newAction,
@@ -356,6 +552,47 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                     onChange={(e) => setAction({ ...action, ['resource']: e.target.value })}
                 />
             </Input.Group>
+
+            <div>
+                <Tabs defaultActiveKey={action.httpVerb === 'POST' ? '0' : '1'} className="page_tabs ">
+                    <TabPane tab="Body" key="0">
+                        <table className="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Type</th>
+                                    {/*<th>Value</th>*/}
+                                    {/*<th>Min. Length</th>*/}
+                                    {/*<th>Max. Length</th>*/}
+                                    {/*<th>Description</th>*/}
+                                    <th>Required</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <GenerateEntityStructure data={bodydata} />
+                            </tbody>
+                        </table>
+                    </TabPane>
+                    <TabPane tab="Params" key="1">
+                        <table className="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Key</th>
+                                    <th>Type</th>
+                                    {/*<th>Value</th>*/}
+                                    {/*<th>Min. Length</th>*/}
+                                    {/*<th>Max. Length</th>*/}
+                                    {/*<th>Description</th>*/}
+                                    <th>Required</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <GenerateEntityStructure data={paramsdata} />
+                            </tbody>
+                        </table>
+                    </TabPane>
+                </Tabs>
+            </div>
 
             <Button type="primary" onClick={() => updateActionDetails()} className="mt-3">
                 Save

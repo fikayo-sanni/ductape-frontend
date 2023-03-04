@@ -31,6 +31,8 @@ const AppDisplay: React.FC<Props> = ({ app, orientation = 'grid' }) => {
         Router.push(`/apps/current`);
     };
 
+    console.log(app);
+
     return orientation === 'grid' ? (
         <div className="col-xl-4 cursor_pointer" onClick={() => openApp(app)}>
             <Card
