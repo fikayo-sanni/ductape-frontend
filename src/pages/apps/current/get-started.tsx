@@ -2,29 +2,22 @@ import Dashboard_Layout from '../../../components/layout/dashboard_layout';
 import Overview from '../../../components/apps/app/overview';
 import { setCurrentApp } from '../../../redux/applicationSlice';
 import React, { useState } from 'react';
+import { Card } from 'antd';
 import PageHeader from '../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
-import { Card } from 'antd';
 
-const AppInfo = dynamic(() => import('../../../components/app/appInfo'));
+const GetStartedView = dynamic(() => import('../../../components/app/getStarted'));
 
-const About = (props) => {
-    const { app_id } = props;
-
-    //alert(JSON.stringify(props));
-
-    const [text, setText] = useState('');
-    const [html, setHTML] = useState('');
-
+const GetStarted = (props) => {
     return (
-        <Dashboard_Layout showSidebar={true} title="Apps" appPage="About">
-            <PageHeader title="App Info." />
+        <Dashboard_Layout showSidebar={true} title="Apps" appPage="Get Started">
+            <PageHeader title="Get Started" />
 
             <Card className="no_background no_border">
-                <AppInfo />
+                <GetStartedView />
             </Card>
         </Dashboard_Layout>
     );
 };
 
-export default About;
+export default GetStarted;

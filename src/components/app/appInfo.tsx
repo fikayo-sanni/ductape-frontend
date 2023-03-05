@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Avatar, Typography, Button, Popconfirm, Modal, Input, Collapse, Space } from 'antd';
+import { Avatar, Typography, Button, Popconfirm, Modal, Input, Collapse, Space, Divider } from 'antd';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -142,11 +142,11 @@ export const AppInfo: React.FC<Props> = ({}) => {
         <Loading />
     ) : (
         <div className="container">
-            <div className="d-flex mb-3 justify-content-between">
+            <Divider orientation="left" orientationMargin="0">
+                <Title level={4}> Read me</Title>
+            </Divider>
+            <div className="d-flex mb-5 w-100 justify-content-between">
                 <div>
-                    <Title level={4} className="mb-0">
-                        Readme
-                    </Title>
                     <Text type="secondary">Tell us about your app, what it does, and how to use it</Text>
                 </div>
                 <div>
@@ -176,11 +176,11 @@ export const AppInfo: React.FC<Props> = ({}) => {
             {/*    <MDEditor.Markdown className="p-3" source={dApp.aboutHTML} style={{ whiteSpace: 'pre-wrap' }} />*/}
             {/*)}*/}
 
-            <div className="d-flex mb-3 mt-5 justify-content-between">
+            <Divider orientation="left" orientationMargin="0">
+                <Title level={4}>FAQ</Title>
+            </Divider>
+            <div className="d-flex w-100 mb-3 justify-content-between">
                 <div>
-                    <Title level={4} className="mb-0">
-                        FAQ
-                    </Title>
                     <Text type="secondary">Frequently asked questions about your app</Text>
                 </div>
                 <div>

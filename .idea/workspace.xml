@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="update acton display">
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="Update action render">
+      <change afterPath="$PROJECT_DIR$/src/components/app/getStarted.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/pages/apps/current/get-started.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/app/actions.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/actions.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/b5/js/bootstrap.esm.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/b5/js/bootstrap.esm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/b5/js/bootstrap.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/b5/js/bootstrap.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/app/appInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/app/appInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/dashboard/appNav/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/about.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/apps/current/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +60,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/clients" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components/app" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="prettierjs.PrettierConfiguration.NodeInterpreter" value="/usr/local/bin/node" />
     <property name="prettierjs.PrettierConfiguration.Package" value="$PROJECT_DIR$/node_modules/prettier" />
@@ -68,18 +73,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/clients" />
       <recent name="$PROJECT_DIR$/src/components/app" />
+      <recent name="$PROJECT_DIR$/src/pages/apps/current" />
+      <recent name="$PROJECT_DIR$/src/components/clients" />
       <recent name="$PROJECT_DIR$/src/pages/apps/current/actions" />
       <recent name="$PROJECT_DIR$/src/pages/apps/current/pricing" />
-      <recent name="$PROJECT_DIR$/src/pages/apps/current" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/app" />
       <recent name="$PROJECT_DIR$/src/pages/dashboard" />
       <recent name="$PROJECT_DIR$/src" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/images/icons" />
-      <recent name="$PROJECT_DIR$/public/images" />
     </key>
   </component>
   <component name="RunManager" selected="npm.dev">
@@ -283,14 +288,8 @@
       <workItem from="1675604041618" duration="1436000" />
       <workItem from="1676703246552" duration="12218000" />
       <workItem from="1677301633634" duration="23103000" />
-      <workItem from="1677920565597" duration="18415000" />
-    </task>
-    <task id="LOCAL-00451" summary="okra update">
-      <created>1643065523823</created>
-      <option name="number" value="00451" />
-      <option name="presentableId" value="LOCAL-00451" />
-      <option name="project" value="LOCAL" />
-      <updated>1643065523823</updated>
+      <workItem from="1677920565597" duration="19088000" />
+      <workItem from="1678014974137" duration="2394000" />
     </task>
     <task id="LOCAL-00452" summary="okra update">
       <created>1643069416750</created>
@@ -628,7 +627,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677952274343</updated>
     </task>
-    <option name="localTasksCounter" value="500" />
+    <task id="LOCAL-00500" summary="Update action render">
+      <created>1677956105187</created>
+      <option name="number" value="00500" />
+      <option name="presentableId" value="LOCAL-00500" />
+      <option name="project" value="LOCAL" />
+      <updated>1677956105187</updated>
+    </task>
+    <option name="localTasksCounter" value="501" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -653,7 +659,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="reports" />
     <MESSAGE value="general update" />
     <MESSAGE value="change login layout" />
     <MESSAGE value="update dashboard layout" />
@@ -678,7 +683,8 @@
     <MESSAGE value="update action and folder" />
     <MESSAGE value="update directories" />
     <MESSAGE value="update acton display" />
-    <option name="LAST_COMMIT_MESSAGE" value="update acton display" />
+    <MESSAGE value="Update action render" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update action render" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

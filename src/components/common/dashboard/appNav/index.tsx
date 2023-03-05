@@ -68,11 +68,8 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
                 <Menu.Item key="My App" icon={<DashboardOutlined style={{ width: 20 }} />}>
                     <Link href={`/apps/current/`}>My App</Link>
                 </Menu.Item>
-                <Menu.Item key="Dashboard" icon={<CheckOutlined style={{ width: 20 }} />}>
+                <Menu.Item key="Get Started" icon={<CheckOutlined style={{ width: 20 }} />}>
                     <Link href="/apps/current/get-started">Get Started</Link>
-                </Menu.Item>
-                <Menu.Item key="About" icon={<InfoCircleOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/current/about`}>App Information</Link>
                 </Menu.Item>
                 <Menu.Item key="Publish" icon={<InfoCircleOutlined style={{ width: 20 }} />}>
                     <Link href={`/apps/current/about`}>Publish</Link>
