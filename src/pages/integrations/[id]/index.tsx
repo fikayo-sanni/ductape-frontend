@@ -3,21 +3,21 @@ import React, { useEffect, useState } from "react";
 import { Breadcrumb, Menu, List, Card, Avatar, Switch, Button } from "antd";
 import { useSelector } from "react-redux";
 import Link from "next/link";
-import {
-  Loading,
-  capitalize,
-  fetchInitials,
-} from "../../../components/config/constant";
+// import {
+//   Loading,
+//   capitalize,
+//   fetchInitials,
+// } from "../../../components/config/constant";
 import { PlusOutlined, SettingOutlined } from "@ant-design/icons";
 import Integration_Layout from "../../../components/layout/integration_layout";
 
 const Index = (props) => {
   const {integration_id} = props;
 
-  useEffect(async () => {}, []);
+  useEffect(() => {}, []);
 
-  return (
-    <Integration_Layout integration_id={integration_id}></Integration_Layout>
+  return ( 
+    <Integration_Layout integration_id={integration_id}> heyy</Integration_Layout>
   );
 };
 

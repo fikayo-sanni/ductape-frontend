@@ -70,7 +70,7 @@ export const fetchWorkspaceApps = async (payload) => {
     } catch (e) {
         throw e;
     }
-};
+}; 
 
 export const fetchApp = async (payload) => {
     try {

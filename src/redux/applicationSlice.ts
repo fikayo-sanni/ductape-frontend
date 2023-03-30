@@ -1,5 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export interface Integration {
+    _id?: string;
+    workspace_id: string;
+    user_id: string;
+    name: string;
+    tag?: string;
+    logo?: string;
+    description: string; public_key?: string;
+    private_key: string;
+    status: string,
+    active: boolean
+}
+
 export interface AppState {
     user?: CurrentUser | null;
     isAuthenticated: boolean;
@@ -12,12 +25,13 @@ export interface AppState {
     domains: [];
     defaultWorkspaceId: string;
 
-    integrations: [];
+    integrations: Integration[];
     integration: any;
 
     darkMode: boolean;
     currentTheme: any;
 }
+
 
 export interface Workspace {
     user_id: string;

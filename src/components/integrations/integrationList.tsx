@@ -1,10 +1,30 @@
 import { List, Avatar, Card } from "antd";
 import Link from "next/link";
-import { EditOutlined, EyeOutlined } from "@ant-design/icons";
-import { fetchInitials, capitalize } from "../config/constant";
+import { useDispatch, useSelector } from 'react-redux';
+import { EditOutlined, EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
+//import { fetchInitials, capitalize } from "../config/constant";
+import { RootState } from '../../redux/store';
+import { changeSelectedIntegration } from '../../redux/applicationSlice';
+import Router from 'next/router';
+import { fetchIntegration } from '../services/integrations.service';
 
 const IntegrationList = (props) => {
   const { integrations } = props;
+  const { user, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
+  const dispatch = useDispatch();
+
+  const openIntegration = async (integration) => {
+    const response = await fetchIntegration({
+        token: user.auth_token,
+        user_id: user._id,
+        public_key: user.public_key,
+        integration_id: integration._id,
+    });
+    console.log(response.data.data);
+    await dispatch(changeSelectedIntegration(response.data.data));
+    Router.push(`/integrations/integration`);
+  };
+
   return (
     <div>
       <List
@@ -18,21 +38,21 @@ const IntegrationList = (props) => {
           xxl: 3,
         }}
         dataSource={integrations}
-        renderItem={(item, index) => {
+        renderItem={(item: any, index: number) => {
           //alert(item)
           return (
-
+           
             <List.Item className="p-2">
-              <Link href={`/integrations/${item._id}/features`}>
-                <Card className="hover-blue">
+              
+                <Card className="hover-blue" onClick={() => openIntegration(item)}>
                   <span>
                     <Avatar
                       className="bg-gray text-primary me-2 border_radius font-weight-500"
                       shape="square"
                     >
-                      {fetchInitials(capitalize(item.name))}
+                      {((item.name))}
                     </Avatar>{" "}
-                    {capitalize(item.name)}
+                    {(item.name)}
                   </span>
                   <div className="row">
                     <label className="mt-2 text-muted col-9">
@@ -43,7 +63,7 @@ const IntegrationList = (props) => {
                         <label
                           className={`btn mx-2 bold btn-light text-primary`}
                         >
-                          {capitalize(item.status)} 
+                          {(item.status)} 
                           {item.status==="public"?<EyeOutlined />: item.status==="private"? <EyeInvisibleOutlined/>: <EditOutlined/>}
                         </label>
                       ) : (
@@ -52,7 +72,7 @@ const IntegrationList = (props) => {
                     </label>
                   </div>
                 </Card>
-              </Link>
+              
             </List.Item>
 
 

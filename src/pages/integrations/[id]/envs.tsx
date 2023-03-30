@@ -3,20 +3,22 @@ import { useSelector } from "react-redux";
 import Environments from "../../../components/integrations/integration/environments";
 import Integration_Layout from "../../../components/layout/integration_layout";
 import { fetchIntegrationEnvs } from "../../../components/services/integrations.service";
+import { RootState } from '../../../redux/store';
 
 const Envs = (props) => {
-  const config = useSelector((state) => state.app);
+  const config = useSelector((state: RootState) => state.app);
   const { integration_id } = props;
 
   const [envs, setEnvs] = useState([]);
   const [user, setUser] = useState(config.user);
 
-  useEffect(async () => {
+  useEffect(() => {
+    const fetchIntegration = async () => {
     try {
       const { auth_token: token, _id: user_id, public_key } = user;
       const envs = await fetchIntegrationEnvs({
         token,
-        user_id,
+        user_id, 
         public_key,
         integration_id,
       });
@@ -27,7 +29,9 @@ const Envs = (props) => {
     } catch (e) {
       //alert(JSON.stringify(e));
     }
-  }, [envs]);
+  };
+  fetchIntegration()
+}, [envs]);
 
   const refreshEnvs = (data) => {
     setEnvs(data);
