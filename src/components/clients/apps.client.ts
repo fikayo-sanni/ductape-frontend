@@ -1,7 +1,7 @@
 import axios, { AxiosInstance } from 'axios';
 import { ACTIONS_BASE_URL, APPS_BASE_URL, PRICING_BASE_URL } from '../config/urls';
 
-const source = new axios.CancelToken.source();
+const source = axios.CancelToken.source();
 const requestInterceptor = async (config) => {
     config.cancelToken = source.token;
     return config;

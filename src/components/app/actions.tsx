@@ -264,7 +264,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
     const [loading, setLoading] = useState(true);
     const [envs, setEnvs] = useState([]);
     const [bodydata, setBodyData] = useState<string[]>([]);
-    const [bodySample, setBodySample] = useState<object | null>(null);
+    const [bodySample, setBodySample] = useState<any>(null);
     const [paramsdata, setParamsData] = useState<string[]>([]);
     const [action, setAction] = useState(data);
     const [actionEnvs, setActionEnvs] = useState([]);
@@ -327,7 +327,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                                     <Title className="mb-0" level={5}>
                                         {info.key}
                                     </Title>
-                                    <Text type="" className="mb-0 font-xxs">
+                                    <Text className="mb-0 font-xxs">
                                         Min. Length: {info.minLength} | Max. Length: {info.maxLength}
                                     </Text>
                                 </div>
@@ -349,7 +349,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                         </div>
 
                         {['object', 'array'].includes(info.type) && (
-                            <Collapse size="small" ghost className="p-0 m-0 mt-3">
+                            <Collapse ghost className="p-0 m-0 mt-3">
                                 <Panel header="Entries" className="m-0 p-0 border-top body_panel" key="1">
                                     <GenerateSubEntities parent={info} data={bodydata} />
                                 </Panel>
@@ -376,7 +376,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                                             <Title className="mb-0" level={5}>
                                                 {info.key}
                                             </Title>
-                                            <Text type="" className="mb-0 font-xxs">
+                                            <Text className="mb-0 font-xxs">
                                                 Min. Length: {info.minLength} | Max. Length: {info.maxLength}
                                             </Text>
                                         </div>
@@ -398,7 +398,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                                 </div>
 
                                 {['object', 'array'].includes(info.type) && (
-                                    <Collapse size="small" ghost className="p-0 m-0 mt-3">
+                                    <Collapse ghost className="p-0 m-0 mt-3">
                                         <Panel header="Entries" className="m-0 p-0 border-top body_panel" key="1">
                                             <GenerateSubEntities parent={info} data={bodydata} />
                                         </Panel>
@@ -516,7 +516,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                     <TabPane tab="Body" key="0">
                         {bodySample && (
                             <Collapse className="mb-3">
-                                <Panel header="Sample Request">
+                                <Panel key="request" header="Sample Request">
                                     <pre className="mb-0">{JSON.stringify(JSON.parse(bodySample.sample), null, 4)}</pre>
                                 </Panel>
                             </Collapse>
