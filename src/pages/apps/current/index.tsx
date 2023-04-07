@@ -19,7 +19,7 @@ const Index = () => {
     }, []);
     return (
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="My App">
-            <PageHeader title="My App" />
+            <PageHeader title="My App" /> 
 
             <Card className="no_background no_border">
                 <div className="container">

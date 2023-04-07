@@ -21,7 +21,7 @@ const Index = (props) => {
     }, []);
   return (
     
-    <Dashboard_Layout showSidebar={false} title="Integrations" appPage="Integration">
+    <Dashboard_Layout showSidebar={true} title="Integrations" appPage="Integration">
     <PageHeader title="Integration" />
 
     <Card className="no_background no_border">
@@ -31,21 +31,26 @@ const Index = (props) => {
             </Divider>
 
             <div className="row mb-5">
-                <div className="col-lg-3">
-                    <Text className="font-weight-700">{integration.name}</Text> <br />
+            <div className="col-lg-3">
+                    <Text className="font-weight-700">Integration Name</Text> <br />
+                    <Text>{integration.name}</Text>
                 </div>
                 <div className="col-lg-3">
-                    <Text className="font-weight-700">Status</Text> <br />
+                    <Text className="font-weight-700">Integration Status</Text> <br />
                     <Tag
                         className="text-uppercase"
+                        color={integration.status === 'active' ? 'green' : integration.status === 'draft' ? 'orange' : 'red'}
                     >
+                        {integration.status}
                     </Tag>
                 </div>
                 <div className="col-lg-3">
                     <Text className="font-weight-700">Integration ID</Text> <br />
+                    <Text>{integration._id}</Text>
                 </div>
                 <div className="col-lg-3">
                     <Text className="font-weight-700">Workspace ID</Text> <br />
+                    <Text>{integration.workspace_id}</Text>
                 </div>
             </div>
         </div>

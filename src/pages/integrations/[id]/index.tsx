@@ -17,7 +17,7 @@ const Index = (props) => {
   useEffect(() => {}, []);
 
   return ( 
-    <Integration_Layout integration_id={integration_id}> heyy</Integration_Layout>
+    <Integration_Layout integration_id={integration_id}> </Integration_Layout>
   );
 };
 
