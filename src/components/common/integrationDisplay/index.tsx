@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
 import { changeSelectedIntegration } from '../../../redux/applicationSlice';
 import Router from 'next/router';
-import { fetchApp, fetchWorkspaceApps } from '../../services/apps.service';
 import { fetchIntegration } from '../../services/integrations.service';
 
 const { Title, Text, Paragraph } = Typography;
@@ -18,7 +17,7 @@ interface Props {
 const IntegrationDisplay: React.FC<Props> = ({ integration, orientation = 'grid' }) => {
     const dispatch = useDispatch();
 
-    const { user, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
+    const { user } = useSelector((state: RootState) => state.app);
 
     const openIntegration = async (integration) => {
         const response = await fetchIntegration({

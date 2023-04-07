@@ -11,9 +11,6 @@ import { AppstoreOutlined, BarsOutlined, SearchOutlined } from '@ant-design/icon
 import { fetchWorkspaceApps } from '../../components/services/apps.service';
 import { fetchWorkspaceIntegrations } from '../../components/services/integrations.service';
 
-const { Title, Text } = Typography;
-
-const AppInfo = dynamic(() => import('../../components/app/appInfo'));
 const PageHeader = dynamic(() => import('../../components/common/pageHeader'));
 const Loading = dynamic(() => import('../../components/common/loading'));
 const IntegrationDisplay = dynamic(() => import('../../components/common/integrationDisplay'));
