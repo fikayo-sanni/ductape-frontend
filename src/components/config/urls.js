@@ -47,6 +47,7 @@ export const INTEGRATIONS_BASE_URL = 'https://ductape-integrations-3bubdh4twq-uc
 export const INTEGRATIONS_CREATE_URL = '/integrations/v1/create';
 export const INTEGRATIONS_FETCH_URL = '/integrations/v1/workspace/:workspace_id/:status';
 export const INTEGRATION_FETCH_URL = '/integrations/v1/:integration_id';
+export const INTEGRATION_UPDATE_URL = '/integrations/v1/:integration_id';
 export const INTEGRATION_ENVS_URL = '/integrations/v1/integration/:integration_id/envs';
 
 export const INTEGRATIONS_ENV_CREATE = '/integrations/v1/integration/:integration_id/env';

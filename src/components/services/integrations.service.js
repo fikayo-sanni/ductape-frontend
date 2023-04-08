@@ -3,6 +3,7 @@ import {
   INTEGRATIONS_CREATE_URL,
   INTEGRATIONS_FETCH_URL,
   INTEGRATION_FETCH_URL,
+  INTEGRATION_UPDATE_URL,
   ENV_UPDATE_URL,
   INTEGRATION_ENVS_URL,
   INTEGRATIONS_ENV_CREATE,
@@ -57,6 +58,23 @@ export const fetchIntegration = async (payload) => {
     );
     return integrationsClient(`Bearer ${token}`, "application/json").get(
       `${URL}?user_id=${user_id}&public_key=${public_key}`
+    );
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const updateIntegration = async (payload) => {
+  try {
+    const { token, body ,integration_id } = payload;
+
+    const URL = Parameterize(
+      INTEGRATION_UPDATE_URL,
+      ":integration_id",
+      integration_id
+    );
+    return integrationsClient(`Bearer ${token}`, "application/json").put(
+      `${URL}`, body
     );
   } catch (e) {
     throw e;
