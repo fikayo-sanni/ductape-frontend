@@ -7,14 +7,20 @@ import { RootState } from '../../../redux/store';
 import { fetchIntegrationApps } from "../../../components/services/integrations.service";
 import toast from "react-hot-toast";
 
+import Dashboard_Layout from '../../../components/layout/dashboard_layout';
+import { Button, Card, Input, Modal, Typography } from 'antd';
+import dynamic from 'next/dynamic';
+const PageHeader = dynamic(() => import('../../../components/common/pageHeader'));
+
 const Apps = (props) => {
   const config = useSelector((state: RootState) => state.app);
-  const { integration_id } = props;
+  const { _id } = config.integration;
 
   const [apps, setApps] = useState([]);
   const [user, setUser] = useState(config.user);
   const [loading, setLoading] = useState(true);
 
+  
   useEffect(() => {
     const fetchApps = async () => {
     try {
@@ -23,9 +29,10 @@ const Apps = (props) => {
         token,
         user_id,
         public_key,
-        integration_id,
+        _id,
       });
-
+      
+      console.log(apps.data.data);
       setApps(apps.data.data); 
       setLoading(false);
       //alert(JSON.stringify(apps.data.data));
@@ -54,21 +61,19 @@ const Apps = (props) => {
   )}*/
 
   return (
-    <Integration_Layout integration_id={integration_id} selected={"2"}>
-      <AppsList
-        apps={apps}
-        refreshApps={refreshApps}
-        integration_id={integration_id}
-      />
-    </Integration_Layout>
+    <Dashboard_Layout showSidebar={true} title="Integration" integrationPage="Apps">
+      <PageHeader title="Apps" />
+      <Card className="no_background no_border  ">
+        <AppsList
+          apps={apps}
+          refreshApps={refreshApps}
+          integration_id={_id}
+        />
+      </Card>
+   </Dashboard_Layout>
   );
 };
 
 export default Apps;
 
-export const getServerSideProps = async ({ params }) => {
-  const { id } = params;
-  return {
-    props: { integration_id: id },
-  };
-};
+

@@ -7,6 +7,8 @@ import CreateIntegrationAppModal from "../createIntegrationAppModal";
 const Apps = (props) => {
   const { apps, integration_id, refreshApps } = props;
 
+  console.log(props);
+
   const [createAppsDialog, setCreateAppsDialog] = useState(false);
 
   const closeCreateDialog = () => {

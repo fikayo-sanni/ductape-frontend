@@ -102,6 +102,10 @@ export const applicationSlice = createSlice({
             state.app = payload;
         },
 
+        changeApps: (state: AppState, { payload }: PayloadAction<[]>) => {
+            state.apps = payload;
+        },
+
         // integrations
         changeIntegrations: (state: AppState, { payload }: PayloadAction<[]>) => {
             state.integrations = payload;
@@ -150,6 +154,7 @@ export const {
     setAppUser,
     logoutUser,
     setCurrentApp,
+    changeApps,
     setWorkspaces,
     setCurrentWorkspace,
     setTheme,

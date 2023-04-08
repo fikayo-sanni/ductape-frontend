@@ -6,6 +6,8 @@ import NProgress from "nprogress";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { createIntegrationApp } from "../services/integrations.service";
+import { fetchWorkspaceApps } from "../services/apps.service";
+import { changeApps } from '../../redux/applicationSlice';
 
 const CreateIntegrationAppModal = (props) => {
   const { closeCreateDialog, integration_id, refreshApps } = props;
@@ -35,10 +37,10 @@ const CreateIntegrationAppModal = (props) => {
         const apps = await fetchWorkspaceApps({
           token,
           user_id,
-          public_key,
+          public_key, 
           workspace_id: config.defaultWorkspaceId,
         });
-        dispatch(changeApps(apps.data.data));
+        changeApps(apps.data.data);
         if (apps.data.data.length) {
           setApps(apps.data.data);
           //displayApps(apps.data.data);
