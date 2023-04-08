@@ -31,15 +31,23 @@ const { darkAlgorithm } = theme;
 const TopNav = dynamic(() => import('../../components/common/dashboard/topNav'));
 const LowerNav = dynamic(() => import('../../components/common/dashboard/lowerNav'));
 const AppNav = dynamic(() => import('../../components/common/dashboard/appNav'));
+const IntegrationNav = dynamic(() => import('../../components/common/dashboard/integrationNav'));
 
 interface Props {
     children: any;
     showSidebar?: boolean;
     title: string;
     appPage?: string;
+    integrationPage?: string;
 }
 
-const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', showSidebar = false, appPage }) => {
+const Dashboard_Layout: React.FC<Props> = ({
+    children,
+    title = 'Dashboard',
+    showSidebar = false,
+    appPage,
+    integrationPage,
+}) => {
     const { user, currentTheme, darkMode, isAuthenticated } = useSelector((state: RootState) => state.app);
     const dispatch = useDispatch();
 
@@ -111,7 +119,8 @@ const Dashboard_Layout: React.FC<Props> = ({ children, title = 'Dashboard', show
                                         left: 0,
                                     }}
                                 >
-                                    <AppNav appPage={appPage} />
+                                    {appPage && <AppNav appPage={appPage} />}
+                                    {integrationPage && <IntegrationNav integrationPage={integrationPage} />}
                                 </Layout.Sider>
                             </Affix>
                         )}

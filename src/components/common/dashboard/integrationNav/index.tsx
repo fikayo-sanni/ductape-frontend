@@ -18,8 +18,7 @@ import {
     UsergroupAddOutlined,
     UserOutlined,
     UserSwitchOutlined,
-    SettingOutlined,
-    MobileOutlined,
+    WalletOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
