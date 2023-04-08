@@ -7,6 +7,7 @@ import PageHeader from '../../../components/common/pageHeader';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../redux/store';
+import { updateIntegration } from '../../../components/services/integrations.service';
 
 const { Title, Text } = Typography;
 
@@ -14,10 +15,32 @@ const AppInfo = dynamic(() => import('../../../components/app/appInfo'));
 
 const Index = () => {
     const { user, integration, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
+    const [description, setDescription] = useState(integration.description); 
+
+
+    const updateIntegrationDescription = async (description) => {
+        console.log(user.auth_token, description,integration._id );
+        const response = await updateIntegration({
+            token: user.auth_token,
+            body: {
+                description
+            },
+            integration_id: integration._id,
+        });
+        console.log(response.data.data);
+      };
 
     useEffect(() => {
         console.log(integration);
     }, []);
+
+    const handleSave = () => {
+        updateIntegrationDescription(description);
+    }
+
+    const handleTextAreaChange = (e) => {
+        setDescription(e.target.value);
+    }
     return (
         <Dashboard_Layout showSidebar={true} title="Integrations" integrationPage="My Integration">
             <PageHeader title="My Integration" />
@@ -61,8 +84,8 @@ const Index = () => {
                     <Divider orientation="left" orientationMargin="0">
                         <Title level={4}> Description</Title>
                     </Divider>
-                    <Input.TextArea className="mb-3" rows={5} defaultValue={integration.description} />
-                    <Button type="primary">Save</Button>
+                    <Input.TextArea className="mb-3" rows={5} defaultValue={integration.description} onChange={handleTextAreaChange} />
+                    <Button type="primary" onClick={handleSave}>Save</Button>
                 </div>
             </Card>
         </Dashboard_Layout>
