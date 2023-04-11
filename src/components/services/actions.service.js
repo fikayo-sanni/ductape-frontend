@@ -5,8 +5,10 @@ import {
   ACTIONS_FETCH_RESPONSES,
   ACTION_FETCH_URL,
   SETUP_FETCH_URL,
+  ACTIONS_FETCH_FOLDERS,
   ACTION_UPDATE_DATA,
   APP_CREATE_WEBHOOK,
+  ACTIONS_IMPORT_POSTMAN,
 } from "../config/urls";
 import { Parameterize } from "../config/constant";
 
@@ -17,6 +19,7 @@ export const createActions = async (payload) => {
       user_id,
       app_id,
       public_key,
+      folder_id,
       description,
       resource,
       httpVerb,
@@ -27,16 +30,17 @@ export const createActions = async (payload) => {
     return actionsClient(`Bearer ${token}`, "application/json").post(
       ACTIONS_CREATE_URL,
       {
-        user_id,
-        app_id,
         public_key,
+        user_id,
         description,
         resource,
+        app_id,
+        folder_id,
         httpVerb,
-        tag,
         type,
-        name,
-      }
+        tag,
+        name
+    }
     );
   } catch (e) {
     throw e;
@@ -48,6 +52,20 @@ export const fetchAction = async (payload) => {
     const { token, action_id, user_id, public_key } = payload;
 
     const URL = Parameterize(ACTION_FETCH_URL, ":action_id", action_id);
+
+    return actionsClient(`Bearer ${token}`, "application/json").get(
+      `${URL}?user_id=${user_id}&public_key=${public_key}`
+    );
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const fetchFolders = async (payload) => {
+  try {
+    const { token, app_id, user_id, public_key } = payload;
+
+    const URL = Parameterize(ACTIONS_FETCH_FOLDERS, ":app_id", app_id);
 
     return actionsClient(`Bearer ${token}`, "application/json").get(
       `${URL}?user_id=${user_id}&public_key=${public_key}`
@@ -142,3 +160,32 @@ export const createAppWebhook = async (payload) => {
     throw e;
   }
 }
+
+export const importPostman = async (payload) => {
+  try {
+    const {
+      token,
+      app_id,
+      public_key,
+      user_id,
+      files,
+      type,
+      workspace_id,
+    } = payload;
+
+    const URL = ACTIONS_IMPORT_POSTMAN;
+    const formData = new FormData();
+
+    formData.append('public_key', public_key);
+    formData.append('user_id', user_id);
+    formData.append('app_id', app_id);
+    formData.append('files', files);
+    formData.append('type', type);
+    formData.append('workspace_id', workspace_id);
+
+    return actionsClient(`Bearer ${token}`, "application/json").post(URL,formData)
+
+  } catch (e) {
+    throw e;
+  }
+};

@@ -42,6 +42,7 @@ export const ACTIONS_FETCH_ACTION = '/actions/v1/:action_id';
 export const ACTIONS_FETCH_ACTION_ENTITY = '/actions/v1/entity/:action_id/data/:category';
 export const ACTIONS_FETCH_FOLDERS = '/actions/v1/folders/:app_id';
 export const ACTIONS_UPDATE_FOLDER = '/actions/v1/folder/:folder_id';
+export const ACTIONS_IMPORT_POSTMAN = '/actions/v1/import';
 
 export const INTEGRATIONS_BASE_URL = 'https://ductape-integrations-3bubdh4twq-uc.a.run.app';
 export const INTEGRATIONS_CREATE_URL = '/integrations/v1/create';

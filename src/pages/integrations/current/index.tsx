@@ -22,7 +22,7 @@ const Index = () => {
     }); 
     const [visible, setVisible] = useState(false);
 
-
+ 
     const updateIntegrationDescription = async (data) => {
         console.log(data);
         
@@ -44,6 +44,7 @@ const Index = () => {
 
     const handleSave = () => {
         updateIntegrationDescription(data);
+        setVisible(false);
     }
 
     const handleTextAreaChange = async (e) => {
