@@ -92,7 +92,7 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
                 <Menu.Item key="Pricing" icon={<DollarOutlined style={{ width: 20 }} />}>
                     <Link href="/apps/current/pricing">
                         <a>Pricing</a>
-                    </Link>
+                    </Link> 
                 </Menu.Item>
 
                 <Menu.Item key="Actions" icon={<DatabaseOutlined style={{ width: 20 }} />}>
@@ -102,8 +102,14 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
                 </Menu.Item>
 
                 <Menu.Item key="Webhook" icon={<PartitionOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/webhooks">
+                    <Link href="/apps/current/webhook">
                         <a>Webhooks</a>
+                    </Link>
+                </Menu.Item>
+
+                <Menu.Item key="Setup" icon={<PartitionOutlined style={{ width: 20 }} />}>
+                    <Link href="/apps/current/setups">
+                        <a>Setups</a>
                     </Link>
                 </Menu.Item>
 

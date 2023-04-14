@@ -9,6 +9,7 @@ import {
   ACTION_UPDATE_DATA,
   APP_CREATE_WEBHOOK,
   ACTIONS_IMPORT_POSTMAN,
+  APP_UPDATE_WEBHOOK,
 } from "../config/urls";
 import { Parameterize } from "../config/constant";
 
@@ -160,6 +161,24 @@ export const createAppWebhook = async (payload) => {
     throw e;
   }
 }
+
+export const updateAppWebhook = async (payload) => {
+  try {
+      const { token, webhook_id, public_key, user_id, name } = payload;
+
+      const URL = Parameterize(APP_UPDATE_WEBHOOK, ':webhook_id', webhook_id);
+
+      delete payload.token;
+      delete payload.webhook_id;
+      return actionsClient(`Bearer ${token}`, 'application/json').post(URL, {
+          public_key,
+          user_id,
+          name
+      });
+  } catch (e) {
+      throw e;
+  }
+};
 
 export const importPostman = async (payload) => {
   try {

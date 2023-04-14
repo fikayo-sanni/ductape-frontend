@@ -27,7 +27,7 @@ export const PRICING_CREATE_URL = '/pricing/v1/create';
 export const ENV_UPDATE_URL = '/apps/v1/env/:env_id';
 export const APP_ENV_CREATE = '/apps/v1/app/:app_id/env';
 export const APP_CREATE_SETUP = '/apps/v1/setup/:app_id';
-export const APP_CREATE_WEBHOOK = '/actions/v1/webhook/:app_id';
+export const APP_UPDATE_SETUP = '/apps/v1/setup/:setup_id';
 
 export const APP_FAQ_CREATE = '/apps/v1/FAQ/:app_id';
 export const APP_FAQ_UPDATE = '/apps/v1/FAQ/:app_id/:faq_id';
@@ -43,6 +43,8 @@ export const ACTIONS_FETCH_ACTION_ENTITY = '/actions/v1/entity/:action_id/data/:
 export const ACTIONS_FETCH_FOLDERS = '/actions/v1/folders/:app_id';
 export const ACTIONS_UPDATE_FOLDER = '/actions/v1/folder/:folder_id';
 export const ACTIONS_IMPORT_POSTMAN = '/actions/v1/import';
+export const APP_CREATE_WEBHOOK = '/actions/v1/webhook/:app_id';
+export const APP_UPDATE_WEBHOOK = '/actions/v1/webhook/:webhook_id';
 
 export const INTEGRATIONS_BASE_URL = 'https://ductape-integrations-3bubdh4twq-uc.a.run.app';
 export const INTEGRATIONS_CREATE_URL = '/integrations/v1/create';
