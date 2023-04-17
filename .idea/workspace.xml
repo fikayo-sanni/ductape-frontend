@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="integrations landing page">
-      <change afterPath="$PROJECT_DIR$/src/components/common/dashboard/integrationNav/index.tsx" afterDir="false" />
+    <list default="true" id="798bea92-a707-42e9-bd12-a0b8c5aadee1" name="Default Changelist" comment="integrations current page">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/common/integrationDisplay/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/common/integrationDisplay/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/layout/dashboard_layout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/[id]/activity.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/current/activity.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/[id]/apps.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/current/apps.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/[id]/caches.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/current/caches.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/[id]/envs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/current/envs.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/[id]/features.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/current/features.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/[id]/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/current/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/[id]/keys.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/current/keys.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/active.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/draft.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/integrations/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/integrations/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/cdn/css/style.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/cdn/css/style.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -298,14 +287,12 @@
       <workItem from="1679733595656" duration="931000" />
       <workItem from="1680014988707" duration="47000" />
       <workItem from="1680600070562" duration="606000" />
-      <workItem from="1680885558529" duration="2912000" />
-    </task>
-    <task id="LOCAL-00454" summary="transactions">
-      <created>1643069961100</created>
-      <option name="number" value="00454" />
-      <option name="presentableId" value="LOCAL-00454" />
-      <option name="project" value="LOCAL" />
-      <updated>1643069961104</updated>
+      <workItem from="1680885558529" duration="3729000" />
+      <workItem from="1681070133974" duration="862000" />
+      <workItem from="1681205804495" duration="617000" />
+      <workItem from="1681294595621" duration="108000" />
+      <workItem from="1681392121496" duration="28000" />
+      <workItem from="1681734720063" duration="77000" />
     </task>
     <task id="LOCAL-00455" summary="initial commit">
       <created>1645635993177</created>
@@ -643,7 +630,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680887288340</updated>
     </task>
-    <option name="localTasksCounter" value="503" />
+    <task id="LOCAL-00503" summary="integrations current page">
+      <created>1680888488194</created>
+      <option name="number" value="00503" />
+      <option name="presentableId" value="LOCAL-00503" />
+      <option name="project" value="LOCAL" />
+      <updated>1680888488194</updated>
+    </task>
+    <option name="localTasksCounter" value="504" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -668,7 +662,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="update dashboard layout" />
     <MESSAGE value="apps page" />
     <MESSAGE value="code cleanup" />
     <MESSAGE value="app filter" />
@@ -693,7 +686,8 @@
     <MESSAGE value="Update action render" />
     <MESSAGE value="nav change" />
     <MESSAGE value="integrations landing page" />
-    <option name="LAST_COMMIT_MESSAGE" value="integrations landing page" />
+    <MESSAGE value="integrations current page" />
+    <option name="LAST_COMMIT_MESSAGE" value="integrations current page" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
