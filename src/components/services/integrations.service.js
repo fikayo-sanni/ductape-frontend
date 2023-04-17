@@ -73,6 +73,7 @@ export const updateIntegration = async (payload) => {
       ":integration_id",
       integration_id
     );
+    console.log(body,URL, token);
     return integrationsClient(`Bearer ${token}`, "application/json").put(
       `${URL}`, body
     );

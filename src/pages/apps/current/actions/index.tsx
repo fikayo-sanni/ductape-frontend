@@ -74,6 +74,7 @@ const Actions = () => {
       };
     
     const importPostmanCollection = async () => {
+        try {
         const response = await importPostman({
             token: user.auth_token,
             app_id: app._id,
@@ -84,24 +85,34 @@ const Actions = () => {
             workspace_id: defaultWorkspaceId,
         });
         console.log(response.data.data);
+    } catch (e) {
+        const error = e.response ? e.response.data.errors : e.toString();
+        console.log(error || e.toString());
+    }
     setUpdateVisible(false);
     };
     
     const createAction = async () => { 
-        const response = await createActions({
-            token: user.auth_token,
-            app_id: app._id,
-            public_key: user.public_key,
-            user_id: user._id,
-            folder_id: selectedData,
-            type: "CREATE",
-            name: data.name,
-            resource: data.resource,
-            description: data.description ,
-            tag: data.tag,
-            httpVerb: data.httpVerb,
-        });
-        console.log(response.data.data);
+        try {
+            const response = await createActions({
+                token: user.auth_token,
+                app_id: app._id,
+                public_key: user.public_key,
+                user_id: user._id,
+                folder_id: selectedData,
+                type: "CREATE",
+                name: data.name,
+                resource: data.resource,
+                description: data.description ,
+                tag: data.tag,
+                httpVerb: data.httpVerb,
+            });
+            console.log(response.data.data); 
+        } catch (e) {
+            const error = e.response ? e.response.data.errors : e.toString();
+            console.log(error || e.toString());
+        }
+        
     setCreateVisible(false);
     };
       const props: UploadProps = {
@@ -156,9 +167,29 @@ const Actions = () => {
                     </>
                 }
             />
+            <Select
+                        className="mb-3"
+                        placeholder="Select a type"
+                        onChange={onChange}
+                        options={[
+                        {
+                            value: 'v2.1',
+                            label: ' postman v2.1',
+                        },
+                        {
+                            value: 'v2.0',
+                            label: ' postman v2.0',
+                        },
+                        {
+                            value: 'openAPI 3.0.0',
+                            label: 'openAPI 3.0.0',
+                        },
+                        ]}
+                    />
             <Card className="no_background no_border">
                 <ActionsView />
             </Card>
+
             <Modal
                 title={
                     <div className="mb-3">
@@ -176,6 +207,7 @@ const Actions = () => {
             >
             
             <Form>
+<<<<<<< Updated upstream
             <Form.Item
             label="Name"
             labelCol={{ span: 24 }}
@@ -229,6 +261,37 @@ const Actions = () => {
             <Button type="primary" name="import" onClick={createAction}>Save</Button>
         </Form.Item>
     </Form>
+=======
+                <Form.Item label="Name">
+                    <Input name="name" onChange={handleTextAreaChange} />
+                </Form.Item>
+                <Form.Item label="Folder">
+                    <Select
+                        placeholder="Select app folder"
+                        onChange={onChange}
+                        options={appFolders.map((folder) => ({
+                            value: folder._id,
+                            label: folder.name,
+                        }))}
+                    />
+                </Form.Item>
+                <Form.Item label="HTTP Verb">
+                    <Input name="httpVerb" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()} />
+                </Form.Item>
+                <Form.Item label="Resource">
+                    <Input name="resource" onChange={handleTextAreaChange} />
+                </Form.Item>
+                <Form.Item label="Tag">
+                    <Input name="tag" onChange={handleTextAreaChange} />
+                </Form.Item>
+                <Form.Item label="Description">
+                    <Input.TextArea rows={3} name="description" onChange={handleTextAreaChange}/>
+                </Form.Item>
+                <Form.Item>
+                    <Button type="primary" name="import" onClick={createAction}>Save</Button>
+                </Form.Item>
+            </Form>
+>>>>>>> Stashed changes
             </Modal>
             
 
@@ -246,7 +309,7 @@ const Actions = () => {
                 open={updateVisible}
                 footer={null}
                 onCancel={() => setUpdateVisible(false)}
-            >
+                >
                 <div className="">
                     <label>postman Type</label>
                 </div>

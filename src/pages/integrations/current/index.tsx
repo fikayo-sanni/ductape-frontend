@@ -25,13 +25,18 @@ const Index = () => {
  
     const updateIntegrationDescription = async (data) => {
         console.log(data);
+        try {
+            const response = await updateIntegration({
+                 token: user.auth_token,
+                body: {...data,public_key: user.public_key, user_id: user._id},
+                integration_id: integration._id,
+            });
+            console.log(response.data.data); 
+        } catch (e) {
+            const error = e.response ? e.response.data.errors : e.toString();
+            console.log(error || e.toString());
+        }
         
-        const response = await updateIntegration({
-            token: user.auth_token,
-            body: data,
-            integration_id: integration._id,
-        });
-        console.log(response.data.data);
       };
 
     useEffect(() => {
