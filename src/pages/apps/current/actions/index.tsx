@@ -176,10 +176,18 @@ const Actions = () => {
             >
             
             <Form>
-        <Form.Item label="Name">
+            <Form.Item
+            label="Name"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+        >
             <Input name="name" onChange={handleTextAreaChange} />
         </Form.Item>
-        <Form.Item label="Folder">
+        <Form.Item
+            label="Folder"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+        >
             <Select
                 placeholder="Select app folder"
                 onChange={onChange}
@@ -189,16 +197,32 @@ const Actions = () => {
                 }))}
             />
         </Form.Item>
-        <Form.Item label="HTTP Verb">
+        <Form.Item
+            label="HTTP Verb"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+        >
             <Input name="httpVerb" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()} />
         </Form.Item>
-        <Form.Item label="Resource">
+        <Form.Item
+            label="Resource"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+        >
             <Input name="resource" onChange={handleTextAreaChange} />
         </Form.Item>
-        <Form.Item label="Tag">
+        <Form.Item
+            label="Tag"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+        >
             <Input name="tag" onChange={handleTextAreaChange} />
         </Form.Item>
-        <Form.Item label="Description">
+        <Form.Item
+            label="Description"
+            labelCol={{ span: 24 }}
+            wrapperCol={{ span: 24 }}
+        >
             <Input.TextArea rows={3} name="description" onChange={handleTextAreaChange}/>
         </Form.Item>
         <Form.Item>
