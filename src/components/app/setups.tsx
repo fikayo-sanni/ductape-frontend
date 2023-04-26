@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Dashboard_Layout from '../layout/dashboard_layout';
 import PageHeader from '../common/pageHeader';
 import dynamic from 'next/dynamic';
-import { Button, Card, Typography, Input, List, Modal, Tag } from 'antd';
+import { Button, Card, Typography, Input, List, Modal, Tag,Form } from 'antd';
 import { EditOutlined, SettingOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
@@ -40,13 +40,20 @@ const SetupsView: React.FC<Props> = ({ data }) => {
   };
 const updateSetup= async (data) => {
   console.log(data);
-  
-  const response = await updateAppSetup({
+  try{
+    const response = await updateAppSetup({
       ...data,
+      public_key: user.public_key,
+      user_id: user._id,
       token: user.auth_token,
-      setup_id: selectedSetup
-  });
-  console.log(response.data.data);
+        setup_id: selectedSetup
+    });
+    console.log(response.data.data);
+  } catch (e) {
+    const error = e.response ? e.response.data.errors : e.toString();
+    console.log(error || e.toString());
+    throw e;
+  }
 };
 const handleSave = () => {
       updateSetup(input)
@@ -124,20 +131,36 @@ const handleTextAreaChange = async (e) => {
                 footer={null}
                 onCancel={() => setVisible(false)}
             >
-                <div className="mb-3">
-                    <label>user id</label>
-                    <Input className="mb-3" name="name"  onChange={handleTextAreaChange} />
-                </div>
-                <div className="mb-3">
-                    <label>public key</label>
-                    <Input className="mb-3" name="name"  onChange={handleTextAreaChange} />
-                </div>
-                <div className="mb-3">
-                    <label>Name</label>
-                    <Input className="mb-3" name="name"  onChange={handleTextAreaChange} />
-                </div>
+                <Form>
+                    <Form.Item label="Name">
+                        <Input name="name" onChange={handleTextAreaChange} />
+                    </Form.Item>
 
-                <Button type="primary" onClick={handleSave}>Save</Button>
+                    <Form.Item label="Period">
+                        <Input name="period" onChange={handleTextAreaChange} />
+                    </Form.Item>
+                    <Form.Item label="Method">
+                        <Input name="method" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()}/>
+                    </Form.Item>
+                    <Form.Item label="Setup_type">
+                        <Input name="setup_type" onChange={handleTextAreaChange} />
+                    </Form.Item>
+                    <Form.Item label="Base_url">
+                        <Input name="base_url" onChange={handleTextAreaChange}/>
+                    </Form.Item>
+                    <Form.Item label="Resource">
+                        <Input name="resource" onChange={handleTextAreaChange}/>
+                    </Form.Item>
+                    <Form.Item label="Description">
+                        <Input name="description" onChange={handleTextAreaChange}/>
+                    </Form.Item>
+                    <Form.Item label="Expiry">
+                        <Input name="expiry" onChange={handleTextAreaChange}/>
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" name="import" onClick={handleSave}>Save</Button>
+                    </Form.Item>
+                </Form>
             </Modal>
     </>
 

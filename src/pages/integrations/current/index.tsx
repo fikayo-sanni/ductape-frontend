@@ -35,6 +35,7 @@ const Index = () => {
         } catch (e) {
             const error = e.response ? e.response.data.errors : e.toString();
             console.log(error || e.toString());
+            throw e;
         }
         
       };

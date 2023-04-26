@@ -111,30 +111,23 @@ const Actions = () => {
         } catch (e) {
             const error = e.response ? e.response.data.errors : e.toString();
             console.log(error || e.toString());
+            throw e;
         }
         
     setCreateVisible(false);
     };
-      const props: UploadProps = {
-        name: 'file',
-        multiple: true,
-        action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
-        onChange(info) {
-          const { status, originFileObj } = info.file;
-          if (status !== 'uploading') {
-            console.log(info.file, info.fileList);
-          }
-          if (status === 'done') {
-            message.success(`${info.file.name} file uploaded successfully.`);
-          } else if (status === 'error') {
-            message.error(`${info.file.name} file upload failed.`);
-          }
-          setSelectedFiles([originFileObj]);
-        },
-        onDrop(e) {
-          console.log('Dropped files', e.dataTransfer.files);
-        },
-      };
+    const onFileChange = (e) => {
+        const { status, originFileObj } = e.file;
+        if (status !== 'uploading') {
+          console.log(e.file, e.fileList);
+        }
+        if (status === 'done') {
+          message.success(`${e.file.name} file uploaded successfully.`);
+        } else if (status === 'error') {
+          message.error(`${e.file.name} file upload failed.`);
+        }
+        setSelectedFiles([originFileObj]);
+      }
 
     
     useEffect(() => {
@@ -167,25 +160,6 @@ const Actions = () => {
                     </>
                 }
             />
-            <Select
-                        className="mb-3"
-                        placeholder="Select a type"
-                        onChange={onChange}
-                        options={[
-                        {
-                            value: 'v2.1',
-                            label: ' postman v2.1',
-                        },
-                        {
-                            value: 'v2.0',
-                            label: ' postman v2.0',
-                        },
-                        {
-                            value: 'openAPI 3.0.0',
-                            label: 'openAPI 3.0.0',
-                        },
-                        ]}
-                    />
             <Card className="no_background no_border">
                 <ActionsView />
             </Card>
@@ -207,7 +181,7 @@ const Actions = () => {
             >
             
             <Form>
-<<<<<<< Updated upstream
+
             <Form.Item
             label="Name"
             labelCol={{ span: 24 }}
@@ -261,37 +235,6 @@ const Actions = () => {
             <Button type="primary" name="import" onClick={createAction}>Save</Button>
         </Form.Item>
     </Form>
-=======
-                <Form.Item label="Name">
-                    <Input name="name" onChange={handleTextAreaChange} />
-                </Form.Item>
-                <Form.Item label="Folder">
-                    <Select
-                        placeholder="Select app folder"
-                        onChange={onChange}
-                        options={appFolders.map((folder) => ({
-                            value: folder._id,
-                            label: folder.name,
-                        }))}
-                    />
-                </Form.Item>
-                <Form.Item label="HTTP Verb">
-                    <Input name="httpVerb" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()} />
-                </Form.Item>
-                <Form.Item label="Resource">
-                    <Input name="resource" onChange={handleTextAreaChange} />
-                </Form.Item>
-                <Form.Item label="Tag">
-                    <Input name="tag" onChange={handleTextAreaChange} />
-                </Form.Item>
-                <Form.Item label="Description">
-                    <Input.TextArea rows={3} name="description" onChange={handleTextAreaChange}/>
-                </Form.Item>
-                <Form.Item>
-                    <Button type="primary" name="import" onClick={createAction}>Save</Button>
-                </Form.Item>
-            </Form>
->>>>>>> Stashed changes
             </Modal>
             
 
@@ -333,7 +276,7 @@ const Actions = () => {
                         ]}
                     />
                 <div className="mb-3">
-                    <Dragger {...props}>
+                    <Dragger onChange={onFileChange}>
                         <p className="ant-upload-drag-icon">
                         <InboxOutlined />
                         </p>

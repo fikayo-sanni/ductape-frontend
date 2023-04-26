@@ -246,16 +246,14 @@ export const createAppSetup = async (payload) => {
 
 export const updateAppSetup = async (payload) => {
     try {
-        const { token, setup_id, public_key, user_id, name } = payload;
+        const { token, setup_id} = payload;
 
         const URL = Parameterize(APP_UPDATE_SETUP, ':setup_id', setup_id);
 
         delete payload.token;
         delete payload.setup_id;
-        return appsClient(`Bearer ${token}`, 'application/json').post(URL, {
-            public_key,
-            user_id,
-            name
+        return appsClient(`Bearer ${token}`, 'application/json').put(URL, {
+            ...payload
         });
     } catch (e) {
         throw e;

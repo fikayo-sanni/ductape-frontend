@@ -9,6 +9,7 @@ import { RootState } from '../../../../redux/store';
 import WebhooksView from '../../../../components/app/webhooks'
 import type { MenuProps, UploadProps } from 'antd';
 import { createAppWebhook} from '../../../../components/services/actions.service';
+import { fetchApp} from '../../../../components/services/apps.service';
 
 const { Dragger } = Upload;
 
@@ -19,36 +20,7 @@ const Webhooks = () => {
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
     const [visible, setVisible] = useState(false);
     const [input, setInput] = useState({});
-    const [setups, setSetups] = useState([
-        {
-            "_id": "63d4d9a52a11769b530d5324",
-            "app_id": "634416c83ce5731f54301e4f",
-            "user_id": "62cc17ec5a62fd899d256de0",
-            "name": "Account Created",
-            "tag": "ACCOUNT_CREATED",
-            "setup_type": "registered",
-            "description": "React when an account gets created successfully",
-            "resource": "/summaria",
-            "method": "POST",
-            "private_key": "7b797d0d-e955-461a-9a60-2d7ff1289975",
-            "created": "2023-01-28T08:15:33.055Z",
-            "__v": 0,
-            "pairings": [
-              {
-                "_id": "63d4d9a52a11769b530d5326",
-                "webhook_id": "63d4d9a52a11769b530d5324",
-                "env_id": "62e41dd25efa8a33c23d4cc5",
-                "__v": 0
-              },
-              {
-                "_id": "63d4d9a52a11769b530d5327",
-                "webhook_id": "63d4d9a52a11769b530d5324",
-                "env_id": "62e41dd25efa8a33c23d4cc6",
-                "__v": 0
-              }
-            ]
-          } 
-      ]);
+    const [webhooks, setWebhooks] = useState([]);
 
     const dispatch = useDispatch();
     const handleClick = () => {
@@ -57,16 +29,29 @@ const Webhooks = () => {
 
     const createWebhook= async (data) => {
         console.log(data);
-        
-        const response = await createAppWebhook({
-            ...data,
-            token: user.auth_token,
-            app_id: app._id,
-            public_key: user.public_key,
-            user_id: user._id,
-            envs: app.envs
-        });
+        try {
+            const envIds = app.envs.map(env => env._id);
+            console.log({
+                token: user.auth_token,
+                app_id: app._id,
+                public_key: user.public_key,
+                user_id: user._id,
+});
+            
+            const response = await createAppWebhook({
+                ...data,
+                token: user.auth_token,
+                app_id: app._id,
+                public_key: user.public_key,
+                user_id: user._id,
+                envs: envIds
+            });
         console.log(response.data.data);
+    } catch (e) {
+        const error = e.response ? e.response.data.errors : e.toString();
+        console.log(error || e.toString());
+        throw e;
+    }
       };
 
     const handleSave = () => {
@@ -81,7 +66,19 @@ const Webhooks = () => {
         
       }
     useEffect(() => {
+        const fetchAppDetails = async () => {
+            const appDetails = await fetchApp({
+                token: user.auth_token,
+                user_id: user._id,
+                public_key: user.public_key,
+                app_id: app._id,
+                workspace_id: defaultWorkspaceId,
+            });
     
+            console.log(appDetails.data.data);
+            setWebhooks(appDetails.data.data.webhooks)
+        };
+        fetchAppDetails()
     }, []);
     
 
@@ -99,7 +96,7 @@ const Webhooks = () => {
                 }
             />
             <Card className="no_background no_border">
-                <WebhooksView data={setups}/>
+                <WebhooksView data={webhooks}/>
             </Card>
             
             <Modal

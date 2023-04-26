@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Dashboard_Layout from '../layout/dashboard_layout';
 import PageHeader from '../common/pageHeader';
 import dynamic from 'next/dynamic';
-import { Button, Card, Typography, Input, List, Modal, Tag } from 'antd';
+import { Button, Card, Typography, Input, List, Modal, Tag,Form } from 'antd';
 import { EditOutlined, SettingOutlined } from '@ant-design/icons';
 import { RootState } from '../../redux/store';
 import {updateAppWebhook} from '../services/actions.service';
@@ -36,18 +36,29 @@ const WebhooksView: React.FC<Props> = ({ data }) => {
     setVisible(!visible);
   };
 
-  const updateSetup= async (data) => {
-    console.log(data);
-    
+  const updateWebhook= async (data) => {
+    console.log({...data,
+      public_key: user.public_key,
+      user_id: user._id,
+      token: user.auth_token,
+      webhook_id: selectedWebhook});
+    try{
     const response = await updateAppWebhook({
         ...data,
+        public_key: user.public_key,
+        user_id: user._id,
         token: user.auth_token,
-        webhook_id: selectedWebhook
+        webhook_id: selectedWebhook,
     });
     console.log(response.data.data);
+  } catch (e) {
+    const error = e.response ? e.response.data.errors : e.toString();
+    console.log(error || e.toString());
+    throw e;
+}
   };
 const handleSave = () => {
-    updateSetup(input)
+    updateWebhook(input)
     setVisible(false);
 }
 
@@ -119,20 +130,33 @@ useEffect(() => {
                 footer={null}
                 onCancel={() => setVisible(false)}
             >
-                <div className="mb-3">
-                    <label>user id</label>
-                    <Input className="mb-3" name="name"  onChange={handleTextAreaChange} />
-                </div>
-                <div className="mb-3">
-                    <label>public key</label>
-                    <Input className="mb-3" name="name"  onChange={handleTextAreaChange} />
-                </div>
-                <div className="mb-3">
-                    <label>Name</label>
-                    <Input className="mb-3" name="name"  onChange={handleTextAreaChange} />
-                </div>
+                <Form>
+                    <Form.Item label="Name">
+                        <Input name="name" onChange={handleTextAreaChange} />
+                    </Form.Item>
 
-                <Button type="primary" onClick={handleSave}>Save</Button>
+                    <Form.Item label="tag">
+                        <Input name="tag" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()} />
+                    </Form.Item>
+                    <Form.Item label="method">
+                        <Input name="method" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()}/>
+                    </Form.Item>
+                    <Form.Item label="setup_type">
+                        <Input name="setup_type" onChange={handleTextAreaChange} />
+                    </Form.Item>
+                    <Form.Item label="base_url">
+                        <Input name="base_url" onChange={handleTextAreaChange}/>
+                    </Form.Item>
+                    <Form.Item label="resource">
+                        <Input name="resource" onChange={handleTextAreaChange}/>
+                    </Form.Item>
+                    <Form.Item label="description">
+                        <Input name="description" onChange={handleTextAreaChange}/>
+                    </Form.Item>
+                    <Form.Item>
+                        <Button type="primary" name="import" onClick={handleSave}>Save</Button>
+                    </Form.Item>
+                </Form>
             </Modal>
     </>
 

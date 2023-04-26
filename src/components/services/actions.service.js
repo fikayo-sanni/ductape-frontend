@@ -164,16 +164,14 @@ export const createAppWebhook = async (payload) => {
 
 export const updateAppWebhook = async (payload) => {
   try {
-      const { token, webhook_id, public_key, user_id, name } = payload;
+      const { token, webhook_id } = payload;
 
       const URL = Parameterize(APP_UPDATE_WEBHOOK, ':webhook_id', webhook_id);
 
       delete payload.token;
       delete payload.webhook_id;
-      return actionsClient(`Bearer ${token}`, 'application/json').post(URL, {
-          public_key,
-          user_id,
-          name
+      return actionsClient(`Bearer ${token}`, 'application/json').put(URL, {
+          ...payload
       });
   } catch (e) {
       throw e;
