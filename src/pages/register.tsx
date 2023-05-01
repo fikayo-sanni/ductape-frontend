@@ -1,4 +1,4 @@
-import Home_layout from "../components/layout/home_layout";
+import Home_Layout from '../components/layout/home_layout';
 import React, {useContext, Component, useEffect, useState} from "react";
 import {toast} from "react-hot-toast";
 import {Logo} from '../components/config/constant';
@@ -8,19 +8,24 @@ import { useNProgress } from '@tanem/react-nprogress'
 import { registerUser } from "../components/services/users.service";
 import NProgress from "nprogress";
 
-
-export default function Register(props) {
+const Register = () => {
     const [loadingButton, setLoadingButton] = useState(false);
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState({
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        repeat_password: ''
+      });
 
 
-    const handleChange = e =>
+    const handleChange = (e) => {
         setUser({...user, [e.target.name]: e.target.value});
-
+    }
 
 
     const register = async(e, buttonId) => {
-        e.preventDefault();
+        e.preventDefault(); 
         try {
             if (user.password === user.repeat_password) {
                 setLoadingButton(true);
@@ -42,14 +47,14 @@ export default function Register(props) {
     }
     useEffect(() => {
 
-    }, [])
+    }, []);
 
     return (
-        <Home_layout title="Home">
+        <Home_Layout title="Home">
             <div className="h-100 row g-0">
                 <div className="col-lg-12 order-1 order-lg-0 d-flex flex-column bg-primary-transparent padding_50">
 
-                    <Logo size="full" className="mb-5 justify-content-center"/>
+                    <Logo/>
 
                     <div className="col-xl-6 col-lg-6 col-md-8 mt-4 col-sm-10 mb-auto mx-auto">
 
@@ -127,6 +132,8 @@ export default function Register(props) {
                 </div>
 
             </div>
-        </Home_layout>
-    )
-}
+        </Home_Layout>
+    );
+};
+
+export default Register

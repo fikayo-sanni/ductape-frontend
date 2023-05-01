@@ -18,14 +18,14 @@ import {
 } from 'antd';
 import NProgress from "nprogress";
 import {toast} from "react-hot-toast";
-import {thousandSeparator, Logo} from '../components/config/constant';
+import {Logo} from '../components/config/constant';
 import Router, {useRouter} from "next/router";
 import Link from "next/link";
 import { forgotUser } from "../components/services/users.service";
 
 export default function Index(props) {
     const [loadingButton, setLoadingButton] = useState(false);
-    const [user, setUser] = useState([]);
+    const [user, setUser] = useState({email:""});
 
 
     const handleChange = e =>
@@ -41,7 +41,7 @@ export default function Index(props) {
             console.log(login);
             toast.success('Email Sent')
             const { workspaces } = login.data.data;
-            Router.push('/');
+            Router.push('/changePassword');
 
         } catch (e) {
             setLoadingButton(false)
@@ -62,7 +62,7 @@ export default function Index(props) {
             <div className="h-100 row g-0">
                 <div className="col-lg-12 order-1 order-lg-0 d-flex flex-column bg-primary-transparent padding_50">
 
-                    <Logo size="full" className="mb-5 justify-content-center"/>
+                    <Logo/>
 
                     <div className="col-xl-4 col-lg-6 col-md-8 mt-4 col-sm-10 mb-auto mx-auto">
 
