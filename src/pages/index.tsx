@@ -183,9 +183,16 @@ const Index = () => {
                                                 )}
                                             </div>
                                         </div>
+                                        <Link href="/reset">
+                                                forgot password?
+                                            </Link>   
                                     </form>
+                                    <Link href="/register">
+                                               create account
+                                            </Link>
                                 </div>
                             )}
+                            
                         </section>
                     </div>
 

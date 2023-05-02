@@ -4,8 +4,10 @@ import Link from "next/link";
 import toast from "react-hot-toast";
 import NProgress from "nprogress";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector , useDispatch} from "react-redux";
 import { createIntegrationApp } from "../services/integrations.service";
+import { fetchWorkspaceApps } from "../services/apps.service";
+import { changeApps } from '../../redux/applicationSlice';
 
 const CreateIntegrationAppModal = (props) => {
   const { closeCreateDialog, integration_id, refreshApps } = props;
@@ -17,6 +19,7 @@ const CreateIntegrationAppModal = (props) => {
   const [app, setApp] = useState({});
   const [apps, setApps] = useState([]);
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(async () => {
     const { auth_token: token, _id: user_id, public_key } = user;
@@ -35,7 +38,7 @@ const CreateIntegrationAppModal = (props) => {
         const apps = await fetchWorkspaceApps({
           token,
           user_id,
-          public_key,
+          public_key, 
           workspace_id: config.defaultWorkspaceId,
         });
         dispatch(changeApps(apps.data.data));

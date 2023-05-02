@@ -16705,6 +16705,13 @@ textarea.ant-mentions {
 .ant-modal-wrap-rtl .ant-modal-confirm-btns {
   float: left;
 }
+.ant-modal {
+  z-index: 100;
+}
+.ant-select {
+  z-index: 1100;
+}
+
 .ant-modal-wrap-rtl .ant-modal-confirm-btns .ant-btn + .ant-btn {
   margin-right: 8px;
   margin-left: 0;

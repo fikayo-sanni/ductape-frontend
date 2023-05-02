@@ -18,7 +18,8 @@ import {
     UsergroupAddOutlined,
     UserOutlined,
     UserSwitchOutlined,
-    WalletOutlined,
+    SettingOutlined,
+    MobileOutlined,
 } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
@@ -51,7 +52,7 @@ export const IntegrationNav: React.FC<Props> = ({ integrationPage }) => {
                 <Title className="mb-1 p-0 mt-2" level={4}>
                     {integration.name}
                 </Title>
-                <Link href="/integratios">
+                <Link href="/integrations">
                     <Button className="w-100" type="dashed">
                         <ArrowLeftOutlined /> Back to integrations
                     </Button>
@@ -78,32 +79,32 @@ export const IntegrationNav: React.FC<Props> = ({ integrationPage }) => {
 
             <Menu.ItemGroup key="management_area">
                 <Menu.Item key="Environments" icon={<AppstoreAddOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/current/env`}>
+                    <Link href={`/integrations/current/envs`}>
                         <a>Environments</a>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item key="Pricing" icon={<DollarOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/pricing">
-                        <a>Pricing</a>
+                <Menu.Item key="Apps" icon={<MobileOutlined style={{ width: 20 }} />}>
+                    <Link href="/integrations/current/apps">
+                        <a>Apps</a>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item key="Actions" icon={<DatabaseOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/actions">
-                        <a>Actions</a>
+                <Menu.Item key="Features" icon={<SettingOutlined style={{ width: 20 }} />}>
+                    <Link href="/integrations/current/features">
+                        <a>Features</a>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item key="Webhook" icon={<PartitionOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/webhooks">
-                        <a>Webhooks</a>
+                <Menu.Item key="Activity" icon={<PartitionOutlined style={{ width: 20 }} />}>
+                    <Link href="/integrations/current/activity">
+                        <a>Activity</a>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item key="Access" icon={<SafetyCertificateOutlined style={{ width: 20 }} />}>
-                    <Link href="/swiftmoney/user/payment">
-                        <a>Access</a>
+                <Menu.Item key="Caches" icon={<DatabaseOutlined style={{ width: 20 }} />}>
+                    <Link href="/integrations/current/caches">
+                        <a>Caches</a>
                     </Link>
                 </Menu.Item>
             </Menu.ItemGroup>

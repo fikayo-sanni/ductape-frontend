@@ -6,6 +6,7 @@ import {
     APP_FETCH_URL,
     ENV_UPDATE_URL,
     APP_CREATE_SETUP,
+    APP_UPDATE_SETUP,
     APP_SETUP_FETCH,
     SETUP_FETCH_URL,
     APP_SETUP_ENV_FETCH,
@@ -237,6 +238,22 @@ export const createAppSetup = async (payload) => {
             public_key,
             user_id,
             ...payload,
+        });
+    } catch (e) {
+        throw e;
+    }
+}; 
+
+export const updateAppSetup = async (payload) => {
+    try {
+        const { token, setup_id} = payload;
+
+        const URL = Parameterize(APP_UPDATE_SETUP, ':setup_id', setup_id);
+
+        delete payload.token;
+        delete payload.setup_id;
+        return appsClient(`Bearer ${token}`, 'application/json').put(URL, {
+            ...payload
         });
     } catch (e) {
         throw e;

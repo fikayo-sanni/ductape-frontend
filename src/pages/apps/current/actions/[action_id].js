@@ -24,4 +24,4 @@ export const getServerSideProps = async ({ params }) => {
   return {
     props: { action_id, app_id },
   };
-};
+}; 
