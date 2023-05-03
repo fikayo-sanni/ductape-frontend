@@ -4,13 +4,18 @@ import { toast } from 'react-hot-toast';
 import { Logo } from '../components/config/constant';
 import Router, { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Avatar, Button, Card, Input, Typography, List } from 'antd';
+import { Avatar, Button, Card, Input, Typography, List, Checkbox } from 'antd';
 import { useNProgress } from '@tanem/react-nprogress';
 import { registerUser } from '../components/services/users.service';
 import NProgress from 'nprogress';
 import { LoadingOutlined, StarFilled } from '@ant-design/icons';
+import type { CheckboxChangeEvent } from 'antd/es/checkbox';
 
 const { Title, Text, Paragraph } = Typography;
+
+const onChange = (e: CheckboxChangeEvent) => {
+    console.log(`checked = ${e.target.checked}`);
+};
 
 const Register = () => {
     const [loadingButton, setLoadingButton] = useState(false);
@@ -80,7 +85,7 @@ const Register = () => {
                                 <Title level={3} className="mb-0 font-weight-500 pt-3">
                                     Long Live the Integrations
                                 </Title>
-                                <Paragraph type="secondary" className="mb-5 mt-2 fs-6">
+                                <Paragraph type="secondary" className="mb-2 mt-2 fs-6">
                                     Let’s get you setup
                                 </Paragraph>
                             </div>
@@ -147,7 +152,24 @@ const Register = () => {
                                         />
                                     </div>
 
-                                    <div className="col-lg-12 mt-2 mb-5 mx-auto">
+                                    <div>
+                                        <Checkbox onChange={onChange}>
+                                            By clicking the “Create Account” button, you agree to Ductape’s{' '}
+                                            <u>
+                                                <a href="" className="text-primary">
+                                                    Terms of Use
+                                                </a>
+                                            </u>{' '}
+                                            and{' '}
+                                            <u>
+                                                <a href="" className="text-primary">
+                                                    Privacy Policy
+                                                </a>
+                                            </u>
+                                        </Checkbox>
+                                    </div>
+
+                                    <div className="col-lg-12 mt-5 mb-5 mx-auto">
                                         {!submitting ? (
                                             <Button size="large" type="primary" className=" px-5  w-100">
                                                 Create Account
@@ -169,16 +191,6 @@ const Register = () => {
                                         </u>
                                     </big>
                                 </Text>
-                            </center>
-                            <center>
-                                <div className=" mt-4">
-                                    <a href="" className="font-gray me-4">
-                                        Privacy Policy
-                                    </a>
-                                    <a href="" className="font-gray">
-                                        Terms & Conditions
-                                    </a>
-                                </div>
                             </center>
                         </div>
                     </div>
