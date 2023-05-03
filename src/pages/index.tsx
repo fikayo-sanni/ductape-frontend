@@ -89,8 +89,8 @@ const Index = () => {
     return (
         <Home_Layout title="Home">
             <div className="h-full row overflow-hidden g-0">
-                <div className="col-xl-4 col-lg-5 p-5 d-flex flex-column">
-                    <div className="col-lg-12  padding_10-xs ">
+                <div className="col-xl-4 col-lg-5 d-flex flex-column">
+                    <div className="col-lg-12 p-5 mt-5 padding_10-xs ">
                         <section>
                             {isAuthenticated ? (
                                 <div>
@@ -124,15 +124,15 @@ const Index = () => {
                                         <div className=" margin_30-bottom">
                                             <Logo />
                                         </div>
-                                        <Title level={3} className="mb-0 font-weight-500">
+                                        <Title level={3} className="mb-0 font-weight-500 pt-3">
                                             Automate your Integrations
                                         </Title>
-                                        <Paragraph type="secondary" className="mb-5 lead">
+                                        <Paragraph type="secondary" className="mb-5 mt-2 fs-6">
                                             Continue to your profile
                                         </Paragraph>
                                     </div>
 
-                                    <form id="login_form">
+                                    <form id="login_form" className="col pt-3">
                                         <div className="row">
                                             <div className="col-12 mb-4">
                                                 <Input
@@ -150,7 +150,7 @@ const Index = () => {
                                                 />
                                             </div>
 
-                                            <div className="col-12 mb-4">
+                                            <div className="col-12 mb-2">
                                                 <Input.Password
                                                     required
                                                     size="large"
@@ -166,7 +166,13 @@ const Index = () => {
                                                 />
                                             </div>
 
-                                            <div className="col-lg-12 mt-1 mx-auto">
+                                            <div className="col-12">
+                                                <Text className="mb-5 text-primary float-end fw-normal">
+                                                    <Link href="/reset">Forgot your Password?</Link>
+                                                </Text>
+                                            </div>
+
+                                            <div className="col-lg-12 mt-2 mb-5 mx-auto">
                                                 {!submitting ? (
                                                     <Button
                                                         size="large"
@@ -174,7 +180,7 @@ const Index = () => {
                                                         type="primary"
                                                         className=" px-5  w-100"
                                                     >
-                                                        Sign In
+                                                        Login
                                                     </Button>
                                                 ) : (
                                                     <Button size="large" disabled className="w-100">
@@ -183,29 +189,32 @@ const Index = () => {
                                                 )}
                                             </div>
                                         </div>
-                                        <Link href="/reset">
-                                                forgot password?
-                                            </Link>   
                                     </form>
-                                    <Link href="/register">
-                                               create account
-                                            </Link>
+
+                                    <center className="mt-5">
+                                        <Text>
+                                            <big>
+                                                New to Ductape?{' '}
+                                                <u className="text-primary">
+                                                    <Link href="/register">Create an account</Link>
+                                                </u>
+                                            </big>
+                                        </Text>
+                                    </center>
                                 </div>
                             )}
-                            
                         </section>
                     </div>
 
-                    <div className="mt-auto d-flex font-gray justify-content-between gap-2">
-                        <p>Copyright. &copy; 2023</p>
-                        <p>Ductape</p>
+                    <div className="mt-auto d-flex font-gray justify-content-between gap-2 p-5">
+                        <p>&copy; Ductape 2023</p>
                     </div>
                 </div>
-                <div className="col-xl-8 position-relative col-lg-7 p-3 d-flex flex-column">
+                <div className="col-xl-8 position-relative col-lg-7 p-3 pt-4 pb-4 pe-4 d-flex flex-column">
                     <Card className="h-100 p-5">
                         <Title level={2}>
-                            "Few things make me feel more powerful than setting up automations in Ductape to make my
-                            life easier and more efficient."
+                            "Few things make me feel more powerful than setting up
+                            <div>automations in Ductape to make my life easier and more</div> efficient."
                         </Title>
 
                         <div className="d-flex mt-5 flex-row justify-content-between align-items-start">
@@ -214,14 +223,10 @@ const Index = () => {
                                     {' '}
                                     - Fikayo Sanni
                                 </Title>
-                                <Text type="secondary">Co-Founder startupia LLC</Text>
+                                <Text type="secondary">Co-Founder Startupia LLC</Text>
                             </div>
                             <div>
-                                <StarFilled />
-                                <StarFilled />
-                                <StarFilled />
-                                <StarFilled />
-                                <StarFilled />
+                                <StarFilled /> <StarFilled /> <StarFilled /> <StarFilled /> <StarFilled />
                             </div>
                         </div>
                     </Card>

@@ -1,139 +1,219 @@
 import Home_Layout from '../components/layout/home_layout';
-import React, {useContext, Component, useEffect, useState} from "react";
-import {toast} from "react-hot-toast";
-import {Logo} from '../components/config/constant';
-import Router, {useRouter} from "next/router";
-import Link from "next/link";
-import { useNProgress } from '@tanem/react-nprogress'
-import { registerUser } from "../components/services/users.service";
-import NProgress from "nprogress";
+import React, { useContext, Component, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Logo } from '../components/config/constant';
+import Router, { useRouter } from 'next/router';
+import Link from 'next/link';
+import { Avatar, Button, Card, Input, Typography, List } from 'antd';
+import { useNProgress } from '@tanem/react-nprogress';
+import { registerUser } from '../components/services/users.service';
+import NProgress from 'nprogress';
+import { LoadingOutlined, StarFilled } from '@ant-design/icons';
+
+const { Title, Text, Paragraph } = Typography;
 
 const Register = () => {
     const [loadingButton, setLoadingButton] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
     const [user, setUser] = useState({
         firstname: '',
         lastname: '',
         email: '',
         password: '',
-        repeat_password: ''
-      });
+        repeat_password: '',
+    });
 
+    const data = [
+        {
+            title: 'Selling Point 1',
+        },
+        {
+            title: 'Selling Point 2',
+        },
+        {
+            title: 'Selling Point 3',
+        },
+        {
+            title: 'Selling Point 4',
+        },
+    ];
 
     const handleChange = (e) => {
-        setUser({...user, [e.target.name]: e.target.value});
-    }
+        setUser({ ...user, [e.target.name]: e.target.value });
+    };
 
-
-    const register = async(e, buttonId) => {
-        e.preventDefault(); 
+    const register = async (e, buttonId) => {
+        e.preventDefault();
+        setSubmitting(true);
         try {
             if (user.password === user.repeat_password) {
                 setLoadingButton(true);
                 NProgress.start();
                 //toast.success('Registration successful')
-                await registerUser({...user, repeat_password: undefined});
-                toast.success('Registration successful')
+                await registerUser({ ...user, repeat_password: undefined });
+                toast.success('Registration successful');
                 //Router.push('/dashboard');
             } else {
-                toast.error('passwords do not match')
+                toast.error('passwords do not match');
             }
         } catch (e) {
-            setLoadingButton(false)
+            setLoadingButton(false);
+            setSubmitting(false);
             NProgress.done();
             console.log('An error occurred', e);
-            const error = e.response? e.response.data.errors: e.toString();
-            toast.error(error)
+            const error = e.response ? e.response.data.errors : e.toString();
+            toast.error(error);
         }
-    }
-    useEffect(() => {
-
-    }, []);
+    };
+    useEffect(() => {}, []);
 
     return (
         <Home_Layout title="Home">
-            <div className="h-100 row g-0">
-                <div className="col-lg-12 order-1 order-lg-0 d-flex flex-column bg-primary-transparent padding_50">
+            <div className="h-full row overflow-hidden g-0">
+                <div className="col-xl-4 col-lg-5 d-flex flex-column">
+                    <div className="col-lg-12 p-5 mt-5 padding_10-xs ">
+                        <div>
+                            <div className="">
+                                <div className=" margin_30-bottom">
+                                    <Logo />
+                                </div>
+                                <Title level={3} className="mb-0 font-weight-500 pt-3">
+                                    Long Live the Integrations
+                                </Title>
+                                <Paragraph type="secondary" className="mb-5 mt-2 fs-6">
+                                    Let’s get you setup
+                                </Paragraph>
+                            </div>
 
-                    <Logo/>
-
-                    <div className="col-xl-6 col-lg-6 col-md-8 mt-4 col-sm-10 mb-auto mx-auto">
-
-                        <div className="bg-white login_box shadow">
-                            <h4 className="text-center mb-5 font-weight-700">Create an account</h4>
-
-                            <form id="register_form" onSubmit={(e) => register(e, 'reg_button')}>
+                            <form id="register_form" className="col pt-3" onSubmit={(e) => register(e, 'reg_button')}>
                                 <div className="row">
-
-                                    <div className="col-6 mb-4">
-                                        <div className="form-floating">
-                                            <input type="text" value={user.firstname} onChange={handleChange} required
-                                                   className="form-control" placeholder="firstname" name="firstname"/>
-                                            <label>First name</label>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-6 mb-4">
-                                        <div className="form-floating">
-                                            <input type="text" value={user.lastname} onChange={handleChange} required
-                                                   className="form-control" placeholder="lastname" name="lastname"/>
-                                            <label>Last name</label>
-                                        </div>
-                                    </div>
-
-
                                     <div className="col-12 mb-4">
-                                        <div className="form-floating">
-                                            <input type="email" value={user.email} onChange={handleChange} required
-                                                   className="form-control" placeholder="email" name="email"/>
-                                            <label>Email</label>
-                                        </div>
+                                        <Input
+                                            size="large"
+                                            required
+                                            onChange={handleChange}
+                                            value={user.firstname}
+                                            placeholder="Firstname"
+                                            name="firstname"
+                                            type="text"
+                                        />
                                     </div>
 
                                     <div className="col-12 mb-4">
-                                        <div className="form-floating">
-                                            <input type="password" value={user.password} onChange={handleChange} required
-                                                   className="form-control" placeholder="password" name="password"/>
-                                            <label>Password</label>
-                                        </div>
+                                        <Input
+                                            size="large"
+                                            required
+                                            onChange={handleChange}
+                                            value={user.lastname}
+                                            placeholder="Lastname"
+                                            name="lastname"
+                                            type="text"
+                                        />
                                     </div>
 
                                     <div className="col-12 mb-4">
-                                        <div className="form-floating">
-                                            <input type="password" value={user.repeat_password} onChange={handleChange} required
-                                                   className="form-control" placeholder="repeat_password" name="repeat_password"/>
-                                            <label>Confirm Password</label>
-                                        </div>
+                                        <Input
+                                            size="large"
+                                            required
+                                            onChange={handleChange}
+                                            value={user.email}
+                                            placeholder="Email"
+                                            name="email"
+                                            type="email"
+                                        />
                                     </div>
 
-                                    <div className="col-lg-12 mx-auto">
+                                    <div className="col-12 mb-4">
+                                        <Input.Password
+                                            size="large"
+                                            required
+                                            onChange={handleChange}
+                                            value={user.password}
+                                            placeholder="Password"
+                                            name="password"
+                                            type="password"
+                                        />
+                                    </div>
 
-                                        <button className="btn btn-lg p-3 mt-4 btn-primary w-100" id="reg_button" disabled={loadingButton}>Create
-                                            account
-                                        </button>
+                                    <div className="col-12 mb-4">
+                                        <Input.Password
+                                            size="large"
+                                            required
+                                            onChange={handleChange}
+                                            value={user.repeat_password}
+                                            placeholder="Confirm Password"
+                                            name="repeat_password"
+                                            type="password"
+                                        />
+                                    </div>
 
-                                        <Link href="/">
-                                            <p className="mb-0 mt-4 text-center">Have an account? <a className="">Sign
-                                                In</a></p>
-                                        </Link>
+                                    <div className="col-lg-12 mt-2 mb-5 mx-auto">
+                                        {!submitting ? (
+                                            <Button size="large" type="primary" className=" px-5  w-100">
+                                                Create Account
+                                            </Button>
+                                        ) : (
+                                            <Button size="large" disabled className="w-100">
+                                                <LoadingOutlined className="text-primary" rotate={180} />
+                                            </Button>
+                                        )}
                                     </div>
                                 </div>
                             </form>
+                            <center className="mt-2">
+                                <Text>
+                                    <big>
+                                        Already have an account?{' '}
+                                        <u className="text-primary">
+                                            <Link href="/">Login</Link>
+                                        </u>
+                                    </big>
+                                </Text>
+                            </center>
+                            <center>
+                                <div className=" mt-4">
+                                    <a href="" className="font-gray me-4">
+                                        Privacy Policy
+                                    </a>
+                                    <a href="" className="font-gray">
+                                        Terms & Conditions
+                                    </a>
+                                </div>
+                            </center>
                         </div>
-
                     </div>
-
-
-                    <div className="text-center">
-                        <span className="me-4">&copy; 2022</span>
-                        <a href="" className="font-gray-3 me-4">Privacy policy</a>
-                        <a href="" className="font-gray-3">Terms & conditions</a>
+                    <div className="mb-5 d-flex font-gray justify-content-between gap-2 p-5">
+                        <p>&copy; Ductape 2023</p>
                     </div>
-
                 </div>
-
+                <div className="col-xl-8 position-relative col-lg-7 p-3 pt-4 pb-4 pe-4 d-flex flex-column">
+                    <Card className="h-100 p-5">
+                        <List
+                            itemLayout="horizontal"
+                            dataSource={data}
+                            renderItem={(item, index) => (
+                                <List.Item className="m-5">
+                                    <List.Item.Meta
+                                        avatar={
+                                            <Avatar
+                                                src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}
+                                            />
+                                        }
+                                        title={
+                                            <a href="" className="fs-4">
+                                                {item.title}
+                                            </a>
+                                        }
+                                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed augue nec mi malesuada hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. "
+                                    />
+                                </List.Item>
+                            )}
+                        />
+                    </Card>
+                </div>
             </div>
         </Home_Layout>
     );
 };
 
-export default Register
+export default Register;
