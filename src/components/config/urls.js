@@ -5,6 +5,8 @@ export const USER_CREATE_URL = '/users/v1/create';
 export const USER_LOGIN_URL = '/users/v1/login';
 export const USER_FORGOT_URL = '/users/v1/forgot';
 export const USER_CHANGE_PASSWORD = '/users/v1/password';
+export const USER_OTP_LOGIN = '/users/v1/login/otp';
+export const USER_REQUEST_OTP = '/users/v1/otp/:user_id';
 
 export const WORKSPACES_BASE_URL = 'https://ductape-workspaces-3bubdh4twq-uc.a.run.app';
 export const WORKSPACE_CREATE_URL = '/workspaces/v1/create';

@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { Logo } from '../components/config/constant';
 import Router from 'next/router';
 import { loginUser as userAuth } from '../components/services/users.service';
-import { Avatar, Button, Card, Input, Typography } from 'antd';
+import { Modal,Avatar, Button, Card, Input, Typography } from 'antd';
 import { fetchWorkspaces } from '../components/services/workspaces.service';
 import Link from 'next/link';
 import { RootState } from '../redux/store';
@@ -17,22 +17,74 @@ import {
     changeDefaultWorkspaceId,
 } from '../redux/applicationSlice';
 import { LoadingOutlined, StarFilled } from '@ant-design/icons';
+import { otpLogin, requestOtp } from "../components/services/users.service";
 
 const { Title, Text, Paragraph } = Typography;
 
 const Index = () => {
     const dispatch = useDispatch();
-
+    const [userID, setUserId] = useState("");
     const { user, isAuthenticated } = useSelector((state: RootState) => state.app);
     const [submitting, setSubmitting] = useState(false);
-    const [authenticated, setAuthenticated] = useState(isAuthenticated);
+    const [userData, setUserData] = useState({});
+    const [visible, setVisible] = useState(false);
+    const [otp, setOtp] = useState("");
     const [loginUser, setLoginUser] = useState({
         email: '',
         password: '',
     });
 
     const handleChange = (e) => setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
+    const handleToken = (e) => setOtp( e.target.value );
+    const requestNewOtp = async() => {
+        try {
+                const response = await requestOtp({user_id: userID});
+                toast.success('email sent')
+        } catch (e) {
+            console.log('An error occurred', e);
+            const error = e.response? e.response.data.errors: e.toString();
+            toast.error(error)
+        }
+    }
+    const handleOtpLogin = async() => {
+        try {
+            const response = await otpLogin({user_id: userID,token:otp });
+            toast.success('successful')
+            afterLogin(userData['workspaces'],userData)
+        } catch (e) {
+            console.log('An error occurred', e);
+            const error = e.response? e.response.data.errors: e.toString();
+            toast.error(error)
+        }
+    }
+    const afterLogin = async(workspaces,userData ) => {
+        if (workspaces.length) {
+            const { auth_token: token, public_key, _id: user_id } = userData;
+            const spaces = await fetchWorkspaces({ token, public_key, user_id });
+            const { data } = spaces.data;
+            let defaultChanged = false;
 
+            // save default workspace
+            data.map((d, i) => {
+                if (d.default) {
+                    defaultChanged = true;
+                    dispatch(changeDefaultWorkspaceId(d.workspace_id));
+                    dispatch(setCurrentWorkspace(d));
+                }
+            });
+            if (!defaultChanged) {
+                dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
+                dispatch(setCurrentWorkspace(data[0]));
+            }
+
+            // save all workspaces
+            dispatch(setWorkspaces(data));
+
+            Router.push('/dashboard');
+        } else {
+            Router.push('/workspaces');
+        }
+    }
     const validateEmail = (email) => {
         return email.match(
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -40,42 +92,24 @@ const Index = () => {
     };
 
     const Login = async () => {
+        
         toast('Authenticating details. Please wait');
         setSubmitting(true);
         try {
             // login user
             const login = await userAuth(loginUser);
+            setUserData(login.data.data)
             const userData = login.data.data;
             dispatch(await setAppUser(userData));
-
+            setUserId(login.data.data._id)
             // set workspaces
             const { workspaces } = login.data.data;
-            if (workspaces.length) {
-                const { auth_token: token, public_key, _id: user_id } = userData;
-                const spaces = await fetchWorkspaces({ token, public_key, user_id });
-                const { data } = spaces.data;
-                let defaultChanged = false;
-
-                // save default workspace
-                data.map((d, i) => {
-                    if (d.default) {
-                        defaultChanged = true;
-                        dispatch(changeDefaultWorkspaceId(d.workspace_id));
-                        dispatch(setCurrentWorkspace(d));
-                    }
-                });
-                if (!defaultChanged) {
-                    dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
-                    dispatch(setCurrentWorkspace(data[0]));
-                }
-
-                // save all workspaces
-                dispatch(setWorkspaces(data));
-
-                Router.push('/dashboard');
-            } else {
-                Router.push('/workspaces');
-            }
+            if(login.data.data.active)
+            {
+                setVisible(true)
+            }else{
+                afterLogin(workspaces,userData)
+        }
         } catch (e) {
             console.log('An error occurred', e);
             const error = e.response ? e.response.data.errors : e.toString();
@@ -84,7 +118,8 @@ const Index = () => {
         }
     };
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+    }, []);
 
     return (
         <Home_Layout title="Home">
@@ -226,7 +261,31 @@ const Index = () => {
                         </div>
                     </Card>
                 </div>
+                <Modal
+                    title={
+                        <div className="mb-3">
+                        <Typography.Title level={2} className="m-0 text-capitalize">
+                            Otp Login
+                        </Typography.Title>
+                        </div>
+                    }
+                    visible={visible}
+                    footer={null}
+                    onCancel={() => setVisible(false)}
+                    >
+                    <div className="mb-3">
+                        <label>token</label>
+                        <Input className="mb-3" name="name" onChange={handleToken} />
+                    </div>
+                    <p onClick={requestNewOtp}>
+                        request new otp
+                    </p>
+                    <Button type="primary" onClick={handleOtpLogin}>
+                        verify
+                    </Button>
+                </Modal>                                    
             </div>
+            
         </Home_Layout>
     );
 };

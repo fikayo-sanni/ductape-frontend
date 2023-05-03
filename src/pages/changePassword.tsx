@@ -4,14 +4,17 @@ import {toast} from "react-hot-toast";
 import {Logo} from '../components/config/constant';
 import Router, {useRouter} from "next/router";
 import Link from "next/link";
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import { useNProgress } from '@tanem/react-nprogress'
 import { changePasswordUser } from "../components/services/users.service";
 import NProgress from "nprogress";
 
 const changePassword = () => {
+    const { email } = useSelector((state: RootState) => state.app);
     const [loadingButton, setLoadingButton] = useState(false);
     const [data, setData] = useState({
-        email: '',
+        email:'',
         password: '',
         repeat_password: '',
         token: ''
@@ -20,6 +23,7 @@ const changePassword = () => {
 
     const handleChange = (e) => {
         setData({...data, [e.target.name]: e.target.value});
+        console.log(data);
     }
 
 
@@ -30,7 +34,7 @@ const changePassword = () => {
                 setLoadingButton(true);
                 NProgress.start();
                 //toast.success('Registration successful')
-                await changePasswordUser({...data, repeat_password: undefined});
+                await changePasswordUser({...data,email:email['email'], repeat_password: undefined});
                 toast.success('password change successful')
                 Router.push('/');
             } else {
@@ -45,7 +49,6 @@ const changePassword = () => {
         }
     }
     useEffect(() => {
-
     }, []);
 
     return (
@@ -62,13 +65,6 @@ const changePassword = () => {
 
                             <form id="register_form" onSubmit={(e) => changePass(e, 'reg_button')}>
                                 <div className="row">
-                                <div className="col-12 mb-4">
-                                        <div className="form-floating">
-                                            <input  type = "email" value={data.email} onChange={handleChange} required
-                                                   className="form-control" placeholder="email" name="email"/>
-                                            <label>Email</label>
-                                        </div>
-                                    </div>
 
                                     <div className="col-12 mb-4">
                                         <div className="form-floating">
