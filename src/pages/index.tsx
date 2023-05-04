@@ -245,7 +245,7 @@ const Index = () => {
                         <p>&copy; Ductape 2023</p>
                     </div>
                 </div>
-                <div className="col-xl-8 position-relative col-lg-7 p-3 pt-4 pb-4 pe-4 d-flex flex-column">
+                <div className="col-xl-8 position-relative col-lg-7 p-4 pt-4 pb-4 pe-4 d-flex flex-column">
                     <Card className="h-100 p-5">
                         <Title level={2}>
                             "Few things make me feel more powerful than setting up

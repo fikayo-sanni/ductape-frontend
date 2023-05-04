@@ -163,16 +163,12 @@ const Register = () => {
                                 <div>
                                     <Checkbox onChange={onChange}>
                                         By clicking the “Create Account” button, you agree to Ductape’s{' '}
-                                        <u>
-                                            <a href="" className="text-primary">
-                                                Terms of Use
-                                            </a>
+                                        <u className="text-primary">
+                                            <a href="">Terms of Use</a>
                                         </u>{' '}
                                         and{' '}
-                                        <u>
-                                            <a href="" className="text-primary">
-                                                Privacy Policy
-                                            </a>
+                                        <u className="text-primary">
+                                            <a href="">Privacy Policy</a>
                                         </u>
                                     </Checkbox>
                                 </div>
