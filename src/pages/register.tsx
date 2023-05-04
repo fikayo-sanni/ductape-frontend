@@ -31,15 +31,19 @@ const Register = () => {
     const data = [
         {
             title: 'Build Anything Quickly',
+            description: 'Build any third party integration, natively in hours rather than weeks. Setup custom features quikcly. Ductape gives you the wings to get where you are going, faster than your competition'
         },
         {
             title: 'Long Lived Integrations',
+            description: "Build integrations that can adapt to third party changes as quickly as they are being made, build systems that would last decades rather than months "
         },
         {
             title: 'Scale Automatically',
+            description: "Off-set your scaling costs, send us your blocking/heavy third party tasks and let us resolve them. We automatically scale up resources for you during traffic surges to keep your app performance stable"
         },
         {
             title: 'Extensive Logging',
+            description: "Cutomized error logging, success logging, transaction stack traces, get to see everything happening in your features right at your fingertips. "
         },
     ];
 
@@ -214,7 +218,7 @@ const Register = () => {
                                                 {item.title}
                                             </span>
                                         }
-                                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed augue nec mi malesuada hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. "
+                                        description={item.description}
                                     />
                                 </List.Item>
                             )}

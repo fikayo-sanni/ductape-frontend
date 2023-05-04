@@ -9,8 +9,8 @@
 
 @font-face {
     font-family: 'Raleway';
-    src: url('../../../public/font-raleway/Raleway-Italic-VariableFont_wght.ttf');
-    src: url('../../../public//font-raleway/Raleway-VariableFont_wght.ttf');
+    src: url('../../../public/font-raleway/static/Raleway-Medium.ttf');
+    src: url('../../../public//font-raleway/static/Raleway-Light.ttf');
     font-weight: 400;
     font-style: normal;
 }
