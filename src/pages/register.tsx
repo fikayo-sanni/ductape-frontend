@@ -31,7 +31,7 @@ const Register = () => {
     const data = [
         {
             title: 'Build Anything Quickly',
-            description: 'Build any third party integration, natively in hours rather than weeks. Setup custom features quikcly. Ductape gives you the wings to get where you are going, faster than your competition'
+            description: 'Build any third party integration, natively in hours rather than weeks. Setup custom features quickly. Ductape gives you the wings to get where you are going, faster than your competition'
         },
         {
             title: 'Long Lived Integrations',
