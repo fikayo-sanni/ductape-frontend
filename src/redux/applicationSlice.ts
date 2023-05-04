@@ -19,6 +19,7 @@ export interface AppState {
     lastUpdated: Date;
 
     workspaces: [];
+    email: '',
     workspace: any;
     apps: [];
     app: any;
@@ -69,6 +70,7 @@ export const initialState: AppState = {
     lastUpdated: new Date(),
 
     workspaces: [],
+    email: '',
     workspace: {},
     apps: [],
     app: {},
@@ -91,6 +93,9 @@ export const applicationSlice = createSlice({
             state.user = payload;
             state.isAuthenticated = true;
             state.lastUpdated = new Date();
+        },
+        setUserEmail: (state: AppState, { payload }: PayloadAction<any>) => {
+            state.email = payload;
         },
         logoutUser: (state: AppState) => {
             window.top.location.href = '/';
@@ -152,6 +157,7 @@ export const applicationSlice = createSlice({
 
 export const {
     setAppUser,
+    setUserEmail,
     logoutUser,
     setCurrentApp,
     changeApps,

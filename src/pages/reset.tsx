@@ -1,32 +1,19 @@
 import Home_layout from "../components/layout/home_layout";
 import React, {useContext, Component, useEffect, useState} from "react";
-import {
-    Button,
-    Upload,
-    message,
-    Carousel,
-    Card,
-    Tabs,
-    Typography,
-    Spin,
-    Avatar,
-    Badge,
-    Table,
-    Input,
-    Space,
-    Result
-} from 'antd';
 import NProgress from "nprogress";
 import {toast} from "react-hot-toast";
 import {Logo} from '../components/config/constant';
 import Router, {useRouter} from "next/router";
+import { useDispatch, useSelector } from 'react-redux';
+import { setUserEmail } from '../redux/applicationSlice';
+
 import Link from "next/link";
 import { forgotUser } from "../components/services/users.service";
 
 export default function Index(props) {
     const [loadingButton, setLoadingButton] = useState(false);
     const [user, setUser] = useState({email:""});
-
+    const dispatch = useDispatch();
 
     const handleChange = e =>
         setUser({...user, [e.target.name]: e.target.value});
@@ -40,6 +27,7 @@ export default function Index(props) {
             const login = await forgotUser(user);
             console.log(login);
             toast.success('Email Sent')
+            dispatch(await setUserEmail(user));
             const { workspaces } = login.data.data;
             Router.push('/changePassword');
 
