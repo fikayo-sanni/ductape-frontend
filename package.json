@@ -11,6 +11,7 @@
     "@ant-design/icons": "^4.7.0",
     "@lottiefiles/react-lottie-player": "^3.5.0",
     "@mono.co/connect.js": "^0.2.1",
+    "@next/font": "^13.3.4",
     "@reduxjs/toolkit": "^1.8.5",
     "@tanem/react-nprogress": "^5.0.6",
     "@types/nprogress": "^0.2.0",
