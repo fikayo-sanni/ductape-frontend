@@ -7,8 +7,16 @@
     --skyblue: rgba(140, 194, 232, 0.24);
 }
 
+@font-face {
+    font-family: 'Raleway';
+    src: url('../../../public/font-raleway/Raleway-Italic-VariableFont_wght.ttf');
+    src: url('../../../public//font-raleway/Raleway-VariableFont_wght.ttf');
+    font-weight: 400;
+    font-style: normal;
+}
+
 body {
-    font-family: 'Raleway', 'Inter', sans-serif;
+    font-family: 'Raleway', 'Roboto', sans-serif !important;
 }
 
 .border-bottom,

@@ -30,16 +30,16 @@ const Register = () => {
 
     const data = [
         {
-            title: 'Selling Point 1',
+            title: 'Build Anything Quickly',
         },
         {
-            title: 'Selling Point 2',
+            title: 'Long Lived Integrations',
         },
         {
-            title: 'Selling Point 3',
+            title: 'Scale Automatically',
         },
         {
-            title: 'Selling Point 4',
+            title: 'Extensive Logging',
         },
     ];
 
@@ -204,17 +204,15 @@ const Register = () => {
                             itemLayout="horizontal"
                             dataSource={data}
                             renderItem={(item, index) => (
-                                <List.Item className="m-5">
+                                <List.Item className="m-5 border-0">
                                     <List.Item.Meta
                                         avatar={
-                                            <Avatar
-                                                src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}
-                                            />
+                                            <StarFilled  style={{fontSize: 25, color: "#FF991F"}}/>
                                         }
                                         title={
-                                            <a href="" className="fs-4">
+                                            <span className="fs-4">
                                                 {item.title}
-                                            </a>
+                                            </span>
                                         }
                                         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed augue nec mi malesuada hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. "
                                     />
