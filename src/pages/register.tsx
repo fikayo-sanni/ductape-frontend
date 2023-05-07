@@ -175,7 +175,20 @@ const Register = () => {
 
                                 <div className="col-lg-12 mt-5 mb-5 mx-auto">
                                     {!submitting ? (
-                                        <Button size="large" type="primary" className=" px-5  w-100">
+                                        <Button
+                                            size="large"
+                                            type="primary"
+                                            className=" px-5  w-100"
+                                            disabled={
+                                                !(
+                                                    user.firstname &&
+                                                    user.lastname &&
+                                                    user.password &&
+                                                    user.email &&
+                                                    user.repeat_password
+                                                )
+                                            }
+                                        >
                                             Create Account
                                         </Button>
                                     ) : (
