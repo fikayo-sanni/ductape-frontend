@@ -1,5 +1,5 @@
 import Home_Layout from '../components/layout/home_layout';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { Logo } from '../components/config/constant';
 import Router from 'next/router';
@@ -29,14 +29,40 @@ const Index = () => {
     const [submitting, setSubmitting] = useState(false);
     const [userData, setUserData] = useState({});
     const [visible, setVisible] = useState(true);
-    const [otp, setOtp] = useState('');
+    const [otp, setOtp] = useState(new Array(6).fill(''));
     const [loginUser, setLoginUser] = useState({
         email: '',
         password: '',
     });
 
+    const firstInputRef = useRef(null);
+
+    useEffect(() => {
+        if (visible) {
+            firstInputRef.current.focus();
+        }
+    }, [visible]);
+
     const handleChange = (e) => setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
-    const handleToken = (e) => setOtp(e.target.value);
+
+    const handleToken = (element, index) => {
+        if (isNaN(element.value)) return false;
+
+        // set the value of the current input field in the otp state array
+        const newOtp = [...otp];
+        newOtp[index] = element.value;
+        setOtp(newOtp);
+
+        // move focus to the next input field, or the previous one if deleting
+        if (index === 5 && element.value && element.previousSibling) {
+            handleOtpLogin();
+            element.focus();
+        } else if (element.nextSibling && element.value) {
+            element.nextSibling.focus();
+        } else if (element.previousSibling) {
+            element.previousSibling.focus();
+        }
+    };
 
     const requestNewOtp = async () => {
         try {
@@ -48,9 +74,11 @@ const Index = () => {
             toast.error(error);
         }
     };
+
     const handleOtpLogin = async () => {
         try {
-            const response = await otpLogin({ user_id: userID, token: otp });
+            const response = await otpLogin({ user_id: userID, token: otp.join('') });
+            console.log(otp.join(''));
             toast.success('successful');
             afterLogin(userData['workspaces'], userData);
         } catch (e) {
@@ -89,6 +117,26 @@ const Index = () => {
         }
     };
 
+    const handlePaste = (e, index) => {
+        e.preventDefault();
+        const pasteData = e.clipboardData.getData('text/plain');
+        const pasteArray = pasteData.split('').filter((char) => !isNaN(char));
+        const newOtp = [...otp];
+        pasteArray.forEach((char, i) => {
+            if (index + i < 6) {
+                newOtp[index + i] = char;
+            }
+        });
+        setOtp(newOtp);
+        const lastBox = document.getElementById(`otp-${index + pasteArray.length - 1}`);
+        if (lastBox) {
+            lastBox.focus();
+        }
+        if (newOtp.join('').length === 6) {
+            handleOtpLogin();
+        }
+    };
+
     const validateEmail = (email) => {
         return email.match(
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -120,11 +168,9 @@ const Index = () => {
         }
     };
 
-    useEffect(() => {}, []);
-
     return (
         <Home_Layout title="Home">
-            <div className="h-full row overflow-hidden g-0">
+            <div className="h-full row overflow-hidden">
                 <div className="col-xl-4 col-lg-5 d-flex flex-column">
                     <div className="col-lg-12 p-5 mt-5 padding_10-xs ">
                         <section>
@@ -178,11 +224,6 @@ const Index = () => {
                                                     value={loginUser.email}
                                                     placeholder="Email address"
                                                     name="email"
-                                                    onKeyPress={(event) => {
-                                                        if (event.key === 'Enter') {
-                                                            Login();
-                                                        }
-                                                    }}
                                                 />
                                             </div>
 
@@ -272,7 +313,7 @@ const Index = () => {
                     title={
                         <div className="mb-3">
                             <Title level={3} className="mb-0 font-weight-500 pt-3">
-                                Verify it’s you
+                                Verify it's you
                             </Title>
                             <Paragraph type="secondary" className="mb-5 mt-2 fs-6">
                                 We sent a six-digit pin to your email. Check your email and enter it in the field below
@@ -283,36 +324,44 @@ const Index = () => {
                     footer={null}
                     onCancel={() => setVisible(false)}
                 >
-                    <OtpInput
-                        value={otp}
-                        onChange={handleToken}
-                        numInputs={6}
-                        shouldAutoFocus={true}
-                        renderInput={(index, key) => (
-                            <input
-                                key={key}
-                                className="form-control m-2"
-                                style={{
-                                    width: '3rem',
-                                    height: '3rem',
-                                    fontSize: '20px',
-                                    fontWeight: 'bold',
-                                    letterSpacing: '10px',
-                                }}
-                                maxLength={1}
-                            />
-                        )}
-                    />
-                    <Button
-                        type="primary"
-                        onClick={handleOtpLogin}
-                        className="mb-5 px-5 w-100 mt-5"
-                        size="large"
-                        disabled={!(otp)}
-                    >
+                    <label htmlFor="otp" className="sr-only">
+                        Enter the six-digit pin from your email:
+                    </label>
+                    <div className="flex justify-center mb-5">
+                        {otp.map((data, index) => {
+                            return (
+                                <input
+                                    className="otp-field"
+                                    type="text"
+                                    name="otp"
+                                    id={`otp-${index}`}
+                                    maxLength={1}
+                                    key={index}
+                                    value={data}
+                                    onChange={(e) => handleToken(e.target, index)}
+                                    onFocus={(e) => e.target.select()}
+                                    onPaste={(e) => handlePaste(e, index)}
+                                    style={{
+                                        width: '3rem',
+                                        height: '3rem',
+                                        fontSize: '20px',
+                                        fontWeight: 'bold',
+                                        letterSpacing: '10px',
+                                        textAlign: 'center',
+                                        marginRight: '0.5rem',
+                                        marginBottom: '1rem',
+                                    }}
+                                    ref={index === 0 ? firstInputRef : null}
+                                />
+                            );
+                        })}
+                    </div>
+                    <Button type="primary" onClick={handleOtpLogin} className="px-5 w-100" size="large" disabled={!otp}>
                         Verify Code
                     </Button>
-                    <p onClick={requestNewOtp}>request new otp</p>
+                    <p className="text-center mt-3 text-gray-600" onClick={requestNewOtp}>
+                        Request new OTP
+                    </p>
                 </Modal>
             </div>
         </Home_Layout>
