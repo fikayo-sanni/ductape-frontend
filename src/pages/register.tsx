@@ -47,7 +47,7 @@ const Register = () => {
         {
             title: 'Extensive Logging',
             description:
-                'Cutomized error logging, success logging, transaction stack traces, get to see everything happening in your features right at your fingertips. ',
+                'Customized error logging, success logging, transaction stack traces, get to see everything happening in your features right at your fingertips. ',
         },
     ];
 
@@ -66,6 +66,7 @@ const Register = () => {
                 await registerUser({ ...user, repeat_password: undefined });
                 toast.success('Registration successful');
                 //Router.push('/dashboard');
+                window.location.href = '/';
             } else {
                 toast.error('passwords do not match');
             }
@@ -176,6 +177,7 @@ const Register = () => {
                                 <div className="col-lg-12 mt-5 mb-5 mx-auto">
                                     {!submitting ? (
                                         <Button
+                                            onClick={(e) => register(e, 'reg_button')}
                                             size="large"
                                             type="primary"
                                             className=" px-5  w-100"
