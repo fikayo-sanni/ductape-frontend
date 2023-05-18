@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { createWorkspace } from '../components/services/workspaces.service';
 
 const Workspaces = () => {
+    const dispatch = useDispatch();
     const config = useSelector((state) => state.app);
     // const[workspace, setWorkspace] = useState([]);
     const [user, setUser] = useState(config.user);

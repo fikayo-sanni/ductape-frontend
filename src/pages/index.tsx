@@ -27,7 +27,8 @@ const Index = () => {
     const [userID, setUserId] = useState('');
     const { user, isAuthenticated } = useSelector((state: RootState) => state.app);
     const [submitting, setSubmitting] = useState(false);
-    const [workspaces, setWorkspaces] = useState([]);
+    const [submittingOtp, setSubmittingOtp] = useState(false);
+    const [workspaces, setLoginWorkspaces] = useState([]);
     const [userData, setUserData] = useState({});
     const [visible, setVisible] = useState(false);
     const [otp, setOtp] = useState(new Array(6).fill(''));
@@ -78,8 +79,10 @@ const Index = () => {
 
     const handleOtpLogin = async (otp) => {
         try {
+            setSubmittingOtp(true);
             const response = await otpLogin({ user_id: userID, token: otp.join('') });
             toast.success('successful');
+            setVisible(false);
 
             afterLogin(workspaces, userData);
         } catch (e) {
@@ -90,33 +93,35 @@ const Index = () => {
     };
 
     const afterLogin = async (workspaces, userData) => {
-        Router.push('/dashboard');
+        dispatch(await setAppUser(userData));
+        // Router.push('/dashboard');
         // if (workspaces.length) {
-        //     const { auth_token: token, public_key, _id: user_id } = userData;
-        //     const spaces = await fetchWorkspaces({ token, public_key, user_id });
-        //     const { data } = spaces.data;
-        //     let defaultChanged = false;
+        const { auth_token: token, public_key, _id: user_id } = userData;
+        const spaces = await fetchWorkspaces({ token, public_key, user_id });
+        const { data } = spaces.data;
+        let defaultChanged = false;
+        setSubmittingOtp(false);
 
-        //     // save default workspace
-        //     data.map((d, i) => {
-        //         if (d.default) {
-        //             defaultChanged = true;
-        //             dispatch(changeDefaultWorkspaceId(d.workspace_id));
-        //             dispatch(setCurrentWorkspace(d));
-        //         }
-        //     });
-        //     if (!defaultChanged) {
-        //         dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
-        //         dispatch(setCurrentWorkspace(data[0]));
-        //     }
+        // save default workspace
+        data.map((d, i) => {
+            if (d.default) {
+                defaultChanged = true;
+                dispatch(changeDefaultWorkspaceId(d.workspace_id));
+                dispatch(setCurrentWorkspace(d));
+            }
+        });
+        if (!defaultChanged) {
+            dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
+            dispatch(setCurrentWorkspace(data[0]));
+        }
 
-        //     // save all workspaces
-        //     dispatch(setWorkspaces(data));
+        // save all workspaces
+        dispatch(setWorkspaces(data));
 
-        //     Router.push('/dashboard');
-        // } else {
-        //     Router.push('/workspaces');
-        // }
+        Router.push('/dashboard');
+        /*} else {
+            Router.push('/workspaces');
+        }*/
     };
 
     const handlePaste = (e, index) => {
@@ -157,14 +162,13 @@ const Index = () => {
             const { otp, workspaces } = userData;
             const { active } = otp;
 
-            setWorkspaces(workspaces);
+            setLoginWorkspaces(workspaces);
 
             setUserId(userData._id);
             setUserData(userData);
+            setSubmitting(false);
 
             if (!active) {
-                dispatch(await setAppUser(userData));
-
                 afterLogin(workspaces, userData);
             } else {
                 setVisible(true);
@@ -370,7 +374,7 @@ const Index = () => {
                         })}
                     </div>
                     <div className="col-lg-12 mt-2 mb-5 mx-auto">
-                        {!submitting ? (
+                        {!submittingOtp ? (
                             <Button
                                 size="large"
                                 onClick={handleOtpLogin}

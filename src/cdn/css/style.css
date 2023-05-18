@@ -11,8 +11,20 @@
 .border,
 .border-end,
 .border-start {
-    border-color: #e4e6ea !important;
+    border-color: #D4D4D4 !important;
 }
+
+.border-top-0 {
+    border-top: 0 !important;
+}
+
+.border-start-0 {
+    border-left: 0 !important;
+} 
+.border-end-0 {
+    border-right: 0 !important;
+}
+
 
 .bg-primary_transparent_2 {
     background: var(--primary_color_transparent_2) !important;

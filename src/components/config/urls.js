@@ -14,7 +14,7 @@ export const WORKSPACE_FETCH_URL = '/workspaces/v1/fetch/:user_id';
 export const WORKSPACE_DEFAULT_CHANGE = '/workspaces/v1/update/:user_id';
 export const WORKSPACE_UPDATE_ENVS = '/workspaces/v1/update/:workspace_id/defaults/envs';
 
-export const APPS_BASE_URL = 'https://ductape-apps-3bubdh4twq-uc.a.run.app';
+export const APPS_BASE_URL = 'http://localhost:8004';// 'https://ductape-apps-3bubdh4twq-uc.a.run.app';
 export const APPS_CREATE_URL = '/apps/v1/create';
 export const APPS_FETCH_URL = '/apps/v1/workspace/:workspace_id/:status';
 export const APP_FETCH_URL = '/apps/v1/:app_id';

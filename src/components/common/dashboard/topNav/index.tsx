@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { Avatar, Button, Card, Dropdown, Layout, MenuProps, Space } from 'antd';
 import { BellOutlined, DownOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../../redux/store';
 import { setCurrentWorkspace, logoutUser } from '../../../../redux/applicationSlice';
 import dynamic from 'next/dynamic';
+import { WorkspaceModal } from '../workspaceModal';
 
 const Logo = dynamic(() => import('../../../config/constant').then((component) => component.Logo));
 
@@ -14,6 +15,8 @@ export const TopNav: React.FC = () => {
         (state: RootState) => state.app,
     );
     const dispatch = useDispatch();
+
+    const [workspaceModal, showWorkspaceModal] = useState(false);
 
     let workspaceItems: MenuProps['items'] = workspaces.map((wkspace: any, i) => {
         if (wkspace.workspace_id !== workspace.workspace_id) {
@@ -33,7 +36,7 @@ export const TopNav: React.FC = () => {
             type: 'divider',
         },
         {
-            label: <Link href="/workspaces">Add New Workspace</Link>,
+            label: <a onClick={()=>showWorkspaceModal(true)}>Add New Workspace</a>,
             key: 'new',
             icon: <PlusOutlined />,
         },
@@ -69,7 +72,7 @@ export const TopNav: React.FC = () => {
     useEffect(() => {}, []);
 
     return (
-        <Card className="rounded-0 border-start-0 border-end-0 m-0" size="small">
+        <Card className="rounded-0 border border-start-0 border-end-0 m-0" size="small">
             <Space size={20} className="d-flex align-items-center justify-content-between w-100 flex-row">
                 <div className="d-flex flex-row gap-4">
                     <div style={{ height: 30, overflow: 'hidden' }}>
@@ -98,6 +101,7 @@ export const TopNav: React.FC = () => {
                     </Dropdown>
                 </div>
             </Space>
+            {workspaceModal? <WorkspaceModal showWorkspaceModal={showWorkspaceModal}/>:<></>}
         </Card>
     );
 };
