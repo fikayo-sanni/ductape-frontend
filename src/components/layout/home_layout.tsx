@@ -20,7 +20,7 @@ export default function Home_Layout({ children, title = 'Home' }) {
         >
             <Layout>
                 <Head>
-                    <title>{title} | Pastel</title>
+                    <title>{title} | Ductape</title>
                     <meta charSet="utf-8" />
                     <link rel="shortcut icon" type="image/png" href="images/logo.png" />
                     <link rel="icon" type="image/png" href="images/logo.png" />

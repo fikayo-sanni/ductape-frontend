@@ -30,16 +30,24 @@ const Register = () => {
 
     const data = [
         {
-            title: 'Selling Point 1',
+            title: 'Build Anything Quickly',
+            description:
+                'Build any third party integration, natively in hours rather than weeks. Setup custom features quickly. Ductape gives you the wings to get where you are going, faster than your competition',
         },
         {
-            title: 'Selling Point 2',
+            title: 'Long Lived Integrations',
+            description:
+                'Build integrations that can adapt to third party changes as quickly as they are being made, build systems that would last decades rather than months ',
         },
         {
-            title: 'Selling Point 3',
+            title: 'Scale Automatically',
+            description:
+                'Off-set your scaling costs, send us your blocking/heavy third party tasks and let us resolve them. We automatically scale up resources for you during traffic surges to keep your app performance stable',
         },
         {
-            title: 'Selling Point 4',
+            title: 'Extensive Logging',
+            description:
+                'Customized error logging, success logging, transaction stack traces, get to see everything happening in your features right at your fingertips. ',
         },
     ];
 
@@ -59,6 +67,7 @@ const Register = () => {
                 await registerUser({ ...user, repeat_password: undefined });
                 toast.success('Registration successful');
                 //Router.push('/dashboard');
+                window.location.href = '/';
             } else {
                 toast.error('passwords do not match');
             }
@@ -78,146 +87,148 @@ const Register = () => {
             <div className="h-full row overflow-hidden g-0">
                 <div className="col-xl-4 col-lg-5 d-flex flex-column">
                     <div className="col-lg-12 p-5 mt-5 padding_10-xs ">
-                        <div>
-                            <div className="">
-                                <div className=" margin_30-bottom">
-                                    <Logo />
-                                </div>
-                                <Title level={3} className="mb-0 font-weight-500 pt-3">
-                                    Long Live the Integrations
-                                </Title>
-                                <Paragraph type="secondary" className="mb-2 mt-2 fs-6">
-                                    Let’s get you setup
-                                </Paragraph>
+                        {/* <div> */}
+                        <div className="">
+                            <div className=" margin_30-bottom">
+                                <Logo />
                             </div>
-
-                            <form id="register_form" className="col pt-3" onSubmit={(e) => register(e, 'reg_button')}>
-                                <div className="row">
-                                    <div className="col-12 mb-4">
-                                        <Input
-                                            size="large"
-                                            required
-                                            onChange={handleChange}
-                                            value={user.firstname}
-                                            placeholder="Firstname"
-                                            name="firstname"
-                                            type="text"
-                                        />
-                                    </div>
-
-                                    <div className="col-12 mb-4">
-                                        <Input
-                                            size="large"
-                                            required
-                                            onChange={handleChange}
-                                            value={user.lastname}
-                                            placeholder="Lastname"
-                                            name="lastname"
-                                            type="text"
-                                        />
-                                    </div>
-
-                                    <div className="col-12 mb-4">
-                                        <Input
-                                            size="large"
-                                            required
-                                            onChange={handleChange}
-                                            value={user.email}
-                                            placeholder="Email"
-                                            name="email"
-                                            type="email"
-                                        />
-                                    </div>
-
-                                    <div className="col-12 mb-4">
-                                        <Input.Password
-                                            size="large"
-                                            required
-                                            onChange={handleChange}
-                                            value={user.password}
-                                            placeholder="Password"
-                                            name="password"
-                                            type="password"
-                                        />
-                                    </div>
-
-                                    <div className="col-12 mb-4">
-                                        <Input.Password
-                                            size="large"
-                                            required
-                                            onChange={handleChange}
-                                            value={user.repeat_password}
-                                            placeholder="Confirm Password"
-                                            name="repeat_password"
-                                            type="password"
-                                        />
-                                    </div>
-
-                                    <div>
-                                        <Checkbox onChange={onChange}>
-                                            By clicking the “Create Account” button, you agree to Ductape’s{' '}
-                                            <u>
-                                                <a href="" className="text-primary">
-                                                    Terms of Use
-                                                </a>
-                                            </u>{' '}
-                                            and{' '}
-                                            <u>
-                                                <a href="" className="text-primary">
-                                                    Privacy Policy
-                                                </a>
-                                            </u>
-                                        </Checkbox>
-                                    </div>
-
-                                    <div className="col-lg-12 mt-5 mb-5 mx-auto">
-                                        {!submitting ? (
-                                            <Button size="large" type="primary" className=" px-5  w-100">
-                                                Create Account
-                                            </Button>
-                                        ) : (
-                                            <Button size="large" disabled className="w-100">
-                                                <LoadingOutlined className="text-primary" rotate={180} />
-                                            </Button>
-                                        )}
-                                    </div>
-                                </div>
-                            </form>
-                            <center className="mt-2">
-                                <Text>
-                                    <big>
-                                        Already have an account?{' '}
-                                        <u className="text-primary">
-                                            <Link href="/">Login</Link>
-                                        </u>
-                                    </big>
-                                </Text>
-                            </center>
+                            <Title level={3} className="mb-0 font-weight-500 pt-3">
+                                Long Live the Integrations
+                            </Title>
+                            <Paragraph type="secondary" className="mb-2 mt-2 fs-6">
+                                Let’s get you setup
+                            </Paragraph>
                         </div>
+
+                        <form id="register_form" className="col pt-3" onSubmit={(e) => register(e, 'reg_button')}>
+                            <div className="row">
+                                <div className="col-12 mb-4">
+                                    <Input
+                                        size="large"
+                                        required
+                                        onChange={handleChange}
+                                        value={user.firstname}
+                                        placeholder="Firstname"
+                                        name="firstname"
+                                        type="text"
+                                    />
+                                </div>
+
+                                <div className="col-12 mb-4">
+                                    <Input
+                                        size="large"
+                                        required
+                                        onChange={handleChange}
+                                        value={user.lastname}
+                                        placeholder="Lastname"
+                                        name="lastname"
+                                        type="text"
+                                    />
+                                </div>
+
+                                <div className="col-12 mb-4">
+                                    <Input
+                                        size="large"
+                                        required
+                                        onChange={handleChange}
+                                        value={user.email}
+                                        placeholder="Email"
+                                        name="email"
+                                        type="email"
+                                    />
+                                </div>
+
+                                <div className="col-12 mb-4">
+                                    <Input.Password
+                                        size="large"
+                                        required
+                                        onChange={handleChange}
+                                        value={user.password}
+                                        placeholder="Password"
+                                        name="password"
+                                        type="password"
+                                    />
+                                </div>
+
+                                <div className="col-12 mb-4">
+                                    <Input.Password
+                                        size="large"
+                                        required
+                                        onChange={handleChange}
+                                        value={user.repeat_password}
+                                        placeholder="Confirm Password"
+                                        name="repeat_password"
+                                        type="password"
+                                    />
+                                </div>
+
+                                <div>
+                                    <Checkbox onChange={onChange}>
+                                        By clicking the “Create Account” button, you agree to Ductape’s{' '}
+                                        <u className="text-primary">
+                                            <a href="">Terms of Use</a>
+                                        </u>{' '}
+                                        and{' '}
+                                        <u className="text-primary">
+                                            <a href="">Privacy Policy</a>
+                                        </u>
+                                    </Checkbox>
+                                </div>
+
+                                <div className="col-lg-12 mt-5 mb-5 mx-auto">
+                                    {!submitting ? (
+                                        <Button
+                                            onClick={(e) => register(e, 'reg_button')}
+                                            size="large"
+                                            type="primary"
+                                            className=" px-5  w-100"
+                                            disabled={
+                                                !(
+                                                    user.firstname &&
+                                                    user.lastname &&
+                                                    user.password &&
+                                                    user.email &&
+                                                    user.repeat_password
+                                                )
+                                            }
+                                        >
+                                            Create Account
+                                        </Button>
+                                    ) : (
+                                        <Button size="large" disabled className="w-100">
+                                            <LoadingOutlined className="text-primary" rotate={180} />
+                                        </Button>
+                                    )}
+                                </div>
+                            </div>
+                        </form>
+                        <center className="mt-2">
+                            <Text>
+                                <big>
+                                    Already have an account?{' '}
+                                    <u className="text-primary">
+                                        <Link href="/">Login</Link>
+                                    </u>
+                                </big>
+                            </Text>
+                        </center>
+                        {/* </div> */}
                     </div>
-                    <div className="mb-5 d-flex font-gray justify-content-between gap-2 p-5">
+                    <div className="mt-auto d-flex font-gray justify-content-between gap-2 p-5">
                         <p>&copy; Ductape 2023</p>
                     </div>
                 </div>
-                <div className="col-xl-8 position-relative col-lg-7 p-3 pt-4 pb-4 pe-4 d-flex flex-column">
+                <div className="col-xl-8 position-relative col-lg-7 p-4 pb-5 d-flex flex-column">
                     <Card className="h-100 p-5">
                         <List
                             itemLayout="horizontal"
                             dataSource={data}
                             renderItem={(item, index) => (
-                                <List.Item className="m-5">
+                                <List.Item className="m-5 border-0">
                                     <List.Item.Meta
-                                        avatar={
-                                            <Avatar
-                                                src={`https://xsgames.co/randomusers/avatar.php?g=pixel&key=${index}`}
-                                            />
-                                        }
-                                        title={
-                                            <a href="" className="fs-4">
-                                                {item.title}
-                                            </a>
-                                        }
-                                        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean sed augue nec mi malesuada hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. "
+                                        avatar={<StarFilled style={{ fontSize: 25, color: '#FF991F' }} />}
+                                        title={<span className="fs-4">{item.title}</span>}
+                                        description={item.description}
                                     />
                                 </List.Item>
                             )}

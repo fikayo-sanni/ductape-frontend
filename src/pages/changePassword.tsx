@@ -1,119 +1,155 @@
 import Home_Layout from '../components/layout/home_layout';
-import React, {useContext, Component, useEffect, useState} from "react";
-import {toast} from "react-hot-toast";
-import {Logo} from '../components/config/constant';
-import Router, {useRouter} from "next/router";
-import Link from "next/link";
+import React, { useContext, Component, useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
+import { Logo } from '../components/config/constant';
+import Router, { useRouter } from 'next/router';
+import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import { useNProgress } from '@tanem/react-nprogress'
-import { changePasswordUser } from "../components/services/users.service";
-import NProgress from "nprogress";
+import { useNProgress } from '@tanem/react-nprogress';
+import { changePasswordUser } from '../components/services/users.service';
+import { Button, Input, Typography } from 'antd';
+import NProgress from 'nprogress';
+
+import { LoadingOutlined, StarFilled } from '@ant-design/icons';
+
+const { Title, Text, Paragraph } = Typography;
 
 const changePassword = () => {
     const { email } = useSelector((state: RootState) => state.app);
     const [loadingButton, setLoadingButton] = useState(false);
+    const [submitting, setSubmitting] = useState(false);
     const [data, setData] = useState({
-        email:'',
+        email: '',
         password: '',
         repeat_password: '',
-        token: ''
-      });
-
+        token: '',
+    });
 
     const handleChange = (e) => {
-        setData({...data, [e.target.name]: e.target.value});
+        setData({ ...data, [e.target.name]: e.target.value });
         console.log(data);
-    }
+    };
 
-
-    const changePass = async(e, buttonId) => {
-        e.preventDefault(); 
+    const changePass = async (e, buttonId) => {
+        e.preventDefault();
         try {
             if (data.password === data.repeat_password) {
                 setLoadingButton(true);
                 NProgress.start();
                 //toast.success('Registration successful')
-                await changePasswordUser({...data,email:email['email'], repeat_password: undefined});
-                toast.success('password change successful')
+                await changePasswordUser({ ...data, email: email['email'], repeat_password: undefined });
+                toast.success('password change successful');
                 Router.push('/');
             } else {
-                toast.error('passwords do not match')
+                toast.error('passwords do not match');
             }
         } catch (e) {
-            setLoadingButton(false)
+            setLoadingButton(false);
             NProgress.done();
             console.log('An error occurred', e);
-            const error = e.response? e.response.data.errors: e.toString();
-            toast.error(error)
+            const error = e.response ? e.response.data.errors : e.toString();
+            toast.error(error);
         }
-    }
-    useEffect(() => {
-    }, []);
+    };
+    useEffect(() => {}, []);
 
     return (
         <Home_Layout title="Home">
-            <div className="h-100 row g-0">
-                <div className="col-lg-12 order-1 order-lg-0 d-flex flex-column bg-primary-transparent padding_50">
+            <div className="h-full row overflow-hidden">
+                <div className="h-100 row g-0">
+                    <div className="col-lg-12 order-1 order-lg-0 d-flex flex-column bg-primary-transparent p-5 mt-5 padding_10-xs">
+                        <Logo />
 
-                    <Logo/>
-
-                    <div className="col-xl-6 col-lg-6 col-md-8 mt-4 col-sm-10 mb-auto mx-auto">
-
-                        <div className="bg-white login_box shadow">
-                            <h4 className="text-center mb-5 font-weight-700">New Password</h4>
-
-                            <form id="register_form" onSubmit={(e) => changePass(e, 'reg_button')}>
+                        <div
+                            className="col-xl-6 col-lg-6 col-md-8 mt-4 col-sm-10 mb-auto mx-auto"
+                            style={{ margin: '0 auto', maxWidth: '400px' }}
+                        >
+                            <Title level={3} className="text-center mb-5 font-weight-700">
+                                Create New Password
+                            </Title>
+                            <form id="register_form" className="col pt-3">
                                 <div className="row">
-
                                     <div className="col-12 mb-4">
-                                        <div className="form-floating">
-                                            <input  value={data.token} onChange={handleChange} required
-                                                   className="form-control" placeholder="token" name="token"/>
-                                            <label>Token</label>
-                                        </div>
-                                    </div>
-
-                                    <div className="col-12 mb-4">
-                                        <div className="form-floating">
-                                            <input type="password" value={data.password} onChange={handleChange} required
-                                                   className="form-control" placeholder="password" name="password"/>
-                                            <label>Password</label>
-                                        </div>
+                                        <Input
+                                            size="large"
+                                            required
+                                            onChange={handleChange}
+                                            value={data.token}
+                                            placeholder="Enter OTP"
+                                            name="token"
+                                        />
                                     </div>
 
                                     <div className="col-12 mb-4">
-                                        <div className="form-floating">
-                                            <input type="password" value={data.repeat_password} onChange={handleChange} required
-                                                   className="form-control" placeholder="repeat_password" name="repeat_password"/>
-                                            <label>Confirm Password</label>
-                                        </div>
+                                        <Input.Password
+                                            size="large"
+                                            required
+                                            onChange={handleChange}
+                                            value={data.password}
+                                            placeholder="New Password"
+                                            name="password"
+                                            type="password"
+                                        />
                                     </div>
 
-                                    <div className="col-lg-12 mx-auto">
-
-                                        <button className="btn btn-lg p-3 mt-4 btn-primary w-100" id="reg_button" disabled={loadingButton}>change password
-                                        </button>
-
+                                    <div className="col-12 mb-4">
+                                        <Input.Password
+                                            size="large"
+                                            required
+                                            onChange={handleChange}
+                                            value={data.repeat_password}
+                                            placeholder="Confirm Password"
+                                            name="repeat_password"
+                                            type="password"
+                                            onKeyPress={(event) => {
+                                                if (event.key === 'Enter') {
+                                                    (e) => changePass(e, 'reg_button');
+                                                }
+                                            }}
+                                        />
                                     </div>
+
+                                    <div className="col-lg-12 mt-2 mb-5 mx-auto">
+                                        {!submitting ? (
+                                            <Button
+                                                id="reg_button"
+                                                size="large"
+                                                onClick={(e) => changePass(e, 'reg_button')}
+                                                type="primary"
+                                                className=" px-5 w-100"
+                                                disabled={!(data.token && data.password && data.repeat_password)}
+                                            >
+                                                Login
+                                            </Button>
+                                        ) : (
+                                            <Button size="large" disabled className="w-100">
+                                                <LoadingOutlined className="text-primary" rotate={180} />
+                                            </Button>
+                                        )}
+                                    </div>
+                                </div>
+
+                                <div className="text-center">
+                                    <u className="text-primary">
+                                        <a href="">Terms of Use</a>
+                                    </u>{' '}
+                                    &nbsp;&nbsp;&nbsp;
+                                    <u className="text-primary">
+                                        <a href="">Privacy Policy</a>
+                                    </u>
                                 </div>
                             </form>
                         </div>
 
+                        <div className="mt-auto d-flex font-gray justify-content-between gap-2 p-5">
+                            <p>&copy; Ductape 2023</p>
+                        </div>
                     </div>
-
-
-                    <div className="text-center">
-                        <span className="me-4">&copy; 2022</span>
-                        <a href="" className="font-gray-3 me-4">Privacy policy</a>
-                        <a href="" className="font-gray-3">Terms & conditions</a>
-                    </div>
-
                 </div>
-
             </div>
         </Home_Layout>
     );
 };
 
-export default changePassword
+export default changePassword;

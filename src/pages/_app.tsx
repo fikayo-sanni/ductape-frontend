@@ -14,6 +14,9 @@ import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import store from '../redux/store';
 import dynamic from 'next/dynamic';
+// import {Raleway} from '@next/font/google';
+
+// const raleway = Raleway({weight: '400'})
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());

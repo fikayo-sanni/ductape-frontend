@@ -1,10 +1,10 @@
 import Home_Layout from '../components/layout/home_layout';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { toast } from 'react-hot-toast';
 import { Logo } from '../components/config/constant';
 import Router from 'next/router';
 import { loginUser as userAuth } from '../components/services/users.service';
-import { Modal,Avatar, Button, Card, Input, Typography } from 'antd';
+import { Modal, Avatar, Button, Card, Input, Typography } from 'antd';
 import { fetchWorkspaces } from '../components/services/workspaces.service';
 import Link from 'next/link';
 import { RootState } from '../redux/store';
@@ -17,74 +17,133 @@ import {
     changeDefaultWorkspaceId,
 } from '../redux/applicationSlice';
 import { LoadingOutlined, StarFilled } from '@ant-design/icons';
-import { otpLogin, requestOtp } from "../components/services/users.service";
+import { otpLogin, requestOtp } from '../components/services/users.service';
+import OtpInput from 'react-otp-input';
 
 const { Title, Text, Paragraph } = Typography;
 
 const Index = () => {
     const dispatch = useDispatch();
-    const [userID, setUserId] = useState("");
+    const [userID, setUserId] = useState('');
     const { user, isAuthenticated } = useSelector((state: RootState) => state.app);
     const [submitting, setSubmitting] = useState(false);
+    const [submittingOtp, setSubmittingOtp] = useState(false);
+    const [workspaces, setLoginWorkspaces] = useState([]);
     const [userData, setUserData] = useState({});
     const [visible, setVisible] = useState(false);
-    const [otp, setOtp] = useState("");
+    const [otp, setOtp] = useState(new Array(6).fill(''));
     const [loginUser, setLoginUser] = useState({
         email: '',
         password: '',
     });
 
+    const firstInputRef = useRef(null);
+
+    useEffect(() => {
+        if (visible) {
+            firstInputRef.current.focus();
+        }
+    }, [visible]);
+
     const handleChange = (e) => setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
-    const handleToken = (e) => setOtp( e.target.value );
-    const requestNewOtp = async() => {
-        try {
-                const response = await requestOtp({user_id: userID});
-                toast.success('email sent')
-        } catch (e) {
-            console.log('An error occurred', e);
-            const error = e.response? e.response.data.errors: e.toString();
-            toast.error(error)
-        }
-    }
-    const handleOtpLogin = async() => {
-        try {
-            const response = await otpLogin({user_id: userID,token:otp });
-            toast.success('successful')
-            afterLogin(userData['workspaces'],userData)
-        } catch (e) {
-            console.log('An error occurred', e);
-            const error = e.response? e.response.data.errors: e.toString();
-            toast.error(error)
-        }
-    }
-    const afterLogin = async(workspaces,userData ) => {
-        if (workspaces.length) {
-            const { auth_token: token, public_key, _id: user_id } = userData;
-            const spaces = await fetchWorkspaces({ token, public_key, user_id });
-            const { data } = spaces.data;
-            let defaultChanged = false;
 
-            // save default workspace
-            data.map((d, i) => {
-                if (d.default) {
-                    defaultChanged = true;
-                    dispatch(changeDefaultWorkspaceId(d.workspace_id));
-                    dispatch(setCurrentWorkspace(d));
-                }
-            });
-            if (!defaultChanged) {
-                dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
-                dispatch(setCurrentWorkspace(data[0]));
+    const handleToken = (element, index) => {
+        if (isNaN(element.value)) return false;
+
+        // set the value of the current input field in the otp state array
+        const newOtp = [...otp];
+        newOtp[index] = element.value;
+        setOtp(newOtp);
+
+        // move focus to the next input field, or the previous one if deleting
+        if (index === 5 && element.value && element.previousSibling) {
+            element.focus();
+            handleOtpLogin(newOtp);
+        } else if (element.nextSibling && element.value) {
+            element.nextSibling.focus();
+        } else if (element.previousSibling) {
+            element.previousSibling.focus();
+        }
+    };
+
+    const requestNewOtp = async () => {
+        try {
+            const response = await requestOtp({ user_id: userID });
+            toast.success('email sent');
+        } catch (e) {
+            console.log('An error occurred', e);
+            const error = e.response ? e.response.data.errors : e.toString();
+            toast.error(error);
+        }
+    };
+
+    const handleOtpLogin = async (otp) => {
+        try {
+            setSubmittingOtp(true);
+            const response = await otpLogin({ user_id: userID, token: otp.join('') });
+            toast.success('successful');
+            setVisible(false);
+
+            afterLogin(workspaces, userData);
+        } catch (e) {
+            console.log('An error occurred', e);
+            const error = e.response ? e.response.data.errors : e.toString();
+            toast.error(error);
+        }
+    };
+
+    const afterLogin = async (workspaces, userData) => {
+        dispatch(await setAppUser(userData));
+        // Router.push('/dashboard');
+        // if (workspaces.length) {
+        const { auth_token: token, public_key, _id: user_id } = userData;
+        const spaces = await fetchWorkspaces({ token, public_key, user_id });
+        const { data } = spaces.data;
+        let defaultChanged = false;
+        setSubmittingOtp(false);
+
+        // save default workspace
+        data.map((d, i) => {
+            if (d.default) {
+                defaultChanged = true;
+                dispatch(changeDefaultWorkspaceId(d.workspace_id));
+                dispatch(setCurrentWorkspace(d));
             }
-
-            // save all workspaces
-            dispatch(setWorkspaces(data));
-
-            Router.push('/dashboard');
-        } else {
-            Router.push('/dashboard');
+        });
+        if (!defaultChanged) {
+            dispatch(changeDefaultWorkspaceId(data[0].workspace_id));
+            dispatch(setCurrentWorkspace(data[0]));
         }
-    }
+
+        // save all workspaces
+        dispatch(setWorkspaces(data));
+
+        Router.push('/dashboard');
+        /*} else {
+            Router.push('/workspaces');
+        }*/
+    };
+
+    const handlePaste = (e, index) => {
+        e.preventDefault();
+        const pasteData = e.clipboardData.getData('text/plain');
+        const pasteArray = pasteData.split('').filter((char) => !isNaN(char));
+        const newOtp = [...otp];
+        pasteArray.forEach((char, i) => {
+            if (index + i < 6) {
+                newOtp[index + i] = char;
+            }
+        });
+        setOtp(newOtp);
+        const lastBox = document.getElementById(`otp-${index + pasteArray.length - 1}`);
+        if (lastBox) {
+            lastBox.focus();
+        }
+        if (newOtp.join('').length === 6) {
+            handleOtpLogin(newOtp);
+        }
+    };
+
     const validateEmail = (email) => {
         return email.match(
             /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -92,26 +151,28 @@ const Index = () => {
     };
 
     const Login = async () => {
-        
         toast('Authenticating details. Please wait');
         setSubmitting(true);
         try {
             // login user
             const login = await userAuth(loginUser);
+
             const userData = login.data.data;
-            
-            setUserData(login.data.data)
-            dispatch(await setAppUser(userData));
-            dispatch(await setWorkspaces(userData.workspaces));
-            setUserId(login.data.data._id)
-            // set workspaces
-            const { workspaces } = login.data.data;
-            if(login.data.data.active)
-            {
-                setVisible(true)
-            }else{
-                afterLogin(workspaces,userData)
-        }
+
+            const { otp, workspaces } = userData;
+            const { active } = otp;
+
+            setLoginWorkspaces(workspaces);
+
+            setUserId(userData._id);
+            setUserData(userData);
+            setSubmitting(false);
+
+            if (!active) {
+                afterLogin(workspaces, userData);
+            } else {
+                setVisible(true);
+            }
         } catch (e) {
             console.log('An error occurred', e);
             const error = e.response ? e.response.data.errors : e.toString();
@@ -120,12 +181,9 @@ const Index = () => {
         }
     };
 
-    useEffect(() => {
-    }, []);
-
     return (
         <Home_Layout title="Home">
-            <div className="h-full row overflow-hidden g-0">
+            <div className="h-full row overflow-hidden">
                 <div className="col-xl-4 col-lg-5 d-flex flex-column">
                     <div className="col-lg-12 p-5 mt-5 padding_10-xs ">
                         <section>
@@ -179,11 +237,6 @@ const Index = () => {
                                                     value={loginUser.email}
                                                     placeholder="Email address"
                                                     name="email"
-                                                    onKeyPress={(event) => {
-                                                        if (event.key === 'Enter') {
-                                                            Login();
-                                                        }
-                                                    }}
                                                 />
                                             </div>
 
@@ -216,6 +269,7 @@ const Index = () => {
                                                         onClick={() => Login()}
                                                         type="primary"
                                                         className=" px-5  w-100"
+                                                        disabled={!(loginUser.password && loginUser.email)}
                                                     >
                                                         Login
                                                     </Button>
@@ -247,7 +301,7 @@ const Index = () => {
                         <p>&copy; Ductape 2023</p>
                     </div>
                 </div>
-                <div className="col-xl-8 position-relative col-lg-7 p-3 pt-4 pb-4 pe-4 d-flex flex-column">
+                <div className="col-xl-8 position-relative col-lg-7 p-4 pt-4 pb-4 pe-4 d-flex flex-column">
                     <Card className="h-100 p-5">
                         <Title level={2}>
                             "Few things make me feel more powerful than setting up
@@ -271,28 +325,79 @@ const Index = () => {
                 <Modal
                     title={
                         <div className="mb-3">
-                        <Typography.Title level={2} className="m-0 text-capitalize">
-                            Otp Login
-                        </Typography.Title>
+                            <Title level={3} className="mb-0 font-weight-500 pt-3">
+                                Verify it's you
+                            </Title>
+                            <Paragraph type="secondary" className="mb-5 mt-2 fs-6">
+                                We sent a six-digit pin to your email. Check your email and enter it in the field below
+                            </Paragraph>
                         </div>
                     }
                     visible={visible}
                     footer={null}
-                    onCancel={() => setVisible(false)}
-                    >
-                    <div className="mb-3">
-                        <label>token</label>
-                        <Input className="mb-3" name="name" onChange={handleToken} />
+                    onCancel={() => {
+                        setVisible(false);
+                        setSubmitting(false);
+                        setOtp(new Array(6).fill(''));
+                    }}
+                >
+                    {/* <label htmlFor="otp" className="sr-only">
+                        Enter the six-digit pin from your email:
+                    </label> */}
+                    <div className="flex justify-center mb-5">
+                        {otp.map((data, index) => {
+                            return (
+                                <input
+                                    className="otp-field"
+                                    type="text"
+                                    name="otp"
+                                    id={`otp-${index}`}
+                                    maxLength={1}
+                                    key={index}
+                                    value={data}
+                                    onChange={(e) => handleToken(e.target, index)}
+                                    onFocus={(e) => e.target.select()}
+                                    onPaste={(e) => handlePaste(e, index)}
+                                    style={{
+                                        width: '3rem',
+                                        height: '3rem',
+                                        fontSize: '20px',
+                                        fontWeight: 'bold',
+                                        letterSpacing: '10px',
+                                        textAlign: 'center',
+                                        marginRight: '0.5rem',
+                                        marginBottom: '1rem',
+                                    }}
+                                    ref={index === 0 ? firstInputRef : null}
+                                />
+                            );
+                        })}
                     </div>
-                    <p onClick={requestNewOtp}>
-                        request new otp
+                    <div className="col-lg-12 mt-2 mb-5 mx-auto">
+                        {!submittingOtp ? (
+                            <Button
+                                size="large"
+                                onClick={handleOtpLogin}
+                                type="primary"
+                                className=" px-5  w-100"
+                                disabled={!otp}
+                            >
+                                Verify Code
+                            </Button>
+                        ) : (
+                            <Button size="large" disabled className="w-100">
+                                <LoadingOutlined className="text-primary" rotate={180} />
+                            </Button>
+                        )}
+                    </div>
+                    {/* <Button type="primary" onClick={handleOtpLogin} className="px-5 w-100" size="large" disabled={!otp}>
+                        Verify Code
+                    </Button> */}
+                    <p className="text-center mt-3 text-gray-600" onClick={requestNewOtp}>
+                        Request new OTP
                     </p>
-                    <Button type="primary" onClick={handleOtpLogin}>
-                        verify
-                    </Button>
-                </Modal>                                    
+                </Modal>
             </div>
-            
         </Home_Layout>
     );
 };
