@@ -48,6 +48,7 @@ const Register = () => {
     };
 
     const register = async (e, buttonId) => {
+        console.log("heye")
         e.preventDefault();
         setSubmitting(true);
         try {

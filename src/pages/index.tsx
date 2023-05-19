@@ -82,7 +82,7 @@ const Index = () => {
 
             Router.push('/dashboard');
         } else {
-            Router.push('/workspaces');
+            Router.push('/dashboard');
         }
     }
     const validateEmail = (email) => {
@@ -98,9 +98,11 @@ const Index = () => {
         try {
             // login user
             const login = await userAuth(loginUser);
-            setUserData(login.data.data)
             const userData = login.data.data;
+            
+            setUserData(login.data.data)
             dispatch(await setAppUser(userData));
+            dispatch(await setWorkspaces(userData.workspaces));
             setUserId(login.data.data._id)
             // set workspaces
             const { workspaces } = login.data.data;

@@ -8,21 +8,35 @@ import { ConfigProvider, theme, Tabs, Typography, Card, Breadcrumb, Button, Stat
 import { RootState } from '../../redux/store';
 import { logoutUser } from '../../redux/applicationSlice';
 import CountUp from 'react-countup';
+import CreateWorkspaceModal from '../modal';
 
 const { Title, Paragraph, Text } = Typography;
 const { TabPane } = Tabs;
 const { darkAlgorithm } = theme;
 
 export default function Dashbboard() {
-    const { user } = useSelector((state: RootState) => state.app);
+    const { user, workspaces } = useSelector((state: RootState) => state.app);
+    const [visible, setVisible] = useState(false);
     const dispatch = useDispatch();
 
     const formatter = (value: number) => <CountUp className="font-black" end={value} separator="," />;
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        if(workspaces.length === 0){
+            console.log(workspaces);
+            
+            setVisible(true)
+        }
+        else{
+            console.log("workspaces");
+            console.log(workspaces);
+        }
+
+    }, []);
 
     return (
         <Dashboard_Layout title="Dashboard">
+            <CreateWorkspaceModal visible={visible} onClose={()=> setVisible(false)}/>
             <Card className="border-top-0 border-start-0 border-end-0 rounded-0 px-5 pt-3 padding_50-bottom ">
                 <div className="d-flex justify-content-between align-items-end">
                     <div>
