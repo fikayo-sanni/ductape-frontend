@@ -6,11 +6,12 @@ const { Title, Text, Paragraph } = Typography;
 interface Props {
     title?: string;
     extra?: any;
-    app?: any;
+    secondExtra?: any;
     handleClick?: () => void;
+    secondHandleClick?: () => void;
 }
 
-export const PageHeader: React.FC<Props> = ({ title, handleClick, extra, app }) => {
+export const PageHeader: React.FC<Props> = ({ title, handleClick, secondHandleClick, extra, secondExtra }) => {
     return (
         <Card className="rounded-0 border border-top-0 border-start-0 border-end-0 py-2 m w-90 padding-header">
             <div className="container d-flex flex-row justify-content-between align-items-center">
@@ -18,7 +19,10 @@ export const PageHeader: React.FC<Props> = ({ title, handleClick, extra, app }) 
                     {title || app.app_name}
                 </Title>
 
-                <div className="title_extra">{extra && <Button onClick={handleClick}>{extra}</Button>}</div>
+                <div className="title_extra">
+                    {secondExtra && <Button onClick={secondHandleClick}>{secondExtra}</Button>} 
+                    {extra && <Button onClick={handleClick}>{extra}</Button>}
+                </div>
             </div>
         </Card>
     );

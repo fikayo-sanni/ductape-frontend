@@ -21,7 +21,7 @@ export interface AppState {
     workspaces: [];
     email: '',
     workspace: any;
-    apps: [];
+    apps: []; 
     app: any;
     domains: [];
     defaultWorkspaceId: string;
@@ -95,7 +95,7 @@ export const applicationSlice = createSlice({
             state.lastUpdated = new Date();
         },
         setUserEmail: (state: AppState, { payload }: PayloadAction<any>) => {
-            state.email = payload;
+            state.email = payload
         },
         logoutUser: (state: AppState) => {
             window.top.location.href = '/';

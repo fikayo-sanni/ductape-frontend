@@ -4,10 +4,13 @@ import { Avatar, Card, Input, Tag, Typography, Select, Radio } from 'antd';
 import { toast } from 'react-hot-toast';
 import dynamic from 'next/dynamic';
 import { fetchWorkspaceApps } from '../../components/services/apps.service';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Dashboard_Layout from '../../components/layout/dashboard_layout';
 import { RootState } from '../../redux/store';
 import { AppstoreOutlined, BarsOutlined, SearchOutlined } from '@ant-design/icons';
+import CreateApp from './createApp';
+import SetDefaultEnv from './defaultEnvs';
+import { PlusOutlined , SettingOutlined} from '@ant-design/icons';
 
 const { Title, Text, Paragraph } = Typography;
 
@@ -23,6 +26,8 @@ export default function Apps(props) {
     const [orientation, setOrientation] = useState('grid');
     const [filter, setFilter] = useState<string[]>(['draft', 'public', 'private']);
     const [loading, setLoading] = useState(true);
+    const [visible, setVisible] = useState(false);
+    const [envVisible, setEnvVisible] = useState(false);
 
     const fetchApps = async () => {
         const response = await fetchWorkspaceApps({
@@ -59,8 +64,22 @@ export default function Apps(props) {
 
     return (
         <Dashboard_Layout title="Apps">
-            <PageHeader title="Apps" />
-
+            <PageHeader title="Apps"
+            handleClick={() => {setVisible(!visible);}}
+            secondHandleClick={() => {setEnvVisible(!visible);}}
+            extra={
+                <>
+                    <PlusOutlined /> New App
+                </>
+            }
+            secondExtra={
+                <>
+                    <SettingOutlined /> Environments
+                </>
+            }
+            />
+            <CreateApp visible={visible} onClose={()=> setVisible(false)}/>
+            <SetDefaultEnv visible={envVisible} onClose={()=> setEnvVisible(false)}/>
             <section className="container my-5">
                 {loading ? (
                     <Loading />
@@ -142,7 +161,7 @@ export default function Apps(props) {
 }
 
 /**
- *
+
  * <Dashboard_layout title="Apps">
 
  {isModalVisible?<CreateAppModal showModal={showModal} refreshApps={refreshApps}/>: <></>}

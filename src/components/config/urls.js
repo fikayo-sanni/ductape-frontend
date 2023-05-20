@@ -1,5 +1,4 @@
 'use strict';
-
 export const USER_BASE_URL = 'http://localhost:8002'; // 'https://ductape-users-3bubdh4twq-uc.a.run.app';
 export const USER_CREATE_URL = '/users/v1/create';
 export const USER_LOGIN_URL = '/users/v1/login';
