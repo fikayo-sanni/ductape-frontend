@@ -7,11 +7,15 @@ import { RootState } from '../../redux/store';
 import { setCurrentWorkspace, logoutUser, setCurrentApp } from '../../redux/applicationSlice';
 import dynamic from 'next/dynamic';
 // import MDEditor from '@uiw/react-md-editor';
-import { EditOutlined, PlusCircleOutlined, SaveOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined, EditOutlined, PlusCircleOutlined, SaveOutlined } from '@ant-design/icons';
 import NProgress from 'nprogress';
 import { createAppFaq, deleteAppFaq, fetchApp, updateApp, updateAppEnv, updateAppFaq } from '../services/apps.service';
 import { changeSelectedApp } from '../../data/applicationSlice';
 import toast from 'react-hot-toast';
+
+const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
+    ssr: false,
+});
 
 const { Text, Title } = Typography;
 const { Panel } = Collapse;
@@ -145,98 +149,106 @@ export const AppInfo: React.FC<Props> = ({}) => {
             <Divider orientation="left" orientationMargin="0">
                 <Title level={4}> Read me</Title>
             </Divider>
-            <div className="d-flex mb-5 w-100 justify-content-between">
-                <div>
-                    <Text type="secondary">Tell us about your app, what it does, and how to use it</Text>
-                </div>
-                <div>
-                    <Button onClick={() => toggleEdit()}>
-                        {edit ? (
-                            <>
-                                <SaveOutlined /> Save
-                            </>
-                        ) : (
-                            <>
-                                <EditOutlined /> Edit
-                            </>
-                        )}
-                    </Button>
-                </div>
-            </div>
 
-            {/*{edit ? (*/}
-            {/*    <MDEditor*/}
-            {/*        className="p-3"*/}
-            {/*        value={dApp.aboutHTML}*/}
-            {/*        onChange={(value) => {*/}
-            {/*            setDApp({ ...dApp, aboutHTML: value });*/}
-            {/*        }}*/}
-            {/*    />*/}
-            {/*) : (*/}
-            {/*    <MDEditor.Markdown className="p-3" source={dApp.aboutHTML} style={{ whiteSpace: 'pre-wrap' }} />*/}
-            {/*)}*/}
+            <div className="border p-4">
+                <div className="d-flex mb-2 w-100 justify-content-between">
+                    <div>
+                        <Text type="secondary">Tell us about your app, what it does, and how to use it</Text>
+                    </div>
+                    <div>
+                        {edit ? (
+                            <Button onClick={() => setEdit(!edit)}>
+                                Hide <CloseCircleOutlined />
+                            </Button>
+                        ) : (
+                            <></>
+                        )}
+                        <Button onClick={() => toggleEdit()} type="primary" className="ms-1">
+                            {edit ? (
+                                <>
+                                    <SaveOutlined /> Save
+                                </>
+                            ) : (
+                                <>
+                                    <EditOutlined /> Edit
+                                </>
+                            )}
+                        </Button>
+                    </div>
+                </div>
+
+                {edit ? (
+                    <MdEditor style={{ height: '400px', border: 0}} />
+                ) : (
+                    // <MdEditor.Markdown className="p-3" source={dApp.aboutHTML} style={{ whiteSpace: 'pre-wrap' }} /><
+                    <></>
+                )}
+            </div>
 
             <Divider orientation="left" orientationMargin="0">
                 <Title level={4}>FAQ</Title>
             </Divider>
-            <div className="d-flex w-100 mb-3 justify-content-between">
-                <div>
-                    <Text type="secondary">Frequently asked questions about your app</Text>
+            <div className="p-4 border">
+                <div className="d-flex w-100 mb-3 justify-content-between">
+                    <div>
+                        <Text type="secondary">Frequently asked questions about your app</Text>
+                    </div>
+                    <div>
+                        <Button onClick={() => setNewVisible(true)} type="primary">
+                            <PlusCircleOutlined /> Add
+                        </Button>
+                    </div>
                 </div>
-                <div>
-                    <Button onClick={() => setNewVisible(true)}>
-                        <PlusCircleOutlined /> Add New
-                    </Button>
-                </div>
+
+                {app.FAQS && app.FAQS.length ? (
+                    <Collapse defaultActiveKey={[0]}>
+                        {app.FAQS.map((faq, index) => (
+                            <Panel
+                                header={<Text className="font-weight-700">{faq.question}</Text>}
+                                key={index}
+                                extra={
+                                    <Space>
+                                        <Button
+                                            className="text-primary"
+                                            onClick={(event) => {
+                                                event.stopPropagation();
+                                                initiateEditFaq(faq);
+                                            }}
+                                        >
+                                            Edit
+                                        </Button>
+
+                                        <Popconfirm
+                                            title="Are you sure you want to delete this FAQ?"
+                                            onConfirm={(event) => {
+                                                event.stopPropagation();
+                                                deleteFaq(faq._id);
+                                            }}
+                                            onCancel={null}
+                                            okText="Confirm"
+                                            okButtonProps={{ type: 'primary' }}
+                                            cancelText="No"
+                                        >
+                                            <Button
+                                            className="text-danger"
+                                                onClick={(event) => {
+                                                    event.stopPropagation();
+                                                }}
+                                            >
+                                                Delete
+                                            </Button>
+                                        </Popconfirm>
+                                    </Space>
+                                }
+                            >
+                                <p>{faq.answer}</p>
+                            </Panel>
+                        ))}
+                    </Collapse>
+                ) : (
+                    <></>
+                )}
             </div>
-            <Collapse defaultActiveKey={[0]}>
-                {app.FAQS.map((faq, index) => (
-                    <Panel
-                        header={faq.question}
-                        key={index}
-                        extra={
-                            <Space>
-                                <Button
-                                    type="primary"
-                                    size="small"
-                                    onClick={(event) => {
-                                        event.stopPropagation();
-                                        initiateEditFaq(faq);
-                                    }}
-                                >
-                                    Edit
-                                </Button>
-
-                                <Popconfirm
-                                    title="Are you sure you want to delete this FAQ?"
-                                    onConfirm={(event) => {
-                                        event.stopPropagation();
-                                        deleteFaq(faq._id);
-                                    }}
-                                    onCancel={null}
-                                    okText="Confirm"
-                                    okButtonProps={{ type: 'primary' }}
-                                    cancelText="No"
-                                >
-                                    <Button
-                                        type="primary"
-                                        danger
-                                        size="small"
-                                        onClick={(event) => {
-                                            event.stopPropagation();
-                                        }}
-                                    >
-                                        Delete
-                                    </Button>
-                                </Popconfirm>
-                            </Space>
-                        }
-                    >
-                        <p>{faq.answer}</p>
-                    </Panel>
-                ))}
-            </Collapse>
-
             <Modal title="Add Faq" visible={newVisible} footer={null} onCancel={() => setNewVisible(false)}>
                 <div className="mt-4 mb-3">
                     <Text>Question</Text>

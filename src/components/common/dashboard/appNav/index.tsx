@@ -42,23 +42,13 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
     return (
         <Menu className="no_background no_border" mode="inline" selectedKeys={[appPage]}>
             <div className="p-4">
-                <Breadcrumb>
-                    <Breadcrumb.Item>Dashboard</Breadcrumb.Item>
-                    <Breadcrumb.Item>
-                        <a href="">Apps</a>
-                    </Breadcrumb.Item>
-                </Breadcrumb>
+                <Link href={"/apps"}><ArrowLeftOutlined/></Link>
                 <Title className="mb-1 p-0 mt-2" level={4}>
-                    {app.app_name}
+                <Avatar shape="square" className="bg-gray text-primary me-2 border_radius border font-weight-500">{app.app_name.charAt(0).toUpperCase()}</Avatar> <label className="ps-1">{app.app_name}</label>
                 </Title>
-                <Link href="/apps">
-                    <Button className="w-100" type="dashed">
-                        <ArrowLeftOutlined /> Back to apps
-                    </Button>
-                </Link>
             </div>
 
-            <Divider orientation="left" className="mb-0 ">
+            <Divider orientation="left" className="mb-0" style={{borderColor: "#d4d4d4"}}>
                 <Text type="secondary" className="font-weight-600 font-xxs text-uppercase">
                     Management
                 </Text>
@@ -76,7 +66,7 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
                 </Menu.Item>
             </Menu.ItemGroup>
 
-            <Divider orientation="left" className="mb-0 ">
+            <Divider orientation="left" className="mb-0 " style={{borderColor: "#d4d4d4"}}>
                 <Text type="secondary" className="font-weight-600 font-xxs text-uppercase">
                     Setup
                 </Text>

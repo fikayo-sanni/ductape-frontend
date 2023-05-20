@@ -110,8 +110,8 @@ const Dashboard_Layout: React.FC<Props> = ({
                                     style={{
                                         background: currentTheme.colorBgBase,
                                         borderRight: !darkMode
-                                            ? '1px solid rgba(5, 5, 5, 0.06)'
-                                            : `1px solid rgba(48, 48, 48)`,
+                                            ? '1px solid #D4D4D4'
+                                            : `1px solid #F0F0F0`,
                                         paddingTop: -0,
                                         overflowY: 'auto',
                                         overflowX: 'hidden',

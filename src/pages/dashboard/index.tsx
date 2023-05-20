@@ -52,7 +52,7 @@ export default function Dashbboard() {
                 </Card>
                 <section className="padding_50-left padding_50-right " style={{ position: 'relative', marginTop: -60 }}>
                     <div className="row">
-                        <div className="col-lg-3">
+                        <div className="col-lg-3 padding-right">
                             <Card className="bg-white border border-1">
                                 <Statistic
                                     className="font-black"

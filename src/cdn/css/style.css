@@ -18,11 +18,22 @@
     border-top: 0 !important;
 }
 
+.padding-header {
+    padding-top: 30px !important;
+    padding-bottom: 40px !important;
+}
+
 .border-start-0 {
     border-left: 0 !important;
 } 
 .border-end-0 {
     border-right: 0 !important;
+}
+
+.ant-divider-horizontal.ant-divider-with-text-center::before,
+.ant-divider-horizontal.ant-divider-with-text-center::after
+{
+   border-top: 1px solid red !important;
 }
 
 
