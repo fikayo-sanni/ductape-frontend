@@ -12,6 +12,10 @@ import NProgress from 'nprogress';
 import { createAppFaq, deleteAppFaq, fetchApp, updateApp, updateAppEnv, updateAppFaq } from '../services/apps.service';
 import { changeSelectedApp } from '../../data/applicationSlice';
 import toast from 'react-hot-toast';
+import MarkdownIt from 'markdown-it';
+import ReactHtmlParser from 'react-html-parser';
+
+const mdParser = new MarkdownIt(/* Markdown-it options */);
 
 const MdEditor = dynamic(() => import('react-markdown-editor-lite'), {
     ssr: false,
@@ -26,12 +30,15 @@ const Loading = dynamic(() => import('../../components/common/loading'));
 
 export const AppInfo: React.FC<Props> = ({}) => {
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
+    // alert(JSON.stringify(app))
     const dispatch = useDispatch();
     const [loading, setLoading] = useState(false);
     const [dApp, setDApp] = useState(app);
     const [edit, setEdit] = useState(false);
     const [newVisible, setNewVisible] = useState(false);
     const [editVisible, setEditVisible] = useState(false);
+    const [html, setHTML] = useState(app.aboutHTML || '');
+    const [text, setText] = useState(app.aboutText || '');
     const [newFaq, setNewFaq] = useState({
         question: '',
         answer: '',
@@ -47,18 +54,18 @@ export const AppInfo: React.FC<Props> = ({}) => {
             toast.loading('Updating App');
             try {
                 const data = await updateApp({
-                    aboutHTML: dApp.aboutHTML,
+                    aboutHTML: html,
+                    aboutText: text,
                     token: user.auth_token,
                     user_id: user._id,
                     public_key: user.public_key,
                     app_id: app._id,
                 });
 
-                dispatch(changeSelectedApp(data.data.data));
-
                 toast.success('App Updated');
+
+                await fetchAppDetails();
             } catch (e) {
-                NProgress.done();
                 const error = e.response ? e.response.data.errors : e.toString();
                 toast.error(error || e.toString());
             }
@@ -140,6 +147,12 @@ export const AppInfo: React.FC<Props> = ({}) => {
         dispatch(setCurrentApp(appDetails.data.data));
     };
 
+    const handleEditorChange = ({ html, text }) => {
+        console.log('handleEditorChange', html, text);
+        setHTML(html);
+        setText(text);
+    };
+
     useEffect(() => {}, []);
 
     return loading ? (
@@ -178,10 +191,14 @@ export const AppInfo: React.FC<Props> = ({}) => {
                 </div>
 
                 {edit ? (
-                    <MdEditor style={{ height: '400px', border: 0}} />
+                    <MdEditor
+                        style={{ height: '400px', border: 0 }}
+                        value={text}
+                        renderHTML={(text) => mdParser.render(text)}
+                        onChange={handleEditorChange}
+                    />
                 ) : (
-                    // <MdEditor.Markdown className="p-3" source={dApp.aboutHTML} style={{ whiteSpace: 'pre-wrap' }} /><
-                    <></>
+                    <>{ReactHtmlParser(mdParser.render(text))}</>
                 )}
             </div>
 
@@ -230,7 +247,7 @@ export const AppInfo: React.FC<Props> = ({}) => {
                                             cancelText="No"
                                         >
                                             <Button
-                                            className="text-danger"
+                                                className="text-danger"
                                                 onClick={(event) => {
                                                     event.stopPropagation();
                                                 }}

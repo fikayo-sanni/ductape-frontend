@@ -160,9 +160,9 @@ const Actions = () => {
                     </>
                 }
             />
-            <Card className="no_background no_border">
+            <div className="no_background padding-0 h-100">
                 <ActionsView />
-            </Card>
+            </div>
 
             <Modal
                 title={

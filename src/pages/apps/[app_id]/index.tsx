@@ -17,7 +17,8 @@ const TimeGraph = dynamic(() => import('../../../components/common/timeGraph'));
 const { Title, Text } = Typography;
 const AppInfo = dynamic(() => import('../../../components/app/appInfo'));
 
-const Index = () => {
+const Index = (props) => {
+    const {app_id} = props;
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
 
     const myData = [
@@ -33,9 +34,10 @@ const Index = () => {
     const formatter = (value: number) => <CountUp className="font-black" end={value} separator="," />;
     useEffect(() => {
         console.log(app);
+        // alert(JSON.stringify(app));
     }, []);
     return (
-        <Dashboard_Layout showSidebar={true} title="Apps" appPage="My App">
+        <Dashboard_Layout showSidebar={true} title="Apps" appPage="My App" type="app" id={app_id}>
             <div className="overflow-hidden">
                 <PageHeader title={'App'} app={app} />
                 <section
@@ -152,7 +154,7 @@ const Index = () => {
                         <div className="col-lg-6">
                             <Card>
                                 <div className="col-12">
-                                    <br/>
+                                    <br />
                                     <TimeGraph />
                                     <div className="mt-4 row">
                                         <div className="col-9">
@@ -186,3 +188,11 @@ const Index = () => {
 };
 
 export default Index;
+
+export const getServerSideProps = async ({ params }) => {
+    const app_id = params.app_id;
+
+    return {
+        props: { app_id },
+    };
+};

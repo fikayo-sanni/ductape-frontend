@@ -38,7 +38,7 @@ import {
 } from '../services/apps.service';
 import toast from 'react-hot-toast';
 import Router from 'next/router';
-import { FolderOpenOutlined } from '@ant-design/icons';
+import { DownOutlined, FolderOpenOutlined } from '@ant-design/icons';
 
 const { Text, Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
@@ -150,16 +150,17 @@ export const ActionsView: React.FC<Props> = ({}) => {
     }, []);
 
     return (
-        <div className="container ">
-            <div className="row">
-                <div className="col-lg-3">
-                    <Card title="Navigation" size="small">
+        <div className="container padding-0 h-100">
+            <div className="row h-100">
+                <div className="col-lg-3 h-100">
+                    <Card title="Navigation" size="small" className="p-2 no-radius h-100 border border-top-0 border-start-0">
                         {loading ? (
                             <Loading />
                         ) : (
                             <DirectoryTree
                                 multiple
                                 showLine
+                                switcherIcon={<DownOutlined />}
                                 onSelect={onSelect}
                                 // onExpand={onExpand}
                                 treeData={treeData}
@@ -453,7 +454,8 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
     return loading ? (
         <Loading />
     ) : (
-        <Card title="Action">
+        <div className="mt-4 me-4">
+        <Card title="Action" className="border">
             <div className="row">
                 <div className="col-6">
                     <Text>Name</Text>
@@ -566,6 +568,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                 Save
             </Button>
         </Card>
+        </div>
     );
 };
 

@@ -28,7 +28,7 @@ const AppDisplay: React.FC<Props> = ({ app, orientation = 'grid' }) => {
         });
 
         await dispatch(setCurrentApp(response.data.data));
-        Router.push(`/apps/current`);
+        Router.push(`/apps/${app._id}`);
     };
 
     console.log(app);

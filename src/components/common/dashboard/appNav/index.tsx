@@ -56,13 +56,13 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
 
             <Menu.ItemGroup key="preference_area">
                 <Menu.Item key="My App" icon={<DashboardOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/current/`}>My App</Link>
+                    <Link href={`/apps/${app._id}/`}>My App</Link>
                 </Menu.Item>
                 <Menu.Item key="Get Started" icon={<CheckOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/get-started">Get Started</Link>
+                    <Link href={`/apps/${app._id}/get-started`}>Get Started</Link>
                 </Menu.Item>
                 <Menu.Item key="Publish" icon={<InfoCircleOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/current/about`}>Publish</Link>
+                    <Link href={`/apps/${app._id}/about`}>Publish</Link>
                 </Menu.Item>
             </Menu.ItemGroup>
 
@@ -74,13 +74,13 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
 
             <Menu.ItemGroup key="management_area">
                 <Menu.Item key="Environments" icon={<AppstoreAddOutlined style={{ width: 20 }} />}>
-                    <Link href={`/apps/current/env`}>
+                    <Link href={`/apps/${app._id}/env`}>
                         <a>Environments</a>
                     </Link>
                 </Menu.Item>
 
                 <Menu.Item key="Pricing" icon={<DollarOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/pricing">
+                    <Link href={`/apps/${app._id}/pricing`}>
                         <a>Pricing</a>
                     </Link> 
                 </Menu.Item>
