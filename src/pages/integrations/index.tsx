@@ -24,7 +24,7 @@ export default function Integrations(props) {
     const [filter, setFilter] = useState<string[]>(['draft', 'public', 'private']);
     const [loading, setLoading] = useState(true);
 
-    const fetchIntegratios = async () => {
+    const fetchIntegrations = async () => {
         const response = await fetchWorkspaceIntegrations({
             token: user.auth_token,
             user_id: user._id,
@@ -54,7 +54,7 @@ export default function Integrations(props) {
     };
 
     useEffect(() => {
-        fetchIntegratios();
+        fetchIntegrations();
     }, []);
     return (
         <Dashboard_Layout showSidebar={false} title="Integrations" appPage="Integration">

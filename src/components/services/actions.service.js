@@ -10,6 +10,7 @@ import {
   APP_CREATE_WEBHOOK,
   ACTIONS_IMPORT_POSTMAN,
   APP_UPDATE_WEBHOOK,
+  ACTIONS_FETCH_EVENT
 } from "../config/urls";
 import { Parameterize } from "../config/constant";
 
@@ -53,6 +54,20 @@ export const fetchAction = async (payload) => {
     const { token, action_id, user_id, public_key } = payload;
 
     const URL = Parameterize(ACTION_FETCH_URL, ":action_id", action_id);
+
+    return actionsClient(`Bearer ${token}`, "application/json").get(
+      `${URL}?user_id=${user_id}&public_key=${public_key}`
+    );
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const fetchEvent = async (payload) => {
+  try {
+    const { token, webhook_id, user_id, public_key } = payload;
+
+    const URL = Parameterize(ACTIONS_FETCH_EVENT, ":webhook_id", webhook_id);
 
     return actionsClient(`Bearer ${token}`, "application/json").get(
       `${URL}?user_id=${user_id}&public_key=${public_key}`
@@ -121,7 +136,7 @@ export const createResponse = async (payload) => {
 
     return actionsClient(`Bearer ${token}`, "application/json").post(URL,payload)
 
-  } catch (e) {
+  } catch (e) { 
     throw e;
   }
 }
