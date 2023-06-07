@@ -86,26 +86,20 @@ export const AppNav: React.FC<Props> = ({ appPage }) => {
                 </Menu.Item>
 
                 <Menu.Item key="Actions" icon={<DatabaseOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/actions">
+                    <Link href={`/apps/${app._id}/actions`}>
                         <a>Actions</a>
                     </Link>
                 </Menu.Item>
 
                 <Menu.Item key="Webhook" icon={<PartitionOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/webhook">
-                        <a>Webhooks</a>
+                    <Link href={`/apps/${app._id}/webhook`}>
+                        <a>Events</a>
                     </Link>
                 </Menu.Item>
 
-                <Menu.Item key="Setup" icon={<PartitionOutlined style={{ width: 20 }} />}>
-                    <Link href="/apps/current/setups">
-                        <a>Setups</a>
-                    </Link>
-                </Menu.Item>
-
-                <Menu.Item key="Access" icon={<SafetyCertificateOutlined style={{ width: 20 }} />}>
-                    <Link href="/swiftmoney/user/payment">
-                        <a>Access</a>
+                <Menu.Item key="Setup" icon={<SafetyCertificateOutlined style={{ width: 20 }} />}>
+                    <Link href={`/apps/${app._id}/setups`}>
+                        <a>Authorization</a>
                     </Link>
                 </Menu.Item>
             </Menu.ItemGroup>
