@@ -24,6 +24,9 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import dynamic from 'next/dynamic';
 import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
+import {CreateFolderModal} from './Action_modals/create_folder';
+import {CreateActionModal} from './Action_modals/create_action';
+import {ImportPostmanDoc} from './Action_modals/import_document';
 
 import {
     createPricing,
@@ -38,7 +41,7 @@ import {
 } from '../services/apps.service';
 import toast from 'react-hot-toast';
 import Router from 'next/router';
-import { DownOutlined, FolderOpenOutlined } from '@ant-design/icons';
+import { FolderOpenOutlined } from '@ant-design/icons';
 
 const { Text, Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
@@ -62,9 +65,12 @@ interface Actions {
 
 const Loading = dynamic(() => import('../../components/common/loading'));
 
-export const ActionsView: React.FC<Props> = ({}) => {
+export const ActionsView: React.FC<Props> = ({}) => { 
     const { user, app } = useSelector((state: RootState) => state.app);
     const [loading, setLoading] = useState(true);
+    const [createFolder, setCreateFolder] = useState(false);
+    const [createAction, setCreateAction] = useState(false);
+    const [importPostman, setImportPostman] = useState(false);
     const [treeData, setTreeData] = useState<DataNode[]>();
     const [currentData, setCurrentData] = useState<any>();
 
@@ -150,17 +156,16 @@ export const ActionsView: React.FC<Props> = ({}) => {
     }, []);
 
     return (
-        <div className="container padding-0 h-100">
-            <div className="row h-100">
-                <div className="col-lg-3 h-100">
-                    <Card title="Navigation" size="small" className="p-2 no-radius h-100 border border-top-0 border-start-0">
+        <div className="container ">
+            <div className="row">
+                <div className="col-lg-3">
+                    <Card title="Navigation" size="small">
                         {loading ? (
                             <Loading />
                         ) : (
                             <DirectoryTree
                                 multiple
                                 showLine
-                                switcherIcon={<DownOutlined />}
                                 onSelect={onSelect}
                                 // onExpand={onExpand}
                                 treeData={treeData}
@@ -185,15 +190,18 @@ export const ActionsView: React.FC<Props> = ({}) => {
                             title={`${app.app_name} Actions Directory`}
                             subTitle="Click to open a folder or action from the navigation pane"
                             extra={[
-                                <Button type="primary" key="console">
+                                <Button type="primary" key="console" onClick={() => {setCreateFolder(!createFolder)}}>
                                     Create Folder
                                 </Button>,
-                                <Button key="buy">Create Action</Button>,
+                                <Button key="buy" onClick={() => {setCreateAction(!createAction)}}>Create Action</Button>,
                             ]}
                         />
                     </div>
                 )}
             </div>
+            {createFolder ?<CreateFolderModal showModal={setCreateFolder}/>:<></>}
+            {createAction ?<CreateActionModal showModal={setCreateAction}/>:<></>}
+            {importPostman ?<ImportPostmanDoc showModal={setImportPostman}/>:<></>}
         </div>
     );
 };
@@ -454,8 +462,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
     return loading ? (
         <Loading />
     ) : (
-        <div className="mt-4 me-4">
-        <Card title="Action" className="border">
+        <Card title="Action">
             <div className="row">
                 <div className="col-6">
                     <Text>Name</Text>
@@ -568,8 +575,7 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                 Save
             </Button>
         </Card>
-        </div>
     );
 };
-
+ 
 export default ActionsView;

@@ -35,6 +35,7 @@ export const APP_FAQ_CREATE = '/apps/v1/FAQ/:app_id';
 export const APP_FAQ_UPDATE = '/apps/v1/FAQ/:app_id/:faq_id';
 
 export const ACTIONS_BASE_URL = 'http://localhost:8005'//'https://ductape-actions-3bubdh4twq-uc.a.run.app';
+export const ACTIONS_CREATE_FOLDER = '/actions/v1/folder/:app_id';
 export const ACTIONS_CREATE_URL = '/actions/v1/create';
 export const ACTION_FETCH_URL = '/actions/v1/:action_id';
 export const ACTION_UPDATE_DATA = '/actions/v1/action/:action_id/data/:category';
