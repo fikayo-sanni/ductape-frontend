@@ -15,6 +15,8 @@ import { RootState } from '../../../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { ImportActions } from '../../../components/app/importActions';
+import PricingView from '../../../components/app/pricing';
+import { PricingSetup } from '../../../components/app/pricingSetup';
 
 const { Text, Title, Paragraph } = Typography;
 // const GetStartedView = dynamic(() => import('../../../components/app/getStarted'));
@@ -39,8 +41,8 @@ const Header = ({ index }) => {
             description: 'Define app integration financials specifications',
         },
         {
-            step: 'Events',
-            description: 'Setup app events, webhooks and callbacks',
+            step: 'Authorization',
+            description: 'Setup how third parties access your app securely',
         },
     ];
     const step = 'General Information';
@@ -133,6 +135,10 @@ const GetStarted = (props) => {
                         <EnvSetup />
                     ) : index === 3 ? (
                         <ImportActions title="Setup Actions From API Docs" />
+                    ) : index === 4 ? (
+                        <PricingSetup/>
+                    ) : index === 5 ? (
+                        <></>
                     ) : (
                         <></>
                     )}

@@ -17,6 +17,7 @@ import {
     PRICING_FETCH_SINGLE,
     PRICING_UPDATE_URL,
     PRICING_CREATE_URL,
+    PRICING_DELETE_URL,
     ACTIONS_FETCH_FOLDERS,
     ACTIONS_UPDATE_FOLDER, 
     ACTIONS_FETCH_ACTION,
@@ -115,6 +116,7 @@ export const fetchSinglePricing = async (payload) => {
 export const createPricing = async (payload) => {
     try {
         const { token } = payload;
+        delete payload.token;
 
         return pricingClient(`Bearer ${token}`, 'application/json').post(PRICING_CREATE_URL, payload);
     } catch (e) {
@@ -125,9 +127,11 @@ export const createPricing = async (payload) => {
 
 export const updatePricing = async (payload) => {
     try {
-        const { token, pricing_id } = payload;
+        const { token, _id } = payload;
 
-        const URL = Parameterize(PRICING_UPDATE_URL, ':pricing_id', pricing_id);
+        const URL = Parameterize(PRICING_UPDATE_URL, ':pricing_id', _id);
+        delete payload.token;
+        delete payload.pricing_id;
 
         return pricingClient(`Bearer ${token}`, 'application/json').put(URL, payload);
     } catch (e) {
@@ -135,6 +139,22 @@ export const updatePricing = async (payload) => {
         return true;
     }
 };
+
+export const deletePricing = async (payload) => {
+    try {
+        const { token, _id } = payload;
+
+        const URL = Parameterize(PRICING_DELETE_URL, ':pricing_id', _id);
+        delete payload.token;
+        delete payload.pricing_id
+
+        alert(JSON.stringify(payload));
+
+        return pricingClient(`Bearer ${token}`, 'application/json').put(URL, payload);
+    } catch(e) {
+        throw e;
+    }
+} 
 
 export const fetchAppEnv = async (payload) => {
     try {

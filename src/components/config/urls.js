@@ -24,6 +24,7 @@ export const PRICING_BASE_URL = 'http://localhost:8011'//'https://ductape-pricin
 export const PRICING_FETCH_URL = '/pricing/v1/getAppPrices/:app_id';
 export const PRICING_FETCH_SINGLE = '/pricing/v1/fetch/:pricing_id';
 export const PRICING_UPDATE_URL = '/pricing/v1/update/:pricing_id';
+export const PRICING_DELETE_URL = '/pricing/v1/delete/:pricing_id';
 export const PRICING_CREATE_URL = '/pricing/v1/create';
 
 export const ENV_UPDATE_URL = '/apps/v1/env/:env_id';
