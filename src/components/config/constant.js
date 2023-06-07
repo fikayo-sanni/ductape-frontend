@@ -74,7 +74,7 @@ function thousandSeparator(num) {
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-function capitalize(str) {
+export function capitalize(str) {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 }
 
@@ -113,7 +113,7 @@ function cleanFields(array) {
     return arr;
 }
 
-function isValidHttpUrl(string) {
+export function isValidHttpUrl(string) {
     let url;
 
     try {

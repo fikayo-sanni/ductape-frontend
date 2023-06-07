@@ -335,7 +335,7 @@ const UpdateAppEnvModal = (props) => {
             <div className="">
               <Checkbox onChange={handleChangeActive} checked={envSelectedData.active}>
                 Active
-              </Checkbox>
+              </Checkbox>}
             </div>
           </div>
         </div>

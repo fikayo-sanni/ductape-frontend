@@ -21,6 +21,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 
 import dynamic from 'next/dynamic';
+import toast from 'react-hot-toast';
+import { updateApp } from '../services/apps.service';
 
 const { Title, Text } = Typography;
 
