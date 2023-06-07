@@ -66,7 +66,7 @@ const EditEnvironments = () => {
         toast.success('Environment Updated');
         console.log(response.data.data);
         dispatch(setCurrentApp(response.data.data));
-    };
+    }; 
 
     useEffect(() => {
         fetchEnv();

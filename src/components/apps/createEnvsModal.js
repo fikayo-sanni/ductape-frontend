@@ -77,33 +77,6 @@ const CreateEnvsModal = (props) => {
     });
   },[]);
 
-  const handleCreate = async (env, index) => {
-    try {
-      inputFields[index].loading = true;
-      setInputFields(inputFields);
-      /*const { auth_token: token, _id: user_id, public_key } = user;
-      const create = await createAppEnv({
-        ...env,
-        token,
-        // app_id,
-        user_id,
-        public_key,
-        workspace_id: config.defaultWorkspaceId,
-      });
-      toast.success("Env Created");
-
-      alert(JSON.stringify(create.data.data))
-      /*setLoading(false);
-      refreshEnvs(create.data.data);
-      closeCreateDialog();*/
-    } catch (e) {
-      // setLoading(false);
-      const error = e.response ? e.response.data.errors : e.toString();
-      toast.error(error || e.toString());
-    }
-    // closeCreateDialog();
-  };
-
   const allFieldsDefaultSet = () => {
     let valid = true;
     let exists = false;

@@ -10,6 +10,8 @@ import {
   APP_CREATE_WEBHOOK,
   ACTIONS_IMPORT_POSTMAN,
   APP_UPDATE_WEBHOOK,
+  ACTIONS_FETCH_EVENT,
+  ACTIONS_CREATE_FOLDER
 } from "../config/urls";
 import { Parameterize } from "../config/constant";
 
@@ -56,6 +58,35 @@ export const fetchAction = async (payload) => {
 
     return actionsClient(`Bearer ${token}`, "application/json").get(
       `${URL}?user_id=${user_id}&public_key=${public_key}`
+    );
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const fetchEvent = async (payload) => {
+  try {
+    const { token, webhook_id, user_id, public_key } = payload;
+
+    const URL = Parameterize(ACTIONS_FETCH_EVENT, ":webhook_id", webhook_id);
+
+    return actionsClient(`Bearer ${token}`, "application/json").get(
+      `${URL}?user_id=${user_id}&public_key=${public_key}`
+    );
+  } catch (e) {
+    throw e;
+  }
+};
+
+export const createFolder = async (payload) => {
+  try {
+    const { token, app_id} = payload;
+
+    const URL = Parameterize(ACTIONS_CREATE_FOLDER, ":app_id", app_id);
+    delete payload.token
+    delete payload.app_id
+    return actionsClient(`Bearer ${token}`, "application/json").post(
+      `${URL}`,payload
     );
   } catch (e) {
     throw e;
@@ -121,7 +152,7 @@ export const createResponse = async (payload) => {
 
     return actionsClient(`Bearer ${token}`, "application/json").post(URL,payload)
 
-  } catch (e) {
+  } catch (e) { 
     throw e;
   }
 }

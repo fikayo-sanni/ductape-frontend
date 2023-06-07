@@ -10,6 +10,8 @@ import WebhooksView from '../../../../components/app/webhooks'
 import type { MenuProps, UploadProps } from 'antd';
 import { createAppWebhook} from '../../../../components/services/actions.service';
 import { fetchApp} from '../../../../components/services/apps.service';
+import {CreateEventOne} from '../../../../components/app/Events_Modals/createEventOne'
+import {CreateEventTwo} from '../../../../components/app/Events_Modals/createEventTwo'
 
 const { Dragger } = Upload;
 
@@ -18,14 +20,12 @@ const { Title, Text } = Typography;
 
 const Webhooks = () => {
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
-    const [visible, setVisible] = useState(false);
+    const [stepOne, showStepOne] = useState(false)
+    const [stepTwo, showStepTwo] = useState(false)
     const [input, setInput] = useState({});
     const [webhooks, setWebhooks] = useState([]);
 
     const dispatch = useDispatch();
-    const handleClick = () => {
-        setVisible(!visible);
-    };
 
     const createWebhook= async (data) => {
         console.log(data);
@@ -53,11 +53,6 @@ const Webhooks = () => {
         throw e;
     }
       };
-
-    const handleSave = () => {
-        createWebhook(input)
-        setVisible(false);
-    }
     
     const handleTextAreaChange = async (e) => {
         let value = e.target.value;
@@ -88,7 +83,7 @@ const Webhooks = () => {
                 title="Webhooks"
                 extra={
                     <>
-                            <Space onClick={handleClick}>
+                            <Space onClick={() =>{showStepOne(true);}}>
                                 create webhook
                                 <PlusCircleOutlined />
                             </Space>
@@ -98,51 +93,8 @@ const Webhooks = () => {
             <Card className="no_background no_border">
                 <WebhooksView data={webhooks}/>
             </Card>
-            
-            <Modal
-                title={
-                    <div className="mb-3">
-                        <Typography.Title level={2} className="m-0 text-capitalize">
-                            Create Webhook
-                        </Typography.Title>
-                        <Text type="secondary" className="text-uppercase">
-                            webhooks
-                        </Text>
-                    </div>
-                }
-                open={visible}
-                footer={null}
-                onCancel={() => setVisible(false)}
-            >
-                <Form>
-                    <Form.Item label="Name">
-                        <Input name="name" onChange={handleTextAreaChange} />
-                    </Form.Item>
-
-                    <Form.Item label="tag">
-                        <Input name="tag" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()} />
-                    </Form.Item>
-                    <Form.Item label="method">
-                        <Input name="method" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()}/>
-                    </Form.Item>
-                    <Form.Item label="setup_type">
-                        <Input name="setup_type" onChange={handleTextAreaChange} />
-                    </Form.Item>
-                    <Form.Item label="base_url">
-                        <Input name="base_url" onChange={handleTextAreaChange}/>
-                    </Form.Item>
-                    <Form.Item label="resource">
-                        <Input name="resource" onChange={handleTextAreaChange}/>
-                    </Form.Item>
-                    <Form.Item label="description">
-                        <Input name="description" onChange={handleTextAreaChange}/>
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" name="import" onClick={handleSave}>Save</Button>
-                    </Form.Item>
-                </Form>
-
-            </Modal>
+            {stepOne ?<CreateEventOne showModal={showStepOne} showNext={showStepTwo}/>:<></>}
+            {stepTwo ?<CreateEventTwo showModal={showStepTwo} showPrev={showStepOne}/>:<></>}
         </Dashboard_Layout>
     );
 };

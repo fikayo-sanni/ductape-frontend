@@ -20,7 +20,7 @@ export const APP_FETCH_URL = '/apps/v1/:app_id';
 export const APP_SETUP_FETCH = '/apps/v1/setup/:app_id';
 export const APP_SETUP_ENV_FETCH = '/apps/v1/setup/:app_id/:env_id';
 
-export const PRICING_BASE_URL = 'http://localhost:8011'//'https://ductape-pricing-3bubdh4twq-uc.a.run.app';
+export const PRICING_BASE_URL = 'https://ductape-pricing-3bubdh4twq-uc.a.run.app';
 export const PRICING_FETCH_URL = '/pricing/v1/getAppPrices/:app_id';
 export const PRICING_FETCH_SINGLE = '/pricing/v1/fetch/:pricing_id';
 export const PRICING_UPDATE_URL = '/pricing/v1/update/:pricing_id';
@@ -34,7 +34,8 @@ export const APP_UPDATE_SETUP = '/apps/v1/setup/:setup_id';
 export const APP_FAQ_CREATE = '/apps/v1/FAQ/:app_id';
 export const APP_FAQ_UPDATE = '/apps/v1/FAQ/:app_id/:faq_id';
 
-export const ACTIONS_BASE_URL = 'http://localhost:8005'//'https://ductape-actions-3bubdh4twq-uc.a.run.app';
+export const ACTIONS_BASE_URL = 'https://ductape-actions-3bubdh4twq-uc.a.run.app';
+export const ACTIONS_CREATE_FOLDER = '/actions/v1/folder/:app_id';
 export const ACTIONS_CREATE_URL = '/actions/v1/create';
 export const ACTION_FETCH_URL = '/actions/v1/:action_id';
 export const ACTION_UPDATE_DATA = '/actions/v1/action/:action_id/data/:category';
@@ -47,6 +48,7 @@ export const ACTIONS_UPDATE_FOLDER = '/actions/v1/folder/:folder_id';
 export const ACTIONS_IMPORT_POSTMAN = '/actions/v1/import';
 export const APP_CREATE_WEBHOOK = '/actions/v1/webhook/:app_id';
 export const APP_UPDATE_WEBHOOK = '/actions/v1/webhook/:webhook_id';
+export const ACTIONS_FETCH_EVENT =  '/actions/v1/webhook/:webhook_id';
 
 export const INTEGRATIONS_BASE_URL = 'https://ductape-integrations-3bubdh4twq-uc.a.run.app';
 export const INTEGRATIONS_CREATE_URL = '/integrations/v1/create';

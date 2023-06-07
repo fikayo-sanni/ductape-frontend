@@ -9,7 +9,6 @@ import { ConfigProvider, theme, Tabs, Typography, Card, Breadcrumb, Button, Stat
 import { RootState } from '../../redux/store';
 import { logoutUser } from '../../redux/applicationSlice';
 import CountUp from 'react-countup';
-import CreateWorkspaceModal from '../modal';
 
 const { Title, Paragraph, Text } = Typography;
 const { TabPane } = Tabs;
@@ -29,16 +28,6 @@ export default function Dashbboard() {
     const formatter = (value: number) => <CountUp className="font-black" end={value} separator="," />;
 
     useEffect(() => {
-        if(workspaces.length === 0){
-            console.log(workspaces);
-
-            setVisible(true)
-        }
-        else{
-            console.log("workspaces");
-            console.log(workspaces);
-        }
-
     }, []);
 
     return (
@@ -64,7 +53,7 @@ export default function Dashbboard() {
                 </Card>
                 <section className="padding_50-left padding_50-right " style={{ position: 'relative', marginTop: -60 }}>
                     <div className="row">
-                        <div className="col-lg-3 padding-right">
+                        <div className="col-lg-3">
                             <Card className="bg-white border border-1">
                                 <Statistic
                                     className="font-black"
