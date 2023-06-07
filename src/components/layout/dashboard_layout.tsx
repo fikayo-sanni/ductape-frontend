@@ -19,10 +19,9 @@ import { RootState } from '../../redux/store';
 import { Logo } from '../config/constant';
 import { useDispatch, useSelector } from 'react-redux';
 import dynamic from 'next/dynamic';
-import { setCurrentApp, setTheme } from '../../redux/applicationSlice';
+import { setTheme } from '../../redux/applicationSlice';
 import { BulbFilled, BulbOutlined, DownOutlined, PlusOutlined, UserOutlined } from '@ant-design/icons';
 import Router from 'next/router';
-import { fetchApp } from '../services/apps.service';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -40,13 +39,6 @@ interface Props {
     title: string;
     appPage?: string;
     integrationPage?: string;
-    type?: LayoutTypes; 
-    id?: string; 
-}
-
-enum LayoutTypes {
-    APP= "app",
-    INTERGRATION = "integration"
 }
 
 const Dashboard_Layout: React.FC<Props> = ({
@@ -55,50 +47,15 @@ const Dashboard_Layout: React.FC<Props> = ({
     showSidebar = false,
     appPage,
     integrationPage,
-    type,
-    id
 }) => {
-    const { user, app, currentTheme, darkMode, isAuthenticated } = useSelector((state: RootState) => state.app);
+    const { user, currentTheme, darkMode, isAuthenticated } = useSelector((state: RootState) => state.app);
     const dispatch = useDispatch();
 
-    const fetchAppData = async () => {
-        const { auth_token: token, _id: user_id, public_key } = user;
-        const data = await fetchApp({
-          token,
-          user_id,
-          public_key,
-          app_id: id,
-        });
-        const app = data.data.data;
-        return app;
-      };
-
-    // @ts-ignore
-    useEffect(async () => {
+    useEffect(() => {
         if (isAuthenticated === false) {
             Router.replace('/');
         }
-
-        if (type && type==LayoutTypes.APP) {
-
-            /* if(!app || app._id !== id) {
-                dispatch(setCurrentApp(fetchAppData()));
-            } */
-
-        }
     }, []);
-
-    /**
-     * 
-
-const app = await fetchApp({
-    token: user.auth_token,
-    user_id: user._id,
-    public_key: user.public_key,
-    app_id: app_id,
-    workspace_id: defaultWorkspaceId,
-});
-     */
 
     return (
         <ConfigProvider
@@ -152,7 +109,9 @@ const app = await fetchApp({
                                     width={300}
                                     style={{
                                         background: currentTheme.colorBgBase,
-                                        borderRight: !darkMode ? '1px solid #D4D4D4' : `1px solid #F0F0F0`,
+                                        borderRight: !darkMode
+                                            ? '1px solid rgba(5, 5, 5, 0.06)'
+                                            : `1px solid rgba(48, 48, 48)`,
                                         paddingTop: -0,
                                         overflowY: 'auto',
                                         overflowX: 'hidden',

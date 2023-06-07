@@ -105,7 +105,7 @@ export default function FileUpload(props) {
     <section>
       {/*<h6 className="font-sm ">Add new photos <span className="text-danger">*</span></h6>*/}
 
-      <div className="bg-primary-transparent mb-3 p-4">
+      <div className="bg-primary-transparent border mb-3 p-4">
         <Dragger {...uploadProps}>
           <p className="ant-upload-drag-icon">
             <InboxOutlined style={{ fontSize: 24 }} />
