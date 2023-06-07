@@ -10,7 +10,7 @@ const { Text, Title, Paragraph } = Typography;
 
 interface Props {}
 
-interface Pricing {
+export interface Pricing {
     _id: string;
     app_id: string;
     name: string;
