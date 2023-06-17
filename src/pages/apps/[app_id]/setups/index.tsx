@@ -76,11 +76,11 @@ const Setups = () => {
     return (
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="Setups">
             <PageHeader
-                title="Setups"
+                title="Authorization"
                 extra={
                     <>
                             <Space onClick={handleClick}>
-                                create setup
+                                create Authorization
                                 <PlusCircleOutlined />
                             </Space>
                     </>

@@ -7,7 +7,8 @@ import { EditOutlined, SettingOutlined } from '@ant-design/icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import {updateAppSetup} from '../services/apps.service';
-const { Title, Text } = Typography;
+import {CreateAuthModal} from './Authorization_Modals/createAuth';
+import Router from 'next/router';
 
 interface Props {
   data: {
@@ -28,44 +29,45 @@ interface Props {
 const SetupsView: React.FC<Props> = ({ data }) => {
   const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
   const [selectedSetup, setSelectedSetup] = useState("");
+  const [createAuth, setCreateAuth] = useState(false);
   const [visible, setVisible] = useState(false);
   const [input, setInput] = useState({}); 
 
   useEffect(() => {
     // Your code here
   }, []);
-  const handleClick = (itemId: string) => {
-    setSelectedSetup(itemId);
-    setVisible(!visible);
-  };
-const updateSetup= async (data) => {
-  console.log(data);
-  try{
-    const response = await updateAppSetup({
-      ...data,
-      public_key: user.public_key,
-      user_id: user._id,
-      token: user.auth_token,
-        setup_id: selectedSetup
-    });
-    console.log(response.data.data);
-  } catch (e) {
-    const error = e.response ? e.response.data.errors : e.toString();
-    console.log(error || e.toString());
-    throw e;
-  }
-};
-const handleSave = () => {
-      updateSetup(input)
-    setVisible(false);
-}
 
-const handleTextAreaChange = async (e) => {
-  let value = e.target.value;
-  await setInput({ ...input, [e.target.name]: value });
-  console.log(input);
-  
-}
+  const handleClick = (itemId: string) => {
+    Router.push(`/apps/${app._id}/setups/${itemId}`);
+  };
+  const updateSetup= async (data) => {
+    console.log(data);
+    try{
+      const response = await updateAppSetup({
+        ...data,
+        public_key: user.public_key,
+        user_id: user._id,
+        token: user.auth_token,
+          setup_id: selectedSetup
+      });
+      console.log(response.data.data);
+    } catch (e) {
+      const error = e.response ? e.response.data.errors : e.toString();
+      console.log(error || e.toString());
+      throw e;
+    }
+  };
+  const handleSave = () => {
+        updateSetup(input)
+      setVisible(false);
+  }
+
+  const handleTextAreaChange = async (e) => {
+    let value = e.target.value;
+    await setInput({ ...input, [e.target.name]: value });
+    console.log(input);
+    
+  }
   return (
     <>
       {data.length ? (
@@ -73,17 +75,10 @@ const handleTextAreaChange = async (e) => {
           <tbody>
             {data.map((item, index) => {
               return (
-                <tr key={index}>
-                  <td>
-                  <Button shape="circle" onClick={() => handleClick(item._id)}>
-                    <EditOutlined />
-                  </Button>
-                   
-                  </td>
+                <tr key={index} onClick={() => handleClick(item._id)}>
                   <td>
                     <label className="text-muted">
                       <h5>{item.name}</h5>
-                      {item.description}
                     </label>
                   </td>
                   <td>
@@ -100,70 +95,21 @@ const handleTextAreaChange = async (e) => {
                     </Tag>
                   </td>
                   <td>{item._id}</td>
-                  <td>
-                    <Button shape="circle">
-                    <SettingOutlined />
-                      {/* <Link href={`/apps/${item.app_id}/setup/${item._id}`}>
-                        <SettingOutlined />
-                      </Link> */}
-                    </Button>
-                  </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
       ) : (
-        <List dataSource={[]} />
+        <div className="col-lg-9">
+            <h4>You Dont have any Authorizations Create One to get started</h4>
+            <Button type="primary" key="console" onClick={() => {setCreateAuth(!createAuth)}}>
+                + New Authorization
+            </Button>
+        </div>
       )}
-      <Modal
-                title={
-                    <div className="mb-3">
-                        <Typography.Title level={2} className="m-0 text-capitalize">
-                            Edit Setup
-                        </Typography.Title>
-                        <Text type="secondary" className="text-uppercase">
-                            Setups
-                        </Text>
-                    </div>
-                }
-                open={visible}
-                footer={null}
-                onCancel={() => setVisible(false)}
-            >
-                <Form>
-                    <Form.Item label="Name">
-                        <Input name="name" onChange={handleTextAreaChange} />
-                    </Form.Item>
-
-                    <Form.Item label="Period">
-                        <Input name="period" onChange={handleTextAreaChange} />
-                    </Form.Item>
-                    <Form.Item label="Method">
-                        <Input name="method" onChange={handleTextAreaChange} onInput={e => e.target.value = e.target.value.toUpperCase()}/>
-                    </Form.Item>
-                    <Form.Item label="Setup_type">
-                        <Input name="setup_type" onChange={handleTextAreaChange} />
-                    </Form.Item>
-                    <Form.Item label="Base_url">
-                        <Input name="base_url" onChange={handleTextAreaChange}/>
-                    </Form.Item>
-                    <Form.Item label="Resource">
-                        <Input name="resource" onChange={handleTextAreaChange}/>
-                    </Form.Item>
-                    <Form.Item label="Description">
-                        <Input name="description" onChange={handleTextAreaChange}/>
-                    </Form.Item>
-                    <Form.Item label="Expiry">
-                        <Input name="expiry" onChange={handleTextAreaChange}/>
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" name="import" onClick={handleSave}>Save</Button>
-                    </Form.Item>
-                </Form>
-            </Modal>
+      {createAuth ?<CreateAuthModal showModal={setCreateAuth}/>:<></>}
     </>
-
   );
 };
 

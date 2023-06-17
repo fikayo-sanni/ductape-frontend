@@ -25,7 +25,7 @@ const IntegrationList = (props) => {
     Router.push(`/integrations/integration`);
   };
 
-  return (
+  return ( 
     <div>
       <List
         grid={{

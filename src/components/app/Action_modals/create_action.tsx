@@ -95,6 +95,7 @@ export const CreateActionModal: React.FC<Props> = ({showModal}) => {
                         wrapperCol={{ span: 24 }}
                     >
                     <Select
+                        dropdownStyle={{zIndex: 1000000}}
                         placeholder="Select app folder"
                         onChange={value => {handleSelectChange("folder_id", value)}}
                         options={appFolders.map((folder) => ({
