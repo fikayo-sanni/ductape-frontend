@@ -7,7 +7,7 @@ import { HttpMethods } from '../../config/constant'
 import { PlusOutlined } from '@ant-design/icons';
 
 const { Title } = Typography;
-const { Option } = Select; 
+const { Option } = Select;
 
 interface Props {
     showModal: any;
@@ -103,7 +103,7 @@ export const CreateActionModal: React.FC<Props> = ({ showModal, showCreateFolder
                         onChange={(value) => {
                             handleSelectChange('folder_id', value);
                         }}
-                        
+
                     >
                         <option></option>
                         {folderOptions}
