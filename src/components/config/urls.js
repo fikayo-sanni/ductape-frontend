@@ -41,6 +41,7 @@ export const ACTIONS_CREATE_URL = '/actions/v1/create';
 export const ACTION_FETCH_URL = '/actions/v1/:action_id';
 export const ACTION_UPDATE_DATA = '/actions/v1/action/:action_id/data/:category';
 export const ACTIONS_CREATE_RESPONSES = '/actions/v1/response';
+export const ACTIONS_UPDATE_RESPONSES = '/actions/v1/response/:id';
 export const ACTIONS_FETCH_RESPONSES = '/actions/v1/response/:action_id';
 export const ACTIONS_FETCH_ACTION = '/actions/v1/:action_id';
 export const ACTIONS_FETCH_ACTION_ENTITY = '/actions/v1/entity/:action_id/data/:category';
@@ -50,8 +51,10 @@ export const ACTIONS_IMPORT_POSTMAN = '/actions/v1/import';
 export const APP_CREATE_WEBHOOK = '/actions/v1/webhook/:app_id';
 export const APP_UPDATE_WEBHOOK = '/actions/v1/webhook/:webhook_id';
 export const ACTIONS_FETCH_EVENT =  '/actions/v1/webhook/:webhook_id';
+export const ACTIONS_UPDATE_DATA_POINT = '/actions/v1/entity/data/:id'
 
-export const INTEGRATIONS_BASE_URL = 'https://ductape-integrations-3bubdh4twq-uc.a.run.app';
+
+export const INTEGRATIONS_BASE_URL = "http://localhost:8009"; //'https://ductape-integrations-3bubdh4twq-uc.a.run.app';
 export const INTEGRATIONS_CREATE_URL = '/integrations/v1/create';
 export const INTEGRATIONS_FETCH_URL = '/integrations/v1/workspace/:workspace_id/:status';
 export const INTEGRATION_FETCH_URL = '/integrations/v1/:integration_id';

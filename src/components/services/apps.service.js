@@ -19,7 +19,7 @@ import {
     PRICING_CREATE_URL,
     PRICING_DELETE_URL,
     ACTIONS_FETCH_FOLDERS,
-    ACTIONS_UPDATE_FOLDER, 
+    ACTIONS_UPDATE_FOLDER,
     ACTIONS_FETCH_ACTION,
     ACTIONS_FETCH_ACTION_ENTITY,
 } from '../config/urls';
@@ -382,6 +382,22 @@ export const updateAction = async (payload) => {
         return true;
     }
 };
+
+export const deleteAction = async (payload) => {
+    try {
+        const { action_id, token, user_id, public_key } = payload;
+
+        let URL = Parameterize(ACTIONS_FETCH_ACTION, ':action_id', action_id);
+
+        return actionsClient(`Bearer ${token}`, 'application/json').delete(
+            `${URL}?user_id=${user_id}&public_key=${public_key}`,
+            payload,
+        );
+    } catch (e) {
+        throw e;
+        return true;
+    }
+}
 
 export const fetchActionFolders = async (payload) => {
     try {

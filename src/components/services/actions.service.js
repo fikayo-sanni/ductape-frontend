@@ -11,7 +11,10 @@ import {
   ACTIONS_IMPORT_POSTMAN,
   APP_UPDATE_WEBHOOK,
   ACTIONS_FETCH_EVENT,
-  ACTIONS_CREATE_FOLDER
+  ACTIONS_CREATE_FOLDER,
+  ACTIONS_UPDATE_DATA,
+  ACTIONS_UPDATE_DATA_POINT,
+  ACTIONS_UPDATE_RESPONSES
 } from "../config/urls";
 import { Parameterize } from "../config/constant";
 
@@ -166,6 +169,14 @@ export const fetchResponses = async(payload) => {
 
 }
 
+export const updateResponse = async(payload) => {
+  const {token, id, user_id, public_key} = payload;
+
+  let URL = Parameterize(ACTIONS_UPDATE_RESPONSES, ":id", id);
+
+  return actionsClient(`Bearer ${token}`, "application/json").put(URL, payload);
+}
+
 export const createAppWebhook = async (payload) => {
   try {
 
@@ -208,6 +219,24 @@ export const updateAppWebhook = async (payload) => {
       throw e;
   }
 };
+
+export const updateDataPoint = async (payload) => {
+  try {
+
+    const {token, public_key, _id: id} = payload;
+
+    delete payload.token;
+
+    let URL = Parameterize(ACTIONS_UPDATE_DATA_POINT, ":id", id);
+
+    return actionsClient(`Bearer ${token}`, "application/json").put(URL, {
+      ...payload
+    });
+
+  } catch(e) {
+    throw e;
+  }
+}
 
 export const importPostman = async (payload) => {
   try {

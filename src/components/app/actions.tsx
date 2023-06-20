@@ -24,9 +24,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../../redux/store';
 import dynamic from 'next/dynamic';
 import type { DataNode, DirectoryTreeProps } from 'antd/es/tree';
-import {CreateFolderModal} from './Action_modals/create_folder';
-import {CreateActionModal} from './Action_modals/create_action';
-import {ImportPostmanDoc} from './Action_modals/import_document';
+import { CreateFolderModal } from './Action_modals/create_folder';
+import { CreateActionModal } from './Action_modals/create_action';
+import { ImportPostmanDoc } from './Action_modals/import_document';
+import { deleteAction } from '../services/apps.service';
 
 import {
     createPricing,
@@ -41,7 +42,11 @@ import {
 } from '../services/apps.service';
 import toast from 'react-hot-toast';
 import Router from 'next/router';
-import { FolderOpenOutlined } from '@ant-design/icons';
+import { DownOutlined, ExclamationCircleFilled, FolderOpenOutlined, PlusOutlined } from '@ant-design/icons';
+import { error } from 'console';
+import { EditDataEntry } from './Action_modals/edit_data_entry';
+import { fetchResponses } from '../services/actions.service';
+import { EditResponseModal } from './Action_modals/edit_response';
 
 const { Text, Title, Paragraph } = Typography;
 const { TabPane } = Tabs;
@@ -65,9 +70,10 @@ interface Actions {
 
 const Loading = dynamic(() => import('../../components/common/loading'));
 
-export const ActionsView: React.FC<Props> = ({}) => { 
+export const ActionsView: React.FC<Props> = ({}) => {
     const { user, app } = useSelector((state: RootState) => state.app);
     const [loading, setLoading] = useState(true);
+    const [folders, setFolders] = useState([]);
     const [createFolder, setCreateFolder] = useState(false);
     const [createAction, setCreateAction] = useState(false);
     const [importPostman, setImportPostman] = useState(false);
@@ -86,6 +92,8 @@ export const ActionsView: React.FC<Props> = ({}) => {
             public_key: user.public_key,
             app_id: app._id,
         });
+
+        setFolders(response.data.data);
 
         await generateStructure(response.data.data);
     };
@@ -155,27 +163,32 @@ export const ActionsView: React.FC<Props> = ({}) => {
         fetchFolders();
     }, []);
 
+    const classy = folders.length > 0 ? 'col-lg-9' : 'col-12';
     return (
-        <div className="container ">
-            <div className="row">
-                <div className="col-lg-3">
-                    <Card title="Navigation" size="small">
-                        {loading ? (
-                            <Loading />
-                        ) : (
-                            <DirectoryTree
-                                multiple
-                                showLine
-                                onSelect={onSelect}
-                                // onExpand={onExpand}
-                                treeData={treeData}
-                            />
-                        )}
-                    </Card>
-                </div>
+        <div className="container noPaddingLeft">
+            <div className="row noPaddingLeft">
+                {app.actions.length ? (
+                    <div className="col-lg-3">
+                        <Card title={<Text className="pt-3">Navigation</Text>} size="small" className="blended-card">
+                            {loading ? (
+                                <Loading />
+                            ) : (
+                                <DirectoryTree
+                                    multiple
+                                    switcherIcon={<DownOutlined />}
+                                    onSelect={onSelect}
+                                    // onExpand={onExpand}
+                                    treeData={treeData}
+                                />
+                            )}
+                        </Card>
+                    </div>
+                ) : (
+                    <></>
+                )}
 
                 {currentData ? (
-                    <div className="col-lg-9">
+                    <div className={classy}>
                         {currentData.isFolder ? (
                             <FolderView data={currentData} refresh={fetchFolders} />
                         ) : (
@@ -183,25 +196,35 @@ export const ActionsView: React.FC<Props> = ({}) => {
                         )}
                     </div>
                 ) : (
-                    <div className="col-lg-9">
-                        <Result
-                            status="info"
-                            icon={<FolderOpenOutlined />}
-                            title={`${app.app_name} Actions Directory`}
-                            subTitle="Click to open a folder or action from the navigation pane"
-                            extra={[
-                                <Button type="primary" key="console" onClick={() => {setCreateFolder(!createFolder)}}>
-                                    Create Folder
-                                </Button>,
-                                <Button key="buy" onClick={() => {setCreateAction(!createAction)}}>Create Action</Button>,
-                            ]}
-                        />
-                    </div>
+                    <>
+                        {folders.length === 0 ? (
+                            <div className={`${classy} p-5`}>
+                                <div className="col-9 p-5">
+                                    <Title>
+                                        You do not have any actions. Create a folder, and actions to get started
+                                    </Title>
+
+                                    <Button type="primary" onClick={() => setCreateFolder(!createFolder)}>
+                                        <PlusOutlined /> New Folder
+                                    </Button>
+                                    <Button className="ms-2" onClick={() => setCreateAction(!createAction)}>
+                                        <PlusOutlined /> New Action
+                                    </Button>
+                                </div>
+                            </div>
+                        ) : (
+                            <></>
+                        )}
+                    </>
                 )}
             </div>
-            {createFolder ?<CreateFolderModal showModal={setCreateFolder}/>:<></>}
-            {createAction ?<CreateActionModal showModal={setCreateAction}/>:<></>}
-            {importPostman ?<ImportPostmanDoc showModal={setImportPostman}/>:<></>}
+            {createFolder ? <CreateFolderModal showModal={setCreateFolder} /> : <></>}
+            {createAction ? (
+                <CreateActionModal showModal={setCreateAction} showCreateFolder={setCreateFolder} />
+            ) : (
+                <></>
+            )}
+            {importPostman ? <ImportPostmanDoc showModal={setImportPostman} /> : <></>}
         </div>
     );
 };
@@ -243,7 +266,16 @@ const FolderView: React.FC<FolderProps> = ({ data, refresh }) => {
     useEffect(() => {}, [data.name]);
 
     return (
-        <Card title="Folder">
+        <Card
+            title={
+                <div className="row mt-4">
+                    <Title level={3} className="col-9">
+                        Folder Details
+                    </Title>
+                </div>
+            }
+            className="m-4 ms-2 border"
+        >
             <Text>Name:</Text>
             <Input
                 size="large"
@@ -277,6 +309,12 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
     const [paramsdata, setParamsData] = useState<string[]>([]);
     const [action, setAction] = useState(data);
     const [actionEnvs, setActionEnvs] = useState([]);
+    const [responses, setRresponses] = useState([]);
+
+    const [entryModal, showEntryModal] = useState(false);
+    const [newEntry, setNewEntry] = useState(true);
+    const [editSample, showEditSample] = useState(false);
+    const [entry, setEntry] = useState({});
 
     const fetchActionDetails = async () => {
         setLoading(true);
@@ -306,6 +344,10 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
             category: 'body',
         });
 
+        await fetchResponseData()
+
+        // alert(JSON.stringify(responses.data.data));
+
         setBodyData(response2.data.data.data);
         if (response2.data.data.data.length) {
             setBodySample(response2.data.data.sample);
@@ -324,6 +366,17 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
 
         setLoading(false);
     };
+
+    const fetchResponseData = async () => {
+        const responses = await fetchResponses({
+            token: user.auth_token,
+            user_id: user._id,
+            public_key: user.public_key,
+            action_id: data._id,
+        });
+
+        setRresponses(responses.data.data);
+    }
 
     const GenerateEntityStructure = ({ data }) =>
         data.map(
@@ -352,8 +405,15 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                             </Space>
 
                             <Space>
-                                <Button>Edit</Button>
-                                <Button danger>Delete</Button>
+                                <Button
+                                    onClick={() => {
+                                        showEntryModal(true);
+                                        setEntry(info);
+                                        setNewEntry(false);
+                                    }}
+                                >
+                                    Edit
+                                </Button>
                             </Space>
                         </div>
 
@@ -401,8 +461,15 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                                     </Space>
 
                                     <Space>
-                                        <Button>Edit</Button>
-                                        <Button danger>Delete</Button>
+                                        <Button
+                                            onClick={() => {
+                                                showEntryModal(true);
+                                                setEntry(info);
+                                                setNewEntry(false);
+                                            }}
+                                        >
+                                            Edit
+                                        </Button>
                                     </Space>
                                 </div>
 
@@ -447,6 +514,26 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
         }
     };
 
+    const removeAction = async () => {
+        try {
+            toast.loading('Deleting action');
+            const response = await deleteAction({
+                action_id: action._id,
+                token: user.auth_token,
+                user_id: user._id,
+                public_key: user.public_key,
+            });
+
+            if (response.data.status === true) {
+                toast.success('Action deleted');
+                await refresh();
+            }
+        } catch (e) {
+            const error = e.response ? e.response.data.errors : e.toString();
+            toast.error(error || e.toString());
+        }
+    };
+
     useEffect(() => {
         let environments = [];
 
@@ -459,10 +546,151 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
         fetchActionDetails();
     }, [data.name]);
 
+    const { confirm } = Modal;
+
+    const showConfirm = () => {
+        confirm({
+            title: 'Permanently delete this action?',
+            icon: <ExclamationCircleFilled />,
+            content: 'Are you sure you want to permanently delete this action?',
+            onOk() {
+                removeAction();
+            },
+            onCancel() {
+                console.log('Cancel');
+            },
+        });
+    };
+
+    const [sampleUpdateLoading, showSampleUpdateLoading] = useState(false);
+    const [editResponse, showEditResponse] = useState(false);
+    const [editResponseData, setEditResponseData] = useState({});
+
+    const updateSampleData = () => {
+        // alert(JSON.stringify(entry))
+
+        try {
+            showSampleUpdateLoading(true);
+            /* const response = await updateDataPoint({
+                        ...entry,
+                        token: user.auth_token,
+                        user_id: user._id,
+                        public_key: user.public_key,
+                    });
+                    showLoadingButton(false);
+                    await refresh(); */
+            setTimeout(() => {
+                toast.success('Sample Updated');
+                showSampleUpdateLoading(false);
+            }, 3000);
+        } catch (e) {
+            showSampleUpdateLoading(false);
+            const error = e.response ? e.response.data.errors : e.toString();
+            toast.error(error || e.toString());
+        }
+    };
+
+    const showResponses = responses.map((data, index) => {
+        // alert(JSON.stringify(data.sample[0].sample))
+        const { status_code } = data;
+        return (
+            <Collapse className="mb-1">
+                <Panel
+                    key={index}
+                    header={
+                        <span>
+                            <label
+                                className={
+                                    status_code.startsWith('4')
+                                        ? 'text-warning text-start'
+                                        : status_code.startsWith('2')
+                                        ? 'text-success text-start'
+                                        : status_code.startsWith('3')
+                                        ? 'text-primary text-start'
+                                        : status_code.startsWith('5')
+                                        ? 'text-danger text-start'
+                                        : 'font-xxs text-start'
+                                }
+                            >
+                                {data.status_code}
+                            </label>{' '}
+                            - <label>{data.name}</label>{' '}
+                        </span>
+                    }
+                    extra={
+                        <Space>
+                            <Button
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    showEditResponse(!editResponse);
+                                    setEditResponseData(data);
+                                }}
+                            >
+                                Edit
+                            </Button>
+                        </Space>
+                    }
+                >
+                    <Collapse className="mb-1">
+                        <Panel
+                            key={index}
+                            header="Sample Response"
+                            extra={
+                                <Space>
+                                    <Button
+                                        onClick={(e) => {
+                                            e.preventDefault();
+                                            showEditSample(!editSample);
+                                        }}
+                                    >
+                                        {!editSample ? 'Edit' : 'Discard'}
+                                    </Button>
+                                </Space>
+                            }
+                        >
+                            {!editSample ? (
+                                <pre className="mb-0">{JSON.stringify(JSON.parse(data.sample[0].sample), null, 4)}</pre>
+                            ) : (
+                                <div className="col">
+                                    <Input.TextArea
+                                        rows={15}
+                                        style={{ fontSize: '14px', border: 0 }}
+                                        value={JSON.stringify(JSON.parse(data.sample[0].sample), null, 4)}
+                                    ></Input.TextArea>{' '}
+                                    <Button type="primary" className="mt-2" onClick={() => updateSampleData()}>
+                                        Save
+                                    </Button>
+                                </div>
+                            )}
+                        </Panel>
+                    </Collapse>
+
+                    <GenerateEntityStructure data={data.data} />
+                </Panel>
+
+                {editResponse ? <EditResponseModal showModal={showEditResponse} response={editResponseData} refresh={fetchResponseData} /> : <></>}
+            </Collapse>
+        );
+    });
+
     return loading ? (
         <Loading />
     ) : (
-        <Card title="Action">
+        <Card
+            title={
+                <div className="row mt-4">
+                    <Title level={3} className="col-10">
+                        Action Details
+                    </Title>
+                    <div className="col-1">
+                        <Button danger onClick={() => showConfirm()}>
+                            Delete Action
+                        </Button>
+                    </div>
+                </div>
+            }
+            className="m-4 ms-2 border"
+        >
             <div className="row">
                 <div className="col-6">
                     <Text>Name</Text>
@@ -524,31 +752,43 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                 <Tabs defaultActiveKey={action.httpVerb === 'POST' ? '0' : '1'} className="page_tabs ">
                     <TabPane tab="Body" key="0">
                         {bodySample && (
-                            <Collapse className="mb-3">
-                                <Panel key="request" header="Sample Request">
-                                    <pre className="mb-0">{JSON.stringify(JSON.parse(bodySample.sample), null, 4)}</pre>
+                            <Collapse className="mb-1">
+                                <Panel
+                                    key="request"
+                                    header="Sample Request"
+                                    extra={
+                                        <Space>
+                                            <Button
+                                                onClick={(e) => {
+                                                    e.preventDefault();
+                                                    showEditSample(!editSample);
+                                                }}
+                                            >
+                                                {!editSample ? 'Edit' : 'Discard'}
+                                            </Button>
+                                        </Space>
+                                    }
+                                >
+                                    {!editSample ? (
+                                        <pre className="mb-0">
+                                            {JSON.stringify(JSON.parse(bodySample.sample), null, 4)}
+                                        </pre>
+                                    ) : (
+                                        <div className="col">
+                                            <Input.TextArea
+                                                rows={15}
+                                                style={{ fontSize: '14px', border: 0 }}
+                                                value={JSON.stringify(JSON.parse(bodySample.sample), null, 4)}
+                                            ></Input.TextArea>{' '}
+                                            <Button type="primary" className="mt-2" onClick={() => updateSampleData()}>
+                                                Save
+                                            </Button>
+                                        </div>
+                                    )}
                                 </Panel>
                             </Collapse>
                         )}
-
                         <GenerateEntityStructure data={bodydata} />
-
-                        {/*<table className="table">*/}
-                        {/*    <thead>*/}
-                        {/*        <tr>*/}
-                        {/*            <th>Key</th>*/}
-                        {/*            <th>Type</th>*/}
-                        {/*            /!*<th>Value</th>*!/*/}
-                        {/*            /!*<th>Min. Length</th>*!/*/}
-                        {/*            /!*<th>Max. Length</th>*!/*/}
-                        {/*            /!*<th>Description</th>*!/*/}
-                        {/*            <th>Required</th>*/}
-                        {/*        </tr>*/}
-                        {/*    </thead>*/}
-                        {/*    <tbody>*/}
-                        {/*        <GenerateEntityStructure data={bodydata} />*/}
-                        {/*    </tbody>*/}
-                        {/*</table>*/}
                     </TabPane>
                     <TabPane tab="Params" key="1">
                         <table className="table ">
@@ -568,14 +808,20 @@ const ActionView: React.FC<FolderProps> = ({ data, refresh }) => {
                             </tbody>
                         </table>
                     </TabPane>
+                    <TabPane tab="Response" key="2">
+                        {' '}
+                        {showResponses}
+                    </TabPane>
                 </Tabs>
             </div>
 
             <Button type="primary" onClick={() => updateActionDetails()} className="mt-3">
                 Save
             </Button>
+
+            {entryModal ? <EditDataEntry showModal={showEntryModal} data={entry} refresh={refresh} /> : <></>}
         </Card>
     );
 };
- 
+
 export default ActionsView;

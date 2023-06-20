@@ -74,19 +74,19 @@ const Dashboard_Layout: React.FC<Props> = ({
       };
 
     // @ts-ignore
-    useEffect(async () => {
+    useEffect(() => {
         if (isAuthenticated === false) {
             Router.replace('/');
         }
 
-        if (type && type==LayoutTypes.APP) {
+        /* if (type && type==LayoutTypes.APP) {
 
-            /* if(!app || app._id !== id) {
+            if(!app || app._id !== id) {
                 dispatch(setCurrentApp(fetchAppData()));
-            } */
+            } 
 
-        }
-    }, []);
+        } */
+    });
 
     /**
      * 

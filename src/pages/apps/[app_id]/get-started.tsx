@@ -122,7 +122,7 @@ const Footer = ({ index, setIndex }) => {
 
 const GetStarted = (props) => {
     const { user, app, defaultWorkspaceId } = useSelector((state: RootState) => state.app);
-    const [index, setIndex] = useState(app.get_started);
+    const [index, setIndex] = useState(app.get_started || 1);
     return (
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="Get Started">
             <PageHeader title="Get Started" />

@@ -74,7 +74,6 @@ table th {
     height: 100vh;
 }
 
-.boder
 
 table td {
     border: 1px solid #efefef;
@@ -90,9 +89,33 @@ table td {
     border-top: 0 !important;
 }
 
+.blended-card {
+    border-top: 0 !important;
+    border-radius: 0 !important;
+    padding-left: 0 !important;
+    height: 100vh;
+    border-left: 0px !important;
+    border-right: 1px solid #d4d4d4;
+    overflow-y: auto;
+}
+
+.small-text-btn {
+    font-size: 15px;
+    background-color: #FFF;
+    cursor:pointer;
+    color: var(--primary_color)
+}
+
+.small-text-btn :hover {
+}
+
+.noPaddingLeft {
+    padding-left: 0 !important;
+}
+
 .padding-header {
-    padding-top: 30px !important;
-    padding-bottom: 40px !important;
+    padding-top: 15px !important;
+    padding-bottom: 30px !important;
 }
 
 .border-start-0 {

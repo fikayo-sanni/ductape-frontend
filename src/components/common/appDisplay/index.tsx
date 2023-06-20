@@ -61,7 +61,7 @@ const AppDisplay: React.FC<Props> = ({ app, orientation = 'grid' }) => {
             </Card>
         </div>
     ) : (
-        <div className="col-xl-12">
+        <div className="col-xl-12" onClick={() => openApp(app)}>
             <Card className="mb-4">
                 <div className="d-flex flex-row w-100 gap-3 justify-content-between align-items-center">
                     <div className="d-flex flex-row gap-3 w-25">
@@ -81,12 +81,10 @@ const AppDisplay: React.FC<Props> = ({ app, orientation = 'grid' }) => {
 
                     <div>
                         <ul className="mb-0">
-                            <li>
-                                <Text className="mb-0">{app.domains ? app.domains.length : 0} domains</Text>
-                            </li>
-                            <li>
-                                <Text className="mb-0">{app.envs.length} environments</Text>
-                            </li>
+                                <Text className="mb-0">{app.actions ? app.actions.length : 0} actions</Text>
+                            
+                                <Text className="mb-0 ms-4">{app.envs.length} environments</Text>
+                            
                         </ul>
                     </div>
 

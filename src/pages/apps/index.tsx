@@ -67,6 +67,7 @@ export default function Apps(props) {
             <PageHeader title="Apps"
             handleClick={() => {setVisible(!visible);}}
             secondHandleClick={() => {setEnvVisible(!visible);}}
+            headerBtns={true}
             extra={
                 <>
                     <PlusOutlined /> New App

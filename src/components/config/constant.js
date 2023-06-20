@@ -304,6 +304,14 @@ const statusCodes = [
     { name: 'NETWORK_AUTH_REQUIRED', code: 511 },
 ];
 
+export const HttpMethods = [
+    "POST",
+    "GET",
+    "PUT",
+    "PATCH",
+    "DELETE"
+]
+
 module.exports = {
     Loading,
     Logo,
@@ -320,6 +328,7 @@ module.exports = {
     resourcify,
     uniqueCheck,
     jsonToFields,
-    extractParams,
     statusCodes,
+    extractParams,
+    HttpMethods,
 };

@@ -10,9 +10,9 @@ import { RootState } from '../../../redux/store';
 import CountUp from 'react-countup';
 import { ArrowDownOutlined, ArrowUpOutlined } from '@ant-design/icons';
 
-const LineGraph = dynamic(() => import('../../../components/common/lineGraph'));
+/*const LineGraph = dynamic(() => import('../../../components/common/lineGraph'));
 const RingGraph = dynamic(() => import('../../../components/common/ringGraph'));
-const TimeGraph = dynamic(() => import('../../../components/common/timeGraph'));
+const TimeGraph = dynamic(() => import('../../../components/common/timeGraph'));*/
 
 const { Title, Text } = Typography;
 const AppInfo = dynamic(() => import('../../../components/app/appInfo'));
@@ -36,6 +36,15 @@ const Index = (props) => {
         console.log(app);
         // alert(JSON.stringify(app));
     }, []);
+
+    // <LineGraph />
+
+    // <RingGraph data={myData} content={myContent} color="#00875A" />
+
+    // <TimeGraph />
+
+    // <RingGraph data={myData} content={myContent} color="#0746a6" />
+
     return (
         <Dashboard_Layout showSidebar={true} title="Apps" appPage="My App" type="app" id={app_id}>
             <div className="overflow-hidden">
@@ -95,7 +104,7 @@ const Index = (props) => {
                                     </Text>
                                 </div>
                                 <div className="pt-5">
-                                    <LineGraph />
+                                    
                                 </div>
                             </Card>
                         </div>
@@ -106,15 +115,15 @@ const Index = (props) => {
                             <Card className="m-0">
                                 <div className="row">
                                     <div className="col-4">
-                                        <RingGraph data={myData} content={myContent} color="#00875A" />
+                                        
                                     </div>
-                                    <div className="col-5 pt-4">
-                                        <Title className="pt-4" level={4}>
+                                    <div className="col-5 pt-1">
+                                        <Title className="pt-2" level={4}>
                                             75%
                                         </Title>
                                         <Text className="text-muted">Request Success Rate</Text>
                                     </div>
-                                    <div className="col-3 mt-4">
+                                    <div className="col-3 mt-2">
                                         <div
                                             className="row bold"
                                             style={{ color: '#00875A', marginTop: 50, fontWeight: 600 }}
@@ -129,10 +138,10 @@ const Index = (props) => {
                                 <Divider />
                                 <div className="row">
                                     <div className="col-4">
-                                        <RingGraph data={myData} content={myContent} color="#0746a6" />
+                                        
                                     </div>
-                                    <div className="col-5 pt-4">
-                                        <Title className="pt-4" level={4}>
+                                    <div className="col-5 pt-1">
+                                        <Title className="pt-2" level={4}>
                                             75%
                                         </Title>
                                         <Text className="text-muted">Request Success Rate</Text>
@@ -155,7 +164,7 @@ const Index = (props) => {
                             <Card>
                                 <div className="col-12">
                                     <br />
-                                    <TimeGraph />
+                                    
                                     <div className="mt-4 row">
                                         <div className="col-9">
                                             <Title level={5}>$21.2k</Title>
